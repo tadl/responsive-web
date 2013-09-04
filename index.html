@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <title>Unsemantic + adapt.js demo</title>
+  <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/unsemantic-grid-base.css" />
+  <noscript>
+    <link rel="stylesheet" href="/css/unsemantic-grid-mobile.css" />
+  </noscript>
+  <script>
+    var ADAPT_CONFIG = {
+      path: '/css/',
+      dynamic: true,
+      range: [
+        '0 to 767px = unsemantic-grid-mobile.css',
+        '767px to 1000px = unsemantic-grid-tablet.css',
+        '1000px = unsemantic-grid-desktop.css'
+      ]
+    };
+  </script>
+  <script src="/js/adapt.min.js"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/main.js"></script>
+</head>
+<body>
+<div id="wrapper">
+  <header class="searchbar card">
+    <div class="grid-container">
+        <div class="grid-40 tablet-grid-40 mobile-grid-100"><input style="width:100%;" type="text" /></div>
+        <div class="grid-10 tablet-grid-10 mobile-grid-100">[SEARCH]</div>
+        <div class="grid-10 tablet-grid-10 mobile-grid-100 suffix-30 tablet-suffix-30">[SETTINGS]</div>
+        <div class="grid-10 tablet-grid-10 mobile-grid-100">[MENU]</div>
+    </div>
+  </header>
+  <main role="main" class="grid-container">
+    <div class="clearfix"></div>
+    <div class="grid-container">
+      <div class="grid-25 tablet-grid-35 hide-on-mobile">
+        <div id="region-one">
+          <section class="card">
+            <p><b>Region One</b> (left)</p><p>Bacon ipsum dolor sit amet pancetta ribeye brisket shoulder jerky hamburger short ribs pastrami shankle jowl pig tongue strip steak boudin. Ham hock pork chop spare ribs pork loin meatball sirloin biltong prosciutto pastrami sausage frankfurter. Sausage andouille leberkas turducken bacon tongue. Short ribs beef shankle tenderloin ball tip meatball chicken jowl bresaola rump filet mignon sirloin.</p><p>Salami drumstick meatloaf jowl chuck, ham shoulder pork belly ribeye. Pastrami sirloin shank jerky fatback meatball kielbasa bacon strip steak filet mignon jowl drumstick. Pancetta capicola spare ribs flank filet mignon pork belly pastrami. Meatloaf pork loin brisket flank drumstick shank frankfurter turkey fatback prosciutto. Corned beef pancetta capicola boudin pig pork.</p>
+          </section>
+        </div>
+      </div>
+      <div class="grid-50 mobile-grid-100 tablet-grid-65">
+        <div id="region-two">
+          <h3>Traverse Area District Library</h3>
+          <p class="hide-on-mobile hide-on-tablet">Desktop view</p>
+          <p class="hide-on-mobile hide-on-desktop">Tablet view</p>
+          <p class="hide-on-tablet hide-on-desktop">Mobile view</p>
+          <p><b>Region Two</b> (main)</p>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+            <section class="card">
+              <div class="grid-100 mobile-grid-100">
+                repeatable card<br/>with stuff<br/>in it
+              </div>
+            </section>
+          </div>
+        </div>
+      <div class="grid-25 hide-on-mobile hide-on-tablet">
+        <div id="region-three">
+          <section class="card">
+            <p><b>Region Three</b> (right)</p><p>Bacon ipsum dolor sit amet cow chuck boudin, bacon spare ribs pork belly kielbasa pork chop filet mignon biltong short ribs ham hock short loin brisket. Ball tip andouille pancetta sirloin ribeye rump. Frankfurter swine turducken, meatball jerky capicola boudin. Chuck strip steak flank, swine frankfurter ground round t-bone cow brisket filet mignon pork loin turkey spare ribs.</p><p>Tail kielbasa bacon jerky boudin rump. Short loin meatloaf beef ribs beef spare ribs. Prosciutto ribeye swine, filet mignon jowl cow kielbasa short loin boudin ham hock ham tenderloin spare ribs. Tenderloin beef ribs turducken turkey, tongue salami leberkas prosciutto. Bresaola shankle brisket short ribs ribeye. Capicola pancetta beef ribs meatball chuck. Doner meatball sausage, capicola short ribs beef bacon biltong venison beef ribs meatloaf shankle strip steak drumstick filet mignon.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
