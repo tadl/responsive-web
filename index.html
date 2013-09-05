@@ -26,19 +26,19 @@
     };
   </script>
   <script type="text/javascript" src="js/jquery-1.10.0.min.js"></script>
-  <script src="js/adapt.min.js"></script>
-  <script src="js/main.js"></script>
-    <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
-    <script type="text/javascript" src="js/handlebars.js"></script>
-    <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
-    <script type="text/javascript" src="js/main-vars.js"></script>
-    <script type="text/javascript" src="js/main-helper-functions.js"></script>
-    <script type="text/javascript" src="js/main-handlebars-functions.js"></script>
-    <script type="text/javascript" src="js/main-drupal-functions.js"></script>
-    <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
-    <script type="text/javascript" src="js/jquery.dateFormat-1.0.js"></script>
-    <script type="text/javascript" src="js/jquery.history.js"></script>
-    <script type="text/javascript" src="js/staterouter.js"></script>
+  <script type="text/javascript" src="js/adapt.min.js"></script>
+  <script type="text/javascript" src="js/application.js"></script>
+  <script type="text/javascript" src="js/jquery.dateFormat-1.0.js"></script>
+  <script type="text/javascript" src="js/jquery.history.js"></script>
+  <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
+  <script type="text/javascript" src="js/handlebars.js"></script>
+  <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
+  <script type="text/javascript" src="js/staterouter.js"></script>
+  <script type="text/javascript" src="js/main-vars.js"></script>
+  <script type="text/javascript" src="js/main-helper-functions.js"></script>
+  <script type="text/javascript" src="js/main-handlebars-functions.js"></script>
+  <script type="text/javascript" src="js/main-drupal-functions.js"></script>
+  <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -77,25 +77,19 @@
     <div class="grid-container">
       <div class="grid-25 tablet-grid-35 hide-on-mobile">
         <div id="region-one">
-   
-            
         </div>
       </div>
       <div class="grid-50 mobile-grid-100 tablet-grid-65">
         <div id="region-two">
-         
-     
-
-          </div>
         </div>
       <div class="grid-25 hide-on-mobile hide-on-tablet">
         <div id="region-three">
-          
         </div>
       </div>
     </div>
   </main>
-  </div>
+</div>
+
 <script id="searchfacets-template" type="text/template">
 {{#subjects}}
 
@@ -359,7 +353,7 @@
         {{else}}
             <img src="img/clocktower100.png">
         {{/if}}
-        </div><span style="font-size:1.3em;">{{node.title}}</span><br>
+        </div><span style="font-size:1.2em;">{{node.title}}</span><br>
         <strong>{{node.event-date}} - {{node.location}}</strong><br>
         <span id="more{{node.nid}}" class="viewmore">more details</span>
         <span id="{{node.nid}}" style="display:none;">{{node.body}}</span>

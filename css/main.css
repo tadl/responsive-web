@@ -354,3 +354,10 @@ a.button {
     -moz-border-radius:5px;
     border-radius:5px;
 }
+
+.result_img {
+    float:left;
+    margin-right:15px;
+    width:100%;
+    max-width:75px;
+}
