@@ -280,7 +280,7 @@ h1 {
   overflow: hidden;
   margin-bottom: 10px;
   padding: 0 0 10px 0;
-  text-align: center;
+  text-align: left;
   -webkit-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
   -moz-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
   box-shadow:2px 2px 3px rgba(0,0,0,0.5);
@@ -343,11 +343,11 @@ div[class*="pull-"] section {
 
 a.button {
     display:block;
-    width:95%;
+    width:100%;
     color:#fff;
     font-size:1.3em;
     margin:0;
-    padding:5px 10px;
+    padding:5px 0;
     text-align:center;
     cursor:pointer;
     -webkit-border-radius:5px;
@@ -356,8 +356,20 @@ a.button {
 }
 
 .result_img {
-    float:left;
-    margin-right:15px;
-    width:100%;
-    max-width:75px;
+    padding-top:15px;
+}
+
+.cardtitle {
+    line-height:12px;
+}
+
+.viewmore {
+    text-decoration:none;
+    color:#33B5E5;
+    font-size:0.8em;
+    cursor:pointer;
+}
+
+.pointer {
+    cursor:pointer;
 }
