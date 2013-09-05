@@ -85,7 +85,7 @@
   font-size:14px;
 }
 a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.button:visited {
-  padding:8px 0;
+  padding:10px 0;
   text-decoration:none;
   width:100%
 }
