@@ -341,6 +341,28 @@ div[class*="pull-"] section {
     z-index:1000;
 }
 
+#search_options {
+display: none;
+}
+
+#login_container {
+    position:absolute;
+    top:100px;
+    left:300px;
+}
+
+#login_form {
+    display:none;
+    background:#dddddd;
+    position:absolute;
+    z-index:1999;
+    top:33px;
+    right:0px;
+    line-height:2em;
+    padding:10px;
+    min-width:175px;
+}
+
 a.button {
     display:block;
     width:100%;
@@ -373,3 +395,4 @@ a.button {
 .pointer {
     cursor:pointer;
 }
+

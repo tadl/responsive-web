@@ -1,4 +1,4 @@
-var ILSCATCHER_HOST = 'tadl-ilscatcher.herokuapp.com/';
+var ILSCATCHER_HOST = 'mel-catcher.herokuapp.com/';
 var ILSCATCHER_BASE = 'https://' + ILSCATCHER_HOST;
 var ILSCATCHER_INSECURE_BASE = 'http://' + ILSCATCHER_HOST; /* we will actually use https here also */
 var FEATURED_URL = 'https://www.tadl.org/mobile/export/items/json/featured';

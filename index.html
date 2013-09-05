@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/">
+    <base href="/responsive-web/">
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -44,12 +44,51 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="grid-40 tablet-grid-40 mobile-grid-100"><input style="width:100%;" type="text" /></div>
-            <div class="grid-10 tablet-grid-10 mobile-grid-100">[SEARCH]</div>
-            <div class="grid-10 tablet-grid-10 mobile-grid-100 suffix-30 tablet-suffix-30">[SETTINGS]</div>
-            <div class="grid-10 tablet-grid-10 mobile-grid-100">[ACCT]</div>
+            <div class="grid-40 tablet-grid-40 mobile-grid-40"><input style="width:100%;" type="text" /></div>
+            <div class="grid-10 tablet-grid-10 mobile-grid-20">[SEARCH]</div>
+            <div class="grid-10 tablet-grid-10 mobile-grid-20 suffix-30 tablet-suffix-30">
+            	<img src="img/settings-gear-black.png" alt="Options" width="25" height="25" onclick="openSearch_options()" />
+            </div>
+            <div class="grid-10 tablet-grid-10 mobile-grid-20">
+            	<img src="img/account-button.png" alt="" width="25" height="25" onclick="openForm()" />
+            </div>
+          
         </div>
+          <div id="search_options">
+          <div class="grid-container">
+            <div class="grid-25 tablet-grid-25 mobile-grid-30"> 
+            <input class="left" type="checkbox" id="available" value="false" />
+            ONLY AVAILABLE
+            </div>
+            <div class="grid-15 tablet-grid-15 mobile-grid-30">
+                 <select id="mediatype">
+                <option value="ALL FORMATS">ALL FORMATS</option>
+                <option value="BOOKS">BOOKS</option>
+                <option value="MOVIES">MOVIES</option>
+                <option value="MUSIC">MUSIC</option>
+                <option value="VIDEO GAMES">VIDEO GAMES</option>
+            </select>
+            </div>
+            <div class="grid-15 tablet-grid-15 mobile-grid-40">
+                      <select id="location">
+                <option value="22">ALL LOCATIONS</option>
+                <option value="23">WOODMERE</option>
+                <option value="25">KINGSLEY</option>
+                <option value="24">INTERLOCHEN</option>
+                <option value="27">FIFE LAKE</option>
+                <option value="28">EAST BAY</option>
+            </select>
+            </div>
+            </div>
+            </div>   
     </header>
+    
+            <div id="login_form">
+        Username: <input type="text" id="username" /><br />
+        Password: <input type="password" id="pword" /><br />
+        <button id="login" onclick="login()">Login</button>
+        <span id="login_msg"></span>
+    </div>
     <main role="main" class="grid-container">
         <div class="grid-container">
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
