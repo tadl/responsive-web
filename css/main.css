@@ -252,7 +252,7 @@ table,
 address,
 fieldset,
 figure {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 body {
@@ -395,3 +395,7 @@ em.subtitle {
     cursor:pointer;
 }
 
+h4.title {
+    margin:10px 0 0 0;
+    text-align:center;
+}
