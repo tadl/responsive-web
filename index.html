@@ -10,6 +10,7 @@
         <script src="/js/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
     <link rel="stylesheet" href="css/unsemantic-grid-base.css" />
     <noscript>
         <link rel="stylesheet" href="css/unsemantic-grid-mobile.css" />
@@ -89,25 +90,25 @@
     <main role="main" class="grid-container">
         <div class="grid-container">
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button red" id="link-books">Books</a>
+                <a class="button red" id="link-books"><span>Books</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button orange" id="link-music">Music</a>
+                <a class="button orange" id="link-music"><span>Music</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button yellow" id="link-video">Video</a>
+                <a class="button yellow" id="link-video"><span>Video</span></a>
             </div>
             <div class="grid-10 tablet-grid-10 hide-on-mobile">
-                <a class="button tadlblue" id="link-home">Home</a>
+                <a class="button tadlblue" id="link-home"><span>Home</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button green" id="link-adults">Adults</a>
+                <a class="button green" id="link-adults"><span>Adults</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button blue" id="link-youth">Youth</a>
+                <a class="button blue" id="link-youth"><span>Youth</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button purple" id="link-teens">Teens</a>
+                <a class="button purple" id="link-teens"><span>Teens</span></a>
             </div>
         </div>
         <div class="grid-container">
@@ -309,15 +310,21 @@
 </script>
 
 
-<script id="showfeaturednews-template" type="text/template">
+<script id="showfeaturednews-template" type="text/template"><!-- updated for unsemantic --wjr -->
     {{#nodes}}
         <div class="card">
-        <img class="fb_img pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')">
-        <h3 class="pointer" style="padding:0;margin:0;" onclick="unhide('{{node.nid}}')">{{{ node.title }}}</h3>
-        <span id="more{{ node.nid }}" class="viewmore pointer" onclick="unhide('{{node.nid}}')">View More</span>
-        <span id="{{ node.nid }}" style="display:none;">
-        {{{ node.body }}}
-        </span>
+            <img class="pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')" />
+            <div class="grid-container">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 pointer" onclick="unhide('{{node.nid}}')">
+                    <strong>{{{node.title}}}</strong><br/>
+                    <span id="more{{node.nid}}" class="viewmore">view</span>
+                </div>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <span id="{{node.nid}}" style="display:none;">
+                        {{{node.body}}}
+                    </span>
+                </div>
+            </div>
         </div>
     {{/nodes}}
 </script>
@@ -392,22 +399,23 @@
 
 <script id="showevents-template" type="text/template"><!-- updated for unsemantic --wjr -->
     {{#nodes}}
-        <div class="card pointer" onclick="unhide({{node.nid}})">
+        <div class="card">
             <div class="grid-container">
-                <div class="grid-35 tablet-grid-35">
+                <div class="grid-35 tablet-grid-35 pointer" onclick="unhide({{node.nid}})">
                     {{#if node.image}}
                         <img class="result_img" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
                 </div>
-                <div class="grid-65 tablet-grid-65">
+                <div class="grid-65 tablet-grid-65 pointer" onclick="unhide({{node.nid}})">
                     <span class="cardtitle"><strong>{{node.title}}</strong></span><br/>
-                    <em>{{node.event-date}} - {{node.location}}</em>
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
                 </div>
+                <div class="clearfix"></div>
                 <div class="grid-100">
-                    <span id="more{{node.nid}}" class="viewmore">more details</span>
-                    <span id="{{node.nid}}" style="display:none;">{{node.body}}</span>
+                    <span id="more{{node.nid}}" class="viewmore pointer" onclick="unhide({{node.nid}})">more details</span>
+                    <span id="{{node.nid}}" style="display:none;">{{{node.body}}}</span>
                 </div>
             </div>
         </div>
