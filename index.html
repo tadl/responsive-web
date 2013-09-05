@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    <title>Unsemantic + adapt.js demo</title>
+    <title>Traverse Area District Library</title>
     <!--[if lt IE 9]>
         <script src="/js/html5.js"></script>
     <![endif]-->
@@ -393,19 +393,26 @@
     {{/:checkouts}}
 </script>
 
-<script id="showevents-template" type="text/template">
+<script id="showevents-template" type="text/template"><!-- updated for unsemantic --wjr -->
     {{#nodes}}
-        <div class="card" onclick="unhide({{node.nid}})">
-        <div class="result_img">
-        {{#if node.image}}
-            <img src="{{make_https node.image}}">
-        {{else}}
-            <img src="img/clocktower100.png">
-        {{/if}}
-        </div><span style="font-size:1.2em;">{{node.title}}</span><br>
-        <strong>{{node.event-date}} - {{node.location}}</strong><br>
-        <span id="more{{node.nid}}" class="viewmore">more details</span>
-        <span id="{{node.nid}}" style="display:none;">{{node.body}}</span>
+        <div class="card pointer" onclick="unhide({{node.nid}})">
+            <div class="grid-container">
+                <div class="grid-35 tablet-grid-35">
+                    {{#if node.image}}
+                        <img class="result_img" src="{{make_https node.image}}" />
+                    {{else}}
+                        <img class="result_img" src="img/clocktower100.png" />
+                    {{/if}}
+                </div>
+                <div class="grid-65 tablet-grid-65">
+                    <span class="cardtitle"><strong>{{node.title}}</strong></span><br/>
+                    <em>{{node.event-date}} - {{node.location}}</em>
+                </div>
+                <div class="grid-100">
+                    <span id="more{{node.nid}}" class="viewmore">more details</span>
+                    <span id="{{node.nid}}" style="display:none;">{{node.body}}</span>
+                </div>
+            </div>
         </div>
     {{/nodes}}
 </script>
