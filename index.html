@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/responsive-web/">
+    <base href="/">
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -44,7 +44,7 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="grid-40 tablet-grid-40 mobile-grid-40"><input style="width:100%;" type="text" /></div>
+            <div class="grid-40 tablet-grid-40 mobile-grid-40"><input style="width:100%;" type="text" id="term" /></div>
             <div class="grid-10 tablet-grid-10 mobile-grid-20">[SEARCH]</div>
             <div class="grid-10 tablet-grid-10 mobile-grid-20 suffix-30 tablet-suffix-30">
             	<img src="img/settings-gear-black.png" alt="Options" width="25" height="25" onclick="openSearch_options()" />
@@ -135,10 +135,17 @@
 
 <script id="searchfacets-template" type="text/template">
     {{#subjects}}
-        <h2>{{title}}</h2>
+        <div class="card">
+        {{title}}
+        </div>
+        <div class="card">
         {{#facets}}
-            <h3><a href="{{#links}}{{link}}{{/links}}">{{facet}}</a></h3>
+      
+            <a onclick="facetsearch('{{#links}}{{link}}{{/links}}')">{{facet}}</a>
+        
+          </br>  
         {{/facets}}
+        </div>
     {{/subjects}}
 </script>
 
