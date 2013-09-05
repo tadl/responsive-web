@@ -45,37 +45,41 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="grid-40 tablet-grid-40 mobile-grid-40"><input style="width:100%;" type="text" id="term" /></div>
-            <div class="grid-10 tablet-grid-10 mobile-grid-20">[SEARCH]</div>
-            <div class="grid-10 tablet-grid-10 mobile-grid-20 suffix-30 tablet-suffix-30">
-            	<img src="img/settings-gear-black.png" alt="Options" width="25" height="25" onclick="openSearch_options()" />
+            <div class="grid-40 tablet-grid-40 mobile-grid-40">
+                <input style="width:100%;" type="text" id="term" />
             </div>
-            <div class="grid-10 tablet-grid-10 mobile-grid-20">
-            	<img src="img/account-button.png" alt="" width="25" height="25" onclick="openForm()" />
+            <div class="grid-5 tablet-grid-5 mobile-grid-10">
+                <img src="img/search.png" class="icon" title="Search!" alt="Search" />
+            </div>
+            <div class="grid-5 tablet-grid-5 mobile-grid-10 suffix-45 tablet-suffix-45 mobile-suffix-30">
+            	<img src="img/settings-gear-black.png" class="icon" alt="Options" title="Search Options" onclick="openSearch_options()" />
+            </div>
+            <div class="grid-5 tablet-grid-5 mobile-grid-10">
+            	<img src="img/account-button.png" class="icon" alt="Account" title="My Account" onclick="openForm()" />
             </div>
         </div>
         <div id="search_options">
             <div class="grid-container">
-                <div class="grid-25 tablet-grid-25 mobile-grid-30"> 
-                    <input class="left" type="checkbox" id="available" value="false" /> ONLY AVAILABLE
+                <div class="grid-25 tablet-grid-25 mobile-grid-100"> 
+                    <input class="left" type="checkbox" id="available" value="false" /> Limit to Available
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-30">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50">
                     <select id="mediatype">
-                        <option value="ALL FORMATS">ALL FORMATS</option>
-                        <option value="BOOKS">BOOKS</option>
-                        <option value="MOVIES">MOVIES</option>
-                        <option value="MUSIC">MUSIC</option>
-                        <option value="VIDEO GAMES">VIDEO GAMES</option>
+                        <option value="ALL FORMATS">All Formats</option>
+                        <option value="BOOKS">Books</option>
+                        <option value="MOVIES">Movies</option>
+                        <option value="MUSIC">Music</option>
+                        <option value="VIDEO GAMES">Video Games</option>
                     </select>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-40">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50">
                     <select id="location">
-                        <option value="22">ALL LOCATIONS</option>
-                        <option value="23">WOODMERE</option>
-                        <option value="25">KINGSLEY</option>
-                        <option value="24">INTERLOCHEN</option>
-                        <option value="27">FIFE LAKE</option>
-                        <option value="28">EAST BAY</option>
+                        <option value="22">All Locations</option>
+                        <option value="23">Woodmere</option>
+                        <option value="25">Kingsley</option>
+                        <option value="24">Interlochen</option>
+                        <option value="27">Fife Lake</option>
+                        <option value="28">East Bay</option>
                     </select>
                 </div>
             </div>
