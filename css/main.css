@@ -252,7 +252,7 @@ table,
 address,
 fieldset,
 figure {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 body {
@@ -316,14 +316,6 @@ div[class*="pull-"] section {
     background-color:#dddddd;
 }
 
-.tadlblue { background-color:#004677; }
-.red { background-color:#E62727; }
-.orange { background-color:#FF5C00; }
-.yellow { background-color:#FFB515; }
-.green { background-color:#91BD09; }
-.blue { background-color:#00ADEE; }
-.purple { background-color:#800080; }
-
 .searchbar {
     display:block;
     background-color:#dddddd;
@@ -362,7 +354,7 @@ display: none;
     padding:10px;
     min-width:175px;
 }
-
+/*
 a.button {
     display:block;
     width:100%;
@@ -376,13 +368,20 @@ a.button {
     -moz-border-radius:5px;
     border-radius:5px;
 }
-
+*/
 .result_img {
     padding-top:15px;
 }
 
 .cardtitle {
-    line-height:12px;
+    display:inline-block;
+    line-height:16px;
+    padding-top:15px;
+}
+
+em.subtitle {
+    display:inline-block;
+    font-size:0.9em;
 }
 
 .viewmore {
@@ -396,3 +395,14 @@ a.button {
     cursor:pointer;
 }
 
+h4.title {
+    margin:10px 0 0 0;
+    text-align:center;
+}
+
+img.icon {
+    max-width:25px;
+    min-width:25px;
+    max-height:25px;
+    min-height:25px;
+}
