@@ -9,14 +9,14 @@
   <!--[if lt IE 9]>
     <script src="/js/html5.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/unsemantic-grid-base.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/unsemantic-grid-base.css" />
   <noscript>
-    <link rel="stylesheet" href="/css/unsemantic-grid-mobile.css" />
+    <link rel="stylesheet" href="css/unsemantic-grid-mobile.css" />
   </noscript>
   <script>
     var ADAPT_CONFIG = {
-      path: '/css/',
+      path: 'css/',
       dynamic: true,
       range: [
         '0 to 767px = unsemantic-grid-mobile.css',
@@ -25,9 +25,20 @@
       ]
     };
   </script>
-  <script src="/js/adapt.min.js"></script>
-  <script src="/js/jquery.js"></script>
-  <script src="/js/main.js"></script>
+  <script type="text/javascript" src="js/jquery-1.10.0.min.js"></script>
+  <script src="js/adapt.min.js"></script>
+  <script src="js/main.js"></script>
+    <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript" src="js/handlebars.js"></script>
+    <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
+    <script type="text/javascript" src="js/main-vars.js"></script>
+    <script type="text/javascript" src="js/main-helper-functions.js"></script>
+    <script type="text/javascript" src="js/main-handlebars-functions.js"></script>
+    <script type="text/javascript" src="js/main-drupal-functions.js"></script>
+    <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
+    <script type="text/javascript" src="js/jquery.dateFormat-1.0.js"></script>
+    <script type="text/javascript" src="js/jquery.history.js"></script>
+    <script type="text/javascript" src="js/staterouter.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -66,69 +77,375 @@
     <div class="grid-container">
       <div class="grid-25 tablet-grid-35 hide-on-mobile">
         <div id="region-one">
-          <section class="card">
-            <p><b>Region One</b> (left)</p><p>Bacon ipsum dolor sit amet pancetta ribeye brisket shoulder jerky hamburger short ribs pastrami shankle jowl pig tongue strip steak boudin. Ham hock pork chop spare ribs pork loin meatball sirloin biltong prosciutto pastrami sausage frankfurter. Sausage andouille leberkas turducken bacon tongue. Short ribs beef shankle tenderloin ball tip meatball chicken jowl bresaola rump filet mignon sirloin.</p><p>Salami drumstick meatloaf jowl chuck, ham shoulder pork belly ribeye. Pastrami sirloin shank jerky fatback meatball kielbasa bacon strip steak filet mignon jowl drumstick. Pancetta capicola spare ribs flank filet mignon pork belly pastrami. Meatloaf pork loin brisket flank drumstick shank frankfurter turkey fatback prosciutto. Corned beef pancetta capicola boudin pig pork.</p>
-          </section>
+   
+            
         </div>
       </div>
       <div class="grid-50 mobile-grid-100 tablet-grid-65">
         <div id="region-two">
-          <h3>Traverse Area District Library</h3>
-          <p class="hide-on-mobile hide-on-tablet">Desktop view</p>
-          <p class="hide-on-mobile hide-on-desktop">Tablet view</p>
-          <p class="hide-on-tablet hide-on-desktop">Mobile view</p>
-          <p><b>Region Two</b> (main)</p>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
-            <section class="card">
-              <div class="grid-100 mobile-grid-100">
-                repeatable card<br/>with stuff<br/>in it
-              </div>
-            </section>
+         
+     
+
           </div>
         </div>
       <div class="grid-25 hide-on-mobile hide-on-tablet">
         <div id="region-three">
-          <section class="card">
-            <p><b>Region Three</b> (right)</p><p>Bacon ipsum dolor sit amet cow chuck boudin, bacon spare ribs pork belly kielbasa pork chop filet mignon biltong short ribs ham hock short loin brisket. Ball tip andouille pancetta sirloin ribeye rump. Frankfurter swine turducken, meatball jerky capicola boudin. Chuck strip steak flank, swine frankfurter ground round t-bone cow brisket filet mignon pork loin turkey spare ribs.</p><p>Tail kielbasa bacon jerky boudin rump. Short loin meatloaf beef ribs beef spare ribs. Prosciutto ribeye swine, filet mignon jowl cow kielbasa short loin boudin ham hock ham tenderloin spare ribs. Tenderloin beef ribs turducken turkey, tongue salami leberkas prosciutto. Bresaola shankle brisket short ribs ribeye. Capicola pancetta beef ribs meatball chuck. Doner meatball sausage, capicola short ribs beef bacon biltong venison beef ribs meatloaf shankle strip steak drumstick filet mignon.</p>
-          </section>
+          
         </div>
       </div>
     </div>
   </main>
-</div>
+  </div>
+<script id="searchfacets-template" type="text/template">
+{{#subjects}}
+
+<h2> {{title}}</h2>
+{{#facets}}
+<h3><a href="{{#links}}{{link}}{{/links}}">{{facet}}</a></h3>
+{{/facets}}
+{{/subjects}}
+</script>
+
+<script id="featured-template" type="text/template">
+    {{#nodes}}
+        <img onclick="loaditem({{node.item}});return false;" onerror="this.style.display='none';" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{node.item}}" height="100" />
+    {{/nodes}}
+</script>
+
+<script id="result-details-template" type="text/template">
+    {{#:items}}
+        <div class="card">
+        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :item.:image}}">
+        <span class="title"><img src="{{make_https :item.:format_icon}}"> {{:item.:title}}</span><br/>
+        {{#if :item.:author}}
+            <span class="author">{{:item.:author}}, </span>
+        {{/if}}
+        {{:item.:record_year}}
+        <div class="summary relative">{{:item.:summary}}</div>
+        <div class="clearfix"></div>
+        <div class="bottomstuff">
+        <div class="more">
+            {{#compare :item.:copies_available null operator="!="}} 
+                {{:item.:copies_available}} of {{:item.:copies_total}} available<br/>
+                <a class="actionlink" id="place_hold_{{:item.:record_id}}" onclick="pre_hold({{:item.:record_id}})">Place Hold</a> 
+            {{/compare}}
+            {{#compare :item.:copies_available null operator="=="}}
+                <a class="actionlink external" onclick="try { navigator.app.loadUrl('{{:item.:eresource}}', {openExternal: true}); } finally { window.location = '{{:item.:eresource}}'; }">View Online</a>
+            {{/compare}}
+        </div></div>
+        <div class="clearfix"></div>
+        <div>
+        {{#compare :item.:copies_available 0 operator="!="}}
+            {{#compare :item.:copies_available null operator="!="}}
+                <table><tr>
+                <td><strong>Library</strong></td>
+                <td><strong>Location</strong></td>
+                <td><strong>Call #</strong></td></tr>
+            {{/compare}}
+        {{/compare}}
+    {{/:items}}
+    {{#:shelvinglocations}}
+        {{#if :shelf_location.:library}}
+            <tr>
+            <td>{{:shelf_location.:library}}</td>
+            <td>{{:shelf_location.:shelving_location}}</td>
+            <td>{{:shelf_location.:call_number}}</td>
+            </tr>
+        {{/if}}
+    {{/:shelvinglocations}}
+    </table>
+    </div>
+    <div class="clearfix"></div>
+    <a onclick="showfeatured();" class="actionlink">Back to Featured Items</a>
+    <div id="{{:item.:record_id}}shelf" style="display:none;"></div>
+    </div>
+</script>
+
+<script id="results-template" type="text/template">
+    {{#items}}
+        <div class="card">
+        <div onclick="showmore({{item.record_id}});" style="cursor:pointer;">
+        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https item.image}}">
+        <span class="title"><img src="{{make_https item.format_icon}}"> {{item.title}}</span><br/>
+        {{#if item.author}}
+            <span class="author">{{item.author}}, </span>
+        {{/if}}
+        {{item.record_year}}
+        <div id="showmore-{{item.record_id}}" class="viewmore">more details</div>
+        </div>
+        <div id="{{item.record_id}}" style="display:none;"></div>
+        <div id="{{item.record_id}}-loading"></div> 
+        <div class="clearfix"></div>
+        </div>
+    {{/items}}
+</script>
+
+<script id="showitemlist-template" type="text/template">
+    {{#nodes}}
+        <div class="card">
+        <div onclick="showmore({{node.item}});" class="pointer">
+        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
+        <span class="title">{{node.title}}</span><br/>
+        {{#if node.author}}
+            <span class="author">{{node.author}}</span>
+        {{/if}}
+        <div id="showmore-{{node.item}}" class="viewmore">more details</div>
+        </div>
+        <div id="{{node.item}}" style="display:none;"></div>
+        <div id="{{node.item}}-loading"></div> 
+        <div class="clearfix"></div>
+
+        </div>
+        </div>
+    {{/nodes}}
+</script>
+
+<script id="showreviews-template" type="text/template">
+    {{#nodes}}
+        <div class="shadow result">
+        <div onclick="showmore({{node.record}});" style="cursor:pointer;">
+        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="http://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{node.record}}">
+        <span class="title">{{node.title}}</span><br/>
+        {{#if node.author}}
+            <span class="author">{{node.author}}</span>
+        {{/if}}
+        
+            <div class="summary">Review by: {{node.reviewer}}
+            </br>
+            
+            {{{node.body}}} </div>
+        
+        
+        <div id="showmore-{{node.record}}" class="viewmore">more details</div>
+        </div>
+        <div id="{{node.record}}" style="display:none;"></div>
+        <div id="{{node.record}}-loading"></div> 
+        <div class="clearfix"></div>
+        </div>
+    {{/nodes}}
+</script>
+
+
+
+<script id="more_details-template" type="text/template">
+    {{#:items}}
+        <div class="summary" style="position:relative">{{:item.:summary}}</div>
+        <div class="clearfix"></div>
+        <div class="bottomstuff">
+        <div class="more">
+            {{#compare :item.:copies_available null operator="!="}} 
+                {{:item.:copies_available}} of {{:item.:copies_total}} available<br/>
+                <a class="actionlink" id="place_hold_{{:item.:record_id}}" onclick="pre_hold({{:item.:record_id}})">Place Hold</a> 
+            {{/compare}}
+            {{#compare :item.:copies_available null operator="=="}}
+                <a class="actionlink external" onclick="try { navigator.app.loadUrl('{{:item.:eresource}}', {openExternal: true}); } finally { window.location = '{{:item.:eresource}}'; }">View Online</a>
+            {{/compare}}
+        </div>
+        </div>
+        <div class="clearfix"></div>
+        <div>
+        {{#compare :item.:copies_available 0 operator="!="}}
+            {{#compare :item.:copies_available null operator="!="}}
+                <table><tr>
+                <td><strong>Library</strong></td>
+                <td><strong>Location</strong></td>
+                <td><strong>Call #</strong></td></tr>
+            {{/compare}}
+        {{/compare}}
+    {{/:items}}
+    {{#:shelvinglocations}}
+        {{#if :shelf_location.:library}}
+            <tr>
+            <td>{{:shelf_location.:library}}</td>
+            <td>{{:shelf_location.:shelving_location}}</td>
+            <td>{{:shelf_location.:call_number}}</td>
+            </tr>
+        {{/if}}
+    {{/:shelvinglocations}}
+    </table>
+    </div>	
+    <div class="clearfix"></div>
+    <div id="{{:item.:record_id}}shelf" style="display:none;"></div>
+</script>
+
+
+<script id="showfeaturednews-template" type="text/template">
+    {{#nodes}}
+        <div class="card">
+        <img class="fb_img pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')">
+        <h3 class="pointer" style="padding:0;margin:0;" onclick="unhide('{{node.nid}}')">{{{ node.title }}}</h3>
+        <span id="more{{ node.nid }}" class="viewmore pointer" onclick="unhide('{{node.nid}}')">View More</span>
+        <span id="{{ node.nid }}" style="display:none;">
+        {{{ node.body }}}
+        </span>
+        </div>
+    {{/nodes}}
+</script>
+
+<script id="showfeatureditembox-template" type="text/template">
+    <div class="card">
+    <div style="width: 275px; height: 275px;">
+    {{#each_upto nodes 4}}
+        
+     <img src="http://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{ node.item }}" style="float:left; width:50%; height:50%; padding: 0px; margin: 0px;">
+     {{/each_upto}}
+     </div>
+        <div class="clear"></div>
+      {{#each_upto nodes 1}}  
+<span style="font-size:1.3em;"><a onclick="showitemlist({{node.termid}})">{{node.term}}</a></span><br>
+{{/each_upto}}
+    </div>
+    
+</script>
+
+
+
+
+
+<script id="shelf-template" type="text/template">
+    <table>
+    <th>Library:</th>
+    <th>Status:</th>
+    <th>Shelving Location:</th>
+    <th>Call Number:</th>
+    {{#:items}}
+        <tr>
+        <td>{{:item.:library}}</td>
+        <td>{{:item.:available}}</td>
+        <td>{{:item.:shelving_location}}</td>
+        <td>{{:item.:call_number}}</td>
+        </tr>
+    {{/:items}}
+    </table>
+</script>
+
+<script id="logedin-template" type="text/template">
+    {{#:users}}
+        <div>
+        {{:user.:name}}<br />
+        <div class="accountlinks">
+        <a class="button" onclick="showcheckouts()">Checkouts: {{:user.:checkouts}}</a><br />
+        <a class="button" onclick="showholds()">Holds: {{:user.:holds}}</a><br />
+        <a class="button" onclick="showpickups()">Ready for Pickup: {{:user.:pickups}}</a><br />
+        </div>
+        Fines: {{:user.:fines}}
+        </div>
+        <button id="login" onclick="logout()">Logout</button>
+        <button id="showbarcode" onclick="showcard()">Card</button>
+    {{/:users}}
+</script>
+
+<script id="showcheckedout-template" type="text/template">
+    {{#:checkouts}}
+        <div class="shadow result">
+        <img src="{{make_https :checkout.:image}}" onload="img_check(this);" onerror="img_error(this);" class="result_img">
+        <img src="{{make_https :checkout.:format_icon}}"><span class="title">{{:checkout.:name}}</span><br/>
+        <div id="{{:checkout.:barcode}}">
+        Due on: {{:checkout.:due_date}}<br/>
+        Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
+        <div class="clearfix"></div>
+        <a class="actionlink" onclick="renew(this, {{:checkout.:checkout_id}}, {{:checkout.:barcode}})">Renew this item</a>
+        </div> 
+        </div>
+    {{/:checkouts}}
+</script>
+
+<script id="showevents-template" type="text/template">
+    {{#nodes}}
+        <div class="card" onclick="unhide({{node.nid}})">
+        <div class="result_img">
+        {{#if node.image}}
+            <img src="{{make_https node.image}}">
+        {{else}}
+            <img src="img/clocktower100.png">
+        {{/if}}
+        </div><span style="font-size:1.3em;">{{node.title}}</span><br>
+        <strong>{{node.event-date}} - {{node.location}}</strong><br>
+        <span id="more{{node.nid}}" class="viewmore">more details</span>
+        <span id="{{node.nid}}" style="display:none;">{{node.body}}</span>
+        </div>
+    {{/nodes}}
+</script>
+
+<script id="showlocations-template" type="text/template">
+    {{#nodes}}
+        <div class="shadow result pointer" onclick="unhide('{{node.shortname}}')">
+        <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
+        <h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
+        {{node.address}}<br/>
+        {{node.citystatezip}}<br/>
+        <a href="tel:{{node.phone}}">{{node.phone}}</a><br/>
+        <span id="more{{node.shortname}}" class="viewmore">view hours</span>
+        <span id="{{node.shortname}}" style="display:none;">
+        <table>
+        <tr><td>Sunday</td><td>{{node.sunday}}</td></tr>
+        <tr><td>Monday</td><td>{{node.monday}}</td></tr>
+        <tr><td>Tuesday</td><td>{{node.tuesday}}</td></tr>
+        <tr><td>Wednesday</td><td>{{node.wednesday}}</td></tr>
+        <tr><td>Thursday</td><td>{{node.thursday}}</td></tr>
+        <tr><td>Friday</td><td>{{node.friday}}</td></tr>
+        <tr><td>Saturday</td><td>{{node.saturday}}</td></tr>
+        </table>
+        </div>
+        </div>
+    {{/nodes}}
+</script>
+
+
+<script id="facebookfeed-template" type="text/template">
+    {{#data}}
+        {{#compare from.id 6113436733 operator="=="}}
+            {{#compare application.name "Photos" operator="!="}}
+                {{#compare privacy.value "" operator="!="}}
+                    <div class="shadow result">
+                        <div class="fb_img">
+                        {{#if picture}}
+                            {{#if object_id}}
+                                <img src="https://graph.facebook.com/{{object_id}}/picture">
+                            {{else}}
+                                <img src="{{make_https picture}}">
+                            {{/if}}
+                        {{else}}
+                            <img src="img/clocktower100.png">
+                        {{/if}}
+                        </div>
+                        <span style="font-size:13px; font-style:italic;">{{description}}</span><br/>
+                        <span class="linkable" style="font-size:14px;">{{message}}</span><br/>Posted on <span class="shortDateFormat">{{created_time}}</span>
+                        
+                        {{#if caption}}
+                            {{#if link}}
+                                <a href="{{link}}" style="font-decoration: none; font-size: 12px;">See More</a>
+                            {{/if}}
+                        {{/if}}
+                        
+                    </div>
+                {{/compare}} 
+            {{/compare}} 
+        {{/compare}}
+    {{/data}}
+</script>
+
+
+<script id="showholds-template" type="text/template">
+    {{#:holds}}
+        <div id="hold_{{:hold.:hold_id}}" class="shadow result">
+        <img class="result_img" src="{{make_https :hold.:image}}" onload="img_check(this);" onerror="img_error(this);">
+        <img src="{{make_https :hold.:format_icon}}"><span class="title">{{:hold.:name}}</span><br/>
+        Pickup Location: {{:hold.:pickup_location}}<br/>
+        Status: {{:hold.:status}}<br/>
+        <a class="actionlink" id="cancel_hold_{{:hold.:hold_id}}" onclick="pre_cancelhold(this, {{:hold.:hold_id}})">Cancel Hold</a>
+        </div>
+    {{/:holds}}
+</script>
+
+<script id="renew-template" type="text/template">
+    {{#:checkouts}}
+        Due on: {{:checkout.:due_date}}<br/>
+        Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
+    {{/:checkouts}}
+        <a onclick="return false;">{{:response}}</a>
+</script>
+
+
 </body>
 </html>
