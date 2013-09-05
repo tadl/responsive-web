@@ -2,7 +2,6 @@ $(document).ready(function() {
     home();
     var state = History.getState();
     var check = state.data.action
-    router.perform();
     $('#term').keydown(function(event) {
         if (event.keyCode == 13) { getResults(); }
     });
