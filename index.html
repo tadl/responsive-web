@@ -3,7 +3,7 @@
   <!-- saved from url=(0021)http://www.google.com -->
 <html lang="en">
 <head>
-    <base href="/responsive-web/">
+    <base href="/">
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -43,8 +43,8 @@
     <script type="text/javascript" src="js/main-handlebars-functions.js"></script>
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
-    	<script>
-    var BASE_URL = '/responsive-web/';
+    <script>
+    var BASE_URL = '/';
   	var router = new staterouter.Router();
   
 // Configure routes
@@ -196,25 +196,16 @@ router
     {{/subjects}}
 </script>
 
-
-
-
-
 <script id="searchfacetsselected-template" type="text/template">
-Filter(s):
-{{#selected}}
-
-{{#compare facets.title "game" operator="!="}}
-{{#facets}}
-
-<a onclick="facetstartsearch('{{link}}')">X </a><span>{{title}}, </span> 
-
-{{/facets}}
-{{/compare}}
-{{/selected}}
+    Filter(s):
+    {{#selected}}
+        {{#compare facets.title "game" operator="!="}}
+            {{#facets}}
+                <a onclick="facetstartsearch('{{link}}')">X </a><span>{{title}}, </span> 
+            {{/facets}}
+        {{/compare}}
+    {{/selected}}
 </script>
-
-
 
 <script id="featured-template" type="text/template">
     {{#nodes}}
