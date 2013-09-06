@@ -5,7 +5,10 @@ function home() {
         var info = template(data);
         $('.load_more').hide();
         $('#region-three').append(info);
-    });
+    })
+    .error(function(jqXHR, textStatus, errorThrown) { alert(errorThrown); })
+;
+    
     $.getJSON('http://www.tadl.org/mobile/export/items/68/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
