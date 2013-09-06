@@ -49,10 +49,8 @@ function showfeatured() {
             var template = Handlebars.compile($('#featured-template').html());
             var info = template(data);
             $('#featured').html(info);
-            $('#featured').imagesLoaded().always(function(instance) { 
-                $('.load_more').hide();
-                $('.image_carousel').show();
-            });
+            $('.load_more').hide();
+            $('.image_carousel').show();
         });
     }
 }
