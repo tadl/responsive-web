@@ -67,7 +67,7 @@ function getResults() {
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
-   loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
+   var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
     
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
