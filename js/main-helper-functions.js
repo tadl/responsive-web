@@ -1,15 +1,60 @@
 $(document).ready(function() {
-    home();
+    router.perform();
     var state = History.getState();
     var check = state.data.action
     $('#term').keydown(function(event) {
-        if (event.keyCode == 13) { getResults(); }
+        if (event.keyCode == 13) { startsearch(); }
     });
     $('#login_form').keydown(function(event) {
         if (event.keyCode == 13) { login(); }
     });
     $('#search').click(getResults);
 });
+
+
+
+
+
+
+
+
+function startsearch() {
+    var searchquery = encodeURIComponent($('#term').val());
+    var mediatype = encodeURIComponent($('#mediatype').val());
+    var loc = $('#location').val();
+    if (document.getElementById('available').checked) {
+        var available = "true";
+        var availablemsg = "ONLY AVAILABLE";
+    } else {
+        var available = "false";
+        var availablemsg = "";
+    }
+    var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc; 
+    var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate}
+    History.pushState(action, psTitle + "Search", newstate);
+    
+}
+
+
+function facetstartsearch(facet) { 
+   var facet = facet;
+   state = History.getState();
+   var searchquery = state.data.query;
+   var mediatype = state.data.mt;
+   var available = state.data.avail;
+   var loc = state.data.location;
+    
+    
+    var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+facet; 
+    var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate, ft:facet}
+    History.pushState(action, psTitle + "Search", newstate);
+    
+}
+
+
+
+
+
 
 function unhide(eventId) {
     var eventId = eventId;

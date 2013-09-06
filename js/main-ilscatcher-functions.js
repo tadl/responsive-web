@@ -26,17 +26,18 @@ function loadmore() {
 }
 
 function getsearch(query, mt, avail, location) {
-    var searchquery = query;
-    var available = avail;
-    var mediatype = mt;
-    var loc = location;
+    state = History.getState();
+    var searchquery = state.data.query;
+    var mediatype = state.data.mt;
+    var available = state.data.avail;
+    var loc = state.data.location;
     linked_search = "true";
     if (available === "true") {
         $('#available').prop('checked', true);
     } else {
         $('#available').prop('checked', false);
     }
-    $("#mediatype").val(decodeURIComponent(mt));
+    $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
     var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc; 
@@ -50,17 +51,23 @@ function getsearch(query, mt, avail, location) {
 function getResults() {      
     cleanhouse();
     pagecount = 0;
-    var searchquery = encodeURIComponent($('#term').val());
-    var mediatype = encodeURIComponent($('#mediatype').val());
-    var loc = $('#location').val();
-    loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
-    if (document.getElementById('available').checked) {
-        var available = "true";
-        var availablemsg = "ONLY AVAILABLE";
+    state = History.getState();
+    var searchquery = state.data.query;
+    var mediatype = state.data.mt;
+    var available = state.data.avail;
+    var loc = state.data.location;
+    $("#mediatype").val(decodeURIComponent(mediatype));
+    $("#term").val(decodeURIComponent(searchquery));
+    $("#location").val(decodeURIComponent(loc));
+    
+  if (available === "true") {
+        $('#available').prop('checked', true);
+        var availablemsg = "Only Available";
     } else {
-        var available = "false";
+        $('#available').prop('checked', false);
         var availablemsg = "";
     }
+   loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
     
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
@@ -85,23 +92,21 @@ function getResults() {
     });
 }
 
-function facetsearch(facet) {
-cleanhouse();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+function facetsearch() {
 state = History.getState();
-var facet = facet;
+var facet = state.data.ft;
 var searchquery = state.data.query;
 var mediatype = state.data.mt;
 var available = state.data.avail;
 var loc = state.data.location;
- if (document.getElementById('available').checked) {
-        var available = "true";
-        var availablemsg = "ONLY AVAILABLE";
+ if (available === "true") {
+        $('#available').prop('checked', true);
+        var availablemsg = "Only Available";
     } else {
-        var available = "false";
+        $('#available').prop('checked', false);
         var availablemsg = "";
     }
+loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
 $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
         var results = data.message;
         state = History.getState();
@@ -114,12 +119,11 @@ $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" +
                 var info = template(data);
                 var info_facets = facet_template(data);
                 var info_selected_facets = selected_facet_template(data);
-                $('#second_region').html(info);
-                $('#first_region').html(info_facets);
+                $('#region-two').html(info);
+                $('#region-one').html(info_facets);
                 $('#loadmoretext').empty().append(loadmoreText);
                 $('#loadmoretext').trigger("create");
-                var mediatypedecode = decodeURIComponent(mediatype);
-                $('#search-params').html('Searching for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
+                $('#search-params').html('Searching for '+ searchquery +' in ' + mediatype + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
                 $('#search-params').append(info_selected_facets);
             } else {
                 $('#second-region').replaceWith("No Results");

@@ -40,6 +40,44 @@
     <script type="text/javascript" src="js/main-handlebars-functions.js"></script>
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
+    	<script>
+    var BASE_URL = '/responsive-web/';
+  	var router = new staterouter.Router();
+  
+// Configure routes
+router
+  .route(BASE_URL, showmain)
+  .route(BASE_URL + '', home)
+  .route(BASE_URL + '#./', home)
+  .route(BASE_URL + '#./events', showevents)
+  .route(BASE_URL + 'events', showevents)
+  .route(BASE_URL + '#./facebook', facebookfeed)
+  .route(BASE_URL + 'facebook', facebookfeed)
+  .route(BASE_URL + '#./locations', showlocations)
+  .route(BASE_URL + 'locations', showlocations)
+  .route(BASE_URL + '#./card', showcard)
+  .route(BASE_URL + 'card', showcard)
+  .route(BASE_URL + '#./pickup', showpickups)
+  .route(BASE_URL + 'pickup', showpickups)
+  .route(BASE_URL + '#./holds', showholds)
+  .route(BASE_URL + 'holds', showholds)
+  .route(BASE_URL + '#./checkout', showcheckouts)
+  .route(BASE_URL + 'checkout', showcheckouts)
+  .route(BASE_URL + '#./featured', showfeatured)
+  .route(BASE_URL + 'featured', showfeatureditembox)
+  .route(BASE_URL + '#./featurednews', showfeaturednews)
+  .route(BASE_URL + 'featurednews', showfeaturednews)
+  .route(BASE_URL + '#./search/:query/:mt/:avail/:location', getResults)
+  .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
+  .route(BASE_URL + 'search/:query/:mt/:avail/:location/:facet', facetsearch)
+  .route(BASE_URL + '#./item/:record_id', viewitem)
+  .route(BASE_URL + 'item/:record_id', viewitem)
+  .route(BASE_URL + '#./reviews', showreviews)
+  .route(BASE_URL + 'reviews', showreviews)
+  .route(BASE_URL + '#./reviews/:review_type', showreviews)
+  .route(BASE_URL + 'reviews/:review_type', showreviews)
+  ;
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -121,6 +159,8 @@
                 </div>
             </div>
             <div class="grid-50 mobile-grid-100 tablet-grid-65">
+                <div id="search-params" class="card">
+                </div>
                 <div id="region-two">
                 </div>
             </div>
@@ -137,19 +177,41 @@
 
 <script id="searchfacets-template" type="text/template">
     {{#subjects}}
+    {{#compare count 0 operator=">"}}
         <div class="card">
         {{title}}
         </div>
         <div class="card">
         {{#facets}}
       
-            <a onclick="facetsearch('{{#links}}{{link}}{{/links}}')">{{facet}}</a>
+            <a onclick="facetstartsearch('{{#links}}{{link}}{{/links}}')">{{facet}}</a>
         
           </br>  
         {{/facets}}
         </div>
+     {{/compare}}   
     {{/subjects}}
 </script>
+
+
+
+
+
+<script id="searchfacetsselected-template" type="text/template">
+Filter(s):
+{{#selected}}
+
+{{#compare facets.title "game" operator="!="}}
+{{#facets}}
+
+<a onclick="facetstartsearch('{{link}}')">X </a><span>{{title}}, </span> 
+
+{{/facets}}
+{{/compare}}
+{{/selected}}
+</script>
+
+
 
 <script id="featured-template" type="text/template">
     {{#nodes}}
