@@ -44,43 +44,42 @@
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
     <script>
-    var BASE_URL = '/';
-  	var router = new staterouter.Router();
-  
-// Configure routes
-router
-  .route(BASE_URL, showmain)
-  .route(BASE_URL + '', home)
-  .route(BASE_URL + '#./', home)
-  .route(BASE_URL + '#./events', showevents)
-  .route(BASE_URL + 'events', showevents)
-  .route(BASE_URL + '#./facebook', facebookfeed)
-  .route(BASE_URL + 'facebook', facebookfeed)
-  .route(BASE_URL + '#./locations', showlocations)
-  .route(BASE_URL + 'locations', showlocations)
-  .route(BASE_URL + '#./card', showcard)
-  .route(BASE_URL + 'card', showcard)
-  .route(BASE_URL + '#./pickup', showpickups)
-  .route(BASE_URL + 'pickup', showpickups)
-  .route(BASE_URL + '#./holds', showholds)
-  .route(BASE_URL + 'holds', showholds)
-  .route(BASE_URL + '#./checkout', showcheckouts)
-  .route(BASE_URL + 'checkout', showcheckouts)
-  .route(BASE_URL + '#./featured', showfeatured)
-  .route(BASE_URL + 'featured', showfeatureditembox)
-  .route(BASE_URL + '#./featurednews', showfeaturednews)
-  .route(BASE_URL + 'featurednews', showfeaturednews)
-  .route(BASE_URL + '#search/:query/:mt/:avail/:location', getResults)
-  .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
-  .route(BASE_URL + 'search/:query/:mt/:avail/:location/:facet', facetsearch)
-  .route(BASE_URL + '#./item/:record_id', viewitem)
-  .route(BASE_URL + 'item/:record_id', viewitem)
-  .route(BASE_URL + '#./reviews', showreviews)
-  .route(BASE_URL + 'reviews', showreviews)
-  .route(BASE_URL + '#./reviews/:review_type', showreviews)
-  .route(BASE_URL + 'reviews/:review_type', showreviews)
-  ;
-</script>
+        var BASE_URL = '/';
+  	    var router = new staterouter.Router();
+        // Configure routes
+        router
+//            .route(BASE_URL, showmain) // what is this
+            .route(BASE_URL + '', home)
+            .route(BASE_URL + '#./', home)
+            .route(BASE_URL + '#./events', showevents)
+            .route(BASE_URL + 'events', showevents)
+            .route(BASE_URL + '#./facebook', facebookfeed)
+            .route(BASE_URL + 'facebook', facebookfeed)
+            .route(BASE_URL + '#./locations', showlocations)
+            .route(BASE_URL + 'locations', showlocations)
+            .route(BASE_URL + '#./card', showcard)
+            .route(BASE_URL + 'card', showcard)
+            .route(BASE_URL + '#./pickup', showpickups)
+            .route(BASE_URL + 'pickup', showpickups)
+            .route(BASE_URL + '#./holds', showholds)
+            .route(BASE_URL + 'holds', showholds)
+            .route(BASE_URL + '#./checkout', showcheckouts)
+            .route(BASE_URL + 'checkout', showcheckouts)
+            .route(BASE_URL + '#./featured', showfeatured)
+            .route(BASE_URL + 'featured', showfeatureditembox)
+            .route(BASE_URL + '#./featurednews', showfeaturednews)
+            .route(BASE_URL + 'featurednews', showfeaturednews)
+            .route(BASE_URL + '#search/:query/:mt/:avail/:location', getResults)
+            .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
+            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:facet', facetsearch)
+            .route(BASE_URL + '#./item/:record_id', viewitem)
+            .route(BASE_URL + 'item/:record_id', viewitem)
+            .route(BASE_URL + '#./reviews', showreviews)
+            .route(BASE_URL + 'reviews', showreviews)
+            .route(BASE_URL + '#./reviews/:review_type', showreviews)
+            .route(BASE_URL + 'reviews/:review_type', showreviews)
+            ;
+    </script>
 </head>
 <body>
 <div id="wrapper">
