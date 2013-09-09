@@ -179,19 +179,24 @@
 
 <script id="searchfacets-template" type="text/template">
     {{#subjects}}
-    {{#compare count 0 operator=">"}}
-        <div class="card">
-        {{title}}
-        </div>
-        <div class="card">
-        {{#facets}}
-      
-            <a onclick="facetstartsearch('{{#links}}{{link}}{{/links}}')">{{facet}}</a>
-        
-          </br>  
-        {{/facets}}
-        </div>
-     {{/compare}}   
+        {{#compare count 0 operator=">"}}
+            <div class="card">
+                <div class="grid-container">
+                    <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                        <h4 class="title">{{title}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="grid-container">
+                    <div class="grid-100 tablet-grid-100 mobile-grid-100"><div class="padtop"><ul class="facetlist">
+                        {{#facets}}
+                            <li class="facetlist"><a onclick="facetstartsearch('{{#links}}{{link}}{{/links}}')" class="pointer">{{facet}}</a></li>
+                        {{/facets}}
+                    </ul></div></div>
+                </div>
+            </div>
+        {{/compare}}
     {{/subjects}}
 </script>
 
