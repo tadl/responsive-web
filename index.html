@@ -175,8 +175,6 @@
 </div>
 
 
-
-
 <script id="searchfacets-template" type="text/template">
     {{#subjects}}
         {{#compare count 0 operator=">"}}
@@ -211,7 +209,7 @@
     {{/selected}}
 </script>
 
-<script id="featured-template" type="text/template">
+<script id="featured-template" type="text/template"><!-- this might not be used anymore -->
     {{#nodes}}
         <img onclick="loaditem({{node.item}});return false;" onerror="this.style.display='none';" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{node.item}}" height="100" />
     {{/nodes}}
@@ -285,22 +283,29 @@
     {{/items}}
 </script>
 
-<script id="showitemlist-template" type="text/template">
+<script id="showitemlist-template" type="text/template"><!-- updated for unsemantic -- wjr -->
     {{#nodes}}
         <div class="card">
-        <div onclick="showmore({{node.item}});" class="pointer">
-        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
-        <span class="title">{{node.title}}</span><br/>
-        {{#if node.author}}
-            <span class="author">{{node.author}}</span>
-        {{/if}}
-        <div id="showmore-{{node.item}}" class="viewmore">more details</div>
-        </div>
-        <div id="{{node.item}}" style="display:none;"></div>
-        <div id="{{node.item}}-loading"></div> 
-        <div class="clearfix"></div>
-
-        </div>
+            <div class="grid-container">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div onclick="showmore({{node.item}})" class="pointer">
+                        <div class="grid-35 tablet-grid-35 mobile-grid-25">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
+                        </div>
+                        <div class="grid-65 tablet-grid-65 mobile-grid-75">
+                            <span class="cardtitle"><strong>{{node.title}}</strong></span><br/>
+                            {{#if node.author}}
+                                <em class="subtitle">{{node.author}}</em>
+                            {{/if}}
+                            <div id="showmore-{{node.item}}" class="viewmore">more details</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div id="{{node.item}}" style="display:none;"></div>
+                    <div id="{{node.item}}-loading"></div>
+                </div>
+            </div>
         </div>
     {{/nodes}}
 </script>
@@ -393,25 +398,24 @@
     {{/nodes}}
 </script>
 
-<script id="showfeatureditembox-template" type="text/template">
+<script id="showfeatureditembox-template" type="text/template"><!-- updated for unsemantic -- wjr -->
     <div class="card">
-    <div style="width: 275px; height: 275px;">
-    {{#each_upto nodes 4}}
-        
-     <img src="http://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{ node.item }}" style="float:left; width:50%; height:50%; padding: 0px; margin: 0px;">
-     {{/each_upto}}
-     </div>
-        <div class="clear"></div>
-      {{#each_upto nodes 1}}  
-<span style="font-size:1.3em;"><a onclick="showitemlist({{node.termid}})">{{node.term}}</a></span><br>
-{{/each_upto}}
+        {{#each_upto nodes 1}}
+        <div class="grid-container pointer" onclick="showitemlist({{node.termid}})">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div class="cardtitle">{{node.term}}</div>
+                {{/each_upto}}
+            </div>
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                {{#each_upto nodes 4}}
+                    <div class="img-viewer">
+                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                    </div>
+                {{/each_upto}}
+            </div>
+        </div>
     </div>
-    
 </script>
-
-
-
-
 
 <script id="shelf-template" type="text/template">
     <table>

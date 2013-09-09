@@ -1,20 +1,18 @@
 function home() {
     cleanhouse();
-    $.getJSON('http://www.tadl.org/mobile/export/items/67/json', function(data) {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
-        $('.load_more').hide();
-        $('#region-three').append(info);
-    })
-    ;
-    
-    $.getJSON('http://www.tadl.org/mobile/export/items/68/json', function(data) {
+    $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('.load_more').hide();
         $('#region-three').append(info);
     });
-    $.getJSON('http://www.tadl.org/mobile/export/items/29/json', function(data) {
+    $.getJSON('https://www.tadl.org/mobile/export/items/68/json', function(data) {
+        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(data);
+        $('.load_more').hide();
+        $('#region-three').append(info);
+    });
+    $.getJSON('https://www.tadl.org/mobile/export/items/29/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('.load_more').hide();
