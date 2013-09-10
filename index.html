@@ -174,7 +174,7 @@
     </main>
 </div>
 
-
+<!-- updated for unsemantic -->
 <script id="searchfacets-template" type="text/template">
     {{#subjects}}
         {{#compare count 0 operator=">"}}
@@ -207,12 +207,6 @@
             {{/facets}}
         {{/compare}}
     {{/selected}}
-</script>
-
-<script id="featured-template" type="text/template"><!-- this might not be used anymore -->
-    {{#nodes}}
-        <img onclick="loaditem({{node.item}});return false;" onerror="this.style.display='none';" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{node.item}}" height="100" />
-    {{/nodes}}
 </script>
 
 <script id="result-details-template" type="text/template">
@@ -283,7 +277,8 @@
     {{/items}}
 </script>
 
-<script id="showitemlist-template" type="text/template"><!-- updated for unsemantic -- wjr -->
+<!-- updated for unsemantic -->
+<script id="showitemlist-template" type="text/template">
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
@@ -378,8 +373,8 @@
     <div id="{{:item.:record_id}}shelf" style="display:none;"></div>
 </script>
 
-
-<script id="showfeaturednews-template" type="text/template"><!-- updated for unsemantic --wjr -->
+<!-- updated for unsemantic -->
+<script id="showfeaturednews-template" type="text/template">
     {{#nodes}}
         <div class="card">
             <img class="pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')" />
@@ -398,7 +393,8 @@
     {{/nodes}}
 </script>
 
-<script id="showfeatureditembox-template" type="text/template"><!-- updated for unsemantic -- wjr -->
+<!-- updated for unsemantic -->
+<script id="showfeatureditembox-template" type="text/template">
     <div class="card">
         {{#each_upto nodes 1}}
         <div class="grid-container pointer" onclick="showitemlist({{node.termid}})">
@@ -465,7 +461,8 @@
     {{/:checkouts}}
 </script>
 
-<script id="showevents-template" type="text/template"><!-- updated for unsemantic --wjr -->
+<!-- updated for unsemantic -->
+<script id="showevents-template" type="text/template">
     <div class="card">
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100">

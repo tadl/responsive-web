@@ -39,27 +39,6 @@ function goHome() {
     });
 }
 
-function showfeatured() {
-    cleanhouse();
-    $('#search-params').empty();
-    var action = {action:"showfeatured"}
-    History.pushState(action, "Featured Items", "featured");
-    state = History.getState();
-    if (state.data.action === "showfeatured") {
-        $('#results').html('<div class="image_carousel"><div id="featured"></div><div class="clearfix"></div></div>');
-        $('.load_more').show();
-        $('.image_carousel').hide();
-        $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
-        $.getJSON(FEATURED_URL, function(data) {
-            var template = Handlebars.compile($('#featured-template').html());
-            var info = template(data);
-            $('#featured').html(info);
-            $('.load_more').hide();
-            $('.image_carousel').show();
-        });
-    }
-}
-
 function showevents() { 
     cleanhouse();
     var action = {action:"showevents"}
