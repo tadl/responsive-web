@@ -82,7 +82,6 @@
   text-decoration:none;
   text-align:center;
   white-space: nowrap;
-  font-size:20px;
 }
 a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.button:visited {
   padding:10px 0;
@@ -97,3 +96,6 @@ a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.butt
 .button.blue { background-color:#00ADEE; }
 .button.purple { background-color:#800080; }
 
+.button.small span { font-size:12px; }
+.button.medium span { font-size:16px; }
+.button.large span { font-size:20px; }
