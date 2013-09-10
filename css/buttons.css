@@ -99,3 +99,5 @@ a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.butt
 .button.small span { font-size:12px; }
 .button.medium span { font-size:16px; }
 .button.large span { font-size:20px; }
+
+.button.bold span { font-weight:bold; }
