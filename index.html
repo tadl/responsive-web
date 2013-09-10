@@ -3,7 +3,7 @@
   <!-- saved from url=(0021)http://www.google.com -->
 <html lang="en">
 <head>
-    <base href="/responsive-web/">
+    <base href="/">
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -45,7 +45,7 @@
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
     <script>
-        var BASE_URL = '/responsive-web/';
+        var BASE_URL = '/';
   	    var router = new staterouter.Router();
         // Configure routes
         router
@@ -87,8 +87,16 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
+<<<<<<< HEAD
             <div class="grid-40 tablet-grid-40 mobile-grid-40">
                 <input style="width:100%; height: 25px; font-size: 16px;" type="text" id="term" />
+=======
+            <div class="mobile-grid-10 hide-on-tablet hide-on-desktop">
+                <img src="img/tinylines.png" class="icon" alt="menu" title="Site Menu" />
+            </div>
+            <div class="grid-40 tablet-grid-40 mobile-grid-30">
+                <input style="width:100%;" type="text" id="term" />
+>>>>>>> c917833fd15208ac6d058bc6db87d4a79afe4b50
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
                 <img src="img/search.png" class="icon" title="Search!" alt="Search" />
@@ -135,6 +143,7 @@
     </div>
     <main role="main" class="grid-container">
         <div class="grid-container">
+
                   <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
                 <a class="button tadlblue" id="link-home" onclick="load('home')"><span>Home</span></a>
             </div>
@@ -215,6 +224,7 @@
     {{/selected}}
 </script>
 
+<!-- this might not be used? Except to view an individual item? Which we don't do now? -->
 <script id="result-details-template" type="text/template">
     {{#:items}}
         <div class="card">
@@ -289,22 +299,18 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div onclick="showmore({{node.item}})" class="pointer">
-                        <div class="grid-35 tablet-grid-35 mobile-grid-25">
-                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
-                        </div>
-                        <div class="grid-65 tablet-grid-65 mobile-grid-75">
-                            <span class="cardtitle">{{node.title}}</span><br/>
-                            {{#if node.author}}
-                                <em class="subtitle">{{node.author}}</em>
-                            {{/if}}
-                            <div id="showmore-{{node.item}}" class="viewmore">more details</div>
-                        </div>
+                    <div class="grid-35 tablet-grid-35 mobile-grid-25">
+                        <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" onclick="showmore({{node.item}})" />
                     </div>
-                </div>
-                <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div id="{{node.item}}" style="display:none;"></div>
-                    <div id="{{node.item}}-loading"></div>
+                    <div class="grid-65 tablet-grid-65 mobile-grid-75">
+                        <span class="cardtitle pointer" onclick="showmore({{node.item}})">{{node.title}}</span><br/>
+                        {{#if node.author}}
+                            <em class="subtitle pointer" onclick="showmore({{node.item}})">{{node.author}}</em>
+                        {{/if}}
+                        <div id="showmore-{{node.item}}" class="viewmore pointer" onclick="showmore({{node.item}})">more details</div>
+                        <div id="{{node.item}}" style="display:none;"></div>
+                        <div id="{{node.item}}-loading"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -405,12 +411,16 @@
         {{#each_upto nodes 1}}
         <div class="grid-container pointer" onclick="showitemlist({{node.termid}})">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="cardtitle">{{node.term}}</div>
+                    <h4 class="title">{{node.term}}</h4>
                 {{/each_upto}}
             </div>
+        </div>
+    </div>
+    <div class="card padtop">
+        <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 {{#each_upto nodes 4}}
-                    <div class="img-viewer">
+                    <div class="img-viewer pointer" onclick="showitemlist({{node.termid}})">
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
                     </div>
                 {{/each_upto}}
