@@ -99,6 +99,11 @@ body {
   height: 100%;
 }
 
+*{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
 article,
 aside,
 details,
@@ -182,10 +187,6 @@ sup {
 
 svg {
   overflow: hidden;
-}
-
-body {
-  font: 13px/1.5 "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
 }
 
 pre,

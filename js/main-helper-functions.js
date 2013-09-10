@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    jQuery.support.cors = true;
     router.perform();
     var state = History.getState();
     var check = state.data.action
@@ -10,6 +9,7 @@ $(document).ready(function() {
         if (event.keyCode == 13) { login(); }
     });
     $('#search').click(getResults);
+    jQuery.support.cors = true;
 });
 
 

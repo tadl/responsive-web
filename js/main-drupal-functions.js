@@ -1,9 +1,12 @@
-function home() {
+function load(page) {
     cleanhouse();
-    $('#region-one').empty();
-    $('#region-two').empty();
-    $('#region-three').empty();
-    goHome();
+    $('#region-three').empty;
+    var pagename = page;
+    if (pagename == 'home'){
+    var action = {action:"home"}
+    var newstate = "home"; 
+    History.pushState(action, "Home", newstate);
+    };
 }
 
 function goHome() {
