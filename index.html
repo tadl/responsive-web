@@ -3,7 +3,7 @@
   <!-- saved from url=(0021)http://www.google.com -->
 <html lang="en">
 <head>
-    <base href="/">
+    <base href="/responsive-web/">
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -45,11 +45,10 @@
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
     <script>
-        var BASE_URL = '/';
+        var BASE_URL = '/responsive-web/';
   	    var router = new staterouter.Router();
         // Configure routes
         router
-//            .route(BASE_URL, showmain) // what is this
             .route(BASE_URL + '', goHome)
             .route(BASE_URL + 'home', goHome)
             .route(BASE_URL + '#./', goHome)
@@ -87,16 +86,13 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
-<<<<<<< HEAD
-            <div class="grid-40 tablet-grid-40 mobile-grid-40">
-                <input style="width:100%; height: 25px; font-size: 16px;" type="text" id="term" />
-=======
+
             <div class="mobile-grid-10 hide-on-tablet hide-on-desktop">
                 <img src="img/tinylines.png" class="icon" alt="menu" title="Site Menu" />
             </div>
             <div class="grid-40 tablet-grid-40 mobile-grid-30">
-                <input style="width:100%;" type="text" id="term" />
->>>>>>> c917833fd15208ac6d058bc6db87d4a79afe4b50
+                <input style="width:100%; height: 25px; font-size: 16px;"" type="text" id="term" />
+
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
                 <img src="img/search.png" class="icon" title="Search!" alt="Search" />
