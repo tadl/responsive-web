@@ -1,5 +1,12 @@
 function home() {
     cleanhouse();
+    $('#region-one').empty();
+    $('#region-two').empty();
+    $('#region-three').empty();
+    goHome();
+}
+
+function goHome() {
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);

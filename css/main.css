@@ -346,36 +346,23 @@ display: none;
 #login_form {
     display:none;
     background:#dddddd;
-    position:absolute;
-    z-index:1999;
+    position:fixed;
+    z-index:9999;
     top:33px;
     right:0px;
     line-height:2em;
     padding:10px;
     min-width:175px;
 }
-/*
-a.button {
-    display:block;
-    width:100%;
-    color:#fff;
-    font-size:1.3em;
-    margin:0;
-    padding:5px 0;
-    text-align:center;
-    cursor:pointer;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-}
-*/
+
 .result_img {
     padding-top:15px;
 }
 
 .cardtitle {
     display:inline-block;
-    line-height:16px;
+    font-size:16px;
+    line-height:18px;
     padding-top:15px;
     font-weight:bold;
 }
@@ -424,13 +411,15 @@ img.icon {
     margin:0;
     padding:0;
     width:50%;
-    height:120px;
+    height:110px;
     overflow:hidden;
 }
 
 .img-viewer img {
     margin:0;
     padding:0;
+    min-height:110px;
+    min-width:110px;
     position:absolute;
 }
 

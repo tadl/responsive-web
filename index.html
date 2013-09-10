@@ -143,7 +143,7 @@
                 <a class="button yellow" id="link-video"><span>Video</span></a>
             </div>
             <div class="grid-10 tablet-grid-10 hide-on-mobile">
-                <a class="button tadlblue" id="link-home"><span>Home</span></a>
+                <a class="button tadlblue" id="link-home" onclick="home()"><span>Home</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile">
                 <a class="button green" id="link-adults"><span>Adults</span></a>
@@ -293,7 +293,7 @@
                             <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
                         </div>
                         <div class="grid-65 tablet-grid-65 mobile-grid-75">
-                            <span class="cardtitle"><strong>{{node.title}}</strong></span><br/>
+                            <span class="cardtitle">{{node.title}}</span><br/>
                             {{#if node.author}}
                                 <em class="subtitle">{{node.author}}</em>
                             {{/if}}
@@ -385,7 +385,7 @@
             <img class="pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')" />
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 pointer" onclick="unhide('{{node.nid}}')">
-                    <strong>{{{node.title}}}</strong><br/>
+                    <span class="cardtitle">{{{node.title}}}</span><br/>
                     <span id="more{{node.nid}}" class="viewmore">view</span>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -484,7 +484,7 @@
                     {{/if}}
                 </div>
                 <div class="grid-65 tablet-grid-65 pointer" onclick="unhide({{node.nid}})">
-                    <span class="cardtitle"><strong>{{node.title}}</strong></span><br/>
+                    <span class="cardtitle">{{node.title}}</span><br/>
                     <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
                 </div>
                 <div class="clearfix"></div>
