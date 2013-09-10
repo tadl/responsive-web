@@ -65,7 +65,7 @@
             .route(BASE_URL + 'holds', showholds)
             .route(BASE_URL + '#./checkout', showcheckouts)
             .route(BASE_URL + 'checkout', showcheckouts)
-            .route(BASE_URL + '#./featured', showfeatured)
+            .route(BASE_URL + '#./featured', showfeatureditembox)
             .route(BASE_URL + 'featured', showfeatureditembox)
             .route(BASE_URL + '#./featurednews', showfeaturednews)
             .route(BASE_URL + 'featurednews', showfeaturednews)
@@ -283,22 +283,18 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div onclick="showmore({{node.item}})" class="pointer">
-                        <div class="grid-35 tablet-grid-35 mobile-grid-25">
-                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
-                        </div>
-                        <div class="grid-65 tablet-grid-65 mobile-grid-75">
-                            <span class="cardtitle">{{node.title}}</span><br/>
-                            {{#if node.author}}
-                                <em class="subtitle">{{node.author}}</em>
-                            {{/if}}
-                            <div id="showmore-{{node.item}}" class="viewmore">more details</div>
-                        </div>
+                    <div class="grid-35 tablet-grid-35 mobile-grid-25">
+                        <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" onclick="showmore({{node.item}})" />
                     </div>
-                </div>
-                <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div id="{{node.item}}" style="display:none;"></div>
-                    <div id="{{node.item}}-loading"></div>
+                    <div class="grid-65 tablet-grid-65 mobile-grid-75">
+                        <span class="cardtitle pointer" onclick="showmore({{node.item}})">{{node.title}}</span><br/>
+                        {{#if node.author}}
+                            <em class="subtitle pointer" onclick="showmore({{node.item}})">{{node.author}}</em>
+                        {{/if}}
+                        <div id="showmore-{{node.item}}" class="viewmore pointer" onclick="showmore({{node.item}})">more details</div>
+                        <div id="{{node.item}}" style="display:none;"></div>
+                        <div id="{{node.item}}-loading"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -399,12 +395,16 @@
         {{#each_upto nodes 1}}
         <div class="grid-container pointer" onclick="showitemlist({{node.termid}})">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="cardtitle">{{node.term}}</div>
+                    <h4 class="title">{{node.term}}</h4>
                 {{/each_upto}}
             </div>
+        </div>
+    </div>
+    <div class="card padtop">
+        <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 {{#each_upto nodes 4}}
-                    <div class="img-viewer">
+                    <div class="img-viewer pointer" onclick="showitemlist({{node.termid}})">
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
                     </div>
                 {{/each_upto}}
