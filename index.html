@@ -67,7 +67,7 @@
             .route(BASE_URL + 'holds', showholds)
             .route(BASE_URL + '#./checkout', showcheckouts)
             .route(BASE_URL + 'checkout', showcheckouts)
-            .route(BASE_URL + '#./featured', showfeatured)
+            .route(BASE_URL + '#./featured', showfeatureditembox)
             .route(BASE_URL + 'featured', showfeatureditembox)
             .route(BASE_URL + '#./featurednews', showfeaturednews)
             .route(BASE_URL + 'featurednews', showfeaturednews)
@@ -88,7 +88,7 @@
     <header class="searchbar card">
         <div class="grid-container">
             <div class="grid-40 tablet-grid-40 mobile-grid-40">
-                <input style="width:100%;" type="text" id="term" />
+                <input style="width:100%; height: 25px; font-size: 16px;" type="text" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
                 <img src="img/search.png" class="icon" title="Search!" alt="Search" />
@@ -135,41 +135,45 @@
     </div>
     <main role="main" class="grid-container">
         <div class="grid-container">
-            <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button red" id="link-books"><span>Books</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button orange" id="link-music"><span>Music</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile">
-                <a class="button yellow" id="link-video"><span>Video</span></a>
-            </div>
-            <div class="grid-10 tablet-grid-10 hide-on-mobile">
+                  <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
                 <a class="button tadlblue" id="link-home" onclick="load('home')"><span>Home</span></a>
             </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile">
+            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                <a class="button red" id="link-books"><span>Books</span></a>
+            </div>
+            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                <a class="button orange" id="link-music"><span>Music</span></a>
+            </div>
+            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                <a class="button yellow" id="link-video"><span>Video</span></a>
+            </div>
+            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                 <a class="button green" id="link-adults"><span>Adults</span></a>
             </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile">
+            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                 <a class="button blue" id="link-youth"><span>Youth</span></a>
             </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile">
+            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                 <a class="button purple" id="link-teens"><span>Teens</span></a>
             </div>
         </div>
         <div class="grid-container">
+              <div id="search-params" class="card grid-100 tablet-grid-100 mobile-grid-100" style="display:none;">
+                </div>
             <div class="grid-25 tablet-grid-35 hide-on-mobile">
                 <div id="region-one">
+                &nbsp;
                 </div>
             </div>
             <div class="grid-50 mobile-grid-100 tablet-grid-65">
-                <div id="search-params" style="display:none;">
-                </div>
+              
                 <div id="region-two">
+                &nbsp;
                 </div>
             </div>
             <div class="grid-25 hide-on-mobile hide-on-tablet">
                 <div id="region-three">
+                &nbsp;
                 </div>
             </div>
         </div>
@@ -203,11 +207,11 @@
 <script id="searchfacetsselected-template" type="text/template">
     Filter(s):
     {{#selected}}
-        {{#compare facets.title "game" operator="!="}}
+    
             {{#facets}}
                 <a onclick="facetstartsearch('{{link}}')">X </a><span>{{title}}, </span> 
             {{/facets}}
-        {{/compare}}
+
     {{/selected}}
 </script>
 

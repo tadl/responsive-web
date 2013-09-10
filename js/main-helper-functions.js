@@ -133,8 +133,9 @@ function hidemenu() {
 
 function cleanhouse() {
     hidemenu();
-    $('#results').html("");
-    $('#first_column_content').html("&nbsp;");
+    $('#region-one').html("&nbsp;");
+    $('#region-two').html("&nbsp;");
+    $('#region-three').html("&nbsp;");
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
     $('#search-params').empty();
