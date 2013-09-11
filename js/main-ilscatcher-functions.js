@@ -70,8 +70,8 @@ function getResults() {
    var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
    var mediatypedecode = decodeURIComponent(mediatype);
    $('#search-params').show();
-   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">Searching for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
+   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
         linked_search = "false";
         
@@ -82,7 +82,7 @@ function getResults() {
                 var info_facets = facet_template(data);
                 $('#region-two').html(info);
                 $('#region-one').html(info_facets);
-                $('#search-params').html('Results for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
+                $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="pointer">options...</a>');
             } else {
                 $('#search-params').html("No Results");
             }
@@ -124,7 +124,7 @@ $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" +
                 $('#region-one').html(info_facets);
                 $('#loadmoretext').empty().append(loadmoreText);
                 $('#loadmoretext').trigger("create");
-                $('#search-params').html('Results for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
+                $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="pointer">options...</a>');
                 $('#search-params').append(info_selected_facets);
             } else {
                 $('#second-region').replaceWith("No Results");

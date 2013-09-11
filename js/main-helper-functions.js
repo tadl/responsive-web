@@ -138,6 +138,6 @@ function cleanhouse() {
 //    $('#region-three').empty();
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
-    $('#search-params').empty();
+    $('#search-params').empty().hide();
     $('.load_more').hide();
 }
