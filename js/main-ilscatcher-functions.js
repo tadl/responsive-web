@@ -68,8 +68,10 @@ function getResults() {
         var availablemsg = "";
     }
    var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
-    
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype +"&avail=" + available + "&loc=" + loc, function(data) {
+   var mediatypedecode = decodeURIComponent(mediatype);
+   $('#search-params').show();
+   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/ajax-loader-2.gif">Searching for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
         linked_search = "false";
         
@@ -80,13 +82,9 @@ function getResults() {
                 var info_facets = facet_template(data);
                 $('#region-two').html(info);
                 $('#region-one').html(info_facets);
-                $('#loadmoretext').empty().append(loadmoreText);
-                $('#loadmoretext').trigger("create");
-                var mediatypedecode = decodeURIComponent(mediatype);
-                $('#search-params').html('Searching for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
+                $('#search-params').html('Results for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
             } else {
-                $('#first_column_content').replaceWith("No Results");
-                $('.load_more').hide();
+                $('#search-params').html("No Results");
             }
     
     });
@@ -106,8 +104,11 @@ var loc = state.data.location;
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
+var mediatypedecode = decodeURIComponent(mediatype);    
 loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
-$.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
+$('#search-params').show();
+$('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/ajax-loader-2.gif"> Changing filter.');
+$.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
         var results = data.message;
         state = History.getState();
         linked_search = "false";
@@ -123,7 +124,7 @@ $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" +
                 $('#region-one').html(info_facets);
                 $('#loadmoretext').empty().append(loadmoreText);
                 $('#loadmoretext').trigger("create");
-                $('#search-params').html('Searching for '+ searchquery +' in ' + mediatype + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
+                $('#search-params').html('Results for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()">options...</a>');
                 $('#search-params').append(info_selected_facets);
             } else {
                 $('#second-region').replaceWith("No Results");

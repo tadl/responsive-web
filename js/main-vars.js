@@ -16,3 +16,4 @@ var version_id = '0';
 var pagecount = {}
 var state = {}
 var linked_search = false;
+var home_url = 'http://scott-lap.in.tcnet.org/responsive-web';
