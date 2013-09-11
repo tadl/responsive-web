@@ -133,9 +133,9 @@ function hidemenu() {
 
 function cleanhouse() {
     hidemenu();
-    $('#region-one').empty();
-    $('#region-two').empty();
-    $('#region-three').empty();
+//    $('#region-one').empty();
+//    $('#region-two').empty();
+//    $('#region-three').empty();
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
     $('#search-params').empty();
