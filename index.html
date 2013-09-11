@@ -204,14 +204,13 @@
 </script>
 
 <script id="searchfacetsselected-template" type="text/template">
-    Filter(s):
+    <div>Filter(s):
     {{#selected}}
-    
             {{#facets}}
-                <a onclick="facetstartsearch('{{link}}')">X </a><span>{{title}}, </span> 
+                <a onclick="facetstartsearch('{{link}}')" class="pointer">X</a> <span>{{title}}, </span> 
             {{/facets}}
-
     {{/selected}}
+    </div>
 </script>
 
 <!-- this might not be used? Except to view an individual item? Which we don't do now? -->
