@@ -70,7 +70,7 @@ function getResults() {
    var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
    var mediatypedecode = decodeURIComponent(mediatype);
    $('#search-params').show();
-   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/ajax-loader-2.gif">Searching for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">Searching for '+ searchquery +' in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
         linked_search = "false";
@@ -107,7 +107,7 @@ var loc = state.data.location;
 var mediatypedecode = decodeURIComponent(mediatype);    
 loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
 $('#search-params').show();
-$('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/ajax-loader-2.gif"> Changing filter.');
+$('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Changing filter.');
 $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
         var results = data.message;
         state = History.getState();

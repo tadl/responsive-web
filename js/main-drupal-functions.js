@@ -13,9 +13,9 @@ function load(page) {
 }
 
 function goHome() {
-    $('#region-three').html("");
+    $('#region-three').empty();
     $('#search-params').show();
-    $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/ajax-loader-2.gif"> Loading page.');
+    $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Loading page.');
 
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
@@ -81,7 +81,6 @@ function showlocations() {
 
 function showitemlist(list_id) {
     cleanhouse();
-   
     $('.load_more').show();
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/json', function(data) {
