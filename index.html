@@ -261,21 +261,38 @@
     </div>
 </script>
 
+<!-- updated for unsemantic -->
 <script id="results-template" type="text/template">
     {{#items}}
         <div class="card">
-        <div onclick="showmore({{item.record_id}});" style="cursor:pointer;">
-        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https item.image}}">
-        <span class="title"><img src="{{make_https item.format_icon}}"> {{item.title}}</span><br/>
-        {{#if item.author}}
-            <span class="author">{{item.author}}, </span>
-        {{/if}}
-        {{item.record_year}}
-        <div id="showmore-{{item.record_id}}" class="viewmore">more details</div>
-        </div>
-        <div id="{{item.record_id}}" style="display:none;"></div>
-        <div id="{{item.record_id}}-loading"></div> 
-        <div class="clearfix"></div>
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-25">
+                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" onclick="showmore({{item.record_id}});" src="{{make_https item.image}}"/>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-75">
+                    <span class="cardtitle pointer" onclick="showmore({{item.record_id}});"><img src="{{make_https item.format_icon}}"/>&nbsp;{{item.title}}</span><br/>
+                    {{#if item.author}}
+                        <em class="subtitle pointer" onclick="showmore({{item.record_id}});">{{item.author}} </em>
+                    {{/if}}
+                    {{#if item.record_year}}
+                        <em class="subtitle pointer" onclick="showmore({{item.record_id}});">{{item.record_year}}</em>
+                    {{/if}}
+                    <div class="clearfix"></div>
+                    <div id="showmore-{{item.record_id}}">
+                        <div class="viewmore" onclick="showmore({{item.record_id}});">more details<br/><br/></div>
+                        <div>
+                            {{#compare item.availability null operator="!="}} 
+                                <a class="actionlink" id="place_hold_{{item.record_id}}" onclick="pre_hold({{item.record_id}})">Place Hold</a> 
+                            {{/compare}}
+                            {{#compare item.availability null operator="=="}}
+                                <a class="actionlink external" target="_blank" onclick="window.location='{{item.image}}';">View Online</a>
+                            {{/compare}}
+                        </div>
+                    </div>
+                    <div id="{{item.record_id}}" style="display:none;"></div>
+                    <div id="{{item.record_id}}-loading"></div>
+                </div>
+            </div>
         </div>
     {{/items}}
 </script>
@@ -334,7 +351,6 @@
 <script id="more_details-template" type="text/template">
     {{#:items}}
         <div class="summary" style="position:relative">{{:item.:summary}}</div>
-        <div class="clearfix"></div>
         <div class="bottomstuff">
         <div class="more">
             {{#compare :item.:copies_available null operator="!="}} 
@@ -342,7 +358,7 @@
                 <a class="actionlink" id="place_hold_{{:item.:record_id}}" onclick="pre_hold({{:item.:record_id}})">Place Hold</a> 
             {{/compare}}
             {{#compare :item.:copies_available null operator="=="}}
-                <a class="actionlink external" onclick="try { navigator.app.loadUrl('{{:item.:eresource}}', {openExternal: true}); } finally { window.location = '{{:item.:eresource}}'; }">View Online</a>
+                <a class="actionlink external" onclick="window.location = '{{:item.:eresource}}';">View Online</a>
             {{/compare}}
         </div>
         </div>

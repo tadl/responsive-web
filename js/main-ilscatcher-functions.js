@@ -168,9 +168,11 @@ function showmore(record_id) {
             });
         } else {
             $('#'+ record_id).css('display', 'block');
+            $('#showmore-' + record_id).css('display', 'none');
         }
     } else {
         $('#'+ record_id).css('display', 'none');
+        $('#showmore-' + record_id).css('display', 'block');
     }
 }
 
