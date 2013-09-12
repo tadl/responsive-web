@@ -277,7 +277,8 @@
                     {{#if item.record_year}}
                         <em class="subtitle pointer">{{item.record_year}}</em>
                     {{/if}}
-                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-100">
                     <div id="showmore-{{item.record_id}}" class="padtop">
                         <a class="button small tadlblue" id="more_details_{{item.record_id}}" onclick="showmore({{item.record_id}});"><span>More Details</span></a>
                         {{#compare item.availability null operator="!="}} 
