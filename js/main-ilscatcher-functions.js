@@ -227,12 +227,12 @@ function showshelf(record_id) {
 function pre_hold(record_id) {
     var record_id = record_id;
     link_id = '#place_hold_' + record_id;
+    $(link_id).removeClass('green').addClass('black');
     if (logged_in()) {
-        $(link_id).html('Requesting hold...');
-        $(link_id).css('color', 'green');
+        $(link_id).html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Requesting hold...</span>').removeAttr('onclick');
         hold(record_id);
     } else {
-        $(link_id).html('Log in to place hold');
+        $(link_id).html('<span>Log in to place hold</span>');
         $(link_id).addClass('hold_login_first');
         $("#login_form").slideDown("fast");
     }
@@ -241,7 +241,7 @@ function pre_hold(record_id) {
 function reset_hold_links() {
     $(".hold_login_first").each(function() {
         $(this).removeClass('hold_login_first');
-        $(this).html('Place Hold');
+        $(this).html('<span>Place Hold</span>');
     });
 }
 
@@ -253,15 +253,19 @@ function hold(record_id) {
         var message = data[':message'];
         var success = false;
         var button_id = '#place_hold_' + record_id;
+        var hold_message = '#hold_message_' + record_id;
         if (message == 'Hold was successfully placed') {
             success = true;
+            $(button_id).hide();
         }
         if (message) {
-            $(button_id).html(message);
+            $(hold_message).html(message).show().addClass((success) ? 'success' : 'error');
+            $(button_id).hide();
         } else {
-            $(button_id).html('Unable to place hold.');
+            $(hold_message).html('Unable to place hold.').show().addClass('error');
+            $(button_id).hide();
         }
-        $(button_id).css('color', (success) ? 'green' : 'red');
+//        $(button_id).css('color', (success) ? '#91BD09' : '#E62727');
     });
     window.setTimeout(partB,5000);
 }

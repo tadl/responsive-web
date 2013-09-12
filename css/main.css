@@ -450,3 +450,19 @@ img.icon {
     font-weight:bold;
     cursor:pointer;
 }
+
+.holdmessage {
+    padding:2px;
+    margin:2px;
+    display:none;
+}
+
+.holdmessage.error {
+    border:2px solid #E62727;
+    background-color:#FFB6B8;
+}
+
+.holdmessage.success {
+    border:2px solid #91BD09;
+    background-color:#DDFF74;
+}
