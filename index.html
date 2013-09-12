@@ -267,15 +267,15 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-25">
-                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="{{make_https item.image}}"/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https item.image}}"/>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-75">
-                    <span class="cardtitle pointer"><img src="{{make_https item.format_icon}}"/>&nbsp;{{item.title}}</span><br/>
+                    <span class="cardtitle"><img src="{{make_https item.format_icon}}"/>&nbsp;{{item.title}}</span><br/>
                     {{#if item.author}}
-                        <em class="subtitle pointer">{{item.author}} </em>
+                        <em class="subtitle">{{item.author}} </em>
                     {{/if}}
                     {{#if item.record_year}}
-                        <em class="subtitle pointer">{{item.record_year}}</em>
+                        <em class="subtitle">{{item.record_year}}</em>
                     {{/if}}
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-100">
