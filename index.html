@@ -88,19 +88,19 @@
         <div class="grid-container">
 
             <div class="mobile-grid-10 hide-on-tablet hide-on-desktop">
-                <img src="img/tinylines.png" class="icon" alt="menu" title="Site Menu" />
+                <img src="img/tinylines.png" class="icon pointer" alt="menu" title="Site Menu" />
             </div>
-            <div class="grid-40 tablet-grid-40 mobile-grid-30">
+            <div class="grid-85 tablet-grid-85 mobile-grid-55">
                 <input style="width:100%;height:25px;font-size:16px;" type="text" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
-                <img src="img/search.png" class="icon" title="Search!" alt="Search" />
-            </div>
-            <div class="grid-5 tablet-grid-5 mobile-grid-10 suffix-45 tablet-suffix-45 mobile-suffix-25">
-            	<img src="img/settings-gear-black.png" class="icon" alt="Options" title="Search Options" onclick="openSearch_options()" />
+                <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
-            	<img src="img/account-button.png" class="icon" alt="Account" title="My Account" onclick="openForm()" />
+            	<img src="img/settings-gear-black.png" class="icon pointer" alt="Options" title="Search Options" onclick="openSearch_options()" />
+            </div>
+            <div class="grid-5 tablet-grid-5 mobile-grid-10">
+            	<img src="img/account-button.png" class="icon pointer" alt="Account" title="My Account" onclick="openForm()" />
             </div>
         </div>
         <div id="search_options">
@@ -279,7 +279,7 @@
                     {{/if}}
                     <div class="clearfix"></div>
                     <div id="showmore-{{item.record_id}}" class="padtop">
-                        <a class="button small tadlblue" onclick="showmore({{item.record_id}});"><span>More Details</span></a>
+                        <a class="button small tadlblue" id="more_details_{{item.record_id}}" onclick="showmore({{item.record_id}});"><span>More Details</span></a>
                         {{#compare item.availability null operator="!="}} 
                             <a class="button small green" id="place_hold_{{item.record_id}}" onclick="pre_hold({{item.record_id}})"><span>Place Hold</span></a> 
                         {{/compare}}
@@ -301,19 +301,17 @@
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="grid-35 tablet-grid-35 mobile-grid-25">
-                        <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" onclick="showmore({{node.item}})" />
-                    </div>
-                    <div class="grid-65 tablet-grid-65 mobile-grid-75">
-                        <span class="cardtitle pointer" onclick="showmore({{node.item}})">{{node.title}}</span><br/>
-                        {{#if node.author}}
-                            <em class="subtitle pointer" onclick="showmore({{node.item}})">{{node.author}}</em>
-                        {{/if}}
-                        <div id="showmore-{{node.item}}" class="viewmore pointer" onclick="showmore({{node.item}})">more details</div>
-                        <div id="{{node.item}}" style="display:none;"></div>
-                        <div id="{{node.item}}-loading"></div>
-                    </div>
+                <div class="grid-35 tablet-grid-35 mobile-grid-25">
+                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" onclick="showmore({{node.item}})" />
+                </div>
+                <div class="grid-65 tablet-grid-65 mobile-grid-75">
+                    <span class="cardtitle pointer" onclick="showmore({{node.item}})">{{node.title}}</span><br/>
+                    {{#if node.author}}
+                        <em class="subtitle pointer" onclick="showmore({{node.item}})">{{node.author}}</em>
+                    {{/if}}
+                    <div id="showmore-{{node.item}}" class="viewmore pointer" onclick="showmore({{node.item}})">more details</div>
+                    <div id="{{node.item}}" style="display:none;"></div>
+                    <div id="{{node.item}}-loading"></div>
                 </div>
             </div>
         </div>
@@ -354,7 +352,6 @@
         <div class="more">
             {{#compare :item.:copies_available null operator="!="}} 
                 {{:item.:copies_available}} of {{:item.:copies_total}} available<br/>
-                <a class="button small green" id="place_hold_{{:item.:record_id}}" onclick="pre_hold({{:item.:record_id}})"><span>Place Hold</span></a> 
             {{/compare}}
             {{#compare :item.:copies_available null operator="=="}}
                 <a class="button small green" onclick="window.location = '{{:item.:eresource}}';"><span>View Online</span></a>
@@ -453,14 +450,14 @@
         <div>
         {{:user.:name}}<br />
         <div class="accountlinks">
-        <a class="button wide medium black" onclick="showcheckouts()">Checkouts: {{:user.:checkouts}}</a><br />
-        <a class="button wide medium black" onclick="showholds()">Holds: {{:user.:holds}}</a><br />
-        <a class="button wide medium black" onclick="showpickups()">Ready for Pickup: {{:user.:pickups}}</a><br />
+        <a class="button wide medium black" onclick="showcheckouts()"><span>Checkouts: {{:user.:checkouts}}</span></a><br />
+        <a class="button wide medium black" onclick="showholds()"><span>Holds: {{:user.:holds}}</span></a><br />
+        <a class="button wide medium black" onclick="showpickups()"><span>Ready for Pickup: {{:user.:pickups}}</span></a><br />
         </div>
         Fines: {{:user.:fines}}
         </div>
-        <button id="login" onclick="logout()">Logout</button>
-        <button id="showbarcode" onclick="showcard()">Card</button>
+        <a class="button small tadlblue" id="login" onclick="logout()"><span>Logout</span></a>
+        <a class="button small tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a>
     {{/:users}}
 </script>
 

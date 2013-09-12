@@ -164,15 +164,15 @@ function showmore(record_id) {
                     $('#'+ record_id +'-loading').empty();
                 });
                 $('#'+ record_id).css('display', 'block');
-                $('#showmore-' + record_id).css('display', 'none');
+                $('#more_details_' + record_id).hide();
             });
         } else {
             $('#'+ record_id).css('display', 'block');
-            $('#showmore-' + record_id).css('display', 'none');
+            $('#more_details_' + record_id).hide();
         }
     } else {
         $('#'+ record_id).css('display', 'none');
-        $('#showmore-' + record_id).css('display', 'block');
+        $('#more_details_' + record_id).show();
     }
 }
 
@@ -240,8 +240,7 @@ function pre_hold(record_id) {
 
 function reset_hold_links() {
     $(".hold_login_first").each(function() {
-        $(this).removeClass('hold_login_first');
-        $(this).html('<span>Place Hold</span>');
+        $(this).removeClass('hold_login_first').removeClass('black').addClass('green').html('<span>Place Hold</span>');
     });
 }
 
@@ -300,24 +299,24 @@ function login_and_fetch_dash(username, password) {
     if (typeof(username) !== 'undefined' && username != '' && username !== null
         && typeof(password) !== 'undefined' && password != '' && password !== null) {
         if ($('#pword').length != 0) {
-            $('#login_form').html('Logging in...');
+            $('#login_form').html('<span>Logging in...</span>');
         }
         if ($('#login').length != 0) {
             $('#login').prop("onclick", null);
-            $('#login').html('Refreshing...');
+            $('#login').html('<span>Refreshing...</span>');
         }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
-                $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
+                $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
     			window.localStorage.clear();
-                $('#login_msg').html('Error logging in.');
+                $('#login_msg').html('<span>Error logging in.</span>');
             } else {
                 render_dash(data);
                 reset_hold_links();
             }
         });
     } else {
-        $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
+        $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
         window.localStorage.clear();
     }
 }
