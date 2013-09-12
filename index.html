@@ -302,14 +302,16 @@
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-35 tablet-grid-35 mobile-grid-25">
-                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" onclick="showmore({{node.item}})" />
+                <div class="grid-30 tablet-grid-30 mobile-grid-25">
+                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
                 </div>
-                <div class="grid-65 tablet-grid-65 mobile-grid-75">
-                    <span class="cardtitle pointer" onclick="showmore({{node.item}})">{{node.title}}</span><br/>
+                <div class="grid-70 tablet-grid-70 mobile-grid-75">
+                    <span class="cardtitle pointer">{{node.title}}</span><br/>
                     {{#if node.author}}
-                        <em class="subtitle pointer" onclick="showmore({{node.item}})">{{node.author}}</em>
+                        <em class="subtitle pointer">{{node.author}}</em>
                     {{/if}}
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-100">
                     <div id="showmore-{{node.item}}" class="viewmore pointer" onclick="showmore({{node.item}})">more details</div>
                     <div id="{{node.item}}" style="display:none;"></div>
                     <div id="{{node.item}}-loading"></div>

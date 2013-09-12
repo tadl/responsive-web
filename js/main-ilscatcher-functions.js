@@ -155,7 +155,7 @@ function showmore(record_id) {
     var e = document.getElementById(record_id);
     if (e.style.display === 'none') {
         if (!$.trim($('#'+ record_id).html()).length) {
-            $('#'+ record_id +'-loading').html(loadingmoreText).trigger("create");
+            $('#'+ record_id +'-loading').html(loadingmoreText).trigger("create"); //perhaps this should just update the button
             $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
                 var results = data.message;
                 var template = Handlebars.compile($('#more_details-template').html());
