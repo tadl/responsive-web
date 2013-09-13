@@ -155,24 +155,23 @@ function showmore(record_id) {
     var e = document.getElementById(record_id);
     if (e.style.display === 'none') {
         if (!$.trim($('#'+ record_id).html()).length) {
-            $('#'+ record_id +'-loading').html(loadingmoreText).trigger("create");
+            $('#more_details_' + record_id).removeClass('tadlblue').addClass('black').html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Loading...</span>').removeAttr('onclick');
             $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
                 var results = data.message;
                 var template = Handlebars.compile($('#more_details-template').html());
                 var info = template(data);
                 $('#'+ record_id).html(info).promise().done(function() {
-                    $('#'+ record_id +'-loading').empty();
+                    $('#more_details_' + record_id).hide();
                 });
-                $('#'+ record_id).css('display', 'block');
-                $('#showmore-' + record_id).css('display', 'none');
+                $('#'+ record_id).show();
             });
         } else {
-            $('#'+ record_id).css('display', 'block');
-            $('#showmore-' + record_id).css('display', 'none');
+            $('#'+ record_id).show();
+            $('#more_details_' + record_id).hide();
         }
     } else {
-        $('#'+ record_id).css('display', 'none');
-        $('#showmore-' + record_id).css('display', 'block');
+        $('#'+ record_id).hide();
+        $('#more_details_' + record_id).show();
     }
 }
 
@@ -227,12 +226,12 @@ function showshelf(record_id) {
 function pre_hold(record_id) {
     var record_id = record_id;
     link_id = '#place_hold_' + record_id;
+    $(link_id).removeClass('green').addClass('black');
     if (logged_in()) {
-        $(link_id).html('Requesting hold...');
-        $(link_id).css('color', 'green');
+        $(link_id).html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Requesting hold...</span>').removeAttr('onclick');
         hold(record_id);
     } else {
-        $(link_id).html('Log in to place hold');
+        $(link_id).html('<span>Log in to place hold</span>');
         $(link_id).addClass('hold_login_first');
         $("#login_form").slideDown("fast");
     }
@@ -240,8 +239,7 @@ function pre_hold(record_id) {
 
 function reset_hold_links() {
     $(".hold_login_first").each(function() {
-        $(this).removeClass('hold_login_first');
-        $(this).html('Place Hold');
+        $(this).removeClass('hold_login_first').removeClass('black').addClass('green').html('<span>Place Hold</span>');
     });
 }
 
@@ -253,15 +251,19 @@ function hold(record_id) {
         var message = data[':message'];
         var success = false;
         var button_id = '#place_hold_' + record_id;
+        var hold_message = '#hold_message_' + record_id;
         if (message == 'Hold was successfully placed') {
             success = true;
+            $(button_id).hide();
         }
         if (message) {
-            $(button_id).html(message);
+            $(hold_message).html(message).show().addClass((success) ? 'success' : 'error');
+            $(button_id).hide();
         } else {
-            $(button_id).html('Unable to place hold.');
+            $(hold_message).html('Unable to place hold.').show().addClass('error');
+            $(button_id).hide();
         }
-        $(button_id).css('color', (success) ? 'green' : 'red');
+//        $(button_id).css('color', (success) ? '#91BD09' : '#E62727');
     });
     window.setTimeout(partB,5000);
 }
@@ -296,24 +298,24 @@ function login_and_fetch_dash(username, password) {
     if (typeof(username) !== 'undefined' && username != '' && username !== null
         && typeof(password) !== 'undefined' && password != '' && password !== null) {
         if ($('#pword').length != 0) {
-            $('#login_form').html('Logging in...');
+            $('#login_form').html('<span>Logging in...</span>');
         }
         if ($('#login').length != 0) {
             $('#login').prop("onclick", null);
-            $('#login').html('Refreshing...');
+            $('#login').html('<span>Refreshing...</span>');
         }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
-                $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
+                $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
     			window.localStorage.clear();
-                $('#login_msg').html('Error logging in.');
+                $('#login_msg').html('<span>Error logging in.</span>');
             } else {
                 render_dash(data);
                 reset_hold_links();
             }
         });
     } else {
-        $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
+        $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
         window.localStorage.clear();
     }
 }

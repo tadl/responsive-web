@@ -84,10 +84,16 @@
   white-space: nowrap;
 }
 a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.button:visited {
-  padding:10px 0;
+  padding:10px 15px;
   text-decoration:none;
-  width:100%
 }
+
+a.button.wide, a.button.wide:link, a.button.wide:active, a.button.wide:hover, a.button.wide:focus, a.button.wide:visited {
+    padding:10px 0;
+    text-decoration:none;
+    width:100%;
+}
+
 .button.tadlblue { background-color:#004677; }
 .button.red { background-color:#E62727; }
 .button.orange { background-color:#FF5C00; }
@@ -95,6 +101,12 @@ a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.butt
 .button.green { background-color:#91BD09; }
 .button.blue { background-color:#00ADEE; }
 .button.purple { background-color:#800080; }
+.button.white { background-color:#ffffff; }
+.button.white.span { color:#666666; }
+.button.gray { background-color:#666666; }
+.button.pink { background-color:#E22092; }
+.button.black { background-color:#333333; }
+.button.cyan { background-color:#46C7C7; }
 
 .button.small span { font-size:12px; }
 .button.medium span { font-size:16px; }

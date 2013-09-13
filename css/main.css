@@ -265,8 +265,12 @@ body {
 }
 
 a {
-  color:#33B5E5;
+  color:#004577;
   text-decoration: none;
+}
+
+a:hover {
+    text-decoration:underline;
 }
 
 h1 {
@@ -449,4 +453,36 @@ img.icon {
     font-size:1.2em;
     font-weight:bold;
     cursor:pointer;
+}
+
+.holdmessage {
+    padding:2px;
+    margin:2px;
+    display:none;
+}
+
+.holdmessage.error {
+    border:2px solid #E62727;
+    background-color:#FFB6B8;
+}
+
+.holdmessage.success {
+    border:2px solid #91BD09;
+    background-color:#DDFF74;
+}
+
+.smaller {
+    font-size:0.8em;
+}
+
+.smallest {
+    font-size:0.6em;
+}
+
+tr.smaller td {
+    border-left: 1px solid #f0f2f5;
+    padding: 0 3px;
+}
+tr.smaller td:first-child {
+    border:none;
 }
