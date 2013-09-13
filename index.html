@@ -286,10 +286,10 @@
                             <a class="button small green" target="_blank" href="{{item.online}}"><span>View Online</span></a>
                         {{/compare}}
                     </div>
+                    <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-100">
                     <div id="{{item.record_id}}" style="display:none;"></div>
-                    <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                 </div>
             </div>
         </div>
@@ -345,45 +345,37 @@
     {{/nodes}}
 </script>
 
-
-
-<script id="more_details-template" type="text/template">
+<!-- updated for unsemantic -->
+<script id="more_details-template" type="text/template">OMFG
     {{#:items}}
-        <div class="summary" style="position:relative">{{:item.:summary}}</div>
-        <div class="bottomstuff">
-        <div class="more">
-            {{#compare :item.:copies_available null operator="!="}} 
-                {{:item.:copies_available}} of {{:item.:copies_total}} available<br/>
-            {{/compare}}
-            {{#compare :item.:copies_available null operator="=="}}
-                <a class="button small green" onclick="window.location = '{{:item.:eresource}}';"><span>View Online</span></a>
-            {{/compare}}
-        </div>
-        </div>
-        <div class="clearfix"></div>
         <div>
-        {{#compare :item.:copies_available 0 operator="!="}}
+            <div class="summary" style="position:relative">{{:item.:summary}}</div>
             {{#compare :item.:copies_available null operator="!="}}
-                <table><tr>
-                <td><strong>Library</strong></td>
-                <td><strong>Location</strong></td>
-                <td><strong>Call #</strong></td></tr>
+                <strong>{{:item.:copies_available}} of {{:item.:copies_total}} available</strong>
             {{/compare}}
-        {{/compare}}
-    {{/:items}}
-    {{#:shelvinglocations}}
-        {{#if :shelf_location.:library}}
-            <tr>
-            <td>{{:shelf_location.:library}}</td>
-            <td>{{:shelf_location.:shelving_location}}</td>
-            <td>{{:shelf_location.:call_number}}</td>
-            </tr>
-        {{/if}}
-    {{/:shelvinglocations}}
-    </table>
-    </div>	
-    <div class="clearfix"></div>
-    <div id="{{:item.:record_id}}shelf" style="display:none;"></div>
+
+            {{#compare :item.:copies_available 0 operator="!="}}
+                {{#compare :item.:copies_available null operator="!="}}
+                    <table>
+                    <tr class="smaller">
+                        <td><strong>Library</strong></td>
+                        <td><strong>Location</strong></td>
+                        <td><strong>Call #</strong></td>
+                    </tr>
+                {{/compare}}
+            {{/compare}}
+        {{/:items}}
+        {{#:shelvinglocations}}
+            {{#if :shelf_location.:library}}
+                <tr class="smaller">
+                    <td>{{:shelf_location.:library}}</td>
+                    <td>{{:shelf_location.:shelving_location}}</td>
+                    <td>{{:shelf_location.:call_number}}</td>
+                </tr>
+            {{/if}}
+        {{/:shelvinglocations}}
+        </table>
+    </div>
 </script>
 
 <!-- updated for unsemantic -->

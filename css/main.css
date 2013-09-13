@@ -470,3 +470,19 @@ img.icon {
     border:2px solid #91BD09;
     background-color:#DDFF74;
 }
+
+.smaller {
+    font-size:0.8em;
+}
+
+.smallest {
+    font-size:0.6em;
+}
+
+tr.smaller td {
+    border-left: 1px solid #f0f2f5;
+    padding: 0 3px;
+}
+tr.smaller td:first-child {
+    border:none;
+}
