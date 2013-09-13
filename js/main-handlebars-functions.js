@@ -22,6 +22,7 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
     }
 });
 
+
 Handlebars.registerHelper('make_https', function(url, options) {
     var url = url;
     var https_url = url.replace(/^http:/, 'https:');

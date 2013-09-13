@@ -141,3 +141,7 @@ function cleanhouse() {
     $('#search-params').empty().hide();
     $('.load_more').hide();
 }
+
+
+
+

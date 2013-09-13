@@ -3,7 +3,7 @@
   <!-- saved from url=(0021)http://www.google.com -->
 <html lang="en">
 <head>
-    <base href="/">
+    <base href="/responsive-web/">
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -45,7 +45,7 @@
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
     <script>
-        var BASE_URL = '/';
+        var BASE_URL = '/responsive-web/';
   	    var router = new staterouter.Router();
         // Configure routes
         router
@@ -287,6 +287,7 @@
                             {{#compare item.availability null operator="=="}}
                                 <a class="actionlink external" target="_blank" onclick="window.location='{{item.image}}';">View Online</a>
                             {{/compare}}
+                            <a class="actionlink" onclick="addtolist('{{item.record_id}}', '{{make_https item.image}}', '{{make_https item.format_icon}}', '{{item.author}}', '{{item.record_year}}', '{{item.online}}', '{{item.title}}' )">Add to List</a> 
                         </div>
                     </div>
                     <div id="{{item.record_id}}" style="display:none;"></div>
@@ -590,6 +591,20 @@
         Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
     {{/:checkouts}}
         <a onclick="return false;">{{:response}}</a>
+</script>
+
+<script id="mylist-template" type="text/template">
+<div class="card">
+ <h4 class="title">Book Bag</h4>
+</div> 
+{{#objects}}
+<div class="card">
+<p>{{title}}</p>
+<img src="{{image}}">
+<br />
+<a onclick="removefromlist('{{record}}')">Remove from List</a>
+</div>
+{{/objects}}
 </script>
 
 

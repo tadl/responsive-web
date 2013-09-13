@@ -442,3 +442,68 @@ function showcard() {
         }
     });
 }
+
+function addtolist(record_id, image, format_icon, author, year, online, title) {
+
+var record_id = record_id;
+var image = image;
+var format_icon = format_icon;
+var author = author;
+var year = year;
+var online = online;
+var title = title;
+var current_list = localStorage["list"]  
+var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
+var savelist = JSON.stringify(listvalue);
+if(current_list){
+    var mergelist = []
+    mergelist.push(JSON.parse(current_list));
+    mergelist.unshift(listvalue);
+    localStorage['list']= JSON.stringify(mergelist);  
+} else {
+   window.localStorage.setItem('list', savelist);
+
+};
+mylist();
+}
+
+
+function mylist() {
+var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+var wrapper = '{"objects": ['+ mylist +']}';
+var test = JSON.stringify(eval("(" + wrapper + ")"));
+var test2 = JSON.parse(test);
+var existingIDs = [];
+test2.objects = $.grep(test2.objects, function(v) {
+    if ($.inArray(v.record, existingIDs) !== -1) {
+        return false;
+    }
+    else {
+        existingIDs.push(v.record);
+        return true;
+    }
+});
+
+        var template = Handlebars.compile($('#mylist-template').html());
+        var info = template(test2);
+        $('#region-three').html(info);
+}
+
+
+
+function removefromlist(record) {
+var record = record;
+var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+var wrapper = '['+ mylist2 +']';
+var test = JSON.stringify(eval("(" + wrapper + ")"));
+var json = JSON.parse(test);
+
+for (i=0;i<json.length;i++)
+            if (json[i].record == record){
+            json.splice(i,1);
+            };
+            window.localStorage["list"] = JSON.stringify(json);
+        
+mylist();
+
+}
