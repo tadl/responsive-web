@@ -277,8 +277,6 @@
                     {{#if item.record_year}}
                         <em class="subtitle">{{item.record_year}}</em>
                     {{/if}}
-                </div>
-                <div class="grid-70 tablet-grid-70 mobile-grid-100">
                     <div id="showmore-{{item.record_id}}" class="padtop">
                         <a class="button small tadlblue" id="more_details_{{item.record_id}}" onclick="showmore({{item.record_id}});"><span>More Details</span></a>
                         {{#compare item.availability null operator="!="}} 
@@ -288,6 +286,8 @@
                             <a class="button small green" target="_blank" href="{{item.online}}"><span>View Online</span></a>
                         {{/compare}}
                     </div>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-100">
                     <div id="{{item.record_id}}" style="display:none;"></div>
                     <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                     <div id="{{item.record_id}}-loading"></div>
