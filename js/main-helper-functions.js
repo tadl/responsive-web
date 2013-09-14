@@ -133,15 +133,17 @@ function hidemenu() {
 
 function cleanhouse() {
     hidemenu();
-//    $('#region-one').empty();
-//    $('#region-two').empty();
-//    $('#region-three').empty();
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
     $('#search-params').empty().hide();
     $('.load_more').hide();
 }
 
-
+function cleandivs() {
+    $('#region-wide').empty();
+    $('#region-one').empty();
+    $('#region-two').empty();
+    $('#region-three').empty();
+}
 
 
