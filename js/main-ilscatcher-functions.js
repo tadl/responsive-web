@@ -382,9 +382,8 @@ function showholds() {
     $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?u='+ username +'&pw=' + password, function(data) {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
-        $('#results').show();
         if (state.data.action === "showholds") {
-            $('#results').html(info);
+            $('#region-wide').html(info).show();
             $('.load_more').hide(); 
         }
     });   
