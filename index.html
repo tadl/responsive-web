@@ -91,7 +91,7 @@
                 <img src="img/tinylines.png" class="icon pointer" alt="menu" title="Site Menu" />
             </div>
             <div class="grid-85 tablet-grid-85 mobile-grid-55">
-                <input style="width:100%;height:25px;font-size:16px;" type="text" id="term" />
+                <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
                 <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" />
@@ -358,7 +358,6 @@
             {{#compare :item.:copies_available null operator="!="}}
                 <strong>{{:item.:copies_available}} of {{:item.:copies_total}} available</strong>
             {{/compare}}
-
             {{#compare :item.:copies_available 0 operator="!="}}
                 {{#compare :item.:copies_available null operator="!="}}
                     <table>

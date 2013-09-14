@@ -10,7 +10,8 @@ var FACEBOOK_URL = 'https://graph.facebook.com/TraverseAreaDistrictLibrary/feed?
 var loadingmoreText = '<span class="loadmore"><img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">LOADING...</span>';
 var logoutText = '<span class="loadmore"><img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">LOGGING OUT...</span>';
 var loadmoreText = '<a class="loadmore button" onclick="loadmore();">LOAD MORE RESULTS</a>';
-var psTitle = "TADL Mobile | ";
+var psTitle = "Traverse Area District Library";
+var separator = " | ";
 var platform = 'web';
 var version_id = '0';
 var pagecount = {}
