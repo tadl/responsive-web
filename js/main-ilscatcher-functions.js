@@ -298,12 +298,11 @@ function login_and_fetch_dash(username, password) {
     if (typeof(username) !== 'undefined' && username != '' && username !== null
         && typeof(password) !== 'undefined' && password != '' && password !== null) {
         if ($('#pword').length != 0) {
-            $('#login_form').html('<span>Logging in...</span>');
+            $('#login_form').html('<span><img src="img/spinner.gif" width="18" height="18"/>&nbsp;Refreshing...</span>');
         }
         if ($('#login').length != 0) {
-            $('#login').prop("onclick", null);
-            $('#login').html('<span>Refreshing...</span>');
-        }
+            $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
+        } // I need help understanding this bit. what does the length of the login button have to do with anything? // wjr
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
                 $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
@@ -329,8 +328,9 @@ function render_dash(data) {
 
 function showcheckouts() { 
     cleanhouse();
+    cleandivs();
     var action = {action:"showcheckouts"}
-    History.pushState(action, "Your Checkedout Items", "checkout");   
+    History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
     $('.load_more').show();
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     var username = window.localStorage.getItem('username');
@@ -340,7 +340,7 @@ function showcheckouts() {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
-            $('#results').html(info);
+            $('#region-wide').html(info).show();
             $('.load_more').hide();
         }
     });
@@ -372,6 +372,7 @@ function cancelhold(hold_id) {
 
 function showholds() {
     cleanhouse();
+    cleandivs();
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
     $('.load_more').show();
@@ -391,6 +392,7 @@ function showholds() {
 
 function showpickups() {
     cleanhouse();
+    cleandivs();
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
     $('.load_more').show();
@@ -403,7 +405,7 @@ function showpickups() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showpickups") {
-            $('#results').html(info);
+            $('#region-wide').html(info).show();
             $('.load_more').hide(); 
         }
     });
@@ -437,8 +439,9 @@ function showcard() {
     $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?u='+ username +'&pw=' + password, function(data) {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
+            var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
             $('.load_more').hide();
-            $('#results').empty().append('<div class="shadow result"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>');
+            $('#region-wide').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
         }
     });

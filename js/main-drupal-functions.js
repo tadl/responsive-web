@@ -2,21 +2,19 @@ function load(page) {
     var pagename = page;
     state = History.getState();
     if (state.data.action != pagename) { 
-     cleanhouse();
-    if (pagename == 'home'){
-    var action = {action:"home"}
-    var newstate = "home"; 
-    History.pushState(action, "Home", newstate);
+        cleanhouse();
+        cleandivs();
+        if (pagename == 'home'){
+            var action = {action:"home"}
+            var newstate = "home"; 
+            History.pushState(action, "Home", newstate);
+        };
     };
-    };
- 
 }
 
 function goHome() {
     $('#region-three').empty();
-    $('#search-params').show();
-    $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Loading page.');
-
+    $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Loading page.').show();
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
