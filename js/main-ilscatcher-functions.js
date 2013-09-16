@@ -13,10 +13,9 @@ function loadmore() {
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var info = template(data);
-                $('#first_column_content').append(info).promise().done(function() {
+                $('#region-two').append(info).promise().done(function() {
                     $('#loadmoretext').empty().append(loadmoreText);
                     $('#loadmoretext').trigger("create");
-                    $("#login_form").slideUp("fast");
                 });
             } else {
                 $('#loadmoretext').html("No Further Results");
@@ -59,22 +58,20 @@ function getResults() {
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
-    
-  if (available === "true") {
+    if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
     } else {
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
-   var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
-   var mediatypedecode = decodeURIComponent(mediatype);
-   $('#search-params').show();
-   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+    var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
+    var mediatypedecode = decodeURIComponent(mediatype);
+    $('#search-params').show();
+    $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
         linked_search = "false";
-        
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var facet_template = Handlebars.compile($('#searchfacets-template').html());
@@ -82,7 +79,7 @@ function getResults() {
                 var info_facets = facet_template(data);
                 $('#region-two').html(info);
                 $('#region-one').html(info_facets);
-                $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="pointer">options...</a>');
+                $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             } else {
                 $('#search-params').html("No Results");
             }
@@ -91,48 +88,45 @@ function getResults() {
 }
 
 function facetsearch() {
-state = History.getState();
-var facet = state.data.ft;
-var searchquery = state.data.query;
-var mediatype = state.data.mt;
-var available = state.data.avail;
-var loc = state.data.location;
- if (available === "true") {
+    state = History.getState();
+    var facet = state.data.ft;
+    var searchquery = state.data.query;
+    var mediatype = state.data.mt;
+    var available = state.data.avail;
+    var loc = state.data.location;
+    if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
     } else {
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
-var mediatypedecode = decodeURIComponent(mediatype);    
-loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
-$('#search-params').show();
-$('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Changing filter.');
-$.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
+    var mediatypedecode = decodeURIComponent(mediatype);    
+    loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
+    $('#search-params').show();
+    $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
         var results = data.message;
         state = History.getState();
         linked_search = "false";
-        
-            if (results != "no results") {
-                var template = Handlebars.compile($('#results-template').html());
-                var facet_template = Handlebars.compile($('#searchfacets-template').html());
-                var selected_facet_template = Handlebars.compile($('#searchfacetsselected-template').html());
-                var info = template(data);
-                var info_facets = facet_template(data);
-                var info_selected_facets = selected_facet_template(data);
-                $('#region-two').html(info);
-                $('#region-one').html(info_facets);
-                $('#loadmoretext').empty().append(loadmoreText);
-                $('#loadmoretext').trigger("create");
-                $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="pointer">options...</a>');
-                $('#search-params').append(info_selected_facets);
-            } else {
-                $('#second-region').replaceWith("No Results");
-                $('.load_more').hide();
-            }
-    
+        if (results != "no results") {
+            var template = Handlebars.compile($('#results-template').html());
+            var facet_template = Handlebars.compile($('#searchfacets-template').html());
+            var selected_facet_template = Handlebars.compile($('#searchfacetsselected-template').html());
+            var info = template(data);
+            var info_facets = facet_template(data);
+            var info_selected_facets = selected_facet_template(data);
+            $('#region-two').html(info);
+            $('#region-one').html(info_facets);
+            $('#loadmoretext').empty().append(loadmoreText);
+            $('#loadmoretext').trigger("create");
+            $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
+            $('#search-params').append(info_selected_facets);
+        } else {
+            $('#second-region').replaceWith("No Results");
+            $('.load_more').hide();
+        }
     });
- 
 }
 
 function logged_in() {
@@ -263,7 +257,6 @@ function hold(record_id) {
             $(hold_message).html('Unable to place hold.').show().addClass('error');
             $(button_id).hide();
         }
-//        $(button_id).css('color', (success) ? '#91BD09' : '#E62727');
     });
     window.setTimeout(partB,5000);
 }
@@ -298,12 +291,11 @@ function login_and_fetch_dash(username, password) {
     if (typeof(username) !== 'undefined' && username != '' && username !== null
         && typeof(password) !== 'undefined' && password != '' && password !== null) {
         if ($('#pword').length != 0) {
-            $('#login_form').html('<span>Logging in...</span>');
+            $('#login_form').html('<span><img src="img/spinner.gif" width="18" height="18"/>&nbsp;Refreshing...</span>');
         }
         if ($('#login').length != 0) {
-            $('#login').prop("onclick", null);
-            $('#login').html('<span>Refreshing...</span>');
-        }
+            $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
+        } // I need help understanding this bit. what does the length of the login button have to do with anything? // wjr
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
                 $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
@@ -329,10 +321,10 @@ function render_dash(data) {
 
 function showcheckouts() { 
     cleanhouse();
+    cleandivs();
     var action = {action:"showcheckouts"}
-    History.pushState(action, "Your Checkedout Items", "checkout");   
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
     state = History.getState();
@@ -340,8 +332,8 @@ function showcheckouts() {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
-            $('#results').html(info);
-            $('.load_more').hide();
+            $('#region-wide').html(info).show();
+            $('#working').hide();
         }
     });
 }
@@ -372,30 +364,29 @@ function cancelhold(hold_id) {
 
 function showholds() {
     cleanhouse();
+    cleandivs();
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?u='+ username +'&pw=' + password, function(data) {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
-        $('#results').show();
         if (state.data.action === "showholds") {
-            $('#results').html(info);
-            $('.load_more').hide(); 
+            $('#region-wide').html(info).show();
+            $('#working').hide();
         }
     });   
 }
 
 function showpickups() {
     cleanhouse();
+    cleandivs();
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");   
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
@@ -404,8 +395,8 @@ function showpickups() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showpickups") {
-            $('#results').html(info);
-            $('.load_more').hide(); 
+            $('#region-wide').html(info).show();
+            $('#working').hide();
         }
     });
 }
@@ -430,70 +421,72 @@ function showcard() {
     cleanhouse();
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?u='+ username +'&pw=' + password, function(data) {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
-            $('.load_more').hide();
-            $('#results').empty().append('<div class="shadow result"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>');
+            var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
+            $('#working').hide();
+            $('#region-wide').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
         }
     });
 }
 
 function addtolist(record_id, image, format_icon, author, year, online, title) {
-
-var record_id = record_id;
-var image = image;
-var format_icon = format_icon;
-var author = author;
-var year = year;
-var online = online;
-var title = title;
-var current_list = localStorage["list"]  
-var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
-var savelist = JSON.stringify(listvalue);
-if(current_list){
-    var mergelist = []
-    mergelist.push(JSON.parse(current_list));
-    mergelist.unshift(listvalue);
-    localStorage['list']= JSON.stringify(mergelist);  
-} else {
-   window.localStorage.setItem('list', savelist);
-
-};
-mylist();
+    var record_id = record_id;
+    var image = image;
+    var format_icon = format_icon;
+    var author = author;
+    var year = year;
+    var online = online;
+    var title = title;
+    var current_list = localStorage["list"]  
+    var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
+    var encodelist = encodeURIComponent(listvalue).replace(/'/g, "%27")
+    var savelist = JSON.stringify(encodelist);
+    if (current_list) {
+        var mergelist = []
+        mergelist.push(JSON.parse(current_list));
+        mergelist.unshift(listvalue);
+        localStorage['list']= JSON.stringify(mergelist);  
+    } else {
+        window.localStorage.setItem('list', savelist);
+    };
+    mylist();
 }
 
 
 function mylist() {
-var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-var wrapper = '{"objects": ['+ mylist +']}';
-var test = JSON.stringify(eval("(" + wrapper + ")"));
-var test2 = JSON.parse(test);
-var existingIDs = [];
-test2.objects = $.grep(test2.objects, function(v) {
-    if ($.inArray(v.record, existingIDs) !== -1) {
-        return false;
-    }
-    else {
-        existingIDs.push(v.record);
-        return true;
-    }
-});
-
-        var template = Handlebars.compile($('#mylist-template').html());
-        var info = template(test2);
-        $('#region-three').html(info);
+    var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+    var decodelist = decodeURIComponent(mylist);
+    var wrapper = '{"objects": ['+ decodelist +']}';
+    var test = JSON.stringify(eval("(" + wrapper + ")"));
+    var test2 = JSON.parse(test);
+    var existingIDs = [];
+    test2.objects = $.grep(test2.objects, function(v) {
+        if ($.inArray(v.record, existingIDs) !== -1) {
+            return false;
+        } else { 
+            existingIDs.push(v.record);
+            return true;
+        }
+    });
+    var savelist = JSON.stringify(test2.objects);
+    var savelist2 = encodeURIComponent(savelist).replace(/'/g, "%27")
+    window.localStorage.setItem('list', savelist2);
+    var template = Handlebars.compile($('#mylist-template').html());
+    var info = template(test2);
+    $('#region-three').html(info);
 }
 
 
 
 function removefromlist(record) {
+
 var record = record;
 var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
 var wrapper = '['+ mylist2 +']';
@@ -508,5 +501,6 @@ for (i=0;i<json.length;i++){
             window.localStorage["list"] = JSON.stringify(json);
         
 mylist();
+
 
 }

@@ -86,15 +86,14 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
-
             <div class="mobile-grid-10 hide-on-tablet hide-on-desktop">
                 <img src="img/tinylines.png" class="icon pointer" alt="menu" title="Site Menu" />
             </div>
             <div class="grid-85 tablet-grid-85 mobile-grid-55">
-                <input style="width:100%;height:25px;font-size:16px;" type="text" id="term" />
+                <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
-                <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" />
+                <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
             	<img src="img/settings-gear-black.png" class="icon pointer" alt="Options" title="Search Options" onclick="openSearch_options()" />
@@ -162,7 +161,11 @@
         </div>
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <div id="search-params" class="card padv" style="display:none;"></div>
+                <div id="search-params" class="card padv hidden"></div>
+                <div id="working" class="card padv hidden"><span><img class="spinner" src="img/spinner.gif"/></span></div>
+            </div>
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <div id="region-wide" style="display:none;"></div>
             </div>
             <div class="grid-25 tablet-grid-35 hide-on-mobile">
                 <div id="region-one"></div>
@@ -358,7 +361,6 @@
             {{#compare :item.:copies_available null operator="!="}}
                 <strong>{{:item.:copies_available}} of {{:item.:copies_total}} available</strong>
             {{/compare}}
-
             {{#compare :item.:copies_available 0 operator="!="}}
                 {{#compare :item.:copies_available null operator="!="}}
                     <table>
@@ -449,9 +451,9 @@
         <div>
         {{:user.:name}}
         <div class="accountlinks">
-        <a class="button wide medium black" onclick="showcheckouts()"><span>Checkouts: {{:user.:checkouts}}</span></a><br />
-        <a class="button wide medium black" onclick="showholds()"><span>Holds: {{:user.:holds}}</span></a><br />
-        <a class="button wide medium black" onclick="showpickups()"><span>Ready for Pickup: {{:user.:pickups}}</span></a><br />
+        <a class="button wide medium gray" onclick="showcheckouts()"><span>Checkouts: {{:user.:checkouts}}</span></a><br />
+        <a class="button wide medium gray" onclick="showholds()"><span>Holds: {{:user.:holds}}</span></a><br />
+        <a class="button wide medium gray" onclick="showpickups()"><span>Ready for Pickup: {{:user.:pickups}}</span></a><br />
         </div>
         Fines: {{:user.:fines}}
         </div>
@@ -462,7 +464,7 @@
 
 <script id="showcheckedout-template" type="text/template">
     {{#:checkouts}}
-        <div class="shadow result">
+        <div class="card">
         <img src="{{make_https :checkout.:image}}" onload="img_check(this);" onerror="img_error(this);" class="result_img">
         <img src="{{make_https :checkout.:format_icon}}"><span class="title">{{:checkout.:name}}</span><br/>
         <div id="{{:checkout.:barcode}}">
@@ -569,7 +571,7 @@
 
 <script id="showholds-template" type="text/template">
     {{#:holds}}
-        <div id="hold_{{:hold.:hold_id}}" class="shadow result">
+        <div id="hold_{{:hold.:hold_id}}" class="card">
         <img class="result_img" src="{{make_https :hold.:image}}" onload="img_check(this);" onerror="img_error(this);">
         <img src="{{make_https :hold.:format_icon}}"><span class="title">{{:hold.:name}}</span><br/>
         Pickup Location: {{:hold.:pickup_location}}<br/>

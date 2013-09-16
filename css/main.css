@@ -371,6 +371,7 @@ div[class*="pull-"] section {
     line-height:18px;
     padding-top:15px;
     font-weight:bold;
+    vertical-align:bottom;
 }
 
 em.subtitle {
@@ -480,9 +481,38 @@ img.icon {
 }
 
 tr.smaller td {
-    border-left: 1px solid #f0f2f5;
-    padding: 0 3px;
+    min-width:0;
+    border-left:2px solid #f0f2f5;
+    padding:0 5px;
 }
+
 tr.smaller td:first-child {
+    min-width:0;
     border:none;
+    padding:0 5px 0 0;
+}
+
+.summary {
+    border-bottom:1px solid #f0f2f5;
+    padding:0 0 5px 0;
+    margin-bottom:5px;
+}
+
+input.search {
+    width:100%;
+    height:25px;
+    font-size:16px;
+    padding:0 5px;
+}
+
+.hidden {
+    display:none;
+}
+
+.spinner {
+    margin:0 10px;
+}
+
+#working {
+    text-align:center;
 }
