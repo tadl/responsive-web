@@ -500,10 +500,11 @@ var wrapper = '['+ mylist2 +']';
 var test = JSON.stringify(eval("(" + wrapper + ")"));
 var json = JSON.parse(test);
 
-for (i=0;i<json.length;i++)
+for (i=0;i<json.length;i++){
             if (json[i].record == record){
             json.splice(i,1);
-            };
+            }
+            }
             window.localStorage["list"] = JSON.stringify(json);
         
 mylist();
