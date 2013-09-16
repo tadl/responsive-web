@@ -402,17 +402,17 @@ function showpickups() {
 }
 
 function renew(element, circulation_id, barcode) {
-    var element = element;
+//    var element = element;
     var circ_id = circulation_id;
     var bc = barcode;
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
-    $(element).css('color','red');
-    $(element).html('Renewing...');
+    $('#renew_' + circ_id).removeClass('tadlblue').addClass('black').removeAttr('onclick').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Renewing...</span>');
     $.getJSON(ILSCATCHER_BASE + '/main/renew.json?u='+ username +'&pw=' + password + '&circ_id=' + circ_id + '&bc=' + bc, function(data) {
         var template = Handlebars.compile($('#renew-template').html());
         var info = template(data);
-        $('#'+ bc +'').html(info);
+        $('#'+ circ_id).html(info);
+        $('#renew_' + circ_id).hide();
     });
 }
 
@@ -444,14 +444,14 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
     var year = year;
     var online = online;
     var title = title;
-    var current_list = localStorage["list"]  
+    var current_list = localStorage["list"];
     var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
     var savelist = JSON.stringify(listvalue);
     if (current_list) {
         var mergelist = []
         mergelist.push(JSON.parse(current_list));
         mergelist.unshift(listvalue);
-        localStorage['list']= JSON.stringify(mergelist);  
+        localStorage['list'] = JSON.stringify(mergelist);  
     } else {
         window.localStorage.setItem('list', savelist);
     };
@@ -486,9 +486,10 @@ function removefromlist(record) {
     var wrapper = '['+ mylist2 +']';
     var test = JSON.stringify(eval("(" + wrapper + ")"));
     var json = JSON.parse(test);
-    for (i=0;i<json.length;i++)
-    if (json[i].record == record) {
-        json.splice(i,1);
+    for (i=0;i<json.length;i++) {
+        if (json[i].record == record) {
+            json.splice(i,1);
+        }
     }
     window.localStorage["list"] = JSON.stringify(json);
     mylist();

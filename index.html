@@ -465,14 +465,19 @@
 <script id="showcheckedout-template" type="text/template">
     {{#:checkouts}}
         <div class="card">
-        <img src="{{make_https :checkout.:image}}" onload="img_check(this);" onerror="img_error(this);" class="result_img">
-        <img src="{{make_https :checkout.:format_icon}}"><span class="title">{{:checkout.:name}}</span><br/>
-        <div id="{{:checkout.:barcode}}">
-        Due on: {{:checkout.:due_date}}<br/>
-        Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
-        <div class="clearfix"></div>
-        <a class="actionlink" onclick="renew(this, {{:checkout.:checkout_id}}, {{:checkout.:barcode}})">Renew this item</a>
-        </div> 
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :checkout.:image}}"/>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}"/>&nbsp;{{:checkout.:name}}</span><br/>
+                    <div id="{{:checkout.:checkout_id}}">
+                        Due: {{:checkout.:due_date}}<br/>
+                        Remaining Renewals: {{:checkout.:renew_attempts}}
+                    </div>
+                    <a class="button small tadlblue" id="renew_{{:checkout.:checkout_id}}" onclick="renew(this, {{:checkout.:checkout_id}}, {{:checkout.:barcode}});"><span>Renew this item</span></a>
+                </div>
+            </div>
         </div>
     {{/:checkouts}}
 </script>
@@ -583,26 +588,25 @@
 
 <script id="renew-template" type="text/template">
     {{#:checkouts}}
-        Due on: {{:checkout.:due_date}}<br/>
+        Due: {{:checkout.:due_date}}<br/>
         Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
     {{/:checkouts}}
-        <a onclick="return false;">{{:response}}</a>
+        <span>{{:response}}</span>
 </script>
 
 <script id="mylist-template" type="text/template">
-<div class="card">
- <h4 class="title">Book Bag</h4>
-</div> 
-{{#objects}}
-<div class="card">
-<p>{{title}}</p>
-<img src="{{image}}">
-<br />
-<a onclick="removefromlist('{{record}}')">Remove from List</a>
-</div>
-{{/objects}}
+    <div class="card">
+        <h4 class="title">Book Bag</h4>
+    </div> 
+    {{#objects}}
+        <div class="card">
+            <p>{{title}}</p>
+            <img src="{{image}}">
+            <br />
+            <a onclick="removefromlist('{{record}}')">Remove from List</a>
+        </div>
+    {{/objects}}
 </script>
-
 
 </body>
 </html>
