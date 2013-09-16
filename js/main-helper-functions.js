@@ -13,6 +13,8 @@ $(document).ready(function() {
 });
 
 function startsearch() {
+    cleanhouse();
+    cleandivs();
     var searchquery = encodeURIComponent($('#term').val());
     var mediatype = encodeURIComponent($('#mediatype').val());
     var loc = $('#location').val();

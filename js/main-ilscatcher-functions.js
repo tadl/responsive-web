@@ -13,10 +13,9 @@ function loadmore() {
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var info = template(data);
-                $('#first_column_content').append(info).promise().done(function() {
+                $('#region-two').append(info).promise().done(function() {
                     $('#loadmoretext').empty().append(loadmoreText);
                     $('#loadmoretext').trigger("create");
-                    $("#login_form").slideUp("fast");
                 });
             } else {
                 $('#loadmoretext').html("No Further Results");

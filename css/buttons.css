@@ -82,6 +82,7 @@
   text-decoration:none;
   text-align:center;
   white-space: nowrap;
+  vertical-align:bottom;
 }
 a.button, a.button:link, a.button:active, a.button:hover, a.button:focus, a.button:visited {
   padding:10px 15px;

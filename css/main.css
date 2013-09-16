@@ -371,6 +371,7 @@ div[class*="pull-"] section {
     line-height:18px;
     padding-top:15px;
     font-weight:bold;
+    vertical-align:bottom;
 }
 
 em.subtitle {
@@ -503,3 +504,4 @@ input.search {
     font-size:16px;
     padding:0 5px;
 }
+
