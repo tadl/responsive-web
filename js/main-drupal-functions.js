@@ -13,8 +13,9 @@ function load(page) {
 }
 
 function goHome() {
-    $('#region-three').empty();
-    $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Loading page.').show();
+    cleanhouse();
+    cleandivs();
+    $('#working').show();
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
@@ -34,7 +35,7 @@ function goHome() {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
         var info = template(data);
         $('#region-two').html(info);
-        $('#search-params').hide();
+        $('#working').hide();
     });
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
@@ -48,14 +49,13 @@ function showevents() {
     var action = {action:"showevents"}
     History.pushState(action, "Upcoming Event", "events"); 
     state = History.getState();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
         if (state.data.action === "showevents") {
-            $('.load_more').hide();
             $('#results').html(info);
+            $('#working').hide();
         }
     });
 }
@@ -65,36 +65,35 @@ function showlocations() {
     var action = {action:"showlocations"}
     History.pushState(action, "Locations", "locations"); 
     state = History.getState();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     $.getJSON(LOCATIONS_BASE + "/all", function(data) {
         var template = Handlebars.compile($('#showlocations-template').html());
         var info = template(data);
-        $('.load_more').hide();
         if (state.data.action === "showlocations") {
             $('#results').html(info);
+            $('#working').hide();
         }
     });
 }
 
 function showitemlist(list_id) {
     cleanhouse();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/json', function(data) {
         var template = Handlebars.compile($('#showitemlist-template').html());
         var info = template(data);
-        $('.load_more').hide();
         $('#region-two').html(info);
+        $('#working').hide();
     });
 }
 
 function showreviews(review_type) { 
     cleanhouse();
+    $('#working').show();
     $.getJSON('https://www.tadl.org/export/reviews/'+ review_type +'/json', function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
-        $('.load_more').hide();
+        $('#working').hide();
         $('#region-two').html(info);
         
     });
@@ -115,7 +114,6 @@ function showfeatureditembox() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('.load_more').hide();
-            console.log("yoda");
             $('#results').append(info);
         });
     }

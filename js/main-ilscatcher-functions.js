@@ -58,22 +58,20 @@ function getResults() {
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
-    
-  if (available === "true") {
+    if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
     } else {
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
-   var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
-   var mediatypedecode = decodeURIComponent(mediatype);
-   $('#search-params').show();
-   $('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+    var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
+    var mediatypedecode = decodeURIComponent(mediatype);
+    $('#search-params').show();
+    $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
         linked_search = "false";
-        
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var facet_template = Handlebars.compile($('#searchfacets-template').html());
@@ -90,48 +88,45 @@ function getResults() {
 }
 
 function facetsearch() {
-state = History.getState();
-var facet = state.data.ft;
-var searchquery = state.data.query;
-var mediatype = state.data.mt;
-var available = state.data.avail;
-var loc = state.data.location;
- if (available === "true") {
+    state = History.getState();
+    var facet = state.data.ft;
+    var searchquery = state.data.query;
+    var mediatype = state.data.mt;
+    var available = state.data.avail;
+    var loc = state.data.location;
+    if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
     } else {
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
-var mediatypedecode = decodeURIComponent(mediatype);    
-loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
-$('#search-params').show();
-$('#search-params').html('<img style="margin-right: 10px; margin-left: 10px;" src="img/spinner.gif"> Changing filter.');
-$.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
+    var mediatypedecode = decodeURIComponent(mediatype);    
+    loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
+    $('#search-params').show();
+    $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
         var results = data.message;
         state = History.getState();
         linked_search = "false";
-        
-            if (results != "no results") {
-                var template = Handlebars.compile($('#results-template').html());
-                var facet_template = Handlebars.compile($('#searchfacets-template').html());
-                var selected_facet_template = Handlebars.compile($('#searchfacetsselected-template').html());
-                var info = template(data);
-                var info_facets = facet_template(data);
-                var info_selected_facets = selected_facet_template(data);
-                $('#region-two').html(info);
-                $('#region-one').html(info_facets);
-                $('#loadmoretext').empty().append(loadmoreText);
-                $('#loadmoretext').trigger("create");
-                $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
-                $('#search-params').append(info_selected_facets);
-            } else {
-                $('#second-region').replaceWith("No Results");
-                $('.load_more').hide();
-            }
-    
+        if (results != "no results") {
+            var template = Handlebars.compile($('#results-template').html());
+            var facet_template = Handlebars.compile($('#searchfacets-template').html());
+            var selected_facet_template = Handlebars.compile($('#searchfacetsselected-template').html());
+            var info = template(data);
+            var info_facets = facet_template(data);
+            var info_selected_facets = selected_facet_template(data);
+            $('#region-two').html(info);
+            $('#region-one').html(info_facets);
+            $('#loadmoretext').empty().append(loadmoreText);
+            $('#loadmoretext').trigger("create");
+            $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
+            $('#search-params').append(info_selected_facets);
+        } else {
+            $('#second-region').replaceWith("No Results");
+            $('.load_more').hide();
+        }
     });
- 
 }
 
 function logged_in() {
@@ -262,7 +257,6 @@ function hold(record_id) {
             $(hold_message).html('Unable to place hold.').show().addClass('error');
             $(button_id).hide();
         }
-//        $(button_id).css('color', (success) ? '#91BD09' : '#E62727');
     });
     window.setTimeout(partB,5000);
 }
@@ -330,8 +324,7 @@ function showcheckouts() {
     cleandivs();
     var action = {action:"showcheckouts"}
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
     state = History.getState();
@@ -340,7 +333,7 @@ function showcheckouts() {
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
             $('#region-wide').html(info).show();
-            $('.load_more').hide();
+            $('#working').hide();
         }
     });
 }
@@ -374,8 +367,7 @@ function showholds() {
     cleandivs();
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -384,7 +376,7 @@ function showholds() {
         var info = template(data);
         if (state.data.action === "showholds") {
             $('#region-wide').html(info).show();
-            $('.load_more').hide(); 
+            $('#working').hide();
         }
     });   
 }
@@ -394,8 +386,7 @@ function showpickups() {
     cleandivs();
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");   
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
@@ -405,7 +396,7 @@ function showpickups() {
         var info = template(data);
         if (state.data.action === "showpickups") {
             $('#region-wide').html(info).show();
-            $('.load_more').hide(); 
+            $('#working').hide();
         }
     });
 }
@@ -430,8 +421,7 @@ function showcard() {
     cleanhouse();
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#working').show();
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -439,7 +429,7 @@ function showcard() {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('.load_more').hide();
+            $('#working').hide();
             $('#region-wide').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
         }
@@ -447,66 +437,59 @@ function showcard() {
 }
 
 function addtolist(record_id, image, format_icon, author, year, online, title) {
-
-var record_id = record_id;
-var image = image;
-var format_icon = format_icon;
-var author = author;
-var year = year;
-var online = online;
-var title = title;
-var current_list = localStorage["list"]  
-var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
-var savelist = JSON.stringify(listvalue);
-if(current_list){
-    var mergelist = []
-    mergelist.push(JSON.parse(current_list));
-    mergelist.unshift(listvalue);
-    localStorage['list']= JSON.stringify(mergelist);  
-} else {
-   window.localStorage.setItem('list', savelist);
-
-};
-mylist();
+    var record_id = record_id;
+    var image = image;
+    var format_icon = format_icon;
+    var author = author;
+    var year = year;
+    var online = online;
+    var title = title;
+    var current_list = localStorage["list"]  
+    var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
+    var savelist = JSON.stringify(listvalue);
+    if (current_list) {
+        var mergelist = []
+        mergelist.push(JSON.parse(current_list));
+        mergelist.unshift(listvalue);
+        localStorage['list']= JSON.stringify(mergelist);  
+    } else {
+        window.localStorage.setItem('list', savelist);
+    };
+    mylist();
 }
 
 
 function mylist() {
-var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-var wrapper = '{"objects": ['+ mylist +']}';
-var test = JSON.stringify(eval("(" + wrapper + ")"));
-var test2 = JSON.parse(test);
-var existingIDs = [];
-test2.objects = $.grep(test2.objects, function(v) {
-    if ($.inArray(v.record, existingIDs) !== -1) {
-        return false;
-    }
-    else {
-        existingIDs.push(v.record);
-        return true;
-    }
-});
-
-        var template = Handlebars.compile($('#mylist-template').html());
-        var info = template(test2);
-        $('#region-three').html(info);
+    var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+    var wrapper = '{"objects": ['+ mylist +']}';
+    var test = JSON.stringify(eval("(" + wrapper + ")"));
+    var test2 = JSON.parse(test);
+    var existingIDs = [];
+    test2.objects = $.grep(test2.objects, function(v) {
+        if ($.inArray(v.record, existingIDs) !== -1) {
+            return false;
+        } else { 
+            existingIDs.push(v.record);
+            return true;
+        }
+    });
+    var template = Handlebars.compile($('#mylist-template').html());
+    var info = template(test2);
+    $('#region-three').html(info);
 }
 
 
 
 function removefromlist(record) {
-var record = record;
-var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-var wrapper = '['+ mylist2 +']';
-var test = JSON.stringify(eval("(" + wrapper + ")"));
-var json = JSON.parse(test);
-
-for (i=0;i<json.length;i++)
-            if (json[i].record == record){
-            json.splice(i,1);
-            };
-            window.localStorage["list"] = JSON.stringify(json);
-        
-mylist();
-
+    var record = record;
+    var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+    var wrapper = '['+ mylist2 +']';
+    var test = JSON.stringify(eval("(" + wrapper + ")"));
+    var json = JSON.parse(test);
+    for (i=0;i<json.length;i++)
+    if (json[i].record == record) {
+        json.splice(i,1);
+    }
+    window.localStorage["list"] = JSON.stringify(json);
+    mylist();
 }

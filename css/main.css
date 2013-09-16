@@ -505,3 +505,14 @@ input.search {
     padding:0 5px;
 }
 
+.hidden {
+    display:none;
+}
+
+.spinner {
+    margin:0 10px;
+}
+
+#working {
+    text-align:center;
+}
