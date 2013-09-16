@@ -446,8 +446,7 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
     var title = title;
     var current_list = localStorage["list"]  
     var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
-    var encodelist = encodeURIComponent(listvalue).replace(/'/g, "%27")
-    var savelist = JSON.stringify(encodelist);
+    var savelist = JSON.stringify(listvalue);
     if (current_list) {
         var mergelist = []
         mergelist.push(JSON.parse(current_list));
@@ -462,8 +461,8 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
 
 function mylist() {
     var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-    var decodelist = decodeURIComponent(mylist);
-    var wrapper = '{"objects": ['+ decodelist +']}';
+    var mylist_decode = decodeURI(mylist);
+    var wrapper = '{"objects": ['+ mylist_decode +']}';
     var test = JSON.stringify(eval("(" + wrapper + ")"));
     var test2 = JSON.parse(test);
     var existingIDs = [];
@@ -476,8 +475,7 @@ function mylist() {
         }
     });
     var savelist = JSON.stringify(test2.objects);
-    var savelist2 = encodeURIComponent(savelist).replace(/'/g, "%27")
-    window.localStorage.setItem('list', savelist2);
+    window.localStorage.setItem('list', savelist);
     var template = Handlebars.compile($('#mylist-template').html());
     var info = template(test2);
     $('#region-three').html(info);

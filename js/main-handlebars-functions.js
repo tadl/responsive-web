@@ -29,6 +29,14 @@ Handlebars.registerHelper('make_https', function(url, options) {
     return https_url;
 });
 
+Handlebars.registerHelper('encode', function(data, options) {
+var data = data;
+var encode_data = data.replace(/'/g, "%27");
+return encode_data;
+
+});
+
+
 Handlebars.registerHelper('each_upto', function(ary, max, options) {
     if (!ary || ary.length == 0)
         return options.inverse(this);
