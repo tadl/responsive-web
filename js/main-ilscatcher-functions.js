@@ -82,7 +82,7 @@ function getResults() {
                 var info_facets = facet_template(data);
                 $('#region-two').html(info);
                 $('#region-one').html(info_facets);
-                $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="pointer">options...</a>');
+                $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             } else {
                 $('#search-params').html("No Results");
             }
@@ -124,7 +124,7 @@ $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" +
                 $('#region-one').html(info_facets);
                 $('#loadmoretext').empty().append(loadmoreText);
                 $('#loadmoretext').trigger("create");
-                $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="pointer">options...</a>');
+                $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
                 $('#search-params').append(info_selected_facets);
             } else {
                 $('#second-region').replaceWith("No Results");

@@ -94,6 +94,13 @@ a.button.wide, a.button.wide:link, a.button.wide:active, a.button.wide:hover, a.
     width:100%;
 }
 
+a.button.verysmall, a.button.verysmall:link, a.button.verysmall:active, a.button.verysmall:hover, a.button.verysmall:focus, a.button.verysmall:visited {
+    padding: 6px 6px;
+    text-decoration:none;
+    vertical-align:middle;
+}
+
+
 .button.tadlblue { background-color:#004677; }
 .button.red { background-color:#E62727; }
 .button.orange { background-color:#FF5C00; }
@@ -108,6 +115,7 @@ a.button.wide, a.button.wide:link, a.button.wide:active, a.button.wide:hover, a.
 .button.black { background-color:#333333; }
 .button.cyan { background-color:#46C7C7; }
 
+.button.verysmall span { font-size:10px; }
 .button.small span { font-size:12px; }
 .button.medium span { font-size:16px; }
 .button.large span { font-size:20px; }
