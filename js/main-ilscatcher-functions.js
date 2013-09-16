@@ -461,7 +461,8 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
 
 function mylist() {
     var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-    var wrapper = '{"objects": ['+ mylist +']}';
+    var mylist_decode = decodeURI(mylist);
+    var wrapper = '{"objects": ['+ mylist_decode +']}';
     var test = JSON.stringify(eval("(" + wrapper + ")"));
     var test2 = JSON.parse(test);
     var existingIDs = [];
@@ -473,6 +474,8 @@ function mylist() {
             return true;
         }
     });
+    var savelist = JSON.stringify(test2.objects);
+    window.localStorage.setItem('list', savelist);
     var template = Handlebars.compile($('#mylist-template').html());
     var info = template(test2);
     $('#region-three').html(info);

@@ -289,7 +289,7 @@
                         {{#compare item.availability null operator="=="}}
                             <a class="button small green" target="_blank" href="{{item.online}}"><span>View Online</span></a>
                         {{/compare}}
- <a class="button small purple" onclick="addtolist('{{item.record_id}}', '{{make_https item.image}}', '{{make_https item.format_icon}}', '{{item.author}}', '{{item.record_year}}', '{{item.online}}', '{{item.title}}' )"><span>Add to List</span></a> 
+ <a class="button small purple" onclick="addtolist('{{item.record_id}}', '{{make_https item.image}}', '{{make_https item.format_icon}}', '{{encode item.author}}', '{{item.record_year}}', '{{item.online}}', '{{encode item.title}}' )"><span>Add to List</span></a> 
                     </div>
                     <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                 </div>
