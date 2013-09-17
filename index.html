@@ -86,10 +86,11 @@
 <div id="wrapper">
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="mobile-grid-10 hide-on-tablet hide-on-desktop">
-                <img src="img/tinylines.png" class="icon pointer" alt="menu" title="Site Menu" />
+            <div class="mobile-grid-10 tablet-grid-5 grid-5">
+                <img src="img/tinylines.png" class="icon pointer hide-on-tablet hide-on-desktop" alt="menu" title="Site Menu" />
+                <img src="img/logo1.png" class="icon logo hide-on-mobile" height="25"/>
             </div>
-            <div class="grid-85 tablet-grid-85 mobile-grid-55">
+            <div class="grid-80 tablet-grid-80 mobile-grid-55">
                 <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
@@ -471,10 +472,10 @@
     {{#:checkouts}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                <div class="grid-10 tablet-grid-20 mobile-grid-30">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :checkout.:image}}"/>
                 </div>
-                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                <div class="grid-90 tablet-grid-80 mobile-grid-70">
                     <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}"/>&nbsp;{{:checkout.:name}}</span><br/>
                     <div id="{{:checkout.:checkout_id}}">
                         Due: {{:checkout.:due_date}}<br/>
@@ -583,10 +584,10 @@
     {{#:holds}}
         <div id="hold_{{:hold.:hold_id}}" class="card">
             <div class="grid-container">
-                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                <div class="grid-10 tablet-grid-20 mobile-grid-30">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}"/>
                 </div>
-                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                <div class="grid-90 tablet-grid-80 mobile-grid-70">
                     <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}"/>&nbsp;{{:hold.:name}}</span><br/>
                     Pick-up Location: {{:hold.:pickup_location}}<br/>
                     Status: {{:hold.:status}}<br/>

@@ -403,6 +403,13 @@ img.icon {
     min-height:30px;
 }
 
+img.icon.logo {
+    max-width:35px;
+    min-width:35px;
+    max-height:30px;
+    min-height:30px;
+}
+
 .padtop {
     padding:15px 0 0 0;
 }
@@ -503,6 +510,7 @@ input.search {
     height:25px;
     font-size:16px;
     padding:0 5px;
+    margin-top:2px;
 }
 
 .hidden {
