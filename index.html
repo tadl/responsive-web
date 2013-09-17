@@ -161,19 +161,23 @@
         </div>
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <div id="search-params" class="card padv hidden"></div>
                 <div id="working" class="card padv hidden"><span><img class="spinner" src="img/spinner.gif"/></span></div>
             </div>
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <div id="wide-pad" class="grid-100">&nbsp;</div>
                 <div id="region-wide" style="display:none;"></div>
             </div>
             <div class="grid-25 tablet-grid-35 hide-on-mobile">
+                <div id="one-pad" class="grid-100">&nbsp;</div>
                 <div id="region-one"></div>
             </div>
             <div class="grid-50 mobile-grid-100 tablet-grid-65">
+                <div id="two-pad" class="grid-100">&nbsp;</div>
+                <div id="search-params" class="card padv hidden"></div>
                 <div id="region-two"></div>
             </div>
             <div class="grid-25 hide-on-mobile hide-on-tablet">
+                <div id="three-pad" class="grid-100">&nbsp;</div>
                 <div id="region-three"></div>
             </div>
         </div>
@@ -462,6 +466,7 @@
     {{/:users}}
 </script>
 
+<!-- updated for unsemantic -->
 <script id="showcheckedout-template" type="text/template">
     {{#:checkouts}}
         <div class="card">
@@ -475,7 +480,7 @@
                         Due: {{:checkout.:due_date}}<br/>
                         Remaining Renewals: {{:checkout.:renew_attempts}}
                     </div>
-                    <a class="button small tadlblue" id="renew_{{:checkout.:checkout_id}}" onclick="renew(this, {{:checkout.:checkout_id}}, {{:checkout.:barcode}});"><span>Renew this item</span></a>
+                    <a class="button small tadlblue" id="renew_{{:checkout.:checkout_id}}" onclick="renew({{:checkout.:checkout_id}}, {{:checkout.:barcode}});"><span>Renew this item</span></a>
                 </div>
             </div>
         </div>
@@ -577,15 +582,22 @@
 <script id="showholds-template" type="text/template">
     {{#:holds}}
         <div id="hold_{{:hold.:hold_id}}" class="card">
-        <img class="result_img" src="{{make_https :hold.:image}}" onload="img_check(this);" onerror="img_error(this);">
-        <img src="{{make_https :hold.:format_icon}}"><span class="title">{{:hold.:name}}</span><br/>
-        Pickup Location: {{:hold.:pickup_location}}<br/>
-        Status: {{:hold.:status}}<br/>
-        <a class="actionlink" id="cancel_hold_{{:hold.:hold_id}}" onclick="pre_cancelhold(this, {{:hold.:hold_id}})">Cancel Hold</a>
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}"/>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}"/>&nbsp;{{:hold.:name}}</span><br/>
+                    Pick-up Location: {{:hold.:pickup_location}}<br/>
+                    Status: {{:hold.:status}}<br/>
+                    <a class="button small tadlblue" id="cancel_hold_{{:hold.:hold_id}}" onclick="pre_cancelhold({{:hold.:hold_id}});"><span>Cancel Hold</span></a>
+                </div>
+            </div>
         </div>
     {{/:holds}}
 </script>
 
+<!-- updated for unsemantic -->
 <script id="renew-template" type="text/template">
     {{#:checkouts}}
         Due: {{:checkout.:due_date}}<br/>

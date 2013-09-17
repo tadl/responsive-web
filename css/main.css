@@ -516,3 +516,10 @@ input.search {
 #working {
     text-align:center;
 }
+
+#one-pad,
+#two-pad,
+#three-pad,
+#wide-pad {
+    max-height:1px;
+}

@@ -85,6 +85,7 @@ function getResults() {
             }
     
     });
+    mylist();
 }
 
 function facetsearch() {
@@ -338,17 +339,16 @@ function showcheckouts() {
     });
 }
 
-function pre_cancelhold(element, hold_id) {
-    var element = element;
+function pre_cancelhold(hold_id) {
     var hold_id = hold_id;
-    var confirm_text = 'Tap to Cancel Hold';
-    var canceling_text = 'Canceling hold...';
-    $(element).css('color', 'red');
-    $(element).html(confirm_text);
+    var element = '#cancel_hold_' + hold_id;
+    var confirm_text = '<span>Click to confirm</span>';
+    var canceling_text = '<span><img class="spinner" src="img/spinner.gif" width="12" height="12"/>Canceling hold...</span>';
+    $(element).removeClass('tadlblue').addClass('red').html(confirm_text);
     $(element).prop("onclick", null);
     $(element).on("click", function(event) {
         $(this).off('click');
-        $(this).html(canceling_text);
+        $(this).removeClass('red').addClass('black').html(canceling_text);
         cancelhold(hold_id);
     });
 }
@@ -401,8 +401,7 @@ function showpickups() {
     });
 }
 
-function renew(element, circulation_id, barcode) {
-//    var element = element;
+function renew(circulation_id, barcode) {
     var circ_id = circulation_id;
     var bc = barcode;
     var username = window.localStorage.getItem('username');
