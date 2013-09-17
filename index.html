@@ -649,12 +649,27 @@
     </div> 
     {{#objects}}
         <div class="card">
-            <p>{{title}}</p>
-            <img src="{{image}}">
-            <br />
-            <a onclick="removefromlist('{{record}}')">Remove from List</a>
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle">{{title}}</span><br/>
+                    {{#if author}}
+                        <span class="subtitle">{{author}}</span>
+                    {{/if}}
+                </div>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
+                    <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove from list</span></a>
+                    <a class="button green verysmall" onclick="pre_hold({{record}})"><span>Place Hold</span></a>
+                </div>
+            </div>
         </div>
     {{/objects}}
+    <div class="card">
+        <p><span class="cardtitle">List Maintenance?</span></p>
+        [options like place holds on all, add to existing list, create new list, etc?]
+    </div>
 </script>
 
 </body>
