@@ -44,6 +44,7 @@
     <script type="text/javascript" src="js/main-handlebars-functions.js"></script>
     <script type="text/javascript" src="js/main-drupal-functions.js"></script>
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
+    <script type="text/javascript" src="js/main-page-functions.js"></script>
     <script>
         var BASE_URL = '/responsive-web/';
   	    var router = new staterouter.Router();
@@ -52,6 +53,8 @@
             .route(BASE_URL + '', goHome)
             .route(BASE_URL + 'home', goHome)
             .route(BASE_URL + '#./', goHome)
+            .route(BASE_URL + 'books', showBooksPage)
+            .route(BASE_URL + '#books', showBooksPage)
             .route(BASE_URL + '#./events', showevents)
             .route(BASE_URL + 'events', showevents)
             .route(BASE_URL + '#./facebook', facebookfeed)
@@ -87,8 +90,8 @@
     <header class="searchbar card">
         <div class="grid-container">
             <div class="mobile-grid-10 tablet-grid-5 grid-5">
-                <img src="img/tinylines.png" class="icon pointer hide-on-tablet hide-on-desktop" alt="menu" title="Site Menu" />
-                <img src="img/logo1.png" class="icon logo hide-on-mobile" height="25"/>
+                <img src="img/tinylines.png" class="icon pointer hide-on-tablet hide-on-desktop" alt="menu" title="Site Menu"/>
+                <img src="img/logo1.png" class="icon logo hide-on-mobile"/>
             </div>
             <div class="grid-80 tablet-grid-80 mobile-grid-55">
                 <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
@@ -142,7 +145,7 @@
                 <a class="button wide large tadlblue" id="link-home" onclick="load('home')"><span>Home</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large red" id="link-books"><span>Books</span></a>
+                <a class="button wide large red" id="link-books" onclick="load('books')"><span>Books</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                 <a class="button wide large orange" id="link-music"><span>Music</span></a>
@@ -315,9 +318,9 @@
                     <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle pointer">{{node.title}}</span><br/>
+                    <span class="cardtitle">{{node.title}}</span><br/>
                     {{#if node.author}}
-                        <em class="subtitle pointer">{{node.author}}</em>
+                        <em class="subtitle">{{node.author}}</em>
                     {{/if}}
                     <div id="showmore-{{node.item}}" class="padtop">
                         <a class="button small tadlblue" id="more_details_{{node.item}}" onclick="showmore({{node.item}})"><span>More Details</span></a>
@@ -333,27 +336,60 @@
     {{/nodes}}
 </script>
 
+<!-- updated for unsemantic -->
 <script id="showreviews-template" type="text/template">
-    {{#nodes}}
-        <div class="shadow result">
-        <div onclick="showmore({{node.record}});" style="cursor:pointer;">
-        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="http://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{node.record}}">
-        <span class="title">{{node.title}}</span><br/>
-        {{#if node.author}}
-            <span class="author">{{node.author}}</span>
-        {{/if}}
-        
-            <div class="summary">Review by: {{node.reviewer}}
-            </br>
-            
-            {{{node.body}}} </div>
-        
-        
-        <div id="showmore-{{node.record}}" class="viewmore">more details</div>
+    <div class="card">
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <span class="cardtitle">Staff Reviews</span>
+            </div>
         </div>
-        <div id="{{node.record}}" style="display:none;"></div>
-        <div id="{{node.record}}-loading"></div> 
-        <div class="clearfix"></div>
+    </div>
+    {{#nodes}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.record}}"/>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle">{{node.title}}</span><br/>
+                    {{#if node.author}}
+                        <span class="subtitle">{{node.author}}</span><br/>
+                    {{/if}}
+                    <span>Reviewed by: {{node.reviewer}}</span>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-100">
+                    <div>
+                        {{{node.body}}}
+                    </div>
+                    <div id="showmore-{{node.record}}" class="padtop">
+                        <a class="button small tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}})"><span>More Details</span></a>
+                        <a class="button small green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
+                    </div>
+                </div>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div id="{{node.record}}" class="hidden"></div>
+                </div>
+            </div>
+        </div>
+    {{/nodes}}
+</script>
+
+<script id="drupalnode-template" type="text/template">
+    {{#nodes}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <span class="cardtitle">{{node.nodetitle}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div class="padtop">{{{node.body}}}</div>
+                </div>
+            </div>
         </div>
     {{/nodes}}
 </script>

@@ -13,14 +13,12 @@ $(document).ready(function() {
 });
 
 function startsearch() {
-    cleanhouse();
-    cleandivs();
     var searchquery = encodeURIComponent($('#term').val());
     var mediatype = encodeURIComponent($('#mediatype').val());
     var loc = $('#location').val();
     if (document.getElementById('available').checked) {
         var available = "true";
-        var availablemsg = "ONLY AVAILABLE";
+        var availablemsg = "Only Available";
     } else {
         var available = "false";
         var availablemsg = "";
@@ -130,4 +128,23 @@ function cleandivs() {
     $('#region-one').empty();
     $('#region-two').empty();
     $('#region-three').empty();
+}
+
+function load(page) {
+    var pagename = page;
+    state = History.getState();
+    if (state.data.action != pagename) { 
+        cleanhouse();
+        cleandivs();
+        if (pagename == 'home') {
+            var action = {action:"home"}
+            var newstate = "home"; 
+            History.pushState(action, "Home", newstate);
+        } 
+        if (pagename == 'books') {
+            var action = {action:"books"}
+            var newstate = "books";
+            History.pushState(action, psTitle + "Books", newstate);
+        };
+    };
 }
