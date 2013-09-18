@@ -120,8 +120,9 @@ function cleanhouse() {
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
     $('#search-params').empty().hide();
-    $('.load_more').hide();
+    $('#loadmore').hide();
     $("html, body").animate({ scrollTop: 0}, "slow");
+    
 }
 
 function cleandivs() {

@@ -59,15 +59,15 @@
             .route(BASE_URL + '#music', showMusicPage)
             .route(BASE_URL + 'video', showVideoPage)
             .route(BASE_URL + '#video', showVideoPage)
-            .route(BASE_URL + 'adults', showAdultsPage)
-            .route(BASE_URL + '#adults', showAdultsPage)
-            .route(BASE_URL + 'youth', showYouthPage)
-            .route(BASE_URL + '#youth', showYouthPage)
-            .route(BASE_URL + 'teens', showTeensPage)
-            .route(BASE_URL + '#teens', showTeensPage)
-            .route(BASE_URL + '#./events', showevents)
-            .route(BASE_URL + 'events', showevents)
-            .route(BASE_URL + '#./facebook', facebookfeed)
+     //       .route(BASE_URL + 'adults', showAdultsPage)
+      //      .route(BASE_URL + '#adults', showAdultsPage)
+      //      .route(BASE_URL + 'youth', showYouthPage)
+      //      .route(BASE_URL + '#youth', showYouthPage)
+      //      .route(BASE_URL + 'teens', showTeensPage)
+      //     .route(BASE_URL + '#teens', showTeensPage)
+      //      .route(BASE_URL + '#./events', showevents)
+      //      .route(BASE_URL + 'events', showevents)
+           .route(BASE_URL + '#./facebook', facebookfeed)
             .route(BASE_URL + 'facebook', facebookfeed)
             .route(BASE_URL + '#./locations', showlocations)
             .route(BASE_URL + 'locations', showlocations)
@@ -188,7 +188,11 @@
             <div class="grid-50 mobile-grid-100 tablet-grid-65">
                 <div id="two-pad" class="grid-100">&nbsp;</div>
                 <div id="search-params" class="card padv hidden"></div>
-                <div id="region-two"></div>
+                <div id="region-two">
+                </div>
+                <div id="loadmore">
+                <div id="loadmoretext"></div>
+                </div>
             </div>
             <div class="grid-25 hide-on-mobile hide-on-tablet">
                 <div id="three-pad" class="grid-100">&nbsp;</div>
@@ -200,18 +204,16 @@
 
 <!-- updated for unsemantic -->
 <script id="searchfacets-template" type="text/template">
+    <div class="card">
+     <h4 class="title">Filter Your Search:</h4>
+     </div>
     {{#subjects}}
         {{#compare count 0 operator=">"}}
             <div class="card">
                 <div class="grid-container">
                     <div class="grid-100 tablet-grid-100 mobile-grid-100">
                         <h4 class="title">{{title}}</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="grid-container">
-                    <div class="grid-100 tablet-grid-100 mobile-grid-100"><div class="padtop"><ul class="facetlist">
+               
                         {{#facets}}
                             <li class="facetlist"><a onclick="facetstartsearch('{{#links}}{{link}}{{/links}}')" class="pointer">{{facet}}</a></li>
                         {{/facets}}
