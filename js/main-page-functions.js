@@ -1,21 +1,47 @@
 /* Feeds for Books page */
-var FEED_BOOKS_FEATURED_FICTION = 'https://www.tadl.org/mobile/export/items/67/json';
-var FEED_BOOKS_FEATURED_NONFIC = 'https://www.tadl.org/mobile/export/items/68/json';
-var FEED_BOOKS_BOOKLISTS = 'https://www.tadl.org/export/node/json/80';
-var FEED_BOOKS_REVIEWS = 'https://www.tadl.org/export/reviews/Books/json';
+var FEED_BOOKS_FEATURED_FICTION = 'https://www.tadl.org/mobile/export/items/67/json'; //left
+var FEED_BOOKS_FEATURED_NONFIC = 'https://www.tadl.org/mobile/export/items/68/json'; //left
+var FEED_BOOKS_BOOKLISTS = 'https://www.tadl.org/export/node/json/80'; //top-middle
+var FEED_BOOKS_REVIEWS = 'https://www.tadl.org/export/reviews/Books/json'; //bottom-middle
 
 /* Feeds for Music page */
-var FEED_MUSIC_NEW = 'https://www.tadl.org/mobile/export/items/29/json';
-var FEED_MUSIC_HOT = 'https://www.tadl.org/mobile/export/items/31/json';
-var FEED_MUSIC_REVIEWS = 'https://www.tadl.org/export/reviews/Music/json';
-var FEED_MUSIC_LINKS = 'https://www.tadl.org/export/node/json/113';
+var FEED_MUSIC_NEW = 'https://www.tadl.org/mobile/export/items/29/json'; //left
+var FEED_MUSIC_HOT = 'https://www.tadl.org/mobile/export/items/31/json'; //left
+var FEED_MUSIC_REVIEWS = 'https://www.tadl.org/export/reviews/Music/json'; //bottom-middle
+var FEED_MUSIC_LINKS = 'https://www.tadl.org/export/node/json/113'; //top-middle
 
 /* Feeds for Video page */
-var FEED_VIDEO_NEW = 'https://www.tadl.org/mobile/export/items/32/json';
-var FEED_VIDEO_HOT = 'https://www.tadl.org/mobile/export/items/34/json';
-var FEED_VIDEO_TCFF = 'https://www.tadl.org/mobile/export/items/165/all/json';
-var FEED_VIDEO_MET = 'https://www.tadl.org/mobile/export/items/286/all/json';
-var FEED_VIDEO_REVIEWS = 'https://www.tadl.org/export/reviews/Video/json';
+var FEED_VIDEO_NEW = 'https://www.tadl.org/mobile/export/items/32/json'; //left
+var FEED_VIDEO_HOT = 'https://www.tadl.org/mobile/export/items/34/json'; //left
+var FEED_VIDEO_TCFF = 'https://www.tadl.org/mobile/export/items/165/all/json'; //left
+var FEED_VIDEO_MET = 'https://www.tadl.org/mobile/export/items/286/all/json'; //left
+var FEED_VIDEO_REVIEWS = 'https://www.tadl.org/export/reviews/Video/json'; //middle
+
+/* Feeds for Adults page */
+var FEED_ADULTS_DISPLAY = ''; //left
+var FEED_ADULTS_CLUBKITS = ''; //left
+var FEED_ADULTS_BUSINESS = ''; //left
+var FEED_ADULTS_EVENTS = ''; //right
+var FEED_ADULTS_REVIEWS = ''; //bottom-middle
+var FEED_ADULTS_MEL = ''; //middle-middle
+var FEED_ADULTS_RESOURCES = ''; //top-middle
+var FEED_ADULTS_LEGAL = ''; //middle-middle
+
+/* Feeds for Youth page */
+var FEED_YOUTH_DISPLAY = ''; //left
+var FEED_YOUTH_NEWBOOKS = ''; //left
+var FEED_YOUTH_REVIEWS = ''; //bottom-middle
+var FEED_YOUTH_EVENTS = ''; //right
+var FEED_YOUTH_RESOURCES = ''; //top-middle
+var FEED_YOUTH_AWARDWINS = ''; //middle-middle
+
+/* Feeds for Teens page */
+var FEED_TEENS_NEW = ''; //left
+var FEED_TEENS_ANIMANGA = ''; //left
+var FEED_TEENS_EVENTS = ''; //right
+var FEED_TEENS_REVIEWS = ''; //bottom-middle
+var FEED_TEENS_HOMEWORK = ''; //middle-middle
+var FEED_TEENS_LISTS = ''; //top-middle
 
 
 function showVideoPage() {
@@ -119,7 +145,7 @@ function showBooksPage() {
     });
 }
 
-function goHome() {
+function showHomePage() {
     cleanhouse();
     cleandivs();
     $('#working').show();

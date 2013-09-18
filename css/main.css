@@ -320,7 +320,9 @@ div[class*="pull-"] section {
 
 .searchbar {
     display:block;
-    background-color:#dddddd;
+    background: linear gradient(center top, #f0f2f5, #dddddd);
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, from(#f0f2f5), to(#dddddd));
+    background: -moz-linear-gradient(center top , #f0f2f5, #dddddd);
     padding-top:10px;
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;

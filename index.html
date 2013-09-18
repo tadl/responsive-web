@@ -50,15 +50,21 @@
   	    var router = new staterouter.Router();
         // Configure routes
         router
-            .route(BASE_URL + '', goHome)
-            .route(BASE_URL + 'home', goHome)
-            .route(BASE_URL + '#./', goHome)
+            .route(BASE_URL + '', showHomePage)
+            .route(BASE_URL + 'home', showHomePage)
+            .route(BASE_URL + '#./', showHomePage)
             .route(BASE_URL + 'books', showBooksPage)
             .route(BASE_URL + '#books', showBooksPage)
             .route(BASE_URL + 'music', showMusicPage)
             .route(BASE_URL + '#music', showMusicPage)
             .route(BASE_URL + 'video', showVideoPage)
             .route(BASE_URL + '#video', showVideoPage)
+            .route(BASE_URL + 'adults', showAdultsPage)
+            .route(BASE_URL + '#adults', showAdultsPage)
+            .route(BASE_URL + 'youth', showYouthPage)
+            .route(BASE_URL + '#youth', showYouthPage)
+            .route(BASE_URL + 'teens', showTeensPage)
+            .route(BASE_URL + '#teens', showTeensPage)
             .route(BASE_URL + '#./events', showevents)
             .route(BASE_URL + 'events', showevents)
             .route(BASE_URL + '#./facebook', facebookfeed)
@@ -158,13 +164,13 @@
                 <a class="button wide large yellow" id="link-video" onclick="load('video');"><span>Video</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large green" id="link-adults"><span>Adults</span></a>
+                <a class="button wide large green" id="link-adults" onclick="load('adults');"><span>Adults</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large blue" id="link-youth"><span>Youth</span></a>
+                <a class="button wide large blue" id="link-youth" onclick="load('youth');"><span>Youth</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large purple" id="link-teens"><span>Teens</span></a>
+                <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
             </div>
         </div>
         <div class="grid-container">
