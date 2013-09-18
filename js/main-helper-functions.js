@@ -137,24 +137,20 @@ function load(page) {
         cleanhouse();
         cleandivs();
         if (pagename == 'home') {
-            var newstate = "home"; 
-            var action = {action:newstate}
-            History.pushState(action, psTitle + separator + "Home", newstate);
-        } 
-        if (pagename == 'books') {
-            var newstate = "books";
-            var action = {action:newstate}
-            History.pushState(action, psTitle + separator + "Books", newstate);
-        }
-        if (pagename == 'music') {
-            var newstate = "music";
-            var action = {action:newstate}
-            History.pushState(action, psTitle + separator + "Music", newstate);
-        }
-        if (pagename == 'video') {
-            var newstate = "video";
-            var action = {action:newstate}
-            History.pushState(action, psTitle + separator + "Video", newstate);
+            var action = {action:pagename}
+            History.pushState(action, psTitle + separator + "Home", pagename);
+        } else if (pagename == 'books') {
+            var action = {action:pagename}
+            History.pushState(action, psTitle + separator + "Books", pagename);
+        } else if (pagename == 'music') {
+            var action = {action:pagename}
+            History.pushState(action, psTitle + separator + "Music", pagename);
+        } else if (pagename == 'video') {
+            var action = {action:pagename}
+            History.pushState(action, psTitle + separator + "Video", pagename);
+        } else if (pagename == 'adults') {
+            var action = {action:pagename}
+            History.pushState(action, psTitle + separator + "Adults", pagename);
         }
     }
 }
