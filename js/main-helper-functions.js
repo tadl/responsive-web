@@ -137,14 +137,24 @@ function load(page) {
         cleanhouse();
         cleandivs();
         if (pagename == 'home') {
-            var action = {action:"home"}
             var newstate = "home"; 
-            History.pushState(action, "Home", newstate);
+            var action = {action:newstate}
+            History.pushState(action, psTitle + separator + "Home", newstate);
         } 
         if (pagename == 'books') {
-            var action = {action:"books"}
             var newstate = "books";
-            History.pushState(action, psTitle + "Books", newstate);
-        };
-    };
+            var action = {action:newstate}
+            History.pushState(action, psTitle + separator + "Books", newstate);
+        }
+        if (pagename == 'music') {
+            var newstate = "music";
+            var action = {action:newstate}
+            History.pushState(action, psTitle + separator + "Music", newstate);
+        }
+        if (pagename == 'video') {
+            var newstate = "video";
+            var action = {action:newstate}
+            History.pushState(action, psTitle + separator + "Video", newstate);
+        }
+    }
 }

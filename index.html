@@ -55,6 +55,10 @@
             .route(BASE_URL + '#./', goHome)
             .route(BASE_URL + 'books', showBooksPage)
             .route(BASE_URL + '#books', showBooksPage)
+            .route(BASE_URL + 'music', showMusicPage)
+            .route(BASE_URL + '#music', showMusicPage)
+            .route(BASE_URL + 'video', showVideoPage)
+            .route(BASE_URL + '#video', showVideoPage)
             .route(BASE_URL + '#./events', showevents)
             .route(BASE_URL + 'events', showevents)
             .route(BASE_URL + '#./facebook', facebookfeed)
@@ -142,16 +146,16 @@
     <main role="main" class="grid-container">
         <div class="grid-container">
             <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large tadlblue" id="link-home" onclick="load('home')"><span>Home</span></a>
+                <a class="button wide large tadlblue" id="link-home" onclick="load('home');"><span>Home</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large red" id="link-books" onclick="load('books')"><span>Books</span></a>
+                <a class="button wide large red" id="link-books" onclick="load('books');"><span>Books</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large orange" id="link-music"><span>Music</span></a>
+                <a class="button wide large orange" id="link-music" onclick="load('music');"><span>Music</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large yellow" id="link-video"><span>Video</span></a>
+                <a class="button wide large yellow" id="link-video" onclick="load('video');"><span>Video</span></a>
             </div>
             <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                 <a class="button wide large green" id="link-adults"><span>Adults</span></a>
