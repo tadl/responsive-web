@@ -59,12 +59,12 @@ function showVideoPage() {
         $('#region-one').prepend(info);
     });
     $.getJSON(FEED_VIDEO_MET, function(data) {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
     });
     $.getJSON(FEED_VIDEO_TCFF, function(data) {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
     });

@@ -462,7 +462,7 @@
         {{#each_upto nodes 1}}
         <div class="grid-container pointer" onclick="showitemlist({{node.termid}})">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <h4 class="title">{{node.term}}</h4>
+                    <h4 class="title pointer">{{node.term}}</h4>
                 {{/each_upto}}
             </div>
         </div>
@@ -472,6 +472,29 @@
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 {{#each_upto nodes 4}}
                     <div class="img-viewer pointer" onclick="showitemlist({{node.termid}})">
+                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                    </div>
+                {{/each_upto}}
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="showfeatureditemboxall-template" type="text/template">
+    <div class="card">
+        {{#each_upto nodes 1}}
+        <div class="grid-container pointer" onclick="showitemlistall({{node.termid}})">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <h4 class="title pointer">{{node.term}}</h4>
+                {{/each_upto}}
+            </div>
+        </div>
+    </div>
+    <div class="card padtop">
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                {{#each_upto nodes 4}}
+                    <div class="img-viewer pointer" onclick="showitemlistall({{node.termid}})">
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
                     </div>
                 {{/each_upto}}

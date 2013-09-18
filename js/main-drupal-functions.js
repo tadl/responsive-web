@@ -41,6 +41,17 @@ function showitemlist(list_id) {
     });
 }
 
+function showitemlistall(list_id) {
+    cleanhouse();
+    $('#working').show();
+    $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/all/json', function(data) {
+        var template = Handlebars.compile($('#showitemlist-template').html());
+        var info = template(data);
+        $('#region-two').html(info);
+        $('#working').hide();
+    });
+}
+
 function showreviews(review_type) { 
     cleanhouse();
     $('#working').show();
