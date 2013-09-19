@@ -8,7 +8,7 @@ function showevents() {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
         if (state.data.action === "showevents") {
-            $('#results').html(info);
+            $('#region-two').html(info);
             $('#working').hide();
         }
     });
@@ -24,7 +24,7 @@ function showlocations() {
         var template = Handlebars.compile($('#showlocations-template').html());
         var info = template(data);
         if (state.data.action === "showlocations") {
-            $('#results').html(info);
+            $('#region-two').html(info);
             $('#working').hide();
         }
     });

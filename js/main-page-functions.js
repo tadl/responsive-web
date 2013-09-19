@@ -43,6 +43,12 @@ var FEED_TEENS_REVIEWS = ''; //bottom-middle
 var FEED_TEENS_HOMEWORK = ''; //middle-middle
 var FEED_TEENS_LISTS = ''; //top-middle
 
+function showAdultsPage() {
+}
+function showYouthPage() {
+}
+function showTeensPage() {
+}
 
 function showVideoPage() {
     cleanhouse();
