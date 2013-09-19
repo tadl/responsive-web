@@ -107,6 +107,7 @@ function facetsearch() {
         $('#available').prop('checked', false);
         var availablemsg = "";
     }
+    cleanhouse();
     var mediatypedecode = decodeURIComponent(mediatype);    
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
@@ -128,11 +129,13 @@ function facetsearch() {
             $('#loadmoretext').trigger("create");
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').append(info_selected_facets);
+            $('#loadmore').show();
         } else {
             $('#second-region').replaceWith("No Results");
-            $('.load_more').hide();
+            
         }
     });
+    mylist();
 }
 
 function logged_in() {
@@ -464,6 +467,7 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
 
 
 function mylist() {
+
     var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
     var mylist_decode = decodeURI(mylist);
     var wrapper = '{"objects": ['+ mylist_decode +']}';
@@ -483,6 +487,8 @@ function mylist() {
     var template = Handlebars.compile($('#mylist-template').html());
     var info = template(test2);
     $('#region-three').html(info);
+  
+
 }
 
 

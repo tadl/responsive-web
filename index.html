@@ -86,6 +86,7 @@
             .route(BASE_URL + '#search/:query/:mt/:avail/:location', getResults)
             .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:facet', facetsearch)
+            .route(BASE_URL + 'list/:list_id', showitemlist)
             .route(BASE_URL + '#./item/:record_id', viewitem)
             .route(BASE_URL + 'item/:record_id', viewitem)
             .route(BASE_URL + '#./reviews', showreviews)
@@ -474,20 +475,16 @@
 
 <!-- updated for unsemantic -->
 <script id="showfeatureditembox-template" type="text/template">
+
     <div class="card">
         {{#each_upto nodes 1}}
-        <div class="grid-container pointer" onclick="showitemlist({{node.termid}})">
+        <div class="grid-container pointer" onclick="loadlist({{node.termid}})">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <h4 class="title pointer">{{node.term}}</h4>
                 {{/each_upto}}
-            </div>
-        </div>
-    </div>
-    <div class="card padtop">
-        <div class="grid-container">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+
                 {{#each_upto nodes 4}}
-                    <div class="img-viewer pointer" onclick="showitemlist({{node.termid}})">
+                    <div class="img-viewer pointer" onclick="loadlist({{node.termid}})">
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
                     </div>
                 {{/each_upto}}
@@ -575,13 +572,7 @@
 
 <!-- updated for unsemantic -->
 <script id="showevents-template" type="text/template">
-    <div class="card">
-        <div class="grid-container">
-            <div class="grid-100 tablet-grid-100">
-                <h4 class="title">Upcoming Events</h4>
-            </div>
-        </div>
-    </div>
+
     {{#each_upto nodes 10}}
         <div class="card">
             <div class="grid-container">

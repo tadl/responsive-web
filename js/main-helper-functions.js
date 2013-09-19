@@ -24,6 +24,9 @@ $(document).ready(function() {
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
     });
+    if (window.localStorage.getItem('list') == null){
+    window.localStorage.setItem('list', 'empty');
+    }
 });
 
 function startsearch() {
@@ -169,4 +172,17 @@ function load(page) {
             History.pushState(action, psTitle + separator + "Adults", pagename);
         }
     }
+}
+
+function loadlist(list) {
+
+var list_id = list;
+state = History.getState();
+if (state.data.list != list){
+var action = {action:'showlist', list:list_id}
+var url = 'list/'+list_id;
+History.pushState(action, psTitle + separator + "Featured", url);
+
+};
+
 }
