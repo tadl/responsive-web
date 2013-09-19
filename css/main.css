@@ -533,3 +533,22 @@ input.search {
 #wide-pad {
     max-height:1px;
 }
+
+.back-to-top {
+    position: fixed;
+    bottom: 60px;
+    left: 15px;
+    text-decoration: none;
+    color: #000000;
+    background-color: rgba(235, 235, 235, 0.80);
+    font-size: 14px;
+    padding: 1em;
+    display: none;
+    cursor:pointer;
+}
+
+.back-to-top:hover {    
+    background-color: rgba(135, 135, 135, 0.50);
+    text-decoration:none;
+}
+
