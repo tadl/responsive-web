@@ -552,3 +552,34 @@ input.search {
     text-decoration:none;
 }
 
+#locsel {
+    background-image:url(../img/wood.jpg);
+    background-position:top;
+    background-size:100%;
+    background-repeat:no-repeat;
+    height:245px;
+    position:relative;
+}
+
+#locinfo {
+    display:block;
+    position:absolute;
+    bottom:0px;
+    background:rgba(0,0,0,0.5);
+    color:#f0f2f5;
+}
+
+#loccontact {
+    text-align:right;
+}
+
+td.day.left {
+    text-align:left;
+    padding-right:5px;
+}
+
+td.day.right {
+    text-align:right;
+    padding-left:5px;
+}
+

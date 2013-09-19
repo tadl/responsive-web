@@ -140,8 +140,10 @@ function facebookfeed() {
 
 function locHoursAndInfo(loc) {
     cleanhouse();
+//    $('#locinfo').html('<br/>' + $('#working').html() + '<br/><br/>');
     $('#locinfo').hide();
     $('#working').show();
+    $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
     $.getJSON('https://www.tadl.org/mobile/export/locations/' + loc, function(data) {
         var template = Handlebars.compile($('#locationinfo-template').html());
         var info = template(data);

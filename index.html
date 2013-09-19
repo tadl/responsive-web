@@ -7,12 +7,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    
     <title>Traverse Area District Library</title>
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="css/unsemantic-grid-base.css" />
+    <link rel="stylesheet" href="css/jquery.dropdown.css" />
     <link rel="stylesheet" href="css/buttons.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
@@ -38,6 +38,7 @@
     <script type="text/javascript" src="js/jquery.history.js"></script>
     <script type="text/javascript" src="js/handlebars.js"></script>
     <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dropdown.min.js"></script>
     <script type="text/javascript" src="js/staterouter.js"></script>
     <script type="text/javascript" src="js/main-vars.js"></script>
     <script type="text/javascript" src="js/main-helper-functions.js"></script>
@@ -152,7 +153,7 @@
     </div>
     <main role="main" class="grid-container">
         <div class="grid-container">
-            <div id="locsel" class="grid-100 tablet-grid-100 hide-on-mobile padtop" style="background-image:url(img/woodmere.jpg);background-position:top;background-size:100%;background-repeat:no-repeat;height:240px;position:relative;">
+            <div id="locsel" class="grid-100 tablet-grid-100 hide-on-mobile padtop">
                 <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
                     <a class="button wide large tadlblue" id="link-home" onclick="load('home');"><span>Home</span></a>
                 </div>
@@ -174,16 +175,7 @@
                 <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                     <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
                 </div>
-                <div id="locinfo" class="grid-100 tablet-grid-100 mobile-grid-100" style="display:block;position:absolute;bottom:0px;background:rgba(0,0,0,0.4);color:#f0f2f5;">
-                    <div id="lochours" class="grid-33 tablet-grid-33 mobile-grid-33">
-                        Hours info goes here
-                    </div>
-                    <div id="locloc" class="grid-33 tablet-grid-33 mobile-grid-33">
-                        Welcome to TADL Woodmere<br/><a href="#" class="button verysmall tadlblue"><span>change location</span></a>
-                    </div>
-                    <div id="loccontact" class="grid-33 tablet-grid-33 mobile-grid-33">
-                        Contact info goes here
-                    </div>
+                <div id="locinfo" class="grid-100 tablet-grid-100 mobile-grid-100">
                 </div>
             </div>
         </div>
@@ -716,15 +708,17 @@
     {{#nodes}}
         <div id="lochours" class="grid-33 tablet-grid-33 mobile-grid-33">
             <table class="hours" style="font-size:12px;">
-                <tr><td>Sunday {{node.sunday}}</td><td>Thursday {{node.thursday}}</td></tr>
-                <tr><td>Monday {{node.monday}}</td><td>Friday {{node.friday}}</td></tr>
-                <tr><td>Tuesday {{node.tuesday}}</td><td>Saturday {{node.saturday}}</td></tr>
-                <tr><td>Wednesday {{node.wednesday}}</td><td></td></tr>
+                <tr><td class="day left">Sunday {{node.sunday}}</td><td class="day right">Thursday {{node.thursday}}</td></tr>
+                <tr><td class="day left">Monday {{node.monday}}</td><td class="day right">Friday {{node.friday}}</td></tr>
+                <tr><td class="day left">Tuesday {{node.tuesday}}</td><td class="day right">Saturday {{node.saturday}}</td></tr>
+                <tr><td class="day left">Wednesday {{node.wednesday}}</td><td class="day right"></td></tr>
             </table>
         </div>
         <div id="locloc" class="grid-33 tablet-grid-33 mobile-grid-33">
-        {{node.fullname}}<br/>
-        <a class="button verysmall tadlblue"><span>change location</span></a>
+            <div class="padtop" style="font-size:19px;">
+                {{node.fullname}}<br/>
+                <a class="button verysmall tadlblue" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
+            </div>
         </div>
         <div id="loccontact" class="grid-33 tablet-grid-33 mobile-grid-33">
             {{node.address}}<br/>
@@ -733,6 +727,17 @@
         </div>
     {{/nodes}}
 </script>
+
+<div id="dropdown-1" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a onclick="locHoursAndInfo('wood')">Woodmere</a></li>
+        <li><a onclick="locHoursAndInfo('kbl')">Kingsley</a></li>
+        <li><a onclick="locHoursAndInfo('ipl')">Interlochen</a></li>
+        <li><a onclick="locHoursAndInfo('flpl')">Fife Lake</a></li>
+        <li><a onclick="locHoursAndInfo('pcl')">Peninsula</a></li>
+        <li><a onclick="locHoursAndInfo('ebb')">East Bay</a></li>
+    </ul>
+</div>
 
 </body>
 </html>
