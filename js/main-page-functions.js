@@ -149,6 +149,9 @@ function showHomePage() {
     cleanhouse();
     cleandivs();
     $('#working').show();
+       $('#region-three').append('<div class="card"><h4 class="title">Featured Items:</h4></div>');
+       $('#region-two').append('<div class="card"><h4 class="title">Featured News:</h4></div>');
+       $('#region-one').append('<div class="card"><h4 class="title">Upcoming Events:</h4></div>');
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
@@ -167,12 +170,12 @@ function showHomePage() {
     $.getJSON(NEWS_URL, function(data) {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
         var info = template(data);
-        $('#region-two').html(info);
+        $('#region-two').append(info);
         $('#working').hide();
     });
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
-        $('#region-one').html(info);
+        $('#region-one').append(info);
     });
 }
