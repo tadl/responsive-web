@@ -151,26 +151,39 @@
     </div>
     <main role="main" class="grid-container">
         <div class="grid-container">
-            <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large tadlblue" id="link-home" onclick="load('home');"><span>Home</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large red" id="link-books" onclick="load('books');"><span>Books</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large orange" id="link-music" onclick="load('music');"><span>Music</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large yellow" id="link-video" onclick="load('video');"><span>Video</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large green" id="link-adults" onclick="load('adults');"><span>Adults</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large blue" id="link-youth" onclick="load('youth');"><span>Youth</span></a>
-            </div>
-            <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
+            <div id="locsel" class="grid-100 tablet-grid-100 mobile-grid-100 padtop" style="background-image:url(img/woodmere.jpg);background-position:top;background-size:100%;background-repeat:no-repeat;height:240px;position:relative;">
+                <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large tadlblue" id="link-home" onclick="load('home');"><span>Home</span></a>
+                </div>
+                <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large red" id="link-books" onclick="load('books');"><span>Books</span></a>
+                </div>
+                <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large orange" id="link-music" onclick="load('music');"><span>Music</span></a>
+                </div>
+                <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large yellow" id="link-video" onclick="load('video');"><span>Video</span></a>
+                </div>
+                <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large green" id="link-adults" onclick="load('adults');"><span>Adults</span></a>
+                </div>
+                <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large blue" id="link-youth" onclick="load('youth');"><span>Youth</span></a>
+                </div>
+                <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
+                    <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
+                </div>
+                <div id="locinfo" class="grid-100 tablet-grid-100 mobile-grid-100" style="display:block;position:absolute;bottom:0px;background:rgba(0,0,0,0.4);color:#f0f2f5;">
+                    <div id="lochours" class="grid-33 tablet-grid-33 mobile-grid-33">
+                        Hours info goes here
+                    </div>
+                    <div id="locloc" class="grid-33 tablet-grid-33 mobile-grid-33">
+                        Welcome to TADL Woodmere<br/><a href="#" class="button verysmall tadlblue"><span>change location</span></a>
+                    </div>
+                    <div id="loccontact" class="grid-33 tablet-grid-33 mobile-grid-33">
+                        Contact info goes here
+                    </div>
+                </div>
             </div>
         </div>
         <div class="grid-container">
