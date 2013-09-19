@@ -712,5 +712,27 @@
     </div>
 </script>
 
+<script id="locationinfo-template" type="text/template">
+    {{#nodes}}
+        <div id="lochours" class="grid-33 tablet-grid-33 mobile-grid-33">
+            <table class="hours" style="font-size:12px;">
+                <tr><td>Sunday {{node.sunday}}</td><td>Thursday {{node.thursday}}</td></tr>
+                <tr><td>Monday {{node.monday}}</td><td>Friday {{node.friday}}</td></tr>
+                <tr><td>Tuesday {{node.tuesday}}</td><td>Saturday {{node.saturday}}</td></tr>
+                <tr><td>Wednesday {{node.wednesday}}</td><td></td></tr>
+            </table>
+        </div>
+        <div id="locloc" class="grid-33 tablet-grid-33 mobile-grid-33">
+        {{node.fullname}}<br/>
+        <a class="button verysmall tadlblue"><span>change location</span></a>
+        </div>
+        <div id="loccontact" class="grid-33 tablet-grid-33 mobile-grid-33">
+            {{node.address}}<br/>
+            {{node.citystatezip}}<br/>
+            {{node.phone}}
+        </div>
+    {{/nodes}}
+</script>
+
 </body>
 </html>

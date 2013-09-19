@@ -154,14 +154,15 @@ function showBooksPage() {
 function showHomePage() {
     cleanhouse();
     cleandivs();
+    locHoursAndInfo('wood'); /* this should have some localstorage functionality to check
+                                if there's a preference saved and use it, otherwise default
+                                to woodmere.
+                              */
     $('#working').show();
-    $('#region-three').prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    $('#region-two').prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
-    $('#region-one').prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
-        $('#region-three').append(info);
+        $('#region-three').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
     });
     $.getJSON('https://www.tadl.org/mobile/export/items/68/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
@@ -176,12 +177,12 @@ function showHomePage() {
     $.getJSON(NEWS_URL, function(data) {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
         var info = template(data);
-        $('#region-two').append(info);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
         $('#working').hide();
     });
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
-        $('#region-one').append(info);
+        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     });
 }

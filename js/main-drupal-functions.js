@@ -137,3 +137,15 @@ function facebookfeed() {
         }
     });
 }
+
+function locHoursAndInfo(loc) {
+    cleanhouse();
+    $('#locinfo').hide();
+    $('#working').show();
+    $.getJSON('https://www.tadl.org/mobile/export/locations/' + loc, function(data) {
+        var template = Handlebars.compile($('#locationinfo-template').html());
+        var info = template(data);
+        $('#working').hide();
+        $('#locinfo').html(info).show();
+    });
+}
