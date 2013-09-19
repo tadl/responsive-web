@@ -19,7 +19,7 @@ function loadmore() {
                     $('#loadmoretext').trigger("create");
                 });
             } else {
-                $('#region-two').html("No Further Results");
+                $('#loadmoretext').html("No Further Results");
             }
         }
     });
@@ -94,6 +94,7 @@ function getResults() {
 
 function facetsearch() {
     state = History.getState();
+    pagecount = 0;
     var facet = state.data.ft;
     var searchquery = state.data.query;
     var mediatype = state.data.mt;
