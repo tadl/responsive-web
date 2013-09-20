@@ -3,7 +3,7 @@ function showevents() {
     var action = {action:"showevents"}
     History.pushState(action, "Upcoming Event", "events"); 
     state = History.getState();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
@@ -19,7 +19,7 @@ function showlocations() {
     var action = {action:"showlocations"}
     History.pushState(action, "Locations", "locations"); 
     state = History.getState();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON(LOCATIONS_BASE + "/all", function(data) {
         var template = Handlebars.compile($('#showlocations-template').html());
         var info = template(data);
@@ -32,7 +32,7 @@ function showlocations() {
 
 function showitemlist(list_id) {
     cleanhouse();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/json', function(data) {
         var template = Handlebars.compile($('#showitemlist-template').html());
         var info = template(data);
@@ -43,7 +43,7 @@ function showitemlist(list_id) {
 
 function showitemlistall(list_id) {
     cleanhouse();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/all/json', function(data) {
         var template = Handlebars.compile($('#showitemlist-template').html());
         var info = template(data);
@@ -54,7 +54,7 @@ function showitemlistall(list_id) {
 
 function showreviews(review_type) { 
     cleanhouse();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON('https://www.tadl.org/export/reviews/'+ review_type +'/json', function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
@@ -140,14 +140,14 @@ function facebookfeed() {
 
 function locHoursAndInfo(loc) {
     cleanhouse();
-//    $('#locinfo').html('<br/>' + $('#working').html() + '<br/><br/>');
+    window.localStorage.setItem('location', loc);
     $('#locinfo').hide();
-    $('#working').show();
+    $('#working').show().spin('default');
     $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
     $.getJSON('https://www.tadl.org/mobile/export/locations/' + loc, function(data) {
         var template = Handlebars.compile($('#locationinfo-template').html());
         var info = template(data);
-        $('#working').hide();
         $('#locinfo').html(info).show();
+        $('#working').hide();
     });
 }

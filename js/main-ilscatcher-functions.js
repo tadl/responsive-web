@@ -333,7 +333,7 @@ function showcheckouts() {
     cleandivs();
     var action = {action:"showcheckouts"}
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
-    $('#working').show();
+    $('#working').show().spin('default');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
     state = History.getState();
@@ -375,7 +375,7 @@ function showholds() {
     cleandivs();
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
-    $('#working').show();
+    $('#working').show().spin('default');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -394,7 +394,7 @@ function showpickups() {
     cleandivs();
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
-    $('#working').show();
+    $('#working').show().spin('default');
     var username = window.localStorage.getItem('username');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
@@ -428,7 +428,7 @@ function showcard() {
     cleanhouse();
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
-    $('#working').show();
+    $('#working').show().spin('default');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();

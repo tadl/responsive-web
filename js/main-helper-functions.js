@@ -24,8 +24,14 @@ $(document).ready(function() {
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
     });
-    if (window.localStorage.getItem('list') == null){
-    window.localStorage.setItem('list', 'empty');
+    if (window.localStorage.getItem('list') == null) {
+        window.localStorage.setItem('list', 'empty');
+    }
+    if (window.localStorage.getItem('location') == null) {
+        window.localStorage.setItem('location', 'wood');
+        locHoursAndInfo('wood');
+    } else {
+        locHoursAndInfo(window.localStorage.getItem('location'));
     }
 });
 
@@ -175,14 +181,29 @@ function load(page) {
 }
 
 function loadlist(list) {
-
-var list_id = list;
-state = History.getState();
-if (state.data.list != list){
-var action = {action:'showlist', list:list_id}
-var url = 'list/'+list_id;
-History.pushState(action, psTitle + separator + "Featured", url);
-
-};
-
+    var list_id = list;
+    state = History.getState();
+    if (state.data.list != list) {
+        var action = {action:'showlist', list:list_id}
+        var url = 'list/'+list_id;
+        History.pushState(action, psTitle + separator + "Featured", url);
+    };
 }
+
+$.fn.spin.presets.default = {
+    lines: 13,
+    length: 15,
+    width: 10,
+    radius: 20,
+    corners: 1,
+    rotate: 0,
+    direction: 1,
+    color: '#000',
+    speed: 0.8,
+    trail: 68,
+    shadow: false,
+    hwaccel: false,
+    className: 'spinner',
+    zIndex: 2e9
+}
+

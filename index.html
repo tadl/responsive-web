@@ -33,12 +33,14 @@
     <script type="text/javascript" src="js/jquery-1.10.0.min.js"></script>
     <script type="text/javascript" src="js/jQuery.XDomainRequest.js"></script>
     <script type="text/javascript" src="js/adapt.min.js"></script>
+    <script type="text/javascript" src="js/spin.min.js"></script>
     <script type="text/javascript" src="js/application.js"></script>
     <script type="text/javascript" src="js/jquery.dateFormat-1.0.js"></script>
     <script type="text/javascript" src="js/jquery.history.js"></script>
     <script type="text/javascript" src="js/handlebars.js"></script>
     <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
     <script type="text/javascript" src="js/jquery.dropdown.min.js"></script>
+    <script type="text/javascript" src="js/jquery.spin.js"></script>
     <script type="text/javascript" src="js/staterouter.js"></script>
     <script type="text/javascript" src="js/main-vars.js"></script>
     <script type="text/javascript" src="js/main-helper-functions.js"></script>
@@ -152,6 +154,7 @@
         <span id="login_msg"></span>
     </div>
     <main role="main" class="grid-container">
+        <div id="working" class="grid-100 tablet-grid-100 mobile-grid-100 hidden"></div>
         <div class="grid-container">
             <div id="locsel" class="grid-100 tablet-grid-100 hide-on-mobile padtop">
                 <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
@@ -181,7 +184,7 @@
         </div>
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <div id="working" class="card padv hidden"><span><img class="spinner" src="img/spinner.gif"/></span></div>
+                <div id="working" class="card padv hidden"></div>
             </div>
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 <div id="wide-pad" class="grid-100">&nbsp;</div>
@@ -715,7 +718,7 @@
             </table>
         </div>
         <div id="locloc" class="grid-33 hide-on-tablet hide-on-mobile">
-            <div class="padtop" style="font-size:19px;">
+            <div class="padtop" style="font-size:26px;">
                 {{node.fullname}}<br/>
                 <a class="button verysmall tadlblue" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
             </div>
@@ -725,7 +728,7 @@
             {{node.citystatezip}}<br/>
             {{node.phone}}
         </div>
-        <div id="lochours" class="hide-on-desktop tablet-grid-40 mobile-grid-40">
+        <div id="lochours" class="hide-on-desktop tablet-grid-45 mobile-grid-45">
             <table class="hours" style="font-size:12px;">
                 <tr><td class="day left">Monday {{node.monday}}</td><td class="day right"></td></tr>
                 <tr><td class="day left">Tuesday {{node.tuesday}}</td><td class="day right">Friday {{node.friday}}</td></tr>
@@ -733,14 +736,14 @@
                 <tr><td class="day left">Thursday {{node.thursday}}</td><td class="day right">Sunday {{node.sunday}}</td></tr>
             </table>
         </div>
-        <div id="locloc" class="hide-on-desktop tablet-grid-60 mobile-grid-60">
-            <table style="width:100%"><tr><td style="text-align:center;">
-                <div class="padtop" style="font-size:19px;">
+        <div id="locloc" class="hide-on-desktop tablet-grid-55 mobile-grid-55">
+            <table style="width:100%"><tr><td style="text-align:center;width:30%;">
+                <div class="padtop" style="font-size:26px;">
                     {{node.fullname}}<br/>
                     <a class="button verysmall tadlblue" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
                 </div>
             </td><td class="right">
-                <div class="padtop">
+                <div class="padtop" style="font-size:16px;">
                     {{node.address}}<br/>
                     {{node.citystatezip}}<br/>
                     {{node.phone}}

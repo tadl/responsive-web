@@ -525,6 +525,10 @@ input.search {
 
 #working {
     text-align:center;
+    position:absolute;
+    top:180px;
+    z-index:200000;
+    width:100%;
 }
 
 #one-pad,
@@ -559,6 +563,7 @@ input.search {
     background-repeat:no-repeat;
     height:285px;
     position:relative;
+    transition: background 0.5s;
 }
 
 #locinfo {

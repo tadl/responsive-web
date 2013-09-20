@@ -53,7 +53,7 @@ function showTeensPage() {
 function showVideoPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON(FEED_VIDEO_NEW, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
@@ -90,7 +90,7 @@ function showVideoPage() {
 function showMusicPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON(FEED_MUSIC_NEW, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
@@ -122,7 +122,7 @@ function showMusicPage() {
 function showBooksPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON(FEED_BOOKS_FEATURED_FICTION, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
@@ -154,11 +154,7 @@ function showBooksPage() {
 function showHomePage() {
     cleanhouse();
     cleandivs();
-    locHoursAndInfo('wood'); /* this should have some localstorage functionality to check
-                                if there's a preference saved and use it, otherwise default
-                                to woodmere.
-                              */
-    $('#working').show();
+    $('#working').show().spin('default');
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
