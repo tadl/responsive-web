@@ -554,10 +554,10 @@ input.search {
 
 #locsel {
     background-image:url(../img/wood.jpg);
-    background-position:top;
+    background-position:center;
     background-size:100%;
     background-repeat:no-repeat;
-    height:245px;
+    height:285px;
     position:relative;
 }
 
@@ -570,15 +570,20 @@ input.search {
 }
 
 #loccontact {
+    padding-top:10px;
     text-align:right;
 }
 
-td.day.left {
+#lochours {
+    padding-top:10px;
+}
+
+.left {
     text-align:left;
     padding-right:5px;
 }
 
-td.day.right {
+.right {
     text-align:right;
     padding-left:5px;
 }
