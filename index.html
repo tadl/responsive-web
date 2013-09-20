@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/unsemantic-grid-base.css" />
     <link rel="stylesheet" href="css/jquery.dropdown.css" />
     <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/navmenu.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <noscript>
@@ -99,13 +100,29 @@
             ;
     </script>
 </head>
-<body>
+<body class="pushmenu-push">
 <div id="wrapper">
+    <nav class="pushmenu pushmenu-left">
+        <h3>Something something</h3>
+        <a href="#">Books</a>
+        <a href="#">Music</a>
+        <a href="#">Video</a>
+        <a href="#">Adults</a>
+        <a href="#">Youth</a>
+        <a href="#">Teens</a>
+        <a href="#">Events</a>
+        <a href="#">Reviews</a>
+        <a href="#">Policies</a>
+        <a href="#">Governance</a>
+        <a href="#">Etc...</a>
+    </nav>
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="mobile-grid-10 tablet-grid-5 grid-5">
-                <img src="img/tinylines.png" class="icon pointer hide-on-tablet hide-on-desktop" alt="menu" title="Site Menu"/>
-                <img src="img/logo1.png" class="icon logo hide-on-mobile"/>
+            <div class="mobile-grid-10 menu hide-on-tablet hide-on-desktop">
+                <div id="nav_list">Show/Hide Navigation Menu</div>
+            </div>
+            <div class="tablet-grid-5 grid-5 hide-on-mobile">
+                <img src="img/logo1.png" class="icon logo"/>
             </div>
             <div class="grid-80 tablet-grid-80 mobile-grid-55">
                 <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
@@ -153,8 +170,8 @@
         <button id="login" onclick="login()">Login</button>
         <span id="login_msg"></span>
     </div>
+    <div id="working" class="grid-100 tablet-grid-100 mobile-grid-100 hidden"></div>
     <main role="main" class="grid-container">
-        <div id="working" class="grid-100 tablet-grid-100 mobile-grid-100 hidden"></div>
         <div class="grid-container">
             <div id="locsel" class="grid-100 tablet-grid-100 hide-on-mobile padtop">
                 <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">

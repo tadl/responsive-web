@@ -10,6 +10,13 @@ $(document).ready(function() {
     });
     $('#search').click(getResults);
     jQuery.support.cors = true;
+    $menuLeft = $('.pushmenu-left');
+    $nav_list = $('#nav_list');
+    $nav_list.click(function() {
+        $(this).toggleClass('active');
+        $('.pushmenu-push').toggleClass('pushmenu-push-toright');
+        $menuLeft.toggleClass('pushmenu-open');
+    });
     var offset = 220;
     var duration = 500;
     $(window).scroll(function() {
@@ -198,10 +205,10 @@ $.fn.spin.presets.default = {
     corners: 1,
     rotate: 0,
     direction: 1,
-    color: '#000',
+    color: '#fff',
     speed: 0.8,
     trail: 68,
-    shadow: false,
+    shadow: true,
     hwaccel: false,
     className: 'spinner',
     zIndex: 2e9

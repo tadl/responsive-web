@@ -9,7 +9,7 @@ function showevents() {
         var info = template(data);
         if (state.data.action === "showevents") {
             $('#region-two').html(info);
-            $('#working').hide();
+            $('#working').hide().spin(false);
         }
     });
 }
@@ -25,7 +25,7 @@ function showlocations() {
         var info = template(data);
         if (state.data.action === "showlocations") {
             $('#region-two').html(info);
-            $('#working').hide();
+            $('#working').hide().spin(false);
         }
     });
 }
@@ -37,7 +37,7 @@ function showitemlist(list_id) {
         var template = Handlebars.compile($('#showitemlist-template').html());
         var info = template(data);
         $('#region-two').html(info);
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
 }
 
@@ -48,7 +48,7 @@ function showitemlistall(list_id) {
         var template = Handlebars.compile($('#showitemlist-template').html());
         var info = template(data);
         $('#region-two').html(info);
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
 }
 
@@ -58,7 +58,7 @@ function showreviews(review_type) {
     $.getJSON('https://www.tadl.org/export/reviews/'+ review_type +'/json', function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
-        $('#working').hide();
+        $('#working').hide().spin(false);
         $('#region-two').html(info);
         
     });
@@ -148,6 +148,6 @@ function locHoursAndInfo(loc) {
         var template = Handlebars.compile($('#locationinfo-template').html());
         var info = template(data);
         $('#locinfo').html(info).show();
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
 }

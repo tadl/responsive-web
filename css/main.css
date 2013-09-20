@@ -320,7 +320,7 @@ div[class*="pull-"] section {
 
 .searchbar {
     display:block;
-    background: linear gradient(center top, #f0f2f5, #dddddd);
+    background: linear-gradient(center top, #f0f2f5, #dddddd);
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, from(#f0f2f5), to(#dddddd));
     background: -moz-linear-gradient(center top , #f0f2f5, #dddddd);
     padding-top:10px;
@@ -593,3 +593,6 @@ input.search {
     padding-left:5px;
 }
 
+.mobile-grid-10.menu {
+    padding-left:0;
+}

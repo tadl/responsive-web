@@ -342,7 +342,7 @@ function showcheckouts() {
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
             $('#region-wide').html(info).show();
-            $('#working').hide();
+            $('#working').hide().spin(false);
         }
     });
 }
@@ -384,7 +384,7 @@ function showholds() {
         var info = template(data);
         if (state.data.action === "showholds") {
             $('#region-wide').html(info).show();
-            $('#working').hide();
+            $('#working').hide().spin(false);
         }
     });   
 }
@@ -404,7 +404,7 @@ function showpickups() {
         var info = template(data);
         if (state.data.action === "showpickups") {
             $('#region-wide').html(info).show();
-            $('#working').hide();
+            $('#working').hide().spin(false);
         }
     });
 }
@@ -436,7 +436,7 @@ function showcard() {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('#working').hide();
+            $('#working').hide().spin(false);
             $('#region-wide').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
         }

@@ -83,7 +83,7 @@ function showVideoPage() {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
         $('#region-two').append(info);
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
 }
 
@@ -115,7 +115,7 @@ function showMusicPage() {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
         $('#region-two').append(info);
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
 }
 
@@ -147,7 +147,7 @@ function showBooksPage() {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
         $('#region-two').append(info);
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
 }
 
@@ -174,7 +174,7 @@ function showHomePage() {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
         var info = template(data);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
-        $('#working').hide();
+        $('#working').hide().spin(false);
     });
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
