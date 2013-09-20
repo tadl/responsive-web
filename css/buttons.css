@@ -115,6 +115,7 @@ a.button.verysmall, a.button.verysmall:link, a.button.verysmall:active, a.button
 .button.pink { background-color:#E22092; }
 .button.black { background-color:#333333; }
 .button.cyan { background-color:#46C7C7; }
+.button.trans { background-color:rgba(0,0,0,0.5); }
 
 .button.verysmall span { font-size:10px; }
 .button.small span { font-size:12px; }
