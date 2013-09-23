@@ -398,12 +398,12 @@
                     <span>Reviewed by: {{node.reviewer}}</span>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-100">
-                    <div>
+                    <div id="review_{{node.record}}" class="hidden">
                         {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
-                        <a class="button small tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}})"><span>More Details</span></a>
-                        <a class="button small green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
+                        <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}})"><span>Details</span></a>
+                        <a class="button verysmall green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
                     </div>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -735,8 +735,9 @@
             </table>
         </div>
         <div id="locloc" class="grid-33 hide-on-tablet hide-on-mobile">
-            <div class="padtop" style="font-size:26px;">
-                {{node.fullname}}<br/>
+            <div class="padtop" style="font-size:26px;line-height:24px;">
+                {{node.libfirstname}}<br/>
+                <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
                 <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
             </div>
         </div>
@@ -753,19 +754,17 @@
                 <tr><td class="day left">Thursday {{node.thursday}}</td><td class="day right">Sunday {{node.sunday}}</td></tr>
             </table>
         </div>
-        <div id="locloc" class="hide-on-desktop tablet-grid-55 mobile-grid-55">
-            <table style="width:100%"><tr><td style="text-align:center;width:30%;">
-                <div class="padtop" style="font-size:26px;">
-                    {{node.fullname}}<br/>
-                    <a class="button verysmall tadlblue" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
-                </div>
-            </td><td class="right">
-                <div class="padtop" style="font-size:16px;">
-                    {{node.address}}<br/>
-                    {{node.citystatezip}}<br/>
-                    {{node.phone}}
-                </div>
-            </td></tr></table>
+        <div id="locloc" class="hide-on-desktop tablet-grid-20 mobile-grid-20">
+            <div class="padtop" style="font-size:26px;line-height:24px;">
+                {{node.libfirstname}}<br/>
+                <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
+                <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
+            </div>
+        </div>
+        <div id="loccontact" class="hide-on-desktop tablet-grid-35 mobile-grid-35">
+            {{node.address}}<br/>
+            {{node.citystatezip}}<br/>
+            {{node.phone}}
         </div>
     {{/nodes}}
 </script>
