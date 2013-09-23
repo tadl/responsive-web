@@ -244,6 +244,10 @@ function reset_hold_links() {
     $(".hold_login_first").each(function() {
         $(this).removeClass('hold_login_first').removeClass('black').addClass('green').html('<span>Place Hold</span>');
     });
+      $(".multi_hold_login_first").each(function() {
+        $(this).removeClass('multi_hold_login_first').removeClass('black').addClass('green').html('<span>Place All on Hold</span>');
+    });
+    
 }
 
 function hold(record_id) {
@@ -468,7 +472,10 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
 
 function mylist() {
 
+if (window.localStorage.getItem('list')){
     var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+  
+   
     var mylist_decode = decodeURI(mylist);
     var wrapper = '{"objects": ['+ mylist_decode +']}';
     var test = JSON.stringify(eval("(" + wrapper + ")"));
@@ -484,6 +491,12 @@ function mylist() {
     });
     var savelist = JSON.stringify(test2.objects);
     window.localStorage.setItem('list', savelist);
+    
+	}
+	else
+	{
+	var test2 = "empty";
+	}
     var template = Handlebars.compile($('#mylist-template').html());
     var info = template(test2);
     $('#region-three').html(info);
@@ -507,3 +520,59 @@ function removefromlist(record) {
     window.localStorage["list"] = JSON.stringify(json);
     mylist();
 }
+
+
+function pre_multi_hold(record_ids) {
+    var record_ids = record_ids
+    var record_ids_array = record_ids.split(',');
+    
+    link_id = '#multi-pre-hold';
+    $(link_id).removeClass('green').addClass('black');
+    if (logged_in()) {
+        $(link_id).html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Requesting holds...</span>').removeAttr('onclick');
+        multi_hold(record_ids);
+    } else {
+        $(link_id).html('<span>Log in to place hold</span>');
+        $(link_id).addClass('multi_hold_login_first');
+        $("#login_form").slideDown("fast");
+    }
+}
+
+function multi_hold(record_ids) {
+    var record_ids = record_ids;
+    var username = window.localStorage.getItem('username');
+    var password = window.localStorage.getItem('password');
+    $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?u='+ username +'&pw=' + password + '&record_id=' + record_ids, function(data) {
+  
+      $.each(data.items, function (index, value) {
+      var message_div = '#multi_hold_message_'+this.record_id;
+      var status = this.message;
+      $(message_div).html(status);
+ 
+      
+      if (status == "Hold was successfully placed"){
+      
+      $(message_div).show().addClass('success');
+      }else{
+      
+      $(message_div).show().addClass('error');
+      };
+   
+    });
+       link_id = '#multi-pre-hold';
+       $(link_id).html('<span>Request Finished: Empty Bag?</span>').removeClass('black').addClass('green').attr("onclick", "emptylist()");
+        
+
+    });
+  
+}
+
+function emptylist(){
+	localStorage.removeItem('list');
+	mylist();
+
+
+}
+
+
+
