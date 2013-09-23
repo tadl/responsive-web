@@ -151,3 +151,18 @@ function locHoursAndInfo(loc) {
         $('#working').hide().spin(false);
     });
 }
+
+function showNode(nid) {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    // this will eventually need some logic that checks what *kind* of node it is
+    // so we can handle different node types differently (images are different sizes
+    // etc, for example).
+    $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
+        var template = Handlebars.compile($('#node-template').html());
+        var info = template(data);
+        $('#region-wide').html(info).show();
+        $('#working').hide().spin(false);
+    });
+}

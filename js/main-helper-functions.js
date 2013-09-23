@@ -214,3 +214,18 @@ $.fn.spin.presets.default = {
     zIndex: 2e9
 }
 
+$.fn.spin.presets.tiny = {
+    lines: 9,
+    length: 11,
+    width: 4,
+    radius: 12,
+    corners: 1,
+    direction: 1,
+    color: '#fff',
+    speed: 0.6,
+    trail: 35,
+    shadow: false,
+    hwaccel: false,
+    className: 'tinyspinner',
+    zIndex: 2e9
+}

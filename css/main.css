@@ -596,3 +596,7 @@ input.search {
 .mobile-grid-10.menu {
     padding-left:0;
 }
+
+.floatright {
+    float:right;
+}
