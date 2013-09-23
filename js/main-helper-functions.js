@@ -31,9 +31,7 @@ $(document).ready(function() {
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
     });
-    if (window.localStorage.getItem('list') == null) {
-        window.localStorage.setItem('list', 'empty');
-    }
+
     if (window.localStorage.getItem('location') == null) {
         window.localStorage.setItem('location', 'wood');
         locHoursAndInfo('wood');
