@@ -106,12 +106,13 @@
 <div id="wrapper">
     <nav class="pushmenu pushmenu-left">
         <h3>Something something</h3>
-        <a href="#">Books</a>
-        <a href="#">Music</a>
-        <a href="#">Video</a>
-        <a href="#">Adults</a>
-        <a href="#">Youth</a>
-        <a href="#">Teens</a>
+        <a class="pointer" onclick="load('home');$('#nav_list').trigger('click');">Home</a>
+        <a class="pointer" onclick="load('books');$('#nav_list').trigger('click');">Books</a>
+        <a class="pointer" onclick="load('music');$('#nav_list').trigger('click');">Music</a>
+        <a class="pointer" onclick="load('video');$('#nav_list').trigger('click');">Video</a>
+        <a class="pointer" onclick="load('adults');$('#nav_list').trigger('click');">Adults</a>
+        <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
+        <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a href="#">Events</a>
         <a href="#">Reviews</a>
         <a href="#">Policies</a>
@@ -480,7 +481,7 @@
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span id="{{node.nid}}" style="display:none;">
                         {{{node.body}}}
-                        <div class="permalink pointer"><a onclick="showNode({{node.nid}})">permalink</a></div>
+                        <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </span><br/>
                 </div>
             </div>
