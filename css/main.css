@@ -526,7 +526,7 @@ input.search {
 #working {
     text-align:center;
     position:absolute;
-    top:180px;
+    top:200px;
     z-index:200000;
     width:100%;
 }
@@ -595,4 +595,8 @@ input.search {
 
 .mobile-grid-10.menu {
     padding-left:0;
+}
+
+.floatright {
+    float:right;
 }

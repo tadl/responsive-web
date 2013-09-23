@@ -101,20 +101,15 @@ function showMusicPage() {
         var info = template(data);
         $('#region-one').append(info);
     });
-    $.getJSON(EVENTS_URL, function(data) { // Events (something else should go here)
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
-        $('#region-three').html(info);
-    });
     $.getJSON(FEED_MUSIC_LINKS, function(data) {
         var template = Handlebars.compile($('#drupalnode-template').html());
         var info = template(data);
-        $('#region-two').prepend(info);
+        $('#region-three').prepend(info);
     });
     $.getJSON(FEED_MUSIC_REVIEWS, function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
-        $('#region-two').append(info);
+        $('#region-three').append(info);
         $('#working').hide().spin(false);
     });
 }

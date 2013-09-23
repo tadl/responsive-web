@@ -10,6 +10,8 @@ $(document).ready(function() {
     });
     $('#search').click(getResults);
     jQuery.support.cors = true;
+
+    // pushmenu
     $menuLeft = $('.pushmenu-left');
     $nav_list = $('#nav_list');
     $nav_list.click(function() {
@@ -17,6 +19,8 @@ $(document).ready(function() {
         $('.pushmenu-push').toggleClass('pushmenu-push-toright');
         $menuLeft.toggleClass('pushmenu-open');
     });
+
+    // back to top button
     var offset = 220;
     var duration = 500;
     $(window).scroll(function() {
@@ -150,7 +154,6 @@ function cleanhouse() {
     $('#search-params').empty().hide();
     $('#loadmore').hide();
     $("html, body").animate({ scrollTop: 0}, "slow");
-    
 }
 
 function cleandivs() {
@@ -185,6 +188,15 @@ function load(page) {
     }
 }
 
+function loadNode(nid) {
+    cleanhouse();
+    cleandivs();
+    var newpage = "node/" + nid;
+    var action = {action:newpage}
+    History.pushState(action, psTitle + separator + "Story " + nid, newpage);
+}
+
+
 function loadlist(list) {
     var list_id = list;
     state = History.getState();
@@ -212,3 +224,18 @@ $.fn.spin.presets.default = {
     zIndex: 2e9
 }
 
+$.fn.spin.presets.tiny = {
+    lines: 9,
+    length: 11,
+    width: 4,
+    radius: 12,
+    corners: 1,
+    direction: 1,
+    color: '#fff',
+    speed: 0.6,
+    trail: 35,
+    shadow: false,
+    hwaccel: false,
+    className: 'tinyspinner',
+    zIndex: 2e9
+}
