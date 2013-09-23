@@ -405,12 +405,12 @@
                         {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
-                        <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}})"><span>Details</span></a>
-                        <a class="button verysmall green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
+                        <a class="button small tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});console.log('clicked {{node.record}}');"><span>Details</span></a>
+                        <a class="button small green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
                     </div>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div id="{{node.record}}" class="hidden"></div>
+                    <div id="{{node.record}}" style="display:none;"></div>
                 </div>
             </div>
         </div>
@@ -794,8 +794,12 @@
                     </div>
                 {{/if}}
                 <div class="grid-60 tablet-grid-50 mobile-grid-100">
-                    <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
-                    <span class="hidden">{{node.nid}} - {{node.nodetype}} - {{node.pubdate}}</span>
+                    {{#if node.nodetitle}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
+                    {{/if}}
+                    {{#if node.title}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
+                    {{/if}}
                 </div>
                 {{#if node.body}}
                     <div class="grid-100 tablet-grid-100 mobile-grid-100">
