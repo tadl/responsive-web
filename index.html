@@ -63,8 +63,8 @@
             .route(BASE_URL + '#music', showMusicPage)
             .route(BASE_URL + 'video', showVideoPage)
             .route(BASE_URL + '#video', showVideoPage)
-            .route(BASE_URL + 'adults', showAdultsPage)
-            .route(BASE_URL + '#adults', showAdultsPage)
+            .route(BASE_URL + 'online', showOnlinePage)
+            .route(BASE_URL + '#online', showOnlinePage)
             .route(BASE_URL + 'youth', showYouthPage)
             .route(BASE_URL + '#youth', showYouthPage)
             .route(BASE_URL + 'teens', showTeensPage)
@@ -110,7 +110,7 @@
         <a class="pointer" onclick="load('books');$('#nav_list').trigger('click');">Books</a>
         <a class="pointer" onclick="load('music');$('#nav_list').trigger('click');">Music</a>
         <a class="pointer" onclick="load('video');$('#nav_list').trigger('click');">Video</a>
-        <a class="pointer" onclick="load('adults');$('#nav_list').trigger('click');">Adults</a>
+        <a class="pointer" onclick="load('online');$('#nav_list').trigger('click');">Online</a>
         <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a href="#">Events</a>
@@ -121,13 +121,13 @@
     </nav>
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="mobile-grid-10 menu hide-on-tablet hide-on-desktop">
+            <div class="mobile-grid-10 tablet-grid-5 grid-5 menu ">
                 <div id="nav_list">Show/Hide Navigation Menu</div>
             </div>
-            <div class="tablet-grid-5 grid-5 hide-on-mobile">
+            <div class="tablet-grid-5 grid-5 mobile-grid-10 menu">
                 <img src="img/logo1.png" class="icon logo"/>
             </div>
-            <div class="grid-80 tablet-grid-80 mobile-grid-55">
+            <div class="grid-75 tablet-grid-75 mobile-grid-45">
                 <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
@@ -190,7 +190,7 @@
                     <a class="button wide large yellow" id="link-video" onclick="load('video');"><span>Video</span></a>
                 </div>
                 <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                    <a class="button wide large green" id="link-adults" onclick="load('adults');"><span>Adults</span></a>
+                    <a class="button wide large green" id="link-online" onclick="load('online');"><span>Online</span></a>
                 </div>
                 <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                     <a class="button wide large blue" id="link-youth" onclick="load('youth');"><span>Youth</span></a>
@@ -381,11 +381,7 @@
 <!-- updated for unsemantic -->
 <script id="showreviews-template" type="text/template">
     <div class="card">
-        <div class="grid-container">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <span class="cardtitle">Staff Reviews</span>
-            </div>
-        </div>
+        <h4 class="title">Staff Reviews</h4>
     </div>
     {{#nodes}}
         <div class="card">
@@ -405,12 +401,12 @@
                         {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
-                        <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}})"><span>Details</span></a>
+                        <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});console.log('clicked {{node.record}}');"><span>Details</span></a>
                         <a class="button verysmall green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
                     </div>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div id="{{node.record}}" class="hidden"></div>
+                    <div id="{{node.record}}" style="display:none;"></div>
                 </div>
             </div>
         </div>
@@ -422,7 +418,7 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <span class="cardtitle">{{node.nodetitle}}</span>
+                    <h4 class="title">{{{node.nodetitle}}}</h4>
                 </div>
             </div>
         </div>
@@ -472,11 +468,11 @@
 <script id="showfeaturednews-template" type="text/template">
     {{#nodes}}
         <div class="card">
-            <img class="pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')" />
+            <img src="{{node.image}}" />
             <div class="grid-container">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 pointer" onclick="unhide('{{node.nid}}')">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
-                    <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright"><span>read story</span></a>
+                    <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span id="{{node.nid}}" style="display:none;">
@@ -498,7 +494,6 @@
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <h4 class="title pointer">{{node.term}}</h4>
                 {{/each_upto}}
-
                 {{#each_upto nodes 4}}
                     <div class="img-viewer pointer" onclick="loadlist({{node.termid}})">
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
@@ -516,12 +511,6 @@
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <h4 class="title pointer">{{node.term}}</h4>
                 {{/each_upto}}
-            </div>
-        </div>
-    </div>
-    <div class="card padtop">
-        <div class="grid-container">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 {{#each_upto nodes 4}}
                     <div class="img-viewer pointer" onclick="showitemlistall({{node.termid}})">
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
@@ -797,8 +786,12 @@
                     </div>
                 {{/if}}
                 <div class="grid-60 tablet-grid-50 mobile-grid-100">
-                    <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
-                    <span class="hidden">{{node.nid}} - {{node.nodetype}} - {{node.pubdate}}</span>
+                    {{#if node.nodetitle}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
+                    {{/if}}
+                    {{#if node.title}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
+                    {{/if}}
                 </div>
                 {{#if node.body}}
                     <div class="grid-100 tablet-grid-100 mobile-grid-100">

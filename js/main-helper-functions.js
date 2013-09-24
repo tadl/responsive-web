@@ -164,26 +164,27 @@ function cleandivs() {
 }
 
 function load(page) {
-    var pagename = page;
     state = History.getState();
-    if (state.data.action != pagename) { 
+    if (state.data.action != page) { 
         cleanhouse();
         cleandivs();
-        if (pagename == 'home') {
-            var action = {action:pagename}
-            History.pushState(action, psTitle + separator + "Home", pagename);
-        } else if (pagename == 'books') {
-            var action = {action:pagename}
-            History.pushState(action, psTitle + separator + "Books", pagename);
-        } else if (pagename == 'music') {
-            var action = {action:pagename}
-            History.pushState(action, psTitle + separator + "Music", pagename);
-        } else if (pagename == 'video') {
-            var action = {action:pagename}
-            History.pushState(action, psTitle + separator + "Video", pagename);
-        } else if (pagename == 'adults') {
-            var action = {action:pagename}
-            History.pushState(action, psTitle + separator + "Adults", pagename);
+        var action = {action:page}
+        if (page == 'home') {
+            History.pushState(action, psTitle + separator + "Home", page);
+        } else if (page == 'books') {
+            History.pushState(action, psTitle + separator + "Books", page);
+        } else if (page == 'music') {
+            History.pushState(action, psTitle + separator + "Music", page);
+        } else if (page == 'video') {
+            History.pushState(action, psTitle + separator + "Video", page);
+        } else if (page == 'online') {
+            History.pushState(action, psTitle + separator + "Online", page);
+        } else if (page == 'youth') {
+            History.pushState(action, psTitle + separator + "Youth", page);
+        } else if (page == 'teens') {
+            History.pushState(action, psTitle + separator + "Teens", page);
+        } else if (page == 'governance') {
+            History.pushState(action, psTitle + separator + "Governance", page);
         }
     }
 }
