@@ -3,9 +3,9 @@ var FEED_BOOKS_FEATURED_FICTION = 'https://www.tadl.org/mobile/export/items/67/j
 var FEED_BOOKS_FEATURED_NONFIC = 'https://www.tadl.org/mobile/export/items/68/json'; //left
 var FEED_BOOKS_BOOKLISTS = 'https://www.tadl.org/export/node/json/80'; //top-middle
 var FEED_BOOKS_REVIEWS = 'https://www.tadl.org/export/reviews/Books/json'; //bottom-middle
-var FEED_BOOKS_ADULTS_DISPLAY = ''; //left
-var FEED_BOOKS_ADULTS_CLUBKITS = ''; //left
-var FEED_BOOKS_ADULTS_BUSINESS = ''; //left
+var FEED_BOOKS_ADULTS_DISPLAY = 'https://www.tadl.org/mobile/export/items/45/all/json'; //left
+var FEED_BOOKS_ADULTS_CLUBKITS = 'https://www.tadl.org/mobile/export/items/224/all/json'; //left
+var FEED_BOOKS_ADULTS_BUSINESS = 'https://www.tadl.org/mobile/export/items/234/all/json'; //left
 
 /* Feeds for Music page */
 var FEED_MUSIC_NEW = 'https://www.tadl.org/mobile/export/items/29/json'; //left
@@ -56,7 +56,7 @@ function showVideoPage() {
     $.getJSON(FEED_VIDEO_NEW, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
-        $('#region-one').prepend(info);
+        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
     });
     $.getJSON(FEED_VIDEO_HOT, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
@@ -93,7 +93,7 @@ function showMusicPage() {
     $.getJSON(FEED_MUSIC_NEW, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
-        $('#region-one').append(info);
+        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
     });
     $.getJSON(FEED_MUSIC_HOT, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
@@ -120,10 +120,25 @@ function showBooksPage() {
     $.getJSON(FEED_BOOKS_FEATURED_FICTION, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
-        $('#region-one').append(info);
+        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
     });
     $.getJSON(FEED_BOOKS_FEATURED_NONFIC, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(data);
+        $('#region-one').append(info);
+    });
+    $.getJSON(FEED_BOOKS_ADULTS_DISPLAY, function(data) {
+        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+        var info = template(data);
+        $('#region-one').append(info);
+    });
+    $.getJSON(FEED_BOOKS_ADULTS_CLUBKITS, function(data) {
+        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+        var info = template(data);
+        $('#region-one').append(info);
+    });
+    $.getJSON(FEED_BOOKS_ADULTS_BUSINESS, function(data) {
+        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
     });
