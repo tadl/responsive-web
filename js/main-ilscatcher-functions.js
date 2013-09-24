@@ -25,37 +25,15 @@ function loadmore() {
     });
 }
 
-function getsearch(query, mt, avail, location) {
-    state = History.getState();
-    var searchquery = state.data.query;
-    var mediatype = state.data.mt;
-    var available = state.data.avail;
-    var loc = state.data.location;
-    linked_search = "true";
-    if (available === "true") {
-        $('#available').prop('checked', true);
-    } else {
-        $('#available').prop('checked', false);
-    }
-    $("#mediatype").val(decodeURIComponent(mediatype));
-    $("#term").val(decodeURIComponent(searchquery));
-    $("#location").val(decodeURIComponent(loc));
-    var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc; 
-    var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate}
-    History.pushState(action, psTitle + "Search", newstate);
-    getResults();
-}
 
 
-
-function getResults() {      
+function getResults(query, mt, avail, location) {      
     cleanhouse();
     pagecount = 0;
-    state = History.getState();
-    var searchquery = state.data.query;
-    var mediatype = state.data.mt;
-    var available = state.data.avail;
-    var loc = state.data.location;
+    var searchquery = query;
+    var mediatype = mt;
+    var available = avail;
+    var loc = location;
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
@@ -68,8 +46,9 @@ function getResults() {
     }
     var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
     var mediatypedecode = decodeURIComponent(mediatype);
-    $('#search-params').show();
     $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+    $('#search-params').show();
+  
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
         var results = data.message;
         linked_search = "false";
@@ -92,14 +71,14 @@ function getResults() {
     mylist();
 }
 
-function facetsearch() {
+function facetsearch(query, mt, avail, location, facet) {
     state = History.getState();
     pagecount = 0;
-    var facet = state.data.ft;
-    var searchquery = state.data.query;
-    var mediatype = state.data.mt;
-    var available = state.data.avail;
-    var loc = state.data.location;
+    var facet = facet;
+    var searchquery = query;
+    var mediatype = mt;
+    var available = avail;
+    var loc = location;
     if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
@@ -255,7 +234,7 @@ function hold(record_id) {
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
     $.getJSON(ILSCATCHER_BASE + '/main/hold.json?u='+ username +'&pw=' + password + '&record_id=' + record_id, function(data) {
-        var message = data[':message'];
+        var message = data[':message'].replace("Placing this hold could result in longer wait times.", "Unavailable for pick-up at your location.");
         var success = false;
         var button_id = '#place_hold_' + record_id;
         var hold_message = '#hold_message_' + record_id;
@@ -546,7 +525,7 @@ function multi_hold(record_ids) {
   
       $.each(data.items, function (index, value) {
       var message_div = '#multi_hold_message_'+this.record_id;
-      var status = this.message;
+      var status = this.message.replace("Placing this hold could result in longer wait times.", "Unavailable for pick-up at your location.");
       $(message_div).html(status);
  
       

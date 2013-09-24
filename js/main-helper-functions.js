@@ -68,7 +68,7 @@ function facetstartsearch(facet) {
     var mediatype = state.data.mt;
     var available = state.data.avail;
     var loc = state.data.location;
-    var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+facet; 
+    var newstate = 'search-facets/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+facet; 
     var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate, ft:facet}
     History.pushState(action, psTitle + "Search", newstate);
 }
