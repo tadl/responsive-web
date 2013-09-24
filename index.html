@@ -63,6 +63,8 @@
             .route(BASE_URL + '#music', showMusicPage)
             .route(BASE_URL + 'video', showVideoPage)
             .route(BASE_URL + '#video', showVideoPage)
+            .route(BASE_URL + 'online', showOnlinePage)
+            .route(BASE_URL + '#online', showOnlinePage)
             .route(BASE_URL + 'youth', showYouthPage)
             .route(BASE_URL + '#youth', showYouthPage)
             .route(BASE_URL + 'teens', showTeensPage)
@@ -108,6 +110,7 @@
         <a class="pointer" onclick="load('books');$('#nav_list').trigger('click');">Books</a>
         <a class="pointer" onclick="load('music');$('#nav_list').trigger('click');">Music</a>
         <a class="pointer" onclick="load('video');$('#nav_list').trigger('click');">Video</a>
+        <a class="pointer" onclick="load('online');$('#nav_list').trigger('click');">Online</a>
         <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a href="#">Events</a>
@@ -118,13 +121,13 @@
     </nav>
     <header class="searchbar card">
         <div class="grid-container">
-            <div class="mobile-grid-10 menu hide-on-tablet hide-on-desktop">
+            <div class="mobile-grid-10 tablet-grid-5 grid-5 menu ">
                 <div id="nav_list">Show/Hide Navigation Menu</div>
             </div>
-            <div class="tablet-grid-5 grid-5 hide-on-mobile">
+            <div class="tablet-grid-5 grid-5 mobile-grid-10 menu">
                 <img src="img/logo1.png" class="icon logo"/>
             </div>
-            <div class="grid-80 tablet-grid-80 mobile-grid-55">
+            <div class="grid-75 tablet-grid-75 mobile-grid-45">
                 <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-10">
