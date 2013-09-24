@@ -63,8 +63,6 @@
             .route(BASE_URL + '#music', showMusicPage)
             .route(BASE_URL + 'video', showVideoPage)
             .route(BASE_URL + '#video', showVideoPage)
-            .route(BASE_URL + 'adults', showAdultsPage)
-            .route(BASE_URL + '#adults', showAdultsPage)
             .route(BASE_URL + 'youth', showYouthPage)
             .route(BASE_URL + '#youth', showYouthPage)
             .route(BASE_URL + 'teens', showTeensPage)
@@ -110,7 +108,6 @@
         <a class="pointer" onclick="load('books');$('#nav_list').trigger('click');">Books</a>
         <a class="pointer" onclick="load('music');$('#nav_list').trigger('click');">Music</a>
         <a class="pointer" onclick="load('video');$('#nav_list').trigger('click');">Video</a>
-        <a class="pointer" onclick="load('adults');$('#nav_list').trigger('click');">Adults</a>
         <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a href="#">Events</a>
@@ -190,7 +187,7 @@
                     <a class="button wide large yellow" id="link-video" onclick="load('video');"><span>Video</span></a>
                 </div>
                 <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
-                    <a class="button wide large green" id="link-adults" onclick="load('adults');"><span>Adults</span></a>
+                    <a class="button wide large green" id="link-online" onclick="load('online');"><span>Online</span></a>
                 </div>
                 <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                     <a class="button wide large blue" id="link-youth" onclick="load('youth');"><span>Youth</span></a>
@@ -472,11 +469,11 @@
 <script id="showfeaturednews-template" type="text/template">
     {{#nodes}}
         <div class="card">
-            <img class="pointer" src="{{node.image}}" onclick="unhide('{{node.nid}}')" />
+            <img src="{{node.image}}" />
             <div class="grid-container">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 pointer" onclick="unhide('{{node.nid}}')">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
-                    <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright"><span>read story</span></a>
+                    <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span id="{{node.nid}}" style="display:none;">
