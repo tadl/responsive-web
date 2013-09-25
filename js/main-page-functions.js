@@ -1,46 +1,83 @@
 /* Feeds for Books page */
-var FEED_BOOKS_FEATURED_FICTION = 'https://www.tadl.org/mobile/export/items/67/json'; //left
-var FEED_BOOKS_FEATURED_NONFIC = 'https://www.tadl.org/mobile/export/items/68/json'; //left
-var FEED_BOOKS_BOOKLISTS = 'https://www.tadl.org/export/node/json/80'; //top-middle
-var FEED_BOOKS_REVIEWS = 'https://www.tadl.org/export/reviews/Books/json'; //bottom-middle
-var FEED_BOOKS_ADULTS_DISPLAY = 'https://www.tadl.org/mobile/export/items/45/all/json'; //left
-var FEED_BOOKS_ADULTS_CLUBKITS = 'https://www.tadl.org/mobile/export/items/224/all/json'; //left
-var FEED_BOOKS_ADULTS_BUSINESS = 'https://www.tadl.org/mobile/export/items/234/all/json'; //left
+var FEED_BOOKS_FEATURED_FICTION = 'https://www.tadl.org/mobile/export/items/67/json';
+var FEED_BOOKS_FEATURED_NONFIC = 'https://www.tadl.org/mobile/export/items/68/json';
+var FEED_BOOKS_BOOKLISTS = 'https://www.tadl.org/export/node/json/80';
+var FEED_BOOKS_REVIEWS = 'https://www.tadl.org/export/reviews/Books/json';
+var FEED_BOOKS_ADULTS_DISPLAY = 'https://www.tadl.org/mobile/export/items/45/all/json';
+var FEED_BOOKS_ADULTS_CLUBKITS = 'https://www.tadl.org/mobile/export/items/224/all/json';
+var FEED_BOOKS_ADULTS_BUSINESS = 'https://www.tadl.org/mobile/export/items/234/all/json';
 
 /* Feeds for Music page */
-var FEED_MUSIC_NEW = 'https://www.tadl.org/mobile/export/items/29/json'; //left
-var FEED_MUSIC_HOT = 'https://www.tadl.org/mobile/export/items/31/json'; //left
-var FEED_MUSIC_REVIEWS = 'https://www.tadl.org/export/reviews/Music/json'; //bottom-middle
-var FEED_MUSIC_LINKS = 'https://www.tadl.org/export/node/json/113'; //top-middle
+var FEED_MUSIC_NEW = 'https://www.tadl.org/mobile/export/items/29/json';
+var FEED_MUSIC_HOT = 'https://www.tadl.org/mobile/export/items/31/json';
+var FEED_MUSIC_REVIEWS = 'https://www.tadl.org/export/reviews/Music/json';
+var FEED_MUSIC_LINKS = 'https://www.tadl.org/export/node/json/113';
 
 /* Feeds for Video page */
-var FEED_VIDEO_NEW = 'https://www.tadl.org/mobile/export/items/32/json'; //left
-var FEED_VIDEO_HOT = 'https://www.tadl.org/mobile/export/items/34/json'; //left
-var FEED_VIDEO_TCFF = 'https://www.tadl.org/mobile/export/items/165/all/json'; //left
-var FEED_VIDEO_MET = 'https://www.tadl.org/mobile/export/items/286/all/json'; //left
-var FEED_VIDEO_REVIEWS = 'https://www.tadl.org/export/reviews/Video/json'; //middle
+var FEED_VIDEO_NEW = 'https://www.tadl.org/mobile/export/items/32/json';
+var FEED_VIDEO_HOT = 'https://www.tadl.org/mobile/export/items/34/json';
+var FEED_VIDEO_TCFF = 'https://www.tadl.org/mobile/export/items/165/all/json';
+var FEED_VIDEO_MET = 'https://www.tadl.org/mobile/export/items/286/all/json';
+var FEED_VIDEO_REVIEWS = 'https://www.tadl.org/export/reviews/Video/json';
 
 /* Feeds for Online page */
-var FEED_ONLINE_MEL = 'https://www.tadl.org/export/node/json/3373'; //middle-middle
-var FEED_ONLINE_RESOURCES = 'https://www.tadl.org/export/node/json/3372'; //top-middle
-var FEED_ONLINE_LEGAL = 'https://www.tadl.org/export/node/json/25242'; //middle-middle
-var FEED_ONLINE_EBOOKS = 'https://www.tadl.org/export/node/json/14040'; //???
+var FEED_ONLINE_MEL = 'https://www.tadl.org/export/node/json/3373';
+var FEED_ONLINE_RESOURCES = 'https://www.tadl.org/export/node/json/3372';
+var FEED_ONLINE_LEGAL = 'https://www.tadl.org/export/node/json/25242';
+var FEED_ONLINE_EBOOKS = 'https://www.tadl.org/export/node/json/14040';
 
 /* Feeds for Youth page */
-var FEED_YOUTH_DISPLAY = 'https://www.tadl.org/mobile/export/items/47/all/json'; //left
-var FEED_YOUTH_NEWBOOKS = 'https://www.tadl.org/mobile/export/items/52/json'; //left
-var FEED_YOUTH_REVIEWS = 'https://www.tadl.org/export/reviews/Youth/json'; //bottom-middle
-var FEED_YOUTH_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/27'; //right
-var FEED_YOUTH_RESOURCES = 'https://www.tadl.org/export/node/json/647'; //top-middle
-var FEED_YOUTH_AWARDWINS = 'https://www.tadl.org/export/node/json/644'; //middle-middle
+var FEED_YOUTH_DISPLAY = 'https://www.tadl.org/mobile/export/items/47/all/json';
+var FEED_YOUTH_NEWBOOKS = 'https://www.tadl.org/mobile/export/items/52/json';
+var FEED_YOUTH_REVIEWS = 'https://www.tadl.org/export/reviews/Youth/json';
+var FEED_YOUTH_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/27';
+var FEED_YOUTH_RESOURCES = 'https://www.tadl.org/export/node/json/647';
+var FEED_YOUTH_AWARDWINS = 'https://www.tadl.org/export/node/json/644';
 
 /* Feeds for Teens page */
-var FEED_TEENS_NEW = ''; //left
-var FEED_TEENS_ANIMANGA = ''; //left
-var FEED_TEENS_EVENTS = ''; //right
-var FEED_TEENS_REVIEWS = ''; //bottom-middle
-var FEED_TEENS_HOMEWORK = ''; //middle-middle
-var FEED_TEENS_LISTS = ''; //top-middle
+var FEED_TEENS_NEW = 'https://www.tadl.org/mobile/export/items/51/json';
+var FEED_TEENS_ANIMANGA = 'https://www.tadl.org/mobile/export/items/41/json';
+var FEED_TEENS_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/28';
+var FEED_TEENS_REVIEWS = 'https://www.tadl.org/export/reviews/Teens/json';
+var FEED_TEENS_HOMEWORK = 'https://www.tadl.org/export/node/json/409';
+var FEED_TEENS_LISTS = 'https://www.tadl.org/export/node/json/12784';
+
+function showTeensPage() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    $.getJSON(FEED_TEENS_NEW, function(data) {
+        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(data);
+        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+    });
+    $.getJSON(FEED_TEENS_ANIMANGA, function(data) {
+        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(data);
+        $('#region-one').append(info);
+    });
+    $.getJSON(FEED_TEENS_HOMEWORK, function(data) {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(data);
+        $('#region-two').prepend(info);
+    });
+    $.getJSON(FEED_TEENS_LISTS, function(data) {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(data);
+        $('#region-two').prepend(info);
+    });
+    $.getJSON(FEED_TEENS_EVENTS, function(data) {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(data);
+        $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    });
+    $.getJSON(FEED_TEENS_REVIEWS, function(data) {
+        var template = Handlebars.compile($('#showreviews-template').html());
+        var info = template(data);
+        $('#region-two').append(info);
+        $('#working').hide().spin(false);
+    });
+}
 
 function showOnlinePage() {
     cleanhouse();
@@ -105,9 +142,6 @@ function showYouthPage() {
     });
 }
 
-function showTeensPage() {
-}
-
 function showVideoPage() {
     cleanhouse();
     cleandivs();
@@ -132,7 +166,7 @@ function showVideoPage() {
         var info = template(data);
         $('#region-one').append(info);
     });
-    $.getJSON(EVENTS_URL, function(data) { // Events (something else should go here)
+    $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
         $('#region-three').html(info);
@@ -201,7 +235,7 @@ function showBooksPage() {
         var info = template(data);
         $('#region-one').append(info);
     });
-    $.getJSON(EVENTS_URL, function(data) { // Events (something else should go here)
+    $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
         var info = template(data);
         $('#region-three').html(info);
