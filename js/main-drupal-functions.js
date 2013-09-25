@@ -149,7 +149,6 @@ function locHoursAndInfo(loc) {
         var template = Handlebars.compile($('#locationinfo-template').html());
         var info = template(data);
         $('#locinfo').html(info).show();
-        $('#working').hide().spin(false);
     } else {
         $.getJSON(LOCATION_BASE + loc, function(data) {
             var template = Handlebars.compile($('#locationinfo-template').html());

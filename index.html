@@ -580,24 +580,25 @@
 
 <!-- updated for unsemantic -->
 <script id="showevents-template" type="text/template">
-
     {{#each_upto nodes 10}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-35 tablet-grid-35 pointer" onclick="unhide({{node.nid}})">
+                <div class="grid-35 tablet-grid-35">
                     {{#if node.image}}
                         <img class="result_img" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
                 </div>
-                <div class="grid-65 tablet-grid-65 pointer" onclick="unhide({{node.nid}})">
+                <div class="grid-65 tablet-grid-65">
                     <span class="cardtitle">{{node.title}}</span><br/>
                     <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
                 </div>
                 <div class="clearfix"></div>
-                <div class="grid-100">
-                    <span id="more{{node.nid}}" class="viewmore pointer" onclick="unhide({{node.nid}})">more details</span>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div class="padtop">
+                        <a id="more{{node.nid}}" class="button verysmall tadlblue" onclick="unhide({{node.nid}})"><span>view details</span></a>
+                    </div>
                     <span id="{{node.nid}}" style="display:none;">{{{node.body}}}</span>
                 </div>
             </div>
