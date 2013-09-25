@@ -50,11 +50,13 @@ function showTeensPage() {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
     });
     $.getJSON(FEED_TEENS_ANIMANGA, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(FEED_TEENS_HOMEWORK, function(data) {
         var template = Handlebars.compile($('#drupalnode-template').html());
@@ -123,11 +125,13 @@ function showYouthPage() {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').prepend(info);
+        applyTips();
     });
     $.getJSON(FEED_YOUTH_NEWBOOKS, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
     });
     $.getJSON(FEED_YOUTH_EVENTS, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
@@ -150,21 +154,25 @@ function showVideoPage() {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
     });
     $.getJSON(FEED_VIDEO_HOT, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').prepend(info);
+        applyTips();
     });
     $.getJSON(FEED_VIDEO_MET, function(data) {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(FEED_VIDEO_TCFF, function(data) {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
@@ -187,11 +195,13 @@ function showMusicPage() {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
     });
     $.getJSON(FEED_MUSIC_HOT, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(FEED_MUSIC_LINKS, function(data) {
         var template = Handlebars.compile($('#drupalnode-template').html());
@@ -214,26 +224,31 @@ function showBooksPage() {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
     });
     $.getJSON(FEED_BOOKS_FEATURED_NONFIC, function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(FEED_BOOKS_ADULTS_DISPLAY, function(data) {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(FEED_BOOKS_ADULTS_CLUBKITS, function(data) {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(FEED_BOOKS_ADULTS_BUSINESS, function(data) {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        applyTips();
     });
     $.getJSON(EVENTS_URL, function(data) {
         var template = Handlebars.compile($('#showevents-template').html());
@@ -260,17 +275,20 @@ function showHomePage() {
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
-        $('#region-three').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
     });
     $.getJSON('https://www.tadl.org/mobile/export/items/68/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-three').append(info);
+        applyTips();
     });
     $.getJSON('https://www.tadl.org/mobile/export/items/29/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
         $('#region-three').append(info);
+        applyTips();
     });
     $.getJSON(NEWS_URL, function(data) {
         var template = Handlebars.compile($('#showfeaturednews-template').html());

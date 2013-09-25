@@ -13,6 +13,7 @@
     <![endif]-->
     <link rel="stylesheet" href="css/unsemantic-grid-base.css" />
     <link rel="stylesheet" href="css/jquery.dropdown.css" />
+    <link rel="stylesheet" href="css/jquery.cluetip.css" />
     <link rel="stylesheet" href="css/buttons.css" />
     <link rel="stylesheet" href="css/navmenu.css" />
     <link rel="stylesheet" href="css/main.css" />
@@ -38,6 +39,8 @@
     <script type="text/javascript" src="js/application.js"></script>
     <script type="text/javascript" src="js/jquery.dateFormat-1.0.js"></script>
     <script type="text/javascript" src="js/jquery.history.js"></script>
+    <script type="text/javascript" src="js/jquery.cluetip.min.js"></script>
+    <script type="text/javascript" src="js/jquery.hoverIntent.minified.js"></script>
     <script type="text/javascript" src="js/handlebars.js"></script>
     <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
     <script type="text/javascript" src="js/jquery.dropdown.min.js"></script>
@@ -496,7 +499,7 @@
                 {{/each_upto}}
                 {{#each_upto nodes 4}}
                     <div class="img-viewer pointer" onclick="loadlist({{node.termid}})">
-                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" class="tips" title="<div class='grid-container'><div class='grid-100'><img class='padtop' src='https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}'/><br/><span class='cardtitle'>{{node.title}}</span><br/>{{#if node.author}}<span class='subtitle'>{{node.author}}</span>{{/if}}</div></div>"/>
                     </div>
                 {{/each_upto}}
             </div>
@@ -513,7 +516,7 @@
                 {{/each_upto}}
                 {{#each_upto nodes 4}}
                     <div class="img-viewer pointer" onclick="showitemlistall({{node.termid}})">
-                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" class="tips" title="<div class='grid-container'><div class='grid-100'><img class='padtop' src='https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}'/><br/><span class='cardtitle'>{{node.title}}</span><br/>{{#if node.author}}<span class='subtitle'>{{node.author}}</span>{{/if}}</div></div>"/>
                     </div>
                 {{/each_upto}}
             </div>
