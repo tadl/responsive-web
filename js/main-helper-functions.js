@@ -37,8 +37,8 @@ $(document).ready(function() {
     });
 
     if (window.localStorage.getItem('location') == null) {
-        window.localStorage.setItem('location', 'wood');
-        locHoursAndInfo('wood');
+        window.localStorage.setItem('location', 'tadl');
+        locHoursAndInfo('tadl');
     } else {
         locHoursAndInfo(window.localStorage.getItem('location'));
     }
