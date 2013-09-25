@@ -89,7 +89,7 @@
             .route(BASE_URL + 'featurednews', showfeaturednews)
             .route(BASE_URL + '#search/:query/:mt/:avail/:location', getResults)
             .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
-            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:facet', facetsearch)
+            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_id', showitemlist)
             .route(BASE_URL + '#./item/:record_id', viewitem)
             .route(BASE_URL + 'item/:record_id', viewitem)
@@ -716,6 +716,7 @@
     <div class="card">
         <p><span class="cardtitle">Manage Book Bag</span></p>
        <a id="multi-pre-hold" class="button green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a>
+       <a id="empty-bag-button" class="button blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
     </div>
 </script>
 

@@ -139,7 +139,6 @@ function facebookfeed() {
 }
 
 function locHoursAndInfo(loc) {
-    cleanhouse();
     window.localStorage.setItem('location', loc);
     $('#locinfo').hide();
     $('#working').show().spin('default');
