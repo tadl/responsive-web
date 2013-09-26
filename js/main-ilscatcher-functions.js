@@ -1,16 +1,18 @@
 function loadmore() {
     pagecount++;
     state = History.getState();
-    var searchquery = state.data.query;
-    var mediatype = state.data.mt;
-    var available = state.data.avail;
-    var loc = state.data.location;
-    var facet = state.data.ft;
+    var searchquery = window.localStorage.getItem('query');
+    var mediatype = window.localStorage.getItem('mt');
+    var available = window.localStorage.getItem('avail');
+    var loc = window.localStorage.getItem('loc');
+    var facet = window.localStorage.getItem('facet');
+    
+    
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $('#loadmoretext').trigger("create");
     $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet, function(data) {
         var results = data.message
-        if (state.data.action === "getsearch" && state.data.query === searchquery && state.data.mt === mediatype && state.data.avail === available && state.data.location === loc)  {
+         
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var info = template(data);
@@ -21,7 +23,7 @@ function loadmore() {
             } else {
                 $('#loadmoretext').html("No Further Results");
             }
-        }
+        
     });
 }
 
@@ -34,6 +36,11 @@ function getResults(query, mt, avail, location) {
     var mediatype = mt;
     var available = avail;
     var loc = location;
+    window.localStorage.setItem('query', searchquery);
+    window.localStorage.setItem('mt', mediatype);
+    window.localStorage.setItem('avail', available);
+    window.localStorage.setItem('loc', location);
+    
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
@@ -79,6 +86,11 @@ function facetsearch(query, mt, avail, location, facet) {
     var mediatype = mt;
     var available = avail;
     var loc = location;
+    window.localStorage.setItem('facet', facet);
+    window.localStorage.setItem('query', searchquery);
+    window.localStorage.setItem('mt', mediatype);
+    window.localStorage.setItem('avail', available);
+    window.localStorage.setItem('loc', loc);
     if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
