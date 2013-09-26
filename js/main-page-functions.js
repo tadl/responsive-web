@@ -211,7 +211,7 @@ function showMusicPage() {
     $.getJSON(FEED_MUSIC_REVIEWS, function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
-        $('#region-three').append(info);
+        $('#region-two').append(info);
         $('#working').hide().spin(false);
     });
 }
