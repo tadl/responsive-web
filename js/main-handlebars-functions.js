@@ -22,7 +22,6 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
     }
 });
 
-
 Handlebars.registerHelper('make_https', function(url, options) {
     var url = url;
     var https_url = url.replace(/^http:/, 'https:');
@@ -30,12 +29,10 @@ Handlebars.registerHelper('make_https', function(url, options) {
 });
 
 Handlebars.registerHelper('encode', function(data, options) {
-var data = data;
-var encode_data = data.replace(/'/g, "%27");
-return encode_data;
-
+    var data = data;
+    var encode_data = data.replace(/'/g, "%27");
+    return encode_data;
 });
-
 
 Handlebars.registerHelper('each_upto', function(ary, max, options) {
     if (!ary || ary.length == 0)

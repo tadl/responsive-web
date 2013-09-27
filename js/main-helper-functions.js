@@ -198,6 +198,18 @@ function load(page) {
             History.pushState(action, psTitle + separator + "Teens", page);
         } else if (page == 'governance') {
             History.pushState(action, psTitle + separator + "Governance", page);
+        } else if (page == 'woodmere') {
+            History.pushState(action, psTitle + separator + "Woodmere Main Branch Library", page);
+        } else if (page == 'kingsley') {
+            History.pushState(action, psTitle + separator + "Kingsley Branch Library", page);
+        } else if (page == 'eastbay') {
+            History.pushState(action, psTitle + separator + "East Bay Branch Library", page);
+        } else if (page == 'fifelake') {
+            History.pushState(action, psTitle + separator + "Fife Lake Public Library", page);
+        } else if (page == 'interlochen') {
+            History.pushState(action, psTitle + separator + "Interlochen Public Library", page);
+        } else if (page == 'peninsula') {
+            History.pushState(action, psTitle + separator + "Peninsula Community Library", page);
         }
     }
 }

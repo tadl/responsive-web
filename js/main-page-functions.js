@@ -42,6 +42,58 @@ var FEED_TEENS_REVIEWS = 'https://www.tadl.org/export/reviews/Teens/json';
 var FEED_TEENS_HOMEWORK = 'https://www.tadl.org/export/node/json/409';
 var FEED_TEENS_LISTS = 'https://www.tadl.org/export/node/json/12784';
 
+/* Feeds for Locations */
+var FEED_LOC_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/'; // add location id to end
+var FEED_LOC_NEWS = 'https://www.tadl.org/export/news/location/json/';
+/* infoboxes */
+var FEED_LOC_PCL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+var FEED_LOC_EBB_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+var FEED_LOC_KBL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+var FEED_LOC_IPL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+var FEED_LOC_FLPL_INFOBOX = 'https://www.tadl.org/export/node/json/578';
+var FEED_LOC_WOOD_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+/* item lists */
+var FEED_LOC_ITEMS_BASE = 'https://melcatcher....';
+var FEED_LOC_ITEMS_FLPL = 31323;
+var FEED_LOC_ITEMS_WOOD = 23523;
+var FEED_LOC_ITEMS_IPL = 14324;
+var FEED_LOC_ITEMS_KBL = 23524;
+var FEED_LOC_ITEMS_EBB = 23523;
+var FEED_LOC_ITEMS_PCL = 46233;
+
+function showWoodmere() {
+}
+function showEastBay() {
+}
+function showKingsley() {
+}
+function showInterlochen() {
+}
+function showPeninsula() {
+}
+function showFifeLake() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(data);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    });
+    $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(data);
+        $('#region-one').prepend(info);
+    });
+    $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(data);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+        $('#working').hide().spin(false);
+        hoursAndInfo('flpl');
+    });
+}
+
 function showTeensPage() {
     cleanhouse();
     cleandivs();
@@ -302,3 +354,4 @@ function showHomePage() {
         $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     });
 }
+

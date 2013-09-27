@@ -142,7 +142,6 @@ var LOCATION_BASE = 'https://www.tadl.org/mobile/export/locations/';
 function locHoursAndInfo(loc) {
     window.localStorage.setItem('location', loc);
     $('#locinfo').hide();
-    $('#working').show().spin('default');
     $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
     if (loc == 'tadl') {
         var data = {"nodes": [{"node": {"fullname": "Traverse Area District Library","shortname": "tadl","sunday": "12pm to 5pm","monday": "9am to 9pm","tuesday": "9am to 9pm","wednesday": "9am to 9pm","thursday": "9am to 9pm","friday": "9am to 6pm","saturday": "9am to 6pm","address": "610 Woodmere Ave","citystatezip": "Traverse City, MI 49686","phone": "(231) 932-8500","fax": "(231) 932-8538","email": "libadmin@tadl.org","libfirstname": "Traverse Area","liblastname": "District Library"}}]}
@@ -150,6 +149,7 @@ function locHoursAndInfo(loc) {
         var info = template(data);
         $('#locinfo').html(info).show();
     } else {
+        $('#working').show().spin('default');
         $.getJSON(LOCATION_BASE + loc, function(data) {
             var template = Handlebars.compile($('#locationinfo-template').html());
             var info = template(data);
@@ -157,6 +157,18 @@ function locHoursAndInfo(loc) {
             $('#working').hide().spin(false);
         });
     }
+}
+
+function hoursAndInfo(loc) {
+    $('#locinfo').hide();
+    $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
+    $('#working').show().spin('default');
+    $.getJSON(LOCATION_BASE + loc, function(data) {
+        var template = Handlebars.compile($('#locationinfo-template').html());
+        var info = template(data);
+        $('#locinfo').html(info).show();
+        $('#working').hide().spin(false);
+    });
 }
 
 function showNode(nid) {

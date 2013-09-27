@@ -72,6 +72,18 @@
             .route(BASE_URL + '#youth', showYouthPage)
             .route(BASE_URL + 'teens', showTeensPage)
             .route(BASE_URL + '#teens', showTeensPage)
+            .route(BASE_URL + 'woodmere', showWoodmere)
+            .route(BASE_URL + '#woodmere', showWoodmere)
+            .route(BASE_URL + 'kingsley', showKingsley)
+            .route(BASE_URL + '#kingsley', showKingsley)
+            .route(BASE_URL + 'eastbay', showEastBay)
+            .route(BASE_URL + '#eastbay', showEastBay)
+            .route(BASE_URL + 'fifelake', showFifeLake)
+            .route(BASE_URL + '#fifelake', showFifeLake)
+            .route(BASE_URL + 'interlochen', showInterlochen)
+            .route(BASE_URL + '#interlochen', showInterlochen)
+            .route(BASE_URL + 'peninsula', showPeninsula)
+            .route(BASE_URL + '#peninsula', showPeninsula)
             .route(BASE_URL + '#./events', showevents)
             .route(BASE_URL + 'events', showevents)
             .route(BASE_URL + '#./facebook', facebookfeed)
@@ -116,11 +128,11 @@
         <a class="pointer" onclick="load('online');$('#nav_list').trigger('click');">Online</a>
         <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
-        <a href="#">Events</a>
-        <a href="#">Reviews</a>
-        <a href="#">Policies</a>
-        <a href="#">Governance</a>
-        <a href="#">Etc...</a>
+        <a class="pointer" href="#">Events</a>
+        <a class="pointer" href="#">Reviews</a>
+        <a class="pointer" href="#">Policies</a>
+        <a class="pointer" href="#">Governance</a>
+        <a class="pointer" href="#">Etc...</a>
     </nav>
     <header class="searchbar card">
         <div class="grid-container">
@@ -476,12 +488,10 @@
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
                     <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
-                </div>
-                <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <span id="{{node.nid}}" style="display:none;">
+                    <div id="{{node.nid}}" style="display:none;">
                         {{{node.body}}}
                         <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
-                    </span><br/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -827,6 +837,19 @@
         <li><a onclick="locHoursAndInfo('ebb')">East Bay</a></li>
     </ul>
 </div>
-
+<!-- Piwik -->
+<script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["trackPageView"]);
+    _paq.push(["enableLinkTracking"]);
+    (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://www.tadl.org/piwik/";
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "12"]);
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Piwik Code -->
 </body>
 </html>
