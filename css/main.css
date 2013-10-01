@@ -615,3 +615,25 @@ input.search {
     min-height:250px;
     background:url(https://www.tadl.org/sites/all/themes/converge/images/footer-top-shadow.png) left top repeat-x;
 }
+
+.fancybox-type-iframe .fancybox-next {
+    right:-60px;
+}
+
+.fancybox-type-iframe .fancybox-prev {
+    left:-60px;
+}
+
+.fancybox-type-iframe .fancybox-nav {
+    width:60px;
+}
+
+.fancybox-type-iframe .fancybox-nav span {
+    visibility:visible;
+    opacity:0.5;
+}
+
+.fancybox-type-iframe .fancybox-nav:hover span {
+    opacity:1;
+}
+
