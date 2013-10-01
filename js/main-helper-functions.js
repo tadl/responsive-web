@@ -1,14 +1,19 @@
 $(document).ready(function() {
     router.perform();
+
     var state = History.getState();
     var check = state.data.action
+
     $('#term').keydown(function(event) {
         if (event.keyCode == 13) { startsearch(); }
     });
+
     $('#login_form').keydown(function(event) {
         if (event.keyCode == 13) { login(); }
     });
+
     $('#search').click(getResults);
+
     jQuery.support.cors = true;
 
     // pushmenu
@@ -55,6 +60,8 @@ $(document).ready(function() {
             timeout: 0
         }
     });
+
+    $('a[rel="lightframe"]').fancybox();
 });
 
 function startsearch() {

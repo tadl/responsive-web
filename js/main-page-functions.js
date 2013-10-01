@@ -172,6 +172,7 @@ function showYouthPage() {
         var template = Handlebars.compile($('#drupalnode-template').html());
         var info = template(data);
         $('#region-one').append(info);
+        $('a[rel="lightframe"]').fancybox({type: 'iframe'});
     });
     $.getJSON(FEED_YOUTH_DISPLAY, function(data) {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
@@ -311,6 +312,7 @@ function showBooksPage() {
         var template = Handlebars.compile($('#drupalnode-template').html());
         var info = template(data);
         $('#region-two').prepend(info);
+        $('a[rel="lightframe"]').fancybox({type: 'iframe'});
     });
     $.getJSON(FEED_BOOKS_REVIEWS, function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
