@@ -439,6 +439,10 @@ img.icon.logo {
     font-size: 14px;
 }
 
+.itembox {
+    max-width:240px;
+}
+
 .img-viewer {
     position:relative;
     float:left;

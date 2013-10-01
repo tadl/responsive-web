@@ -135,6 +135,13 @@
         <a class="pointer" href="#">Policies</a>
         <a class="pointer" href="#">Governance</a>
         <a class="pointer" href="#">Etc...</a>
+        <a class="pointer" href="#">wat</a>
+        <a class="pointer" href="#">is</a>
+        <a class="pointer" href="#">this</a>
+        <a class="pointer" href="#">i</a>
+        <a class="pointer" href="#">dont</a>
+        <a class="pointer" href="#">even</a>
+        <a class="pointer" href="#">because reasons</a>
     </nav>
     <header class="searchbar card">
         <div class="grid-container">
@@ -521,7 +528,7 @@
     <div class="card">
         {{#each_upto nodes 1}}
         <div class="grid-container pointer" onclick="loadlist({{node.termid}})">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
                     <h4 class="title pointer">{{node.term}}</h4>
                 {{/each_upto}}
                 {{#each_upto nodes 4}}
@@ -538,7 +545,7 @@
     <div class="card">
         {{#each_upto nodes 1}}
         <div class="grid-container pointer" onclick="showitemlistall({{node.termid}})">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
                     <h4 class="title pointer">{{node.term}}</h4>
                 {{/each_upto}}
                 {{#each_upto nodes 4}}
