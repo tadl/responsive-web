@@ -611,13 +611,17 @@ input.search {
 }
 
 #footer-wrapper {
-    min-height:250px;
     background:url(https://www.tadl.org/sites/all/themes/converge/images/footer-glow-bg.png) center top repeat-x;
 }
 
 #footer-container {
-    min-height:250px;
     background:url(https://www.tadl.org/sites/all/themes/converge/images/footer-top-shadow.png) left top repeat-x;
+    border-bottom:rgba(255,255,255,.20) 1px solid;
+    margin-bottom:20px;
+}
+
+#footer-pad {
+    min-height:50px;
 }
 
 .fancybox-type-iframe .fancybox-next {
@@ -641,3 +645,39 @@ input.search {
     opacity:1;
 }
 
+ul.footer-menu li {
+    background:url(https://www.tadl.org/sites/all/themes/converge/images/list-style-arrow.png) left center no-repeat;
+    padding: 6px 0 6px 14px;
+    list-style:none;
+    list-style-image:none;
+    text-align:left;
+    border-bottom:rgba(255,255,255,.20) 1px solid;
+}
+
+ul.footer-menu li.last {
+    border-bottom:none;
+}
+
+ul.footer-menu li a {
+    color:#f0f2f5;
+}
+
+ul.footer-top-menu li {
+    background:url(https://www.tadl.org/sites/all/themes/converge/images/list-style-arrow.png) left center no-repeat;
+    padding:0 15px;
+    display:inline;
+    list-style:none;
+    list-style-image:none;
+}
+
+ul.footer-top-menu li a {
+    color:#f1f5f3;
+}
+
+ul.footer-top-menu li.last {
+}
+
+h3.footer-heading {
+    padding-left:30px;
+    text-align:left;
+}
