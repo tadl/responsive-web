@@ -369,35 +369,5 @@ function showHomePage() {
 // loadNodes({left: 24241, right: 4241, middle: 13531});
 //
 
-function loadNodes(nodes) {
-    if (nodes !== null) {
-        cleanhouse();
-        cleandivs();
-        $('#working').show().spin('default');
-        if (nodes.left != null) {
-            $.getJSON(NODEPREFIX + nodes.left, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
-                var info = template(data);
-                $('#region-one').append(info);
-            });
-        }
-        if (nodes.middle != null) {
-            $.getJSON(NODEPREFIX + nodes.middle, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
-                var info = template(data);
-                $('#region-two').append(info);
-            });
-        }
-        if (nodes.right != null) {
-            $.getJSON(NODEPREFIX + nodes.right, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
-                var info = template(data);
-                $('#region-three').append(info);
-                $('#working').hide().spin(false);
-            });
-        }
-    }
-}
-
 // governance: loadNodes({left:573, middle:7180, right:577})
 //

@@ -240,6 +240,38 @@ function loadlist(list) {
     };
 }
 
+function loadNodes(nodes) {
+    console.log(nodes);
+    if (nodes !== null) {
+        cleanhouse();
+        cleandivs();
+        $('#working').show().spin('default');
+        if (nodes.left != null) {
+            $.getJSON(NODEPREFIX + nodes.left, function(data) {
+                var template = Handlebars.compile($('#drupalnode-template').html());
+                var info = template(data);
+                $('#region-one').append(info);
+            });
+        }
+        if (nodes.middle != null) {
+            $.getJSON(NODEPREFIX + nodes.middle, function(data) {
+                var template = Handlebars.compile($('#drupalnode-template').html());
+                var info = template(data);
+                $('#region-two').append(info);
+            });
+        }
+        if (nodes.right != null) {
+            $.getJSON(NODEPREFIX + nodes.right, function(data) {
+                var template = Handlebars.compile($('#drupalnode-template').html());
+                var info = template(data);
+                $('#region-three').append(info);
+                $('#working').hide().spin(false);
+            });
+        }
+    }
+}
+
+
 $.fn.spin.presets.default = {
     lines: 13,
     length: 15,
