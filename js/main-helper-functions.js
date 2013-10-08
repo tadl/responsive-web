@@ -240,6 +240,21 @@ function loadlist(list) {
     };
 }
 
+// examples of what to pass to the following loadNodes func:
+// 
+// var nodes = {};
+// nodes['left'] = 24241;
+// nodes['right'] = 4241;
+// nodes['middle'] = 13532;
+// loadNodes(nodes);
+//
+// alternately:
+// loadNodes({left: 24241, right: 4241, middle: 13531});
+//
+
+// governance: loadNodes({left:573, middle:7180, right:577})
+//
+
 function loadNodes(nodes) {
     console.log(nodes);
     if (nodes !== null) {

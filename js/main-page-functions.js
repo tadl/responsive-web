@@ -359,15 +359,3 @@ function showHomePage() {
     });
 }
 
-// var nodes = {};
-// nodes['left'] = 24241;
-// nodes['right'] = 4241;
-// nodes['middle'] = 13532;
-// loadNodes(nodes);
-//
-// alternately:
-// loadNodes({left: 24241, right: 4241, middle: 13531});
-//
-
-// governance: loadNodes({left:573, middle:7180, right:577})
-//
