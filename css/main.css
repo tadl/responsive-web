@@ -544,7 +544,7 @@ input.search {
 
 .back-to-top {
     position: fixed;
-    bottom: 60px;
+    bottom: 15px;
     left: 15px;
     text-decoration: none;
     color: #000000;

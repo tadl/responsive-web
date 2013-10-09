@@ -59,64 +59,38 @@
   	    var router = new staterouter.Router();
         // Configure routes
         router
-            .route(BASE_URL + '', showHomePage)
+            .route(BASE_URL, showHomePage)
             .route(BASE_URL + 'home', showHomePage)
-            .route(BASE_URL + '#./', showHomePage)
             .route(BASE_URL + 'books', showBooksPage)
-            .route(BASE_URL + '#books', showBooksPage)
             .route(BASE_URL + 'music', showMusicPage)
-            .route(BASE_URL + '#music', showMusicPage)
             .route(BASE_URL + 'video', showVideoPage)
-            .route(BASE_URL + '#video', showVideoPage)
             .route(BASE_URL + 'online', showOnlinePage)
-            .route(BASE_URL + '#online', showOnlinePage)
             .route(BASE_URL + 'youth', showYouthPage)
-            .route(BASE_URL + '#youth', showYouthPage)
             .route(BASE_URL + 'teens', showTeensPage)
-            .route(BASE_URL + '#teens', showTeensPage)
             .route(BASE_URL + 'woodmere', showWoodmere)
-            .route(BASE_URL + '#woodmere', showWoodmere)
             .route(BASE_URL + 'kingsley', showKingsley)
-            .route(BASE_URL + '#kingsley', showKingsley)
             .route(BASE_URL + 'eastbay', showEastBay)
-            .route(BASE_URL + '#eastbay', showEastBay)
             .route(BASE_URL + 'fifelake', showFifeLake)
-            .route(BASE_URL + '#fifelake', showFifeLake)
             .route(BASE_URL + 'interlochen', showInterlochen)
-            .route(BASE_URL + '#interlochen', showInterlochen)
             .route(BASE_URL + 'peninsula', showPeninsula)
-            .route(BASE_URL + '#peninsula', showPeninsula)
-            .route(BASE_URL + '#./events', showevents)
             .route(BASE_URL + 'events', showevents)
-            .route(BASE_URL + '#./facebook', facebookfeed)
             .route(BASE_URL + 'facebook', facebookfeed)
-            .route(BASE_URL + '#./locations', showlocations)
             .route(BASE_URL + 'locations', showlocations)
-            .route(BASE_URL + '#./card', showcard)
             .route(BASE_URL + 'card', showcard)
-            .route(BASE_URL + '#./pickup', showpickups)
             .route(BASE_URL + 'pickup', showpickups)
-            .route(BASE_URL + '#./holds', showholds)
             .route(BASE_URL + 'holds', showholds)
-            .route(BASE_URL + '#./checkout', showcheckouts)
             .route(BASE_URL + 'checkout', showcheckouts)
-            .route(BASE_URL + '#./featured', showfeatureditembox)
             .route(BASE_URL + 'featured', showfeatureditembox)
-            .route(BASE_URL + '#./featurednews', showfeaturednews)
             .route(BASE_URL + 'featurednews', showfeaturednews)
-            .route(BASE_URL + '#search/:query/:mt/:avail/:location', getResults)
             .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_id', showitemlist)
-            .route(BASE_URL + '#./item/:record_id', viewitem)
             .route(BASE_URL + 'item/:record_id', viewitem)
             .route(BASE_URL + 'node/:nid', showNode)
-            .route(BASE_URL + '#node/:nid', showNode)
-            .route(BASE_URL + '#./reviews', showreviews)
+            .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
-            .route(BASE_URL + '#./reviews/:review_type', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
-            .route(BASE_URL + 'governance', loadNodes({left:573, middle:7180, right:577}))
+//            .route(BASE_URL + 'governance', loadNodes({left:573, middle:7180, right:577}))
             ;
     </script>
 </head>
@@ -133,8 +107,8 @@
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a class="pointer" href="#">Events</a>
         <a class="pointer" href="#">Reviews</a>
-        <a class="pointer" href="#">Policies</a>
-        <a class="pointer" href="#">Governance</a>
+        <a class="pointer" href="node/338">Policies</a>
+        <a class="pointer" href="page/governance">Governance</a>
         <a class="pointer" href="#">Etc...</a>
         <a class="pointer" href="#">wat</a>
         <a class="pointer" href="#">is</a>
@@ -259,63 +233,64 @@
             <div class="grid-container" id="footer-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
                     <ul id="footer-top-menu" class="footer-top-menu">
-                        <li class="first"><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li class="last"><a href="node/141432">Menu item</a></li>
+                        <li class="first"><a href="node/141432">East Bay</a></li>
+                        <li><a href="node/141432">Fife Lake</a></li>
+                        <li><a href="node/141432">Interlochen</a></li>
+                        <li><a href="node/141432">Kingsley</a></li>
+                        <li><a href="node/141432">Peninsula</a></li>
+                        <li class="last"><a href="node/141432">Woodmere</a></li>
                     </ul>
                 </div>
                 <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
                     <h3 class="footer-heading">About Us</h3>
                     <ul id="footer-left-menu" class="footer-menu">
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li class="last"><a href="node/141432">Menu item</a></li>
+                        <li><a href="node/338">Policies</a></li>
+                        <li><a href="node/141432">Director</a></li>
+                        <li><a href="page/governance">Governance</a></li>
+                        <li><a href="node/7180">Board Meetings</a></li>
+                        <li><a href="node/314">Volunteer</a></li>
+                        <li><a href="node/752">Employment</a></li>
+                        <li><a href="node/5439">Holiday Hours</a></li>
+                        <li class="last"><a href="node/745">Locations & Hours</a></li>
                     </ul>
                 </div>
                 <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
                     <h3 class="footer-heading">Services</h3>
                     <ul id="footer-middle-left-menu" class="footer-menu">
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li class="last"><a href="node/141432">Menu item</a></li>
+                        <li><a href="node/141432">Talking Book Library</a></li>
+                        <li><a href="node/141432">Public Computing</a></li>
+                        <li><a href="node/141432">Meeting Rooms</a></li>
+                        <li><a href="node/141432">Interlibrary Loans</a></li>
+                        <li><a href="node/141432">Notary Public</a></li>
+                        <li><a href="node/141432">Genealogical Research</a></li>
+                        <li><a href="node/141432">Power Meter Lending</a></li>
+                        <li class="last"><a href="node/141432">SCORE Small Business</a></li>
                     </ul>
                 </div>
                 <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
                     <h3 class="footer-heading">Features</h3>
                     <ul id="footer-middle-right-menu" class="footer-menu">
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
+                        <li><a href="node/141432">District News</a></li>
+                        <li><a href="node/141432">Staff Reviews</a></li>
+                        <li><a href="node/141432">Legal Resources</a></li>
+                        <li><a href="node/141432">Exhibit</a></li>
+                        <li><a href="node/141432">Local History Collection</a></li>
+                        <li><a href="http://www.tadl.org/stats">Statistics Dashboard</a></li>
+                        <li><a href="node/745">Newsletter</a></li>
                         <li class="last"><a href="node/141432">Menu item</a></li>
                     </ul>
                 </div>
                 <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
                     <h3 class="footer-heading">Why so many links</h3>
                     <ul id="footer-right-menu" class="footer-menu">
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li><a href="node/141432">Menu item</a></li>
-                        <li class="last"><a href="node/141432">Menu item</a></li>
+                        <li><a href="node/141432">Something</a></li>
+                        <li><a href="node/141432">Else</a></li>
+                        <li><a href="node/141432">Should</a></li>
+                        <li><a href="node/141432">Go</a></li>
+                        <li><a href="node/141432">Here</a></li>
+                        <li><a href="node/141432">I</a></li>
+                        <li><a href="node/141432">Think</a></li>
+                        <li class="last"><a href="node/141432">Perhaps</a></li>
                     </ul>
                 </div>
             </div>

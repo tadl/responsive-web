@@ -190,34 +190,41 @@ function load(page) {
         cleandivs();
         var action = {action:page}
         if (page == 'home') {
-            History.pushState(action, psTitle + separator + "Home", page);
+            var title = psTitle + separator + "Home";
         } else if (page == 'books') {
-            History.pushState(action, psTitle + separator + "Books", page);
+            var title = psTitle + separator + "Books";
         } else if (page == 'music') {
-            History.pushState(action, psTitle + separator + "Music", page);
+            var title = psTitle + separator + "Music";
         } else if (page == 'video') {
-            History.pushState(action, psTitle + separator + "Video", page);
+            var title = psTitle + separator + "Video";
         } else if (page == 'online') {
-            History.pushState(action, psTitle + separator + "Online", page);
+            var title = psTitle + separator + "Online";
         } else if (page == 'youth') {
-            History.pushState(action, psTitle + separator + "Youth", page);
+            var title = psTitle + separator + "Youth";
         } else if (page == 'teens') {
-            History.pushState(action, psTitle + separator + "Teens", page);
-        } else if (page == 'governance') {
-            History.pushState(action, psTitle + separator + "Governance", page);
+            var title = psTitle + separator + "Teens";
         } else if (page == 'woodmere') {
-            History.pushState(action, psTitle + separator + "Woodmere Main Branch Library", page);
+            var title = psTitle + separator + "Woodmere Main Branch Library";
         } else if (page == 'kingsley') {
-            History.pushState(action, psTitle + separator + "Kingsley Branch Library", page);
+            var title = psTitle + separator + "Kingsley Branch Library";
         } else if (page == 'eastbay') {
-            History.pushState(action, psTitle + separator + "East Bay Branch Library", page);
+            var title = psTitle + separator + "East Bay Branch Library";
         } else if (page == 'fifelake') {
-            History.pushState(action, psTitle + separator + "Fife Lake Public Library", page);
+            var title = psTitle + separator + "Fife Lake Public Library";
         } else if (page == 'interlochen') {
-            History.pushState(action, psTitle + separator + "Interlochen Public Library", page);
+            var title = psTitle + separator + "Interlochen Public Library";
         } else if (page == 'peninsula') {
-            History.pushState(action, psTitle + separator + "Peninsula Community Library", page);
+            var title = psTitle + separator + "Peninsula Community Library";
         }
+        if (page != null) {
+            History.pushState(action, title, page);
+        }
+    }
+}
+
+function nodePage(page) {
+    if (page == 'governance') {
+        loadNodes({left:573, middle:7180, right:577});
     }
 }
 
@@ -285,6 +292,8 @@ function loadNodes(nodes) {
         }
     }
 }
+
+
 
 
 $.fn.spin.presets.default = {
