@@ -328,6 +328,85 @@ function showHomePage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
+    var items67 = JSON.parse(localStorage.getItem("items67"));
+    if (items67 == null) {
+        $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
+            localStorage.setItem("items67", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(items67);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
+    }
+    var items68 = JSON.parse(localStorage.getItem("items68"));
+    if (items68 == null) {
+        $.getJSON('https://www.tadl.org/mobile/export/items/68/json', function(data) {
+            localStorage.setItem("items68", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-three').append(info);
+            applyTips();
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(items68);
+        $('#region-three').append(info);
+        applyTips();
+    }
+    var items29 = JSON.parse(localStorage.getItem("items29"));
+    if (items29 == null) {
+        $.getJSON('https://www.tadl.org/mobile/export/items/29/json', function(data) {
+            localStorage.setItem("items29", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-three').append(info);
+            applyTips();
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeatureditembox-template').html());
+        var info = template(items29);
+        $('#region-three').append(info);
+        applyTips();
+    }
+    var featurednews = JSON.parse(localStorage.getItem("featurednews"));
+    if (featurednews == null) {
+        $.getJSON(NEWS_URL, function(data) {
+            localStorage.setItem("featurednews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
+            $('#working').hide().spin(false);
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(featurednews);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
+        $('#working').hide().spin(false);
+    }
+    var tadlevents = JSON.parse(localStorage.getItem("tadlevents"));
+    if (tadlevents == null) {
+        $.getJSON(EVENTS_URL, function(data) {
+            localStorage.setItem("tadlevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(tadlevents);
+        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    }
+}
+/*
+function showHomePage() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
     $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(data);
@@ -358,4 +437,4 @@ function showHomePage() {
         $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     });
 }
-
+*/

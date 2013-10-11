@@ -5,6 +5,7 @@
     width: 240px;
     height: 100%;
     top: 57px;
+    bottom:0;
     z-index: 1000;
     overflow-y:scroll;
     text-align:left;
