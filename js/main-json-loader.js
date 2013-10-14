@@ -4,6 +4,13 @@ function loadJson(key, url) {
     });
 }
 function loadAllJson() {
+    /* Feeds for Home page */
+    loadJson("items67", 'https://www.tadl.org/mobile/export/items/67/json'); 
+    loadJson("items68", 'https://www.tadl.org/mobile/export/items/68/json');
+    loadJson("items29", 'https://www.tadl.org/mobile/export/items/29/json');
+    loadJson("featurednews", 'https://www.tadl.org/export/news/json');
+    loadJson("tadlevents", 'https://www.tadl.org/mobile/export/events/formatted/json/all');
+
     /* Feeds for Books page */
     loadJson("items67", 'https://www.tadl.org/mobile/export/items/67/json'); /* FEED_BOOKS_FEATURED_FICTION */
     loadJson("items68", 'https://www.tadl.org/mobile/export/items/68/json'); /* FEED_BOOKS_FEATURED_NONFIC */
@@ -47,4 +54,14 @@ function loadAllJson() {
     loadJson("teenreviews", 'https://www.tadl.org/export/reviews/Teens/json'); /* FEED_TEENS_REVIEWS */
     loadJson("teenhomework", 'https://www.tadl.org/export/node/json/409'); /* FEED_TEENS_HOMEWORK */
     loadJson("teenlists", 'https://www.tadl.org/export/node/json/12784'); /* FEED_TEENS_LISTS */
+
+    /* Feeds for library pages */
+    loadJson("flplevents", FEED_LOC_EVENTS + '20'); /* FEED_LOC_FLPL_EVENTS */
+    loadJson("flplinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
+    loadJson("flplnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
+
+
+
+
+
 }

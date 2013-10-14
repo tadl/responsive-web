@@ -91,7 +91,6 @@
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
-//            .route(BASE_URL + 'governance', loadNodes({left:573, middle:7180, right:577}))
             ;
     </script>
 </head>
@@ -234,14 +233,15 @@
             <div class="grid-container" id="footer-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
                     <ul id="footer-top-menu" class="footer-top-menu">
-                        <li class="first"><a href="node/141432">East Bay</a></li>
-                        <li><a href="fifelake">Fife Lake</a></li>
-                        <li><a href="node/141432">Interlochen</a></li>
-                        <li><a href="node/141432">Kingsley</a></li>
-                        <li><a href="node/141432">Peninsula</a></li>
-                        <li class="last"><a href="node/141432">Woodmere</a></li>
+                        <li class="first"><a class="pointer" onclick="load('eastbay')">East Bay</a></li>
+                        <li><a class="pointer" onclick="load('fifelake')">Fife Lake</a></li>
+                        <li><a class="pointer" onclick="load('interlochen')">Interlochen</a></li>
+                        <li><a class="pointer" onclick="load('kingsley')">Kingsley</a></li>
+                        <li><a class="pointer" onclick="load('peninsula')">Peninsula</a></li>
+                        <li class="last"><a class="pointer" onclick="load('woodmere')">Woodmere</a></li>
                     </ul>
-                </div>
+                </div><!-- all of these links should use onclick instead of href
+                           to avoid reloading the page and triggering document.ready -->
                 <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
                     <h3 class="footer-heading">About Us</h3>
                     <ul id="footer-left-menu" class="footer-menu">

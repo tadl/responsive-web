@@ -79,23 +79,49 @@ function showFifeLake() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
+    if (flplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+            sessionStorage.setItem("flplevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
+        var info = template(flplevents);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    });
-    $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+    }
+    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
+    if (flplinfo == null) {
+        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(flplinfo);
         $('#region-one').prepend(info);
-    });
-    $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+    }
+    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
+    if (flplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+            sessionStorage.setItem("flplnews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+            $('#working').hide().spin(false);
+            hoursAndInfo('flpl');
+        });
+    } else {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(data);
+        var info = template(flplnews);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('flpl');
-    });
+    }
 }
 
 function showTeensPage() {
