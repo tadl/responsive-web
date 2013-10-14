@@ -62,6 +62,8 @@ $(document).ready(function() {
     });
 
     $('a[rel="lightframe"]').fancybox();
+
+    loadAllJson();
 });
 
 function startsearch() {

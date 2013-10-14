@@ -55,6 +55,7 @@ var FEED_LOC_IPL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
 var FEED_LOC_FLPL_INFOBOX = 'https://www.tadl.org/export/node/json/578';
 var FEED_LOC_WOOD_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
 /* item lists */
+/* NYI
 var FEED_LOC_ITEMS_BASE = 'https://melcatcher....';
 var FEED_LOC_ITEMS_FLPL = 31323;
 var FEED_LOC_ITEMS_WOOD = 23523;
@@ -62,6 +63,7 @@ var FEED_LOC_ITEMS_IPL = 14324;
 var FEED_LOC_ITEMS_KBL = 23524;
 var FEED_LOC_ITEMS_EBB = 23523;
 var FEED_LOC_ITEMS_PCL = 46233;
+*/
 
 function showWoodmere() {
 }
@@ -100,228 +102,497 @@ function showTeensPage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_TEENS_NEW, function(data) {
+    var items51 = JSON.parse(sessionStorage.getItem("items51"));
+    if (items51 == null) {
+        $.getJSON(FEED_TEENS_NEW, function(data) {
+            sessionStorage.setItem("items51", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items51);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
         applyTips();
-    });
-    $.getJSON(FEED_TEENS_ANIMANGA, function(data) {
+    }
+    var items41 = JSON.parse(sessionStorage.getItem("items41"));
+    if (items41 == null) {
+        $.getJSON(FEED_TEENS_ANIMANGA, function(data) {
+            sessionStorage.setItem("items41", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items41);
         $('#region-one').append(info);
         applyTips();
-    });
-    $.getJSON(FEED_TEENS_HOMEWORK, function(data) {
+    }
+    var teenhomework = JSON.parse(sessionStorage.getItem("teenhomework"));
+    if (teenhomework == null) {
+        $.getJSON(FEED_TEENS_HOMEWORK, function(data) {
+            sessionStorage.setItem("teenhomework", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
-        $('#region-two').prepend(info);
-    });
-    $.getJSON(FEED_TEENS_LISTS, function(data) {
+        var info = template(teenhomework);
+        $('#region-one').append(info);
+    }
+    var teenlists = JSON.parse(sessionStorage.getItem("teenlists"));
+    if (teenlists == null) {
+        $.getJSON(FEED_TEENS_LISTS, function(data) {
+            sessionStorage.setItem("teenlists", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-two').prepend(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(teenlists);
         $('#region-two').prepend(info);
-    });
-    $.getJSON(FEED_TEENS_EVENTS, function(data) {
+    }
+    var teenevents = JSON.parse(sessionStorage.getItem("teenevents"));
+    if (teenevents == null) {
+        $.getJSON(FEED_TEENS_EVENTS, function(data) {
+            sessionStorage.setItem("teenevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
+        var info = template(teenevents);
         $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    });
-    $.getJSON(FEED_TEENS_REVIEWS, function(data) {
+    }
+    var teenreviews = JSON.parse(sessionStorage.getItem("teenreviews"));
+    if (teenreviews == null) {
+        $.getJSON(FEED_TEENS_REVIEWS, function(data) {
+            sessionStorage.setItem("teenreviews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showreviews-template').html());
+            var info = template(data);
+            $('#region-two').append(info);
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(data);
+        var info = template(teenreviews);
         $('#region-two').append(info);
         $('#working').hide().spin(false);
-    });
+    }
 }
 
 function showOnlinePage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_ONLINE_MEL, function(data) {
+    var melresources = JSON.parse(sessionStorage.getItem("melresources"));
+    if (melresources == null) {
+        $.getJSON(FEED_ONLINE_MEL, function(data) {
+            sessionStorage.setItem("melresources", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-two').append(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(melresources);
         $('#region-two').append(info);
-    });
-    $.getJSON(FEED_ONLINE_RESOURCES, function(data) {
+    }
+    var tadlresources = JSON.parse(sessionStorage.getItem("tadlresources"));
+    if (tadlresources == null) {
+        $.getJSON(FEED_ONLINE_RESOURCES, function(data) {
+            sessionStorage.setItem("tadlresources", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-two').prepend(info);
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(tadlresources);
         $('#region-two').prepend(info);
         $('#working').hide().spin(false);
-    });
-    $.getJSON(FEED_ONLINE_LEGAL, function(data) {
+    }
+    var legalresources = JSON.parse(sessionStorage.getItem("legalresources"));
+    if (legalresources == null) {
+        $.getJSON(FEED_ONLINE_LEGAL, function(data) {
+            sessionStorage.setItem("legalresources", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(legalresources);
         $('#region-one').append(info);
-    });
-    $.getJSON(FEED_ONLINE_EBOOKS, function(data) {
+    }
+    var ebooks = JSON.parse(sessionStorage.getItem("ebooks"));
+    if (ebooks == null) {
+        $.getJSON(FEED_ONLINE_EBOOKS, function(data) {
+            sessionStorage.setItem("ebooks", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(ebooks);
         $('#region-three').prepend(info);
-    });
+    }
 }
 function showYouthPage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_YOUTH_RESOURCES, function(data) {
+    var youthresources = JSON.parse(sessionStorage.getItem("youthresources"));
+    if (youthresources == null) {
+        $.getJSON(FEED_YOUTH_RESOURCES, function(data) {
+            sessionStorage.setItem("youthresources", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(youthresources);
         $('#region-one').append(info);
-    });
-    $.getJSON(FEED_YOUTH_AWARDWINS, function(data) {
+    }
+    var youthawards = JSON.parse(sessionStorage.getItem("youthawards"));
+    if (youthawards == null) {
+        $.getJSON(FEED_YOUTH_AWARDWINS, function(data) {
+            sessionStorage.setItem("youthawards", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+            $('a[rel="lightframe"]').fancybox({type: 'iframe'});
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(youthawards);
         $('#region-one').append(info);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-    });
-    $.getJSON(FEED_YOUTH_DISPLAY, function(data) {
+    }
+    var items47 = JSON.parse(sessionStorage.getItem("items47"));
+    if (items47 == null) {
+        $.getJSON(FEED_YOUTH_DISPLAY, function(data) {
+            sessionStorage.setItem("items47", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(data);
+        var info = template(items47);
         $('#region-one').prepend(info);
         applyTips();
-    });
-    $.getJSON(FEED_YOUTH_NEWBOOKS, function(data) {
+    }
+    var items52 = JSON.parse(sessionStorage.getItem("items52"));
+    if (items52 == null) {
+        $.getJSON(FEED_YOUTH_NEWBOOKS, function(data) {
+            sessionStorage.setItem("items52", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items52);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
         applyTips();
-    });
-    $.getJSON(FEED_YOUTH_EVENTS, function(data) {
+    }
+    var youthevents = JSON.parse(sessionStorage.getItem("youthevents"));
+    if (youthevents == null) {
+        $.getJSON(FEED_YOUTH_EVENTS, function(data) {
+            sessionStorage.setItem("youthevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
+        var info = template(youthevents);
         $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    });
-    $.getJSON(FEED_YOUTH_REVIEWS, function(data) {
+    }
+    var youthreviews = JSON.parse(sessionStorage.getItem("youthreviews"));
+    if (youthreviews == null) {
+        $.getJSON(FEED_YOUTH_REVIEWS, function(data) {
+            sessionStorage.setItem("youthreviews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showreviews-template').html());
+            var info = template(data);
+            $('#region-two').append(info);
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(data);
+        var info = template(youthreviews);
         $('#region-two').append(info);
         $('#working').hide().spin(false);
-    });
+    }
 }
 
 function showVideoPage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_VIDEO_NEW, function(data) {
+    var items32 = JSON.parse(sessionStorage.getItem("items32"));
+    if (items32 == null) {
+        $.getJSON(FEED_VIDEO_NEW, function(data) {
+            sessionStorage.setItem("items32", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items32);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
         applyTips();
-    });
-    $.getJSON(FEED_VIDEO_HOT, function(data) {
+    }
+    var items34 = JSON.parse(sessionStorage.getItem("items34"));
+    if (items34 == null) {
+        $.getJSON(FEED_VIDEO_HOT, function(data) {
+            sessionStorage.setItem("items34", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
-        $('#region-one').prepend(info);
-        applyTips();
-    });
-    $.getJSON(FEED_VIDEO_MET, function(data) {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(data);
+        var info = template(items34);
         $('#region-one').append(info);
         applyTips();
-    });
-    $.getJSON(FEED_VIDEO_TCFF, function(data) {
+    }
+    var items286 = JSON.parse(sessionStorage.getItem("items286"));
+    if (items286 == null) {
+        $.getJSON(FEED_VIDEO_MET, function(data) {
+            sessionStorage.setItem("items286", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+            var info = template(data);
+            $('#region-three').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(data);
-        $('#region-one').append(info);
+        var info = template(items286);
+        $('#region-three').append(info);
         applyTips();
-    });
-    $.getJSON(EVENTS_URL, function(data) {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
-        $('#region-three').html(info);
-    });
-    $.getJSON(FEED_VIDEO_REVIEWS, function(data) {
+    }
+    var items165 = JSON.parse(sessionStorage.getItem("items165"));
+    if (items165 == null) {
+        $.getJSON(FEED_VIDEO_TCFF, function(data) {
+            sessionStorage.setItem("items165", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+        var info = template(items165);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        applyTips();
+    }
+    var videoreviews = JSON.parse(sessionStorage.getItem("videoreviews"));
+    if (videoreviews == null) {
+        $.getJSON(FEED_VIDEO_REVIEWS, function(data) {
+            sessionStorage.setItem("videoreviews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showreviews-template').html());
+            var info = template(data);
+            $('#region-two').append(info);
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(data);
+        var info = template(videoreviews);
         $('#region-two').append(info);
         $('#working').hide().spin(false);
-    });
+    }
 }
 
 function showMusicPage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_MUSIC_NEW, function(data) {
+    var items29 = JSON.parse(sessionStorage.getItem("items29"));
+    if (items29 == null) {
+        $.getJSON(FEED_MUSIC_NEW, function(data) {
+            sessionStorage.setItem("items29", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items29);
         $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
         applyTips();
-    });
-    $.getJSON(FEED_MUSIC_HOT, function(data) {
+    }
+    var items31 = JSON.parse(sessionStorage.getItem("items31"));
+    if (items31 == null) {
+        $.getJSON(FEED_MUSIC_HOT, function(data) {
+            sessionStorage.setItem("items31", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items31);
         $('#region-one').append(info);
         applyTips();
-    });
-    $.getJSON(FEED_MUSIC_LINKS, function(data) {
+    }
+    var musiclinks = JSON.parse(sessionStorage.getItem("musiclinks"));
+    if (musiclinks == null) {
+        $.getJSON(FEED_MUSIC_LINKS, function(data) {
+            sessionStorage.setItem("musiclinks", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info);
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(musiclinks);
         $('#region-three').prepend(info);
-    });
-    $.getJSON(FEED_MUSIC_REVIEWS, function(data) {
+    }
+    var musicreviews = JSON.parse(sessionStorage.getItem("musicreviews"));
+    if (musicreviews == null) {
+        $.getJSON(FEED_MUSIC_REVIEWS, function(data) {
+            sessionStorage.setitem("musicreviews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showreviews-template').html());
+            var info = template(data);
+            $('#region-two').append(info);
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(data);
+        var info = template(musicreviews);
         $('#region-two').append(info);
         $('#working').hide().spin(false);
-    });
+    }
 }
 
 function showBooksPage() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(FEED_BOOKS_FEATURED_FICTION, function(data) {
+    var items67 = JSON.parse(sessionStorage.getItem("items67"));
+    if (items67 == null) {
+        $.getJSON(FEED_BOOKS_FEATURED_FICTION, function(data) {
+            sessionStorage.setItem("items67", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
-        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+        var info = template(items67);
+        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
         applyTips();
-    });
-    $.getJSON(FEED_BOOKS_FEATURED_NONFIC, function(data) {
+    }
+    var items68 = JSON.parse(sessionStorage.getItem("items68"));
+    if (items68 == null) {
+        $.getJSON(FEED_BOOKS_FEATURED_NONFIC, function(data) {
+            sessionStorage.setItem("items68", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditembox-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(data);
+        var info = template(items68);
         $('#region-one').append(info);
         applyTips();
-    });
-    $.getJSON(FEED_BOOKS_ADULTS_DISPLAY, function(data) {
+    }
+    var items45 = JSON.parse(sessionStorage.getItem("items45"));
+    if (items45 == null) {
+        $.getJSON(FEED_BOOKS_ADULTS_DISPLAY, function(data) {
+            sessionStorage.setItem("items45", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+            var info = template(data);
+            $('#region-one').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(data);
+        var info = template(items45);
         $('#region-one').append(info);
         applyTips();
-    });
-    $.getJSON(FEED_BOOKS_ADULTS_CLUBKITS, function(data) {
+    }
+    var items224 = JSON.parse(sessionStorage.getItem("items224"));
+    if (items224 == null) {
+        $.getJSON(FEED_BOOKS_ADULTS_CLUBKITS, function(data) {
+            sessionStorage.setItem("items224", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(data);
-        $('#region-one').append(info);
+        var info = template(items224);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
         applyTips();
-    });
-    $.getJSON(FEED_BOOKS_ADULTS_BUSINESS, function(data) {
+    }
+    var items234 = JSON.parse(sessionStorage.getItem("items234"));
+    if (items234 == null) {
+        $.getJSON(FEED_BOOKS_ADULTS_BUSINESS, function(data) {
+            sessionStorage.setItem("items234", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+            var info = template(data);
+            $('#region-three').append(info);
+            applyTips();
+        });
+    } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(data);
-        $('#region-one').append(info);
+        var info = template(items234);
+        $('#region-three').append(info);
         applyTips();
-    });
-    $.getJSON(EVENTS_URL, function(data) {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
-        $('#region-three').html(info);
-    });
-    $.getJSON(FEED_BOOKS_BOOKLISTS, function(data) {
+    }
+    var booklists = JSON.parse(sessionStorage.getItem("booklists"));
+    if (booklists == null) {
+        $.getJSON(FEED_BOOKS_BOOKLISTS, function(data) {
+            sessionStorage.setItem("booklists", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-two').prepend(info);
+            $('a[rel="lightframe"]').fancybox({type: 'iframe'});
+        });
+    } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(data);
+        var info = template(booklists);
         $('#region-two').prepend(info);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-    });
-    $.getJSON(FEED_BOOKS_REVIEWS, function(data) {
+    }
+    var bookreviews = JSON.parse(sessionStorage.getItem("bookreviews"));
+    if (bookreviews == null) {
+        $.getJSON(FEED_BOOKS_REVIEWS, function(data) {
+            sessionStorage.setItem("bookreviews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showreviews-template').html());
+            var info = template(data);
+            $('#region-two').append(info);
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(data);
+        var info = template(bookreviews);
         $('#region-two').append(info);
         $('#working').hide().spin(false);
-    });
+    }
 }
 
 function showHomePage() {
