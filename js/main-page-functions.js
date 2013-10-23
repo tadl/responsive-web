@@ -3,7 +3,7 @@ var NODEPREFIX = 'https://www.tadl.org/export/node/json/';
 /* Feeds for Books page */
 var FEED_BOOKS_FEATURED_FICTION = 'https://www.tadl.org/mobile/export/items/67/json';
 var FEED_BOOKS_FEATURED_NONFIC = 'https://www.tadl.org/mobile/export/items/68/json';
-var FEED_BOOKS_BOOKLISTS = 'https://www.tadl.org/export/node/json/80';
+var FEED_BOOKS_BOOKLISTS = NODEPREFIX + '80';
 var FEED_BOOKS_REVIEWS = 'https://www.tadl.org/export/reviews/Books/json';
 var FEED_BOOKS_ADULTS_DISPLAY = 'https://www.tadl.org/mobile/export/items/45/all/json';
 var FEED_BOOKS_ADULTS_CLUBKITS = 'https://www.tadl.org/mobile/export/items/224/all/json';
@@ -13,7 +13,7 @@ var FEED_BOOKS_ADULTS_BUSINESS = 'https://www.tadl.org/mobile/export/items/234/a
 var FEED_MUSIC_NEW = 'https://www.tadl.org/mobile/export/items/29/json';
 var FEED_MUSIC_HOT = 'https://www.tadl.org/mobile/export/items/31/json';
 var FEED_MUSIC_REVIEWS = 'https://www.tadl.org/export/reviews/Music/json';
-var FEED_MUSIC_LINKS = 'https://www.tadl.org/export/node/json/113';
+var FEED_MUSIC_LINKS = NODEPREFIX + '113';
 
 /* Feeds for Video page */
 var FEED_VIDEO_NEW = 'https://www.tadl.org/mobile/export/items/32/json';
@@ -23,26 +23,26 @@ var FEED_VIDEO_MET = 'https://www.tadl.org/mobile/export/items/286/all/json';
 var FEED_VIDEO_REVIEWS = 'https://www.tadl.org/export/reviews/Video/json';
 
 /* Feeds for Online page */
-var FEED_ONLINE_MEL = 'https://www.tadl.org/export/node/json/3373';
-var FEED_ONLINE_RESOURCES = 'https://www.tadl.org/export/node/json/3372';
-var FEED_ONLINE_LEGAL = 'https://www.tadl.org/export/node/json/25242';
-var FEED_ONLINE_EBOOKS = 'https://www.tadl.org/export/node/json/14040';
+var FEED_ONLINE_MEL = NODEPREFIX + '3373';
+var FEED_ONLINE_RESOURCES = NODEPREFIX + '3372';
+var FEED_ONLINE_LEGAL = NODEPREFIX + '25242';
+var FEED_ONLINE_EBOOKS = NODEPREFIX + '14040';
 
 /* Feeds for Youth page */
 var FEED_YOUTH_DISPLAY = 'https://www.tadl.org/mobile/export/items/47/all/json';
 var FEED_YOUTH_NEWBOOKS = 'https://www.tadl.org/mobile/export/items/52/json';
 var FEED_YOUTH_REVIEWS = 'https://www.tadl.org/export/reviews/Youth/json';
 var FEED_YOUTH_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/27';
-var FEED_YOUTH_RESOURCES = 'https://www.tadl.org/export/node/json/647';
-var FEED_YOUTH_AWARDWINS = 'https://www.tadl.org/export/node/json/644';
+var FEED_YOUTH_RESOURCES = NODEPREFIX + '647';
+var FEED_YOUTH_AWARDWINS = NODEPREFIX + '644';
 
 /* Feeds for Teens page */
 var FEED_TEENS_NEW = 'https://www.tadl.org/mobile/export/items/51/json';
 var FEED_TEENS_ANIMANGA = 'https://www.tadl.org/mobile/export/items/41/json';
 var FEED_TEENS_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/28';
 var FEED_TEENS_REVIEWS = 'https://www.tadl.org/export/reviews/Teens/json';
-var FEED_TEENS_HOMEWORK = 'https://www.tadl.org/export/node/json/409';
-var FEED_TEENS_LISTS = 'https://www.tadl.org/export/node/json/12784';
+var FEED_TEENS_HOMEWORK = NODEPREFIX + '409';
+var FEED_TEENS_LISTS = NODEPREFIX + '12784';
 
 /* Feeds for Locations */
 var FEED_LOC_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/'; // add location id to end
@@ -65,16 +65,55 @@ var FEED_LOC_ITEMS_EBB = 23523;
 var FEED_LOC_ITEMS_PCL = 46233;
 */
 
-function showWoodmere() {
-}
 function showEastBay() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
+    if (flplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+            sessionStorage.setItem("flplevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(flplevents);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    }
+    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
+    if (flplinfo == null) {
+        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+        });
+    } else {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(flplinfo);
+        $('#region-one').prepend(info);
+    }
+    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
+    if (flplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+            sessionStorage.setItem("flplnews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+            $('#working').hide().spin(false);
+            hoursAndInfo('flpl');
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(flplnews);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+        $('#working').hide().spin(false);
+        hoursAndInfo('ebb');
+    }
 }
-function showKingsley() {
-}
-function showInterlochen() {
-}
-function showPeninsula() {
-}
+
 function showFifeLake() {
     cleanhouse();
     cleandivs();
@@ -121,6 +160,202 @@ function showFifeLake() {
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('flpl');
+    }
+}
+
+function showInterlochen() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
+    if (flplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+            sessionStorage.setItem("flplevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(flplevents);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    }
+    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
+    if (flplinfo == null) {
+        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+        });
+    } else {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(flplinfo);
+        $('#region-one').prepend(info);
+    }
+    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
+    if (flplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+            sessionStorage.setItem("flplnews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+            $('#working').hide().spin(false);
+            hoursAndInfo('flpl');
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(flplnews);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+        $('#working').hide().spin(false);
+        hoursAndInfo('ipl');
+    }
+}
+
+function showKingsley() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
+    if (flplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+            sessionStorage.setItem("flplevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(flplevents);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    }
+    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
+    if (flplinfo == null) {
+        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+        });
+    } else {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(flplinfo);
+        $('#region-one').prepend(info);
+    }
+    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
+    if (flplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+            sessionStorage.setItem("flplnews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+            $('#working').hide().spin(false);
+            hoursAndInfo('flpl');
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(flplnews);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+        $('#working').hide().spin(false);
+        hoursAndInfo('kbl');
+    }
+}
+
+function showPeninsula() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
+    if (flplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+            sessionStorage.setItem("flplevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(flplevents);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    }
+    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
+    if (flplinfo == null) {
+        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+        });
+    } else {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(flplinfo);
+        $('#region-one').prepend(info);
+    }
+    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
+    if (flplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+            sessionStorage.setItem("flplnews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+            $('#working').hide().spin(false);
+            hoursAndInfo('flpl');
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(flplnews);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+        $('#working').hide().spin(false);
+        hoursAndInfo('pcl');
+    }
+}
+
+function showWoodmere() {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
+    if (flplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
+            sessionStorage.setItem("flplevents", JSON.stringify(data));
+            var template = Handlebars.compile($('#showevents-template').html());
+            var info = template(data);
+            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        });
+    } else {
+        var template = Handlebars.compile($('#showevents-template').html());
+        var info = template(flplevents);
+        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    }
+    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
+    if (flplinfo == null) {
+        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
+            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+            var template = Handlebars.compile($('#drupalnode-template').html());
+            var info = template(data);
+            $('#region-one').prepend(info);
+        });
+    } else {
+        var template = Handlebars.compile($('#drupalnode-template').html());
+        var info = template(flplinfo);
+        $('#region-one').prepend(info);
+    }
+    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
+    if (flplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
+            sessionStorage.setItem("flplnews", JSON.stringify(data));
+            var template = Handlebars.compile($('#showfeaturednews-template').html());
+            var info = template(data);
+            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+            $('#working').hide().spin(false);
+            hoursAndInfo('flpl');
+        });
+    } else {
+        var template = Handlebars.compile($('#showfeaturednews-template').html());
+        var info = template(flplnews);
+        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
+        $('#working').hide().spin(false);
+        hoursAndInfo('wood');
     }
 }
 

@@ -67,9 +67,6 @@ function showreviews(review_type) {
 
 function showfeatureditembox() {
     cleanhouse();
-//    var action = {action:"showfeatureditembox"}
-//    var newstate = 'featured'; 
-//    History.pushState(action, "Featured Items", newstate); 
     state = History.getState();
     $('.load_more').show();
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
