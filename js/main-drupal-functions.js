@@ -135,7 +135,6 @@ function facebookfeed() {
     });
 }
 
-var LOCATION_BASE = 'https://www.tadl.org/mobile/export/locations/';
 function locHoursAndInfo(loc) {
     window.localStorage.setItem('location', loc);
     $('#locinfo').hide();
@@ -146,26 +145,42 @@ function locHoursAndInfo(loc) {
         var info = template(data);
         $('#locinfo').html(info).show();
     } else {
-        $('#working').show().spin('default');
-        $.getJSON(LOCATION_BASE + loc, function(data) {
+        var currentLoc = JSON.parse(sessionStorage.getItem(loc + "hours"));
+        if (currentLoc == null) {
+            $('#working').show().spin('default');
+            $.getJSON(LOCATION_BASE + loc, function(data) {
+                sessionStorage.setItem(loc + "hours", JSON.stringify(data));
+                var template = Handlebars.compile($('#locationinfo-template').html());
+                var info = template(data);
+                $('#locinfo').html(info).show();
+                $('#working').hide().spin(false);
+            });
+        } else {
             var template = Handlebars.compile($('#locationinfo-template').html());
-            var info = template(data);
+            var info = template(currentLoc);
             $('#locinfo').html(info).show();
-            $('#working').hide().spin(false);
-        });
+        }
     }
 }
 
 function hoursAndInfo(loc) {
     $('#locinfo').hide();
     $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
-    $('#working').show().spin('default');
-    $.getJSON(LOCATION_BASE + loc, function(data) {
+    var currentLoc = JSON.parse(sessionStorage.getItem(loc + "hours"));
+    if (currentLoc == null) {
+        $('#working').show().spin('default');
+        $.getJSON(LOCATION_BASE + loc, function(data) {
+            sessionStorage.setItem(loc + "hours", JSON.stringify(data));
+            var template = Handlebars.compile($('#locationinfo-template').html());
+            var info = template(data);
+            $('#locinfo').html(info).show();
+            $('#working').hide().spin(false);
+        });
+    } else {
         var template = Handlebars.compile($('#locationinfo-template').html());
-        var info = template(data);
+        var info = template(currentLoc);
         $('#locinfo').html(info).show();
-        $('#working').hide().spin(false);
-    });
+    }
 }
 
 function showNode(nid) {
