@@ -48,19 +48,6 @@ $(document).ready(function() {
         locHoursAndInfo(window.localStorage.getItem('location'));
     }
 
-    $('img.tips').cluetip({
-        splitTitle: '|',
-        cluetipClass: 'rounded',
-        dropShadow: false,
-        width: '400px',
-        showTitle: false,
-        hoverIntent: {
-            sensitivity: 3,
-            interval: 100,
-            timeout: 0
-        }
-    });
-
     $('a[rel="lightframe"]').fancybox();
 
     loadAllJson();
@@ -329,11 +316,4 @@ $.fn.spin.presets.tiny = {
     hwaccel: false,
     className: 'tinyspinner',
     zIndex: 2e9
-}
-
-function applyTips() {
-    $('img.tips').cluetip({
-        splitTitle: '|', cluetipClass: 'rounded', dropShadow: false, width: '250px', showTitle: false,
-        hoverIntent: { sensitivity: 3, interval: 100, timeout: 0 }
-    });
 }

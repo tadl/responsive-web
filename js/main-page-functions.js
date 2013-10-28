@@ -370,13 +370,11 @@ function showTeensPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items51);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var items41 = JSON.parse(sessionStorage.getItem("items41"));
     if (items41 == null) {
@@ -385,13 +383,11 @@ function showTeensPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items41);
         $('#region-one').append(info);
-        applyTips();
     }
     var teenhomework = JSON.parse(sessionStorage.getItem("teenhomework"));
     if (teenhomework == null) {
@@ -547,13 +543,11 @@ function showYouthPage() {
             var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
             var info = template(data);
             $('#region-one').prepend(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(items47);
         $('#region-one').prepend(info);
-        applyTips();
     }
     var items52 = JSON.parse(sessionStorage.getItem("items52"));
     if (items52 == null) {
@@ -562,13 +556,11 @@ function showYouthPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items52);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var youthevents = JSON.parse(sessionStorage.getItem("youthevents"));
     if (youthevents == null) {
@@ -611,13 +603,11 @@ function showVideoPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items32);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var items34 = JSON.parse(sessionStorage.getItem("items34"));
     if (items34 == null) {
@@ -626,13 +616,11 @@ function showVideoPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items34);
         $('#region-one').append(info);
-        applyTips();
     }
     var items286 = JSON.parse(sessionStorage.getItem("items286"));
     if (items286 == null) {
@@ -641,13 +629,11 @@ function showVideoPage() {
             var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
             var info = template(data);
             $('#region-three').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(items286);
         $('#region-three').append(info);
-        applyTips();
     }
     var items165 = JSON.parse(sessionStorage.getItem("items165"));
     if (items165 == null) {
@@ -656,13 +642,11 @@ function showVideoPage() {
             var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(items165);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var videoreviews = JSON.parse(sessionStorage.getItem("videoreviews"));
     if (videoreviews == null) {
@@ -692,13 +676,11 @@ function showMusicPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items29);
         $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var items31 = JSON.parse(sessionStorage.getItem("items31"));
     if (items31 == null) {
@@ -707,13 +689,11 @@ function showMusicPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items31);
         $('#region-one').append(info);
-        applyTips();
     }
     var musiclinks = JSON.parse(sessionStorage.getItem("musiclinks"));
     if (musiclinks == null) {
@@ -756,13 +736,11 @@ function showBooksPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items67);
         $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var items68 = JSON.parse(sessionStorage.getItem("items68"));
     if (items68 == null) {
@@ -771,13 +749,11 @@ function showBooksPage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-one').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items68);
         $('#region-one').append(info);
-        applyTips();
     }
     var items45 = JSON.parse(sessionStorage.getItem("items45"));
     if (items45 == null) {
@@ -786,13 +762,11 @@ function showBooksPage() {
             var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
             var info = template(data);
             $('#region-one').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(items45);
         $('#region-one').append(info);
-        applyTips();
     }
     var items224 = JSON.parse(sessionStorage.getItem("items224"));
     if (items224 == null) {
@@ -801,13 +775,11 @@ function showBooksPage() {
             var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(items224);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var items234 = JSON.parse(sessionStorage.getItem("items234"));
     if (items234 == null) {
@@ -816,13 +788,11 @@ function showBooksPage() {
             var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
             var info = template(data);
             $('#region-three').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
         var info = template(items234);
         $('#region-three').append(info);
-        applyTips();
     }
     var booklists = JSON.parse(sessionStorage.getItem("booklists"));
     if (booklists == null) {
@@ -867,13 +837,11 @@ function showHomePage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items67);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        applyTips();
     }
     var items68 = JSON.parse(sessionStorage.getItem("items68"));
     if (items68 == null) {
@@ -882,13 +850,11 @@ function showHomePage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-three').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items68);
         $('#region-three').append(info);
-        applyTips();
     }
     var items29 = JSON.parse(sessionStorage.getItem("items29"));
     if (items29 == null) {
@@ -897,13 +863,11 @@ function showHomePage() {
             var template = Handlebars.compile($('#showfeatureditembox-template').html());
             var info = template(data);
             $('#region-three').append(info);
-            applyTips();
         });
     } else {
         var template = Handlebars.compile($('#showfeatureditembox-template').html());
         var info = template(items29);
         $('#region-three').append(info);
-        applyTips();
     }
     var featurednews = JSON.parse(sessionStorage.getItem("featurednews"));
     if (featurednews == null) {
