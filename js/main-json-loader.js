@@ -55,23 +55,23 @@ function loadAllJson() {
     loadJson("flplinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
     loadJson("flplnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
     /* East Bay */
-    loadJson("ebbevents", FEED_LOC_EVENTS + '20'); /* FEED_LOC_FLPL_EVENTS */
-    loadJson("ebbinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
-    loadJson("ebbnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
+    loadJson("ebbevents", FEED_LOC_EVENTS + '19'); /* FEED_LOC_EBB_EVENTS */
+    loadJson("ebbinfo", FEED_LOC_EBB_INFOBOX); /* FEED_LOC_EBB_INFOBOX */
+    loadJson("ebbnews", FEED_LOC_NEWS + '19'); /* FEED_LOC_EBB_NEWS */
     /* Kingsley */
-    loadJson("kblevents", FEED_LOC_EVENTS + '20'); /* FEED_LOC_FLPL_EVENTS */
-    loadJson("kblinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
-    loadJson("kblnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
+    loadJson("kblevents", FEED_LOC_EVENTS + '22'); /* FEED_LOC_KBL_EVENTS */
+    loadJson("kblinfo", FEED_LOC_KBL_INFOBOX); /* FEED_LOC_KBL_INFOBOX */
+    loadJson("kblnews", FEED_LOC_NEWS + '22'); /* FEED_LOC_KBL_NEWS */
     /* Interlochen */
-    loadJson("iplevents", FEED_LOC_EVENTS + '20'); /* FEED_LOC_FLPL_EVENTS */
-    loadJson("iplinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
-    loadJson("iplnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
+    loadJson("iplevents", FEED_LOC_EVENTS + '21'); /* FEED_LOC_IPL_EVENTS */
+    loadJson("iplinfo", FEED_LOC_IPL_INFOBOX); /* FEED_LOC_IPL_INFOBOX */
+    loadJson("iplnews", FEED_LOC_NEWS + '21'); /* FEED_LOC_IPL_NEWS */
     /* Peninsula */
-    loadJson("pclevents", FEED_LOC_EVENTS + '20'); /* FEED_LOC_FLPL_EVENTS */
-    loadJson("pclinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
-    loadJson("pclnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
+    loadJson("pclevents", FEED_LOC_EVENTS + '24'); /* FEED_LOC_PCL_EVENTS */
+    loadJson("pclinfo", FEED_LOC_PCL_INFOBOX); /* FEED_LOC_PCL_INFOBOX */
+    loadJson("pclnews", FEED_LOC_NEWS + '24'); /* FEED_LOC_PCL_NEWS */
     /* Woodmere */
-    loadJson("woodevents", FEED_LOC_EVENTS + '20'); /* FEED_LOC_FLPL_EVENTS */
-    loadJson("woodinfo", FEED_LOC_FLPL_INFOBOX); /* FEED_LOC_FLPL_INFOBOX */
-    loadJson("woodnews", FEED_LOC_NEWS + '20'); /* FEED_LOC_FLPL_NEWS */
+    loadJson("woodevents", FEED_LOC_EVENTS + '25'); /* FEED_LOC_WOOD_EVENTS */
+    loadJson("woodinfo", FEED_LOC_WOOD_INFOBOX); /* FEED_LOC_WOOD_INFOBOX */
+    loadJson("woodnews", FEED_LOC_NEWS + '25'); /* FEED_LOC_WOOD_NEWS */
 }

@@ -48,12 +48,12 @@ var FEED_TEENS_LISTS = NODEPREFIX + '12784';
 var FEED_LOC_EVENTS = 'https://www.tadl.org/mobile/export/events/formatted/json/'; // add location id to end
 var FEED_LOC_NEWS = 'https://www.tadl.org/export/news/location/json/';
 /* infoboxes */
-var FEED_LOC_PCL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
-var FEED_LOC_EBB_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
-var FEED_LOC_KBL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
-var FEED_LOC_IPL_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+var FEED_LOC_PCL_INFOBOX = 'https://www.tadl.org/export/node/json/583';
+var FEED_LOC_EBB_INFOBOX = 'https://www.tadl.org/export/node/json/5439';
+var FEED_LOC_KBL_INFOBOX = 'https://www.tadl.org/export/node/json/23123';
+var FEED_LOC_IPL_INFOBOX = 'https://www.tadl.org/export/node/json/580';
 var FEED_LOC_FLPL_INFOBOX = 'https://www.tadl.org/export/node/json/578';
-var FEED_LOC_WOOD_INFOBOX = 'https://www.tadl.org/export/node/json/NNN';
+var FEED_LOC_WOOD_INFOBOX = 'https://www.tadl.org/export/node/json/5439';
 /* item lists */
 /* NYI
 var FEED_LOC_ITEMS_BASE = 'https://melcatcher....';
@@ -69,45 +69,45 @@ function showEastBay() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
-    if (flplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
-            sessionStorage.setItem("flplevents", JSON.stringify(data));
+    var ebbevents = JSON.parse(sessionStorage.getItem("ebbevents"));
+    if (ebbevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '19', function(data) {
+            sessionStorage.setItem("ebbevents", JSON.stringify(data));
             var template = Handlebars.compile($('#showevents-template').html());
             var info = template(data);
             $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
         });
     } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(flplevents);
+        var info = template(ebbevents);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
-    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
-    if (flplinfo == null) {
-        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
-            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+    var ebbinfo = JSON.parse(sessionStorage.getItem("ebbinfo"));
+    if (ebbinfo == null) {
+        $.getJSON(FEED_LOC_EBB_INFOBOX, function(data) {
+            sessionStorage.setItem("ebbinfo", JSON.stringify(data));
             var template = Handlebars.compile($('#drupalnode-template').html());
             var info = template(data);
             $('#region-one').prepend(info);
         });
     } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(flplinfo);
+        var info = template(ebbinfo);
         $('#region-one').prepend(info);
     }
-    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
-    if (flplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
-            sessionStorage.setItem("flplnews", JSON.stringify(data));
+    var ebbnews = JSON.parse(sessionStorage.getItem("ebbnews"));
+    if (ebbnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '19', function(data) {
+            sessionStorage.setItem("ebbnews", JSON.stringify(data));
             var template = Handlebars.compile($('#showfeaturednews-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
             $('#working').hide().spin(false);
-            hoursAndInfo('flpl');
+            hoursAndInfo('ebb');
         });
     } else {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(flplnews);
+        var info = template(ebbnews);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('ebb');
@@ -167,45 +167,45 @@ function showInterlochen() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
-    if (flplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
-            sessionStorage.setItem("flplevents", JSON.stringify(data));
+    var iplevents = JSON.parse(sessionStorage.getItem("iplevents"));
+    if (iplevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '21', function(data) {
+            sessionStorage.setItem("iplevents", JSON.stringify(data));
             var template = Handlebars.compile($('#showevents-template').html());
             var info = template(data);
             $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
         });
     } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(flplevents);
+        var info = template(iplevents);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
-    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
-    if (flplinfo == null) {
-        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
-            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+    var iplinfo = JSON.parse(sessionStorage.getItem("iplinfo"));
+    if (iplinfo == null) {
+        $.getJSON(FEED_LOC_IPL_INFOBOX, function(data) {
+            sessionStorage.setItem("iplinfo", JSON.stringify(data));
             var template = Handlebars.compile($('#drupalnode-template').html());
             var info = template(data);
             $('#region-one').prepend(info);
         });
     } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(flplinfo);
+        var info = template(iplinfo);
         $('#region-one').prepend(info);
     }
-    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
-    if (flplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
-            sessionStorage.setItem("flplnews", JSON.stringify(data));
+    var iplnews = JSON.parse(sessionStorage.getItem("iplnews"));
+    if (iplnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '21', function(data) {
+            sessionStorage.setItem("iplnews", JSON.stringify(data));
             var template = Handlebars.compile($('#showfeaturednews-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
             $('#working').hide().spin(false);
-            hoursAndInfo('flpl');
+            hoursAndInfo('ipl');
         });
     } else {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(flplnews);
+        var info = template(iplnews);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('ipl');
@@ -216,45 +216,45 @@ function showKingsley() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
-    if (flplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
-            sessionStorage.setItem("flplevents", JSON.stringify(data));
+    var kblevents = JSON.parse(sessionStorage.getItem("kblevents"));
+    if (kblevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '22', function(data) {
+            sessionStorage.setItem("kblevents", JSON.stringify(data));
             var template = Handlebars.compile($('#showevents-template').html());
             var info = template(data);
             $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
         });
     } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(flplevents);
+        var info = template(kblevents);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
-    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
-    if (flplinfo == null) {
-        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
-            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+    var kblinfo = JSON.parse(sessionStorage.getItem("kblinfo"));
+    if (kblinfo == null) {
+        $.getJSON(FEED_LOC_KBL_INFOBOX, function(data) {
+            sessionStorage.setItem("kblinfo", JSON.stringify(data));
             var template = Handlebars.compile($('#drupalnode-template').html());
             var info = template(data);
             $('#region-one').prepend(info);
         });
     } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(flplinfo);
+        var info = template(kblinfo);
         $('#region-one').prepend(info);
     }
-    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
-    if (flplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
-            sessionStorage.setItem("flplnews", JSON.stringify(data));
+    var kblnews = JSON.parse(sessionStorage.getItem("kblnews"));
+    if (kblnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '22', function(data) {
+            sessionStorage.setItem("kblnews", JSON.stringify(data));
             var template = Handlebars.compile($('#showfeaturednews-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
             $('#working').hide().spin(false);
-            hoursAndInfo('flpl');
+            hoursAndInfo('kbl');
         });
     } else {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(flplnews);
+        var info = template(kblnews);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('kbl');
@@ -265,45 +265,45 @@ function showPeninsula() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
-    if (flplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
-            sessionStorage.setItem("flplevents", JSON.stringify(data));
+    var pclevents = JSON.parse(sessionStorage.getItem("pclevents"));
+    if (pclevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '24', function(data) {
+            sessionStorage.setItem("pclevents", JSON.stringify(data));
             var template = Handlebars.compile($('#showevents-template').html());
             var info = template(data);
             $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
         });
     } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(flplevents);
+        var info = template(pclevents);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
-    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
-    if (flplinfo == null) {
-        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
-            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+    var pclinfo = JSON.parse(sessionStorage.getItem("pclinfo"));
+    if (pclinfo == null) {
+        $.getJSON(FEED_LOC_PCL_INFOBOX, function(data) {
+            sessionStorage.setItem("pclinfo", JSON.stringify(data));
             var template = Handlebars.compile($('#drupalnode-template').html());
             var info = template(data);
             $('#region-one').prepend(info);
         });
     } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(flplinfo);
+        var info = template(pclinfo);
         $('#region-one').prepend(info);
     }
-    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
-    if (flplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
-            sessionStorage.setItem("flplnews", JSON.stringify(data));
+    var pclnews = JSON.parse(sessionStorage.getItem("pclnews"));
+    if (pclnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '24', function(data) {
+            sessionStorage.setItem("pclnews", JSON.stringify(data));
             var template = Handlebars.compile($('#showfeaturednews-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
             $('#working').hide().spin(false);
-            hoursAndInfo('flpl');
+            hoursAndInfo('pcl');
         });
     } else {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(flplnews);
+        var info = template(pclnews);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('pcl');
@@ -314,45 +314,45 @@ function showWoodmere() {
     cleanhouse();
     cleandivs();
     $('#working').show().spin('default');
-    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
-    if (flplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
-            sessionStorage.setItem("flplevents", JSON.stringify(data));
+    var woodevents = JSON.parse(sessionStorage.getItem("woodevents"));
+    if (woodevents == null) {
+        $.getJSON(FEED_LOC_EVENTS + '25', function(data) {
+            sessionStorage.setItem("woodevents", JSON.stringify(data));
             var template = Handlebars.compile($('#showevents-template').html());
             var info = template(data);
             $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
         });
     } else {
         var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(flplevents);
+        var info = template(woodevents);
         $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
-    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
-    if (flplinfo == null) {
-        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
-            sessionStorage.setItem("flplinfo", JSON.stringify(data));
+    var woodinfo = JSON.parse(sessionStorage.getItem("woodinfo"));
+    if (woodinfo == null) {
+        $.getJSON(FEED_LOC_WOOD_INFOBOX, function(data) {
+            sessionStorage.setItem("woodinfo", JSON.stringify(data));
             var template = Handlebars.compile($('#drupalnode-template').html());
             var info = template(data);
             $('#region-one').prepend(info);
         });
     } else {
         var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(flplinfo);
+        var info = template(woodinfo);
         $('#region-one').prepend(info);
     }
-    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
-    if (flplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
-            sessionStorage.setItem("flplnews", JSON.stringify(data));
+    var woodnews = JSON.parse(sessionStorage.getItem("woodnews"));
+    if (woodnews == null) {
+        $.getJSON(FEED_LOC_NEWS + '25', function(data) {
+            sessionStorage.setItem("woodnews", JSON.stringify(data));
             var template = Handlebars.compile($('#showfeaturednews-template').html());
             var info = template(data);
             $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
             $('#working').hide().spin(false);
-            hoursAndInfo('flpl');
+            hoursAndInfo('wood');
         });
     } else {
         var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(flplnews);
+        var info = template(woodnews);
         $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
         $('#working').hide().spin(false);
         hoursAndInfo('wood');
