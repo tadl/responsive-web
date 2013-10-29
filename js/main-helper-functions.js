@@ -215,6 +215,12 @@ function nodePage(page) {
     if (page == 'governance') {
         loadNodes({left:573, middle:7180, right:577});
     }
+    if (page == 'tbl') {
+        loadNodes({left:5048, middle:729});
+    }
+    if (page == 'public-computing') {
+        loadNodes({left:851, middle:643});
+    }
 }
 
 function loadNode(nid) {
@@ -262,6 +268,7 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#region-one').append(info);
+                $('#working').hide().spin(false);
             });
         }
         if (nodes.middle != null) {
@@ -269,6 +276,7 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#region-two').append(info);
+                $('#working').hide().spin(false);
             });
         }
         if (nodes.right != null) {
