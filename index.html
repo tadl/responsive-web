@@ -424,6 +424,11 @@
 
 <!-- updated for unsemantic -->
 <script id="showitemlist-template" type="text/template">
+        <div class="card">
+        {{#each_upto nodes 1}}
+      <h4 class="title pointer">{{node.term}}</h4>
+      {{/each_upto}}
+        </div>
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
