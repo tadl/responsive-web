@@ -180,9 +180,6 @@ function viewitem(record_id) {
 }
 
 function viewmarc(record_id) {
-
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/marc.json?record_id=" + record_id, function(data) {
     var content = data.marc;
     $.fancybox({
