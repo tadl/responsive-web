@@ -170,6 +170,8 @@ function cleandivs() {
     $('#region-one').empty();
     $('#region-two').empty();
     $('#region-three').empty();
+    $('#one-third').empty();
+    $('#two-thirds').empty();
 }
 
 function load(page) {
@@ -216,10 +218,13 @@ function nodePage(page) {
         loadNodes({left:573, middle:7180, right:577});
     }
     if (page == 'tbl') {
-        loadNodes({left:5048, middle:729});
+        loadNodes({third:5048, twothirds:729});
     }
     if (page == 'public-computing') {
-        loadNodes({left:851, middle:643});
+        loadNodes({third:851, twothirds:643});
+    }
+    if (page == 'rooms') {
+        loadNodes({third:863, twothirds:730});
     }
 }
 
@@ -284,6 +289,22 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#region-three').append(info);
+                $('#working').hide().spin(false);
+            });
+        }
+        if (nodes.third != null) {
+            $.getJSON(NODEPREFIX + nodes.third, function(data) {
+                var template = Handlebars.compile($('#drupalnode-template').html());
+                var info = template(data);
+                $('#one-third').append(info);
+                $('#working').hide().spin(false);
+            });
+        }
+        if (nodes.twothirds != null) {
+            $.getJSON(NODEPREFIX + nodes.twothirds, function(data) {
+                var template = Handlebars.compile($('#drupalnode-template').html());
+                var info = template(data);
+                $('#two-thirds').append(info);
                 $('#working').hide().spin(false);
             });
         }
