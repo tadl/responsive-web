@@ -147,8 +147,8 @@ function logout() {
 function showmore(record_id) {
     var record_id = record_id;
     var e = document.getElementById(record_id);
-    if (e.style.display === 'none') {
-        if (!$.trim($('#'+ record_id).html()).length) {
+
+      
             $('#more_details_' + record_id).removeClass('tadlblue').addClass('black').html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Loading...</span>').removeAttr('onclick');
             $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
                 var results = data.message;
@@ -159,14 +159,7 @@ function showmore(record_id) {
                 });
                 $('#'+ record_id).show();
             });
-        } else {
-            $('#'+ record_id).show();
-            $('#more_details_' + record_id).hide();
-        }
-    } else {
-        $('#'+ record_id).hide();
-        $('#more_details_' + record_id).show();
-    }
+    
 }
 
 function viewitem(record_id) {
@@ -185,6 +178,20 @@ function viewitem(record_id) {
         }
     });
 }
+
+function viewmarc(record_id) {
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/marc.json?record_id=" + record_id, function(data) {
+    var content = data.marc;
+    $.fancybox({
+     content : content,
+     type : 'iframe'
+      });
+
+    });
+}
+
+
+
 
 // not sure what this is for. It might be something I left half-done and has been replaced
 function loaditem(record_id) {    

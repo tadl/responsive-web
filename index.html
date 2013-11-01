@@ -423,7 +423,16 @@
                     <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-100">
-                    <div id="{{item.record_id}}" style="display:none;"></div>
+                    <div id="{{item.record_id}}">
+                    <p class="subtitle">
+                    {{item.abstract}}
+                    <p>
+                    <p class="subtitle">
+                    {{item.availability}}
+                    </p>
+                    
+                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -432,6 +441,11 @@
 
 <!-- updated for unsemantic -->
 <script id="showitemlist-template" type="text/template">
+        <div class="card">
+        {{#each_upto nodes 1}}
+      <h4 class="title pointer">{{node.term}}</h4>
+      {{/each_upto}}
+        </div>
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
@@ -540,6 +554,9 @@
             {{/if}}
         {{/:shelvinglocations}}
         </table>
+        {{#:items}}
+        	<a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{:item.:record_id}})"><span>marc record</span></a>        
+        {{/:items}}
     </div>
 </script>
 
