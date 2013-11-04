@@ -538,6 +538,8 @@ input.search {
 #one-pad,
 #two-pad,
 #three-pad,
+#third-pad,
+#twothirds-pad,
 #wide-pad {
     max-height:1px;
 }
