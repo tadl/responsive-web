@@ -40,7 +40,7 @@ function getResults(query, mt, avail, location) {
     window.localStorage.setItem('mt', mediatype);
     window.localStorage.setItem('avail', available);
     window.localStorage.setItem('loc', location);
-    
+    localStorage.removeItem('facet');
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
@@ -184,7 +184,7 @@ function viewmarc(record_id) {
     var content = data.marc;
     $.fancybox({
      content : content,
-     type : 'iframe'
+     type : 'ajax'
       });
 
     });
