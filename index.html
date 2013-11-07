@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="css/navmenu.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+  		google.load("books", "0");
+	</script>
     <noscript>
         <link rel="stylesheet" href="css/unsemantic-grid-mobile.css" />
     </noscript>
@@ -422,7 +426,7 @@
                     </div>
                     <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                 </div>
-                <div class="grid-70 tablet-grid-70 mobile-grid-100">
+                
                     <div id="{{item.record_id}}">
                     <p class="subtitle">
                     {{item.abstract}}
@@ -433,7 +437,7 @@
                     
                     
                     </div>
-                </div>
+              
             </div>
         </div>
     {{/items}}
@@ -490,7 +494,7 @@
                     <span>Reviewed by: {{node.reviewer}}</span>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-100">
-                    <div id="review_{{node.record}}" class="hidden">
+                    <div id="review_{{node.record}}">
                         {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
@@ -527,14 +531,14 @@
 
 <!-- updated for unsemantic -->
 <script id="more_details-template" type="text/template">
-    {{#:items}}
+    {{#items}}
         <div>
-            <div class="summary" style="position:relative">{{:item.:summary}}</div>
-            {{#compare :item.:copies_available null operator="!="}}
-                <strong>{{:item.:copies_available}} of {{:item.:copies_total}} available</strong>
+            <div class="summary" style="position:relative">{{summary}}</div>
+            {{#compare copies_available null operator="!="}}
+                <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
             {{/compare}}
-            {{#compare :item.:copies_available 0 operator="!="}}
-                {{#compare :item.:copies_available null operator="!="}}
+            {{#compare copies_available 0 operator="!="}}
+                {{#compare copies_available null operator="!="}}
                     <table>
                     <tr class="smaller">
                         <td><strong>Library</strong></td>
@@ -543,20 +547,27 @@
                     </tr>
                 {{/compare}}
             {{/compare}}
-        {{/:items}}
-        {{#:shelvinglocations}}
-            {{#if :shelf_location.:library}}
+        {{/items}}
+        {{#shelvinglocations}}
+            {{#if shelf_location.library}}
                 <tr class="smaller">
-                    <td>{{:shelf_location.:library}}</td>
-                    <td>{{:shelf_location.:shelving_location}}</td>
-                    <td>{{:shelf_location.:call_number}}</td>
+                    <td>{{shelf_location.library}}</td>
+                    <td>{{shelf_location.shelving_location}}</td>
+                    <td>{{shelf_location.call_number}}</td>
                 </tr>
             {{/if}}
-        {{/:shelvinglocations}}
+        {{/shelvinglocations}}
         </table>
-        {{#:items}}
-        	<a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{:item.:record_id}})"><span>marc record</span></a>        
-        {{/:items}}
+        {{#items}}
+        {{#if related_subjects}}
+        <table>
+        <tr>Related Subjects:</tr>
+        {{{ related_subjects }}}
+        </table>	
+        {{/if}}
+        <span id="preview-{{record_id}}" class="floatright"></span>
+        <a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{:item.:record_id}})"><span>marc record</span></a>  
+        {{/items}}
     </div>
 </script>
 

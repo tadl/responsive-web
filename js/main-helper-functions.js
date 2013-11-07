@@ -73,10 +73,10 @@ function startsearch() {
 function facetstartsearch(facet) { 
     var facet = facet;
     state = History.getState();
-    var searchquery = state.data.query;
-    var mediatype = state.data.mt;
-    var available = state.data.avail;
-    var loc = state.data.location;
+    var searchquery = window.localStorage.getItem('query');
+    var mediatype = window.localStorage.getItem('mt');
+    var available = window.localStorage.getItem('avail');
+    var loc = window.localStorage.getItem('loc');
     var newstate = 'search-facets/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+facet; 
     var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate, ft:facet}
     History.pushState(action, psTitle + "Search", newstate);

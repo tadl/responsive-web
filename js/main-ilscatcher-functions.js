@@ -129,6 +129,15 @@ function facetsearch(query, mt, avail, location, facet) {
     mylist();
 }
 
+
+
+function subject_search(subject) {
+	var subject = subject;
+	alert('Search for '+subject);
+
+
+}
+
 function logged_in() {
     var username = window.localStorage.getItem('username');
     if (username) {
@@ -154,10 +163,15 @@ function showmore(record_id) {
                 var results = data.message;
                 var template = Handlebars.compile($('#more_details-template').html());
                 var info = template(data);
+                var isbn = data.items[0].isbn;
+                
+              
+            
                 $('#'+ record_id).html(info).promise().done(function() {
                     $('#more_details_' + record_id).hide();
                 });
                 $('#'+ record_id).show();
+                check_googlebooks(record_id, isbn);
             });
     
 }
@@ -572,5 +586,43 @@ function emptylist(){
 
 }
 
+function check_googlebooks(record_id, isbn){
+var isbn = isbn;
+var clean_isbn = isbn.split(",")[0].replace(/[^0-9]/g, "");
+var super_clean_isbn = $.trim(clean_isbn);
+var isbn_google = 'ISBN:'+ super_clean_isbn;
+var isbn_google_prep = "'"+ isbn_google +"'"
+var record_div = record_id
+var url = 'http://books.google.com/books?bibkeys='+ isbn_google +'&jscmd=viewapi&callback=mycallback';
+var reviews = "";
+var googlebook_test = "";
+$.ajax({
+    url: url,
+    type: "GET",
+    dataType: "jsonp",
+    async: false,
+    success: function (msg) {
+         googlebook_test = JSON.stringify(msg[isbn_google].preview);
+          if ( googlebook_test == '"partial"' || googlebook_test == '"full"' ){
+         $('#preview-'+ record_div).append('<a onclick="load_googlebooks('+ isbn_google_prep +')"><img src="https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif"></a>');
+         };
+    },
+    error: function () {
+         $('#preview-'+ record_div).append("fail");
+    },    
+});
+}
 
+function load_googlebooks(isbn){
+ var isbn = isbn;
+ var content = '<div id="viewerCanvas" style="width: 500px; height: 600px"></div>'
+ $.fancybox({
+     content : content,
+     type : 'iframe',
+     autoScale : true,
+     });
+ var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+viewer.load(isbn);
+
+}
 
