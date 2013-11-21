@@ -56,6 +56,7 @@ $(document).ready(function() {
 function startsearch() {
     var searchquery = encodeURIComponent($('#term').val());
     var mediatype = encodeURIComponent($('#mediatype').val());
+    var searchtype = encodeURIComponent($('#searchtype').val());
     var loc = $('#location').val();
     if (document.getElementById('available').checked) {
         var available = "true";
@@ -64,8 +65,8 @@ function startsearch() {
         var available = "false";
         var availablemsg = "";
     }
-    var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc; 
-    var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate}
+    var newstate = 'search/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+searchtype; 
+    var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, search:searchtype, state:newstate}
     History.pushState(action, psTitle + "Search", newstate);
     
 }
@@ -75,9 +76,10 @@ function facetstartsearch(facet) {
     state = History.getState();
     var searchquery = window.localStorage.getItem('query');
     var mediatype = window.localStorage.getItem('mt');
+    var searchtype = encodeURIComponent($('#searchtype').val());
     var available = window.localStorage.getItem('avail');
     var loc = window.localStorage.getItem('loc');
-    var newstate = 'search-facets/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+facet; 
+    var newstate = 'search-facets/'+searchquery+'/'+mediatype+'/'+available+'/'+loc+'/'+searchtype+'/'+facet; 
     var action = {action:"getsearch", query:searchquery, mt:mediatype, avail:available, location:loc, state:newstate, ft:facet}
     History.pushState(action, psTitle + "Search", newstate);
 }

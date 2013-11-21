@@ -42,3 +42,45 @@ Handlebars.registerHelper('each_upto', function(ary, max, options) {
         result.push(options.fn(ary[i]));
     return result.join('');
 });
+
+Handlebars.registerHelper('youtubeify', function(title){
+	var youtube_url = 'http://gdata.youtube.com/feeds/api/videos?q=' + title + '-trailer-official&start-index=1&max-results=1&v=2&alt=json';
+	
+	jQuery.extend({
+    getValues: function(url) {
+        var result = null;
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+            	if (data.feed.entry !== undefined){
+                result = data.feed.entry[0].media$group.yt$videoid.$t
+                }
+                else
+                {
+                result = "fail"
+                };
+            },
+            error: function() {
+                result = "fail";
+            },
+            
+        });
+       return result;
+    }
+});
+	
+var test = $.getValues(youtube_url)
+
+if (test != 'fail'){
+
+var embed_code = '<iframe class="youtube-player" type="text/html" width="320" height="240" src="http://www.youtube.com/embed/'+ test +'" allowfullscreen frameborder="0"></iframe>'
+
+
+return embed_code;
+};
+
+
+});

@@ -6,11 +6,12 @@ function loadmore() {
     var available = window.localStorage.getItem('avail');
     var loc = window.localStorage.getItem('loc');
     var facet = window.localStorage.getItem('facet');
+    var searchtype = window.localStorage.getItem('searchtype');
     
     
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $('#loadmoretext').trigger("create");
-    $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet, function(data) {
+    $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
         var results = data.message
          
             if (results != "no results") {
@@ -29,13 +30,15 @@ function loadmore() {
 
 
 
-function getResults(query, mt, avail, location) {      
+function getResults(query, mt, avail, location, searchtype) {      
     cleanhouse();
     pagecount = 0;
     var searchquery = query;
     var mediatype = mt;
     var available = avail;
     var loc = location;
+    var searchtype = searchtype;
+    window.localStorage.setItem('searchtype', searchtype);
     window.localStorage.setItem('query', searchquery);
     window.localStorage.setItem('mt', mediatype);
     window.localStorage.setItem('avail', available);
@@ -44,6 +47,7 @@ function getResults(query, mt, avail, location) {
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
     $("#location").val(decodeURIComponent(loc));
+    $("#searchtype").val(decodeURIComponent(searchtype));
     if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
@@ -56,7 +60,7 @@ function getResults(query, mt, avail, location) {
     $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $('#search-params').show();
   
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc, function(data) {
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype, function(data) {
         var results = data.message;
         linked_search = "false";
             if (results != "no results") {
@@ -78,9 +82,10 @@ function getResults(query, mt, avail, location) {
     mylist();
 }
 
-function facetsearch(query, mt, avail, location, facet) {
+function facetsearch(query, mt, avail, location, searchtype, facet) {
     state = History.getState();
     pagecount = 0;
+    var searchtype = searchtype;
     var facet = facet;
     var searchquery = query;
     var mediatype = mt;
@@ -103,7 +108,7 @@ function facetsearch(query, mt, avail, location, facet) {
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&facet=" + facet, function(data) {
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&facet=" + facet, function(data) {
         var results = data.message;
         state = History.getState();
         linked_search = "false";
@@ -132,9 +137,10 @@ function facetsearch(query, mt, avail, location, facet) {
 
 
 function subject_search(subject) {
-	var subject = subject;
-	alert('Search for '+subject);
-
+	var subject = subject.replace(";qtype=subject","");
+   $("#searchtype").val("subject");
+   $("#term").val(decodeURIComponent(subject));
+   startsearch();
 
 }
 

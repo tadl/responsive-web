@@ -87,8 +87,8 @@
             .route(BASE_URL + 'checkout', showcheckouts)
             .route(BASE_URL + 'featured', showfeatureditembox)
             .route(BASE_URL + 'featurednews', showfeaturednews)
-            .route(BASE_URL + 'search/:query/:mt/:avail/:location', getResults)
-            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:facet', facetsearch)
+            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype', getResults)
+            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_id', showitemlist)
             .route(BASE_URL + 'item/:record_id', viewitem)
             .route(BASE_URL + 'node/:nid', showNode)
@@ -147,6 +147,14 @@
             <div class="grid-container">
                 <div class="grid-25 tablet-grid-25 mobile-grid-100"> 
                     <input class="left" type="checkbox" id="available" value="false" /> Limit to Available
+                </div>
+                  <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                    <select id="searchtype">
+                        <option value="keyword">Keyword</option>
+                        <option value="author">Author</option>
+                        <option value="title">Title</option>
+                        <option value="subject">Subject</option>
+                    </select>
                 </div>
                 <div class="grid-15 tablet-grid-15 mobile-grid-50">
                     <select id="mediatype">
@@ -533,7 +541,14 @@
 <script id="more_details-template" type="text/template">
     {{#items}}
         <div>
-            <div class="summary" style="position:relative">{{summary}}</div>
+            <div class="summary" style="position:relative">{{summary}}
+            <br/>
+            <!-- COMMENTED OUT FOR TIME BEING
+            {{#compare format_icon 'g.png' operator="==="}}
+        		{{{youtubeify title}}}
+        	{{/compare}}
+        	//-->
+            </div>
             {{#compare copies_available null operator="!="}}
                 <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
             {{/compare}}
@@ -566,7 +581,8 @@
         </table>	
         {{/if}}
         <span id="preview-{{record_id}}" class="floatright"></span>
-        <a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{:item.:record_id}})"><span>marc record</span></a>  
+        <a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{record_id}})"><span>marc record</span></a>
+
         {{/items}}
     </div>
 </script>
