@@ -163,22 +163,26 @@ function locHoursAndInfo(loc) {
     }
 }
 
+
+
+
+
 function hoursAndInfo(loc) {
     $('#locinfo').hide();
     $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
-    var currentLoc = JSON.parse(sessionStorage.getItem(loc + "hours"));
-    if (currentLoc == null) {
-        $('#working').show().spin('default');
-        $.getJSON(LOCATION_BASE + loc, function(data) {
-            sessionStorage.setItem(loc + "hours", JSON.stringify(data));
-            var template = Handlebars.compile($('#locationinfo-template').html());
-            var info = template(data);
-            $('#locinfo').html(info).show();
-            $('#working').hide().spin(false);
-        });
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+    if (data == null) {
+     $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        hoursAndInfo(loc);
+        return;
+    });
     } else {
         var template = Handlebars.compile($('#locationinfo-template').html());
-        var info = template(currentLoc);
+        var current_loc = data['hours_' + loc]; 
+        alert(current_loc)
+        var info = template(current_loc);
         $('#locinfo').html(info).show();
     }
 }

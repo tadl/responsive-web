@@ -1,833 +1,322 @@
+function compile_templates() {
+drupalnode_template = Handlebars.compile($('#drupalnode-template').html());
+featured_item_template = Handlebars.compile($('#showfeatureditembox-template').html());
+review_template = Handlebars.compile($('#showreviews-template').html());
+events_template = Handlebars.compile($('#showevents-template').html());
+featured_news_template =  Handlebars.compile($('#showfeaturednews-template').html());
+featured_item_all_template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+}
+
+
 function showEastBay() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var ebbevents = JSON.parse(sessionStorage.getItem("ebbevents"));
-    if (ebbevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '19', function(data) {
-            sessionStorage.setItem("ebbevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(ebbevents);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var ebbinfo = JSON.parse(sessionStorage.getItem("ebbinfo"));
-    if (ebbinfo == null) {
-        $.getJSON(FEED_LOC_EBB_INFOBOX, function(data) {
-            sessionStorage.setItem("ebbinfo", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(ebbinfo);
-        $('#region-one').prepend(info);
-    }
-    var ebbnews = JSON.parse(sessionStorage.getItem("ebbnews"));
-    if (ebbnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '19', function(data) {
-            sessionStorage.setItem("ebbnews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-            $('#working').hide().spin(false);
-            hoursAndInfo('ebb');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(ebbnews);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-        $('#working').hide().spin(false);
-        hoursAndInfo('ebb');
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showEastBay();
+        return;
+    });
+ 	} else { 
+ 	var events_ebb = events_template(data.events_ebb)
+ 	var infobox_ebb = drupalnode_template(data.infobox_ebb)
+ 	var news_ebb = featured_news_template(data.news_ebb)
+ 	$('#region-one').html(infobox_ebb);
+ 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb);
+ 	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ebb);
+ 	hoursAndInfo('ebb');
+ 	}
+ 	
 }
 
 function showFifeLake() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var flplevents = JSON.parse(sessionStorage.getItem("flplevents"));
-    if (flplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '20', function(data) {
-            sessionStorage.setItem("flplevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(flplevents);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var flplinfo = JSON.parse(sessionStorage.getItem("flplinfo"));
-    if (flplinfo == null) {
-        $.getJSON(FEED_LOC_FLPL_INFOBOX, function(data) {
-            sessionStorage.setItem("flplinfo", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(flplinfo);
-        $('#region-one').prepend(info);
-    }
-    var flplnews = JSON.parse(sessionStorage.getItem("flplnews"));
-    if (flplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '20', function(data) {
-            sessionStorage.setItem("flplnews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-            $('#working').hide().spin(false);
-            hoursAndInfo('flpl');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(flplnews);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-        $('#working').hide().spin(false);
-        hoursAndInfo('flpl');
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showFifeLake();
+        return;
+    });
+ 	} else { 
+ 	var events_flpl = events_template(data.events_flpl)
+ 	var infobox_flpl = drupalnode_template(data.infobox_flpl)
+ 	var news_flpl = featured_news_template(data.news_flpl)
+ 	$('#region-one').html(infobox_flpl);
+ 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl);
+ 	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_flpl);
+ 	hoursAndInfo('flpl');
+ 	}
 }
 
 function showInterlochen() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var iplevents = JSON.parse(sessionStorage.getItem("iplevents"));
-    if (iplevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '21', function(data) {
-            sessionStorage.setItem("iplevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(iplevents);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var iplinfo = JSON.parse(sessionStorage.getItem("iplinfo"));
-    if (iplinfo == null) {
-        $.getJSON(FEED_LOC_IPL_INFOBOX, function(data) {
-            sessionStorage.setItem("iplinfo", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(iplinfo);
-        $('#region-one').prepend(info);
-    }
-    var iplnews = JSON.parse(sessionStorage.getItem("iplnews"));
-    if (iplnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '21', function(data) {
-            sessionStorage.setItem("iplnews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-            $('#working').hide().spin(false);
-            hoursAndInfo('ipl');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(iplnews);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-        $('#working').hide().spin(false);
-        hoursAndInfo('ipl');
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showInterlochen();
+        return;
+    });
+ 	} else { 
+ 	var events_ipl = events_template(data.events_ipl)
+ 	var infobox_ipl = drupalnode_template(data.infobox_ipl)
+ 	var news_ipl = featured_news_template(data.news_ipl)
+ 	$('#region-one').html(infobox_ipl);
+ 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl);
+ 	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ipl);
+ 	hoursAndInfo('ipl');
+ 	}
 }
 
 function showKingsley() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var kblevents = JSON.parse(sessionStorage.getItem("kblevents"));
-    if (kblevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '22', function(data) {
-            sessionStorage.setItem("kblevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(kblevents);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var kblinfo = JSON.parse(sessionStorage.getItem("kblinfo"));
-    if (kblinfo == null) {
-        $.getJSON(FEED_LOC_KBL_INFOBOX, function(data) {
-            sessionStorage.setItem("kblinfo", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(kblinfo);
-        $('#region-one').prepend(info);
-    }
-    var kblnews = JSON.parse(sessionStorage.getItem("kblnews"));
-    if (kblnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '22', function(data) {
-            sessionStorage.setItem("kblnews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-            $('#working').hide().spin(false);
-            hoursAndInfo('kbl');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(kblnews);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-        $('#working').hide().spin(false);
-        hoursAndInfo('kbl');
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showKingsley();
+        return;
+    });
+ 	} else { 
+ 	var events_kbl = events_template(data.events_kbl)
+ 	var infobox_kbl = drupalnode_template(data.infobox_kbl)
+ 	var news_kbl = featured_news_template(data.news_kbl)
+ 	$('#region-one').html(infobox_kbl);
+ 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl);
+ 	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_kbl);
+ 	hoursAndInfo('kbl');
+ 	}
 }
 
 function showPeninsula() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var pclevents = JSON.parse(sessionStorage.getItem("pclevents"));
-    if (pclevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '24', function(data) {
-            sessionStorage.setItem("pclevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(pclevents);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var pclinfo = JSON.parse(sessionStorage.getItem("pclinfo"));
-    if (pclinfo == null) {
-        $.getJSON(FEED_LOC_PCL_INFOBOX, function(data) {
-            sessionStorage.setItem("pclinfo", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(pclinfo);
-        $('#region-one').prepend(info);
-    }
-    var pclnews = JSON.parse(sessionStorage.getItem("pclnews"));
-    if (pclnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '24', function(data) {
-            sessionStorage.setItem("pclnews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-            $('#working').hide().spin(false);
-            hoursAndInfo('pcl');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(pclnews);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-        $('#working').hide().spin(false);
-        hoursAndInfo('pcl');
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showPeninsula();
+        return;
+    });
+ 	} else { 
+ 	var events_pcl = events_template(data.events_pcl)
+ 	var infobox_pcl = drupalnode_template(data.infobox_pcl)
+ 	var news_pcl = featured_news_template(data.news_pcl)
+ 	$('#region-one').html(infobox_pcl);
+ 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl);
+ 	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_pcl);
+ 	hoursAndInfo('pcl');
+ 	}
 }
 
 function showWoodmere() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var woodevents = JSON.parse(sessionStorage.getItem("woodevents"));
-    if (woodevents == null) {
-        $.getJSON(FEED_LOC_EVENTS + '25', function(data) {
-            sessionStorage.setItem("woodevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(woodevents);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var woodinfo = JSON.parse(sessionStorage.getItem("woodinfo"));
-    if (woodinfo == null) {
-        $.getJSON(FEED_LOC_WOOD_INFOBOX, function(data) {
-            sessionStorage.setItem("woodinfo", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(woodinfo);
-        $('#region-one').prepend(info);
-    }
-    var woodnews = JSON.parse(sessionStorage.getItem("woodnews"));
-    if (woodnews == null) {
-        $.getJSON(FEED_LOC_NEWS + '25', function(data) {
-            sessionStorage.setItem("woodnews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-            $('#working').hide().spin(false);
-            hoursAndInfo('wood');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(woodnews);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Recent News</h4></div>');
-        $('#working').hide().spin(false);
-        hoursAndInfo('wood');
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showWoodmere();
+        return;
+    });
+ 	} else { 
+ 	var events_wood = events_template(data.events_wood)
+ 	var infobox_wood = drupalnode_template(data.infobox_wood)
+ 	var news_wood = featured_news_template(data.news_wood)
+ 	$('#region-one').html(infobox_wood);
+ 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood);
+ 	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_wood);
+ 	hoursAndInfo('wood');
+ 	}
 }
 
 function showTeensPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var items51 = JSON.parse(sessionStorage.getItem("items51"));
-    if (items51 == null) {
-        $.getJSON(FEED_TEENS_NEW, function(data) {
-            sessionStorage.setItem("items51", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items51);
-        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var items41 = JSON.parse(sessionStorage.getItem("items41"));
-    if (items41 == null) {
-        $.getJSON(FEED_TEENS_ANIMANGA, function(data) {
-            sessionStorage.setItem("items41", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items41);
-        $('#region-one').append(info);
-    }
-    var teenhomework = JSON.parse(sessionStorage.getItem("teenhomework"));
-    if (teenhomework == null) {
-        $.getJSON(FEED_TEENS_HOMEWORK, function(data) {
-            sessionStorage.setItem("teenhomework", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(teenhomework);
-        $('#region-one').append(info);
-    }
-    var teenlists = JSON.parse(sessionStorage.getItem("teenlists"));
-    if (teenlists == null) {
-        $.getJSON(FEED_TEENS_LISTS, function(data) {
-            sessionStorage.setItem("teenlists", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-two').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(teenlists);
-        $('#region-two').prepend(info);
-    }
-    var teenevents = JSON.parse(sessionStorage.getItem("teenevents"));
-    if (teenevents == null) {
-        $.getJSON(FEED_TEENS_EVENTS, function(data) {
-            sessionStorage.setItem("teenevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(teenevents);
-        $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var teenreviews = JSON.parse(sessionStorage.getItem("teenreviews"));
-    if (teenreviews == null) {
-        $.getJSON(FEED_TEENS_REVIEWS, function(data) {
-            sessionStorage.setItem("teenreviews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showreviews-template').html());
-            var info = template(data);
-            $('#region-two').append(info);
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(teenreviews);
-        $('#region-two').append(info);
-        $('#working').hide().spin(false);
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showTeensPage();
+        return;
+    });
+ 	} else { 
+ 	var teens_new = featured_item_template(data.teens_new)
+ 	var teens_manga = featured_item_template(data.teens_manga)
+ 	var teens_events = events_template(data.teens_events)
+ 	var teens_reviews = review_template(data.teens_reviews)
+ 	var teens_homework = drupalnode_template(data.teens_homework)
+ 	var teens_lists = drupalnode_template(data.teens_lists)
+ 	$('#region-one').html(teens_new + teens_manga);
+ 	$('#region-two').html(teens_lists + teens_reviews);
+ 	$('#region-three').html(teens_events);
+ 	}
 }
 
 function showOnlinePage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var melresources = JSON.parse(sessionStorage.getItem("melresources"));
-    if (melresources == null) {
-        $.getJSON(FEED_ONLINE_MEL, function(data) {
-            sessionStorage.setItem("melresources", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-two').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(melresources);
-        $('#region-two').append(info);
-    }
-    var tadlresources = JSON.parse(sessionStorage.getItem("tadlresources"));
-    if (tadlresources == null) {
-        $.getJSON(FEED_ONLINE_RESOURCES, function(data) {
-            sessionStorage.setItem("tadlresources", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-two').prepend(info);
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(tadlresources);
-        $('#region-two').prepend(info);
-        $('#working').hide().spin(false);
-    }
-    var legalresources = JSON.parse(sessionStorage.getItem("legalresources"));
-    if (legalresources == null) {
-        $.getJSON(FEED_ONLINE_LEGAL, function(data) {
-            sessionStorage.setItem("legalresources", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(legalresources);
-        $('#region-one').append(info);
-    }
-    var ebooks = JSON.parse(sessionStorage.getItem("ebooks"));
-    if (ebooks == null) {
-        $.getJSON(FEED_ONLINE_EBOOKS, function(data) {
-            sessionStorage.setItem("ebooks", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(ebooks);
-        $('#region-three').prepend(info);
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showOnlinePage();
+        return;
+    });
+ 	} else {   
+ 	var online_legal = drupalnode_template(data.online_legal)
+ 	$('#region-one').append(online_legal);
+ 	var online_mel = drupalnode_template(data.online_mel)
+ 	var online_resources = drupalnode_template(data.online_resources)
+ 	$('#region-two').append(online_resources + online_mel);
+ 	var online_ebooks = drupalnode_template(data.online_ebooks)
+ 	$('#region-three').append(online_ebooks);
+ 	}
 }
+
+
 function showYouthPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var youthresources = JSON.parse(sessionStorage.getItem("youthresources"));
-    if (youthresources == null) {
-        $.getJSON(FEED_YOUTH_RESOURCES, function(data) {
-            sessionStorage.setItem("youthresources", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(youthresources);
-        $('#region-one').append(info);
-    }
-    var youthawards = JSON.parse(sessionStorage.getItem("youthawards"));
-    if (youthawards == null) {
-        $.getJSON(FEED_YOUTH_AWARDWINS, function(data) {
-            sessionStorage.setItem("youthawards", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-            $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(youthawards);
-        $('#region-one').append(info);
-        $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-    }
-    var items47 = JSON.parse(sessionStorage.getItem("items47"));
-    if (items47 == null) {
-        $.getJSON(FEED_YOUTH_DISPLAY, function(data) {
-            sessionStorage.setItem("items47", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(items47);
-        $('#region-one').prepend(info);
-    }
-    var items52 = JSON.parse(sessionStorage.getItem("items52"));
-    if (items52 == null) {
-        $.getJSON(FEED_YOUTH_NEWBOOKS, function(data) {
-            sessionStorage.setItem("items52", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items52);
-        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var youthevents = JSON.parse(sessionStorage.getItem("youthevents"));
-    if (youthevents == null) {
-        $.getJSON(FEED_YOUTH_EVENTS, function(data) {
-            sessionStorage.setItem("youthevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(youthevents);
-        $('#region-three').html(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-    }
-    var youthreviews = JSON.parse(sessionStorage.getItem("youthreviews"));
-    if (youthreviews == null) {
-        $.getJSON(FEED_YOUTH_REVIEWS, function(data) {
-            sessionStorage.setItem("youthreviews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showreviews-template').html());
-            var info = template(data);
-            $('#region-two').append(info);
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(youthreviews);
-        $('#region-two').append(info);
-        $('#working').hide().spin(false);
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showYouthPage();
+        return;
+    });
+ 	} else {
+ 	var youth_display = featured_item_template(data.youth_display);
+ 	var youth_new_books = featured_item_template(data.youth_new_books);
+ 	var youth_resources = drupalnode_template(data.youth_resources);
+ 	var youth_award_winners = drupalnode_template(data.youth_award_winners);
+ 	$('#region-one').append(youth_display + youth_new_books + youth_resources + youth_award_winners);
+ 	$('a[rel="lightframe"]').fancybox({type: 'iframe'});
+ 	var youth_reviews = review_template(data.youth_reviews);
+ 	$('#region-two').append(youth_reviews);
+ 	var youth_events = events_template(data.youth_events);
+ 	$('#region-three').append(youth_events).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+ 	}
 }
 
 function showVideoPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var items32 = JSON.parse(sessionStorage.getItem("items32"));
-    if (items32 == null) {
-        $.getJSON(FEED_VIDEO_NEW, function(data) {
-            sessionStorage.setItem("items32", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items32);
-        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var items34 = JSON.parse(sessionStorage.getItem("items34"));
-    if (items34 == null) {
-        $.getJSON(FEED_VIDEO_HOT, function(data) {
-            sessionStorage.setItem("items34", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items34);
-        $('#region-one').append(info);
-    }
-    var items286 = JSON.parse(sessionStorage.getItem("items286"));
-    if (items286 == null) {
-        $.getJSON(FEED_VIDEO_MET, function(data) {
-            sessionStorage.setItem("items286", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-            var info = template(data);
-            $('#region-three').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(items286);
-        $('#region-three').append(info);
-    }
-    var items165 = JSON.parse(sessionStorage.getItem("items165"));
-    if (items165 == null) {
-        $.getJSON(FEED_VIDEO_TCFF, function(data) {
-            sessionStorage.setItem("items165", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(items165);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var videoreviews = JSON.parse(sessionStorage.getItem("videoreviews"));
-    if (videoreviews == null) {
-        $.getJSON(FEED_VIDEO_REVIEWS, function(data) {
-            sessionStorage.setItem("videoreviews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showreviews-template').html());
-            var info = template(data);
-            $('#region-two').append(info);
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(videoreviews);
-        $('#region-two').append(info);
-        $('#working').hide().spin(false);
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showVideoPage();
+        return;
+    });
+ 	} else {
+ 	var videos_new = featured_item_template(data.videos_new);
+ 	var videos_hot = featured_item_template(data.videos_hot);
+ 	$('#region-one').append(videos_new + videos_hot);
+ 	var videos_met = featured_item_all_template(data.videos_met);
+ 	var videos_tcff= featured_item_all_template(data.videos_tcff);
+ 	$('#region-three').append(videos_met + videos_tcff);
+ 	var videos_reviews = review_template(data.videos_reviews);
+ 	$('#region-two').append(videos_reviews);
+ 	}
 }
 
 function showMusicPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var items29 = JSON.parse(sessionStorage.getItem("items29"));
-    if (items29 == null) {
-        $.getJSON(FEED_MUSIC_NEW, function(data) {
-            sessionStorage.setItem("items29", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items29);
-        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var items31 = JSON.parse(sessionStorage.getItem("items31"));
-    if (items31 == null) {
-        $.getJSON(FEED_MUSIC_HOT, function(data) {
-            sessionStorage.setItem("items31", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items31);
-        $('#region-one').append(info);
-    }
-    var musiclinks = JSON.parse(sessionStorage.getItem("musiclinks"));
-    if (musiclinks == null) {
-        $.getJSON(FEED_MUSIC_LINKS, function(data) {
-            sessionStorage.setItem("musiclinks", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(musiclinks);
-        $('#region-three').prepend(info);
-    }
-    var musicreviews = JSON.parse(sessionStorage.getItem("musicreviews"));
-    if (musicreviews == null) {
-        $.getJSON(FEED_MUSIC_REVIEWS, function(data) {
-            sessionStorage.setitem("musicreviews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showreviews-template').html());
-            var info = template(data);
-            $('#region-two').append(info);
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(musicreviews);
-        $('#region-two').append(info);
-        $('#working').hide().spin(false);
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showMusicPage();
+        return;
+    });
+ 	} else {
+ 	var music_new = featured_item_template(data.music_new);
+ 	var music_hot = featured_item_template(data.music_hot);
+ 	$('#region-one').append(music_new + music_hot);
+ 	var music_reviews = review_template(data.music_reviews);
+ 	$('#region-two').prepend(music_reviews);
+ 	var music_links = drupalnode_template(data.music_links);
+ 	$('#region-three').append(music_links);
+ 	}
 }
 
 function showBooksPage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var items67 = JSON.parse(sessionStorage.getItem("items67"));
-    if (items67 == null) {
-        $.getJSON(FEED_BOOKS_FEATURED_FICTION, function(data) {
-            sessionStorage.setItem("items67", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items67);
-        $('#region-one').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var items68 = JSON.parse(sessionStorage.getItem("items68"));
-    if (items68 == null) {
-        $.getJSON(FEED_BOOKS_FEATURED_NONFIC, function(data) {
-            sessionStorage.setItem("items68", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items68);
-        $('#region-one').append(info);
-    }
-    var items45 = JSON.parse(sessionStorage.getItem("items45"));
-    if (items45 == null) {
-        $.getJSON(FEED_BOOKS_ADULTS_DISPLAY, function(data) {
-            sessionStorage.setItem("items45", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-            var info = template(data);
-            $('#region-one').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(items45);
-        $('#region-one').append(info);
-    }
-    var items224 = JSON.parse(sessionStorage.getItem("items224"));
-    if (items224 == null) {
-        $.getJSON(FEED_BOOKS_ADULTS_CLUBKITS, function(data) {
-            sessionStorage.setItem("items224", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(items224);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var items234 = JSON.parse(sessionStorage.getItem("items234"));
-    if (items234 == null) {
-        $.getJSON(FEED_BOOKS_ADULTS_BUSINESS, function(data) {
-            sessionStorage.setItem("items234", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-            var info = template(data);
-            $('#region-three').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditemboxall-template').html());
-        var info = template(items234);
-        $('#region-three').append(info);
-    }
-    var booklists = JSON.parse(sessionStorage.getItem("booklists"));
-    if (booklists == null) {
-        $.getJSON(FEED_BOOKS_BOOKLISTS, function(data) {
-            sessionStorage.setItem("booklists", JSON.stringify(data));
-            var template = Handlebars.compile($('#drupalnode-template').html());
-            var info = template(data);
-            $('#region-two').prepend(info);
-            $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-        });
-    } else {
-        var template = Handlebars.compile($('#drupalnode-template').html());
-        var info = template(booklists);
-        $('#region-two').prepend(info);
-        $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-    }
-    var bookreviews = JSON.parse(sessionStorage.getItem("bookreviews"));
-    if (bookreviews == null) {
-        $.getJSON(FEED_BOOKS_REVIEWS, function(data) {
-            sessionStorage.setItem("bookreviews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showreviews-template').html());
-            var info = template(data);
-            $('#region-two').append(info);
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#showreviews-template').html());
-        var info = template(bookreviews);
-        $('#region-two').append(info);
-        $('#working').hide().spin(false);
-    }
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showBooksPage();
+        return;
+    });
+ 	} else {
+    var books_featured_fiction = featured_item_template(data.books_featured_fiction);
+    var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
+    var books_adult_display = featured_item_template(data.books_adult_display)
+    $('#region-one').append(books_featured_fiction + books_featured_nonfiction + books_adult_display);
+    var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
+    var books_adult_business = featured_item_template(data.books_adult_business)
+    $('#region-three').append(books_adult_clubkits + books_adult_business);
+    var books_book_list = drupalnode_template(data.books_book_list)
+    $('#region-two').prepend(books_book_list);
+    $('a[rel="lightframe"]').fancybox({type: 'iframe'});
+    var books_reviews = review_template(data.books_reviews)
+    $('#region-two').prepend(books_reviews);
+ 	}
 }
 
 function showHomePage() {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
-    var items67 = JSON.parse(sessionStorage.getItem("items67"));
-    if (items67 == null) {
-        $.getJSON('https://www.tadl.org/mobile/export/items/67/json', function(data) {
-            sessionStorage.setItem("items67", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items67);
-        $('#region-three').prepend(info).prepend('<div class="card"><h4 class="title">Featured Items</h4></div>');
-    }
-    var items68 = JSON.parse(sessionStorage.getItem("items68"));
-    if (items68 == null) {
-        $.getJSON('https://www.tadl.org/mobile/export/items/68/json', function(data) {
-            sessionStorage.setItem("items68", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-three').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items68);
-        $('#region-three').append(info);
-    }
-    var items29 = JSON.parse(sessionStorage.getItem("items29"));
-    if (items29 == null) {
-        $.getJSON('https://www.tadl.org/mobile/export/items/29/json', function(data) {
-            sessionStorage.setItem("items29", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('#region-three').append(info);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeatureditembox-template').html());
-        var info = template(items29);
-        $('#region-three').append(info);
-    }
-    var featurednews = JSON.parse(sessionStorage.getItem("featurednews"));
-    if (featurednews == null) {
-        $.getJSON(NEWS_URL, function(data) {
-            sessionStorage.setItem("featurednews", JSON.stringify(data));
-            var template = Handlebars.compile($('#showfeaturednews-template').html());
-            var info = template(data);
-            $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
-            $('#working').hide().spin(false);
-        });
-    } else {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(featurednews);
-        $('#region-two').append(info).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
-        $('#working').hide().spin(false);
-    }
-    var tadlevents = JSON.parse(sessionStorage.getItem("tadlevents"));
-    if (tadlevents == null) {
-        $.getJSON(EVENTS_URL, function(data) {
-            sessionStorage.setItem("tadlevents", JSON.stringify(data));
-            var template = Handlebars.compile($('#showevents-template').html());
-            var info = template(data);
-            $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
-        });
-    } else {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(tadlevents);
-        $('#region-one').append(info).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+ 	var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showHomePage();
+        return;
+    });
+ 	} else {
+    var books_featured_fiction = featured_item_template(data.books_featured_fiction);
+    var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
+    var music_new = featured_item_template(data.music_new);
+    $('#region-three').append(books_featured_fiction + books_featured_nonfiction + music_new);
+	var featured_news = featured_news_template(data.featured_news);
+    $('#region-two').append(featured_news).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
+    var events = events_template(data.events);
+    $('#region-one').append(events).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
 }

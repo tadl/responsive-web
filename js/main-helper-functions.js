@@ -1,6 +1,15 @@
-$(document).ready(function() {
-    router.perform();
+var drupalnode_template;
+var featured_item_template;
+var review_template;
+var events_template;
+var featured_news_template;   	
+var featured_item_all_template;
 
+$(document).ready(function() {
+    load_drupal_json();
+    compile_templates(); 
+    router.perform();
+    
     var state = History.getState();
     var check = state.data.action
 
@@ -50,8 +59,25 @@ $(document).ready(function() {
 
     $('a[rel="lightframe"]').fancybox();
 
-    loadAllJson();
+
+
 });
+
+function load_drupal_json() {
+
+var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+
+ $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+    });
+
+
+}
+
+
+
+
 
 function startsearch() {
     var searchquery = encodeURIComponent($('#term').val());
