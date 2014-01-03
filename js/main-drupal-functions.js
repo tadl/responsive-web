@@ -181,7 +181,6 @@ function hoursAndInfo(loc) {
     } else {
         var template = Handlebars.compile($('#locationinfo-template').html());
         var current_loc = data['hours_' + loc]; 
-        alert(current_loc)
         var info = template(current_loc);
         $('#locinfo').html(info).show();
     }
