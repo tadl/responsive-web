@@ -284,10 +284,10 @@ function showBooksPage() {
  	} else {
     var books_featured_fiction = featured_item_template(data.books_featured_fiction);
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
-    var books_adult_display = featured_item_template(data.books_adult_display)
+    var books_adult_display = featured_item_all_template(data.books_adult_display)
     $('#region-one').append(books_featured_fiction + books_featured_nonfiction + books_adult_display);
     var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
-    var books_adult_business = featured_item_template(data.books_adult_business)
+    var books_adult_business = featured_item_all_template(data.books_adult_business)
     $('#region-three').append(books_adult_clubkits + books_adult_business);
     var books_book_list = drupalnode_template(data.books_book_list)
     $('#region-two').prepend(books_book_list);
