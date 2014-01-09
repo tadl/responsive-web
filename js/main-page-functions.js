@@ -209,7 +209,7 @@ function showYouthPage() {
         return;
     });
  	} else {
- 	var youth_display = featured_item_template(data.youth_display);
+ 	var youth_display = featured_item_all_template(data.youth_display);
  	var youth_new_books = featured_item_template(data.youth_new_books);
  	var youth_resources = drupalnode_template(data.youth_resources);
  	var youth_award_winners = drupalnode_template(data.youth_award_winners);
