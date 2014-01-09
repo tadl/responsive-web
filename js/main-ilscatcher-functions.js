@@ -178,6 +178,13 @@ function showmore(record_id) {
                 });
                 $('#'+ record_id).show();
                 check_googlebooks(record_id, isbn);
+                $(".fancybox").fancybox({
+    				openEffect  : 'none',
+   					closeEffect : 'none',
+    				iframe : {
+        				preload: false
+    						}
+				});
             });
     
 }
@@ -599,7 +606,7 @@ var super_clean_isbn = $.trim(clean_isbn);
 var isbn_google = 'ISBN:'+ super_clean_isbn;
 var isbn_google_prep = "'"+ isbn_google +"'"
 var record_div = record_id
-var url = 'http://books.google.com/books?bibkeys='+ isbn_google +'&jscmd=viewapi&callback=mycallback';
+var url = 'https://books.google.com/books?bibkeys='+ isbn_google +'&jscmd=viewapi&callback=mycallback';
 var reviews = "";
 var googlebook_test = "";
 $.ajax({
@@ -630,5 +637,18 @@ function load_googlebooks(isbn){
  var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
 viewer.load(isbn);
 
+}
+
+function shelf_finder(library, location, call_number){
+var shelf_url = 'http://wjr.dev.tadl.org/locator/index.php?location='+ library + '&shelf=' + location +'&call=' + call_number;
+var content = '<iframe style="width: 90%; height: 90%; overflow: hidden" scrolling="no" src="' + shelf_url + '"></iframe>';
+$.fancybox({
+     content : content,
+     type : 'html',
+     width : '90%',
+     height : '90%',
+     autoSize : false,
+     scrolling : 'no'
+     });
 }
 

@@ -44,7 +44,7 @@ Handlebars.registerHelper('each_upto', function(ary, max, options) {
 });
 
 Handlebars.registerHelper('youtubeify', function(title){
-	var youtube_url = 'http://gdata.youtube.com/feeds/api/videos?q=' + title + '-trailer-official&start-index=1&max-results=1&v=2&alt=json';
+	var youtube_url = 'https://gdata.youtube.com/feeds/api/videos?q=' + title + '-trailer-official&start-index=1&max-results=1&v=2&alt=json';
 	
 	jQuery.extend({
     getValues: function(url) {
@@ -76,7 +76,7 @@ var test = $.getValues(youtube_url)
 
 if (test != 'fail'){
 
-var embed_code = '<iframe class="youtube-player" type="text/html" width="320" height="240" src="http://www.youtube.com/embed/'+ test +'" allowfullscreen frameborder="0"></iframe>'
+var embed_code = '<iframe class="youtube-player" type="text/html" width="320" height="240" src="https://www.youtube.com/embed/'+ test +'" allowfullscreen frameborder="0"></iframe>'
 
 
 return embed_code;

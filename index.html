@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/buttons.css" />
     <link rel="stylesheet" href="css/navmenu.css" />
     <link rel="stylesheet" href="css/main.css" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
   		google.load("books", "0");
@@ -189,7 +189,7 @@
         <div class="grid-container">
             <div id="mobile-hero" class="hide-on-desktop hide-on-tablet mobile-100">
                 <div id="mobile-hero-inner" class="grid-100 tablet-grid-100 mobile-grid-100">
-                    This is a mobile header/banner.
+                    This is a mobile header/banner not cached.
                 </div>
             </div>
             <div id="locsel" class="grid-100 tablet-grid-100 hide-on-mobile padtop">
@@ -355,55 +355,6 @@
     </div>
 </script>
 
-<!-- this might not be used? Except to view an individual item? Which we don't do now? -->
-<script id="result-details-template" type="text/template">
-    {{#:items}}
-        <div class="card">
-        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :item.:image}}">
-        <span class="title"><img src="{{make_https :item.:format_icon}}"> {{:item.:title}}</span><br/>
-        {{#if :item.:author}}
-            <span class="author">{{:item.:author}}, </span>
-        {{/if}}
-        {{:item.:record_year}}
-        <div class="summary relative">{{:item.:summary}}</div>
-        <div class="clearfix"></div>
-        <div class="bottomstuff">
-        <div class="more">
-            {{#compare :item.:copies_available null operator="!="}} 
-                {{:item.:copies_available}} of {{:item.:copies_total}} available<br/>
-                <a class="actionlink" id="place_hold_{{:item.:record_id}}" onclick="pre_hold({{:item.:record_id}})">Place Hold</a> 
-            {{/compare}}
-            {{#compare :item.:copies_available null operator="=="}}
-                <a class="actionlink external" onclick="try { navigator.app.loadUrl('{{:item.:eresource}}', {openExternal: true}); } finally { window.location = '{{:item.:eresource}}'; }">View Online</a>
-            {{/compare}}
-        </div></div>
-        <div class="clearfix"></div>
-        <div>
-        {{#compare :item.:copies_available 0 operator="!="}}
-            {{#compare :item.:copies_available null operator="!="}}
-                <table><tr>
-                <td><strong>Library</strong></td>
-                <td><strong>Location</strong></td>
-                <td><strong>Call #</strong></td></tr>
-            {{/compare}}
-        {{/compare}}
-    {{/:items}}
-    {{#:shelvinglocations}}
-        {{#if :shelf_location.:library}}
-            <tr>
-            <td>{{:shelf_location.:library}}</td>
-            <td>{{:shelf_location.:shelving_location}}</td>
-            <td>{{:shelf_location.:call_number}}</td>
-            </tr>
-        {{/if}}
-    {{/:shelvinglocations}}
-    </table>
-    </div>
-    <div class="clearfix"></div>
-    <a onclick="showfeatured();" class="actionlink">Back to Featured Items</a>
-    <div id="{{:item.:record_id}}shelf" style="display:none;"></div>
-    </div>
-</script>
 
 <!-- updated for unsemantic -->
 <script id="results-template" type="text/template">
@@ -568,7 +519,12 @@
                 <tr class="smaller">
                     <td>{{shelf_location.library}}</td>
                     <td>{{shelf_location.shelving_location}}</td>
-                    <td>{{shelf_location.call_number}}</td>
+                    <td>{{shelf_location.call_number}}
+                    {{#compare shelf_location.library 'Woodmere' operator="==="}}
+                    </br>
+                    <a onclick="shelf_finder('{{shelf_location.library}}', '{{shelf_location.shelving_location}}', '{{shelf_location.call_number}}')">Find on Shelf</a>
+                    {{/compare}}
+                    </td>
                 </tr>
             {{/if}}
         {{/shelvinglocations}}
