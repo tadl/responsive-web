@@ -59,7 +59,7 @@ function getResults(query, mt, avail, location, searchtype) {
     var mediatypedecode = decodeURIComponent(mediatype);
     $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $('#search-params').show();
-  
+    changeBanner('Searching Catalog', '#0d4c78');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype, function(data) {
         var results = data.message;
         linked_search = "false";
@@ -107,6 +107,7 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
     var mediatypedecode = decodeURIComponent(mediatype);    
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
+    changeBanner('Searching Catalog', '#0d4c78');
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&facet=" + facet, function(data) {
         var results = data.message;

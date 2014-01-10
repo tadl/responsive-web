@@ -214,9 +214,11 @@
                 <div class="grid-15 tablet-grid-15 hide-on-mobile" style="width: 14.28%">
                     <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
                 </div>
-                <div id="locinfo" class="grid-100 tablet-grid-100 mobile-grid-100">
-                </div>
             </div>
+            <div class="grid-100 tablet-grid-100 mobile-grid-100"">
+            	<div id="page_banner">
+         		</div>
+         	</div>
         </div>
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -423,6 +425,7 @@
                     <div id="showmore-{{node.item}}" class="padtop">
                         <a class="button small tadlblue" id="more_details_{{node.item}}" onclick="showmore({{node.item}})"><span>More Details</span></a>
                         <a class="button small green" id="place_hold_{{node.item}}" onclick="pre_hold({{node.item}})"><span>Place Hold</span></a>
+                        <a class="button small purple" onclick="addtolist('{{node.item}}', 'https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}', '', '{{encode node.author}}', '', '', '{{encode node.title}}' )"><span>Add to List</span></a> 
                     </div>
                     <div id="hold_message_{{node.item}}" class="holdmessage"></div>
                 </div>
@@ -552,7 +555,7 @@
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
                     <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
-                    <div id="{{node.nid}}" style="display:none;">
+                    <div id="{{node.nid}}" style="display:none;" class="news_story">
                         {{{node.body}}}
                         <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
@@ -580,22 +583,6 @@
     </div>
 </script>
 
-<script id="showfeatureditemboxall-template" type="text/template">
-    <div class="card">
-        {{#each_upto nodes 1}}
-        <div class="grid-container pointer" onclick="showitemlistall({{node.termid}})">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
-                    <h4 class="title pointer">{{node.term}}</h4>
-                {{/each_upto}}
-                {{#each_upto nodes 4}}
-                    <div class="img-viewer pointer" onclick="showitemlistall({{node.termid}})">
-                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
-                    </div>
-                {{/each_upto}}
-            </div>
-        </div>
-    </div>
-</script>
 
 <script id="shelf-template" type="text/template">
     <table>
@@ -680,16 +667,21 @@
 </script>
 
 <script id="showlocations-template" type="text/template">
-    {{#nodes}}
-        <div class="shadow result pointer" onclick="unhide('{{node.shortname}}')">
-        <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
-        <h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
+	
+  	{{#nodes}}
+  		<div class="grid-100 tablet-grid-100 mobile-grid-100">
+          	<div class="card">
+          	<div class="grid-container">
+          	<div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-top: 5px;">
+        	<img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
+        	<h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
         {{node.address}}<br/>
         {{node.citystatezip}}<br/>
         <a href="tel:{{node.phone}}">{{node.phone}}</a><br/>
-        <span id="more{{node.shortname}}" class="viewmore">view hours</span>
-        <span id="{{node.shortname}}" style="display:none;">
+       </div>
+        <div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-top: 10px;">
         <table>
+        <tr><td><strong>Hours:</strong></td><td></td></tr>
         <tr><td>Sunday</td><td>{{node.sunday}}</td></tr>
         <tr><td>Monday</td><td>{{node.monday}}</td></tr>
         <tr><td>Tuesday</td><td>{{node.tuesday}}</td></tr>
@@ -700,7 +692,10 @@
         </table>
         </div>
         </div>
+        </div>
+          </div>
     {{/nodes}}
+       
 </script>
 
 

@@ -30,26 +30,59 @@ function showlocations() {
     });
 }
 
+
+
 function showitemlist(list_id) {
     cleanhouse();
-    $('#working').show().spin('default');
-    $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/json', function(data) {
-        var template = Handlebars.compile($('#showitemlist-template').html());
-        var info = template(data);
-        $('#region-two').html(info);
-        $('#working').hide().spin(false);
+    cleandivs();
+    changeBanner('Featured Items', '#0d4c78');
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+ 	if (data == null) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	 $.getJSON(drupal_json_url, function(data) {
+ 		var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
+        showitemlistall(list_id);
+        return;
     });
-}
-
-function showitemlistall(list_id) {
-    cleanhouse();
-    $('#working').show().spin('default');
-    $.getJSON('https://www.tadl.org/mobile/export/items/' + list_id + '/all/json', function(data) {
-        var template = Handlebars.compile($('#showitemlist-template').html());
-        var info = template(data);
+ 	} else { 
+ 	   var template = Handlebars.compile($('#showitemlist-template').html());
+       if (list_id == "67") {
+       var info = template(data.books_featured_fiction)
+       } else if (list_id == "68") {
+       var info = template(data.books_featured_nonfiction)
+       } else if (list_id == "45") {
+       var info = template(data.books_adult_display) 
+       } else if (list_id == "224") {
+       var info = template(data.books_adult_clubkits) 
+       } else if (list_id == "234") {
+       var info = template(data.books_adult_business) 
+       } else if (list_id == "29") {
+       var info = template(data.music_new) 
+       } else if (list_id == "31") {
+       var info = template(data.music_hot) 
+       } else if (list_id == "32") {
+       var info = template(data.videos_new) 
+       } else if (list_id == "34") {
+       var info = template(data.videos_hot) 
+       } else if (list_id == "165") {
+       var info = template(data.videos_tcff) 
+       } else if (list_id == "286") {
+       var info = template(data.videos_met) 
+       } else if (list_id == "47") {
+       var info = template(data.youth_display) 
+       } else if (list_id == "52") {
+       var info = template(data.youth_new_books) 
+       } else if (list_id == "41") {
+       var info = template(data.teens_manga) 
+       } else if (list_id == "51") {
+       var info = template(data.teens_new) 
+       } else {
+       return;
+       }
         $('#region-two').html(info);
-        $('#working').hide().spin(false);
-    });
+        mylist();
+      }
 }
 
 function showreviews(review_type) { 
@@ -165,26 +198,6 @@ function locHoursAndInfo(loc) {
 
 
 
-
-
-function hoursAndInfo(loc) {
-    $('#locinfo').hide();
-    $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
-    var data = JSON.parse(sessionStorage.getItem("everything"));
-    if (data == null) {
-     $.getJSON(drupal_json_url, function(data) {
- 		var cat = JSON.stringify(data)
-        sessionStorage.setItem('everything', cat );
-        hoursAndInfo(loc);
-        return;
-    });
-    } else {
-        var template = Handlebars.compile($('#locationinfo-template').html());
-        var current_loc = data['hours_' + loc]; 
-        var info = template(current_loc);
-        $('#locinfo').html(info).show();
-    }
-}
 
 function showNode(nid) {
     cleanhouse();

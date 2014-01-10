@@ -3,7 +3,7 @@ var featured_item_template;
 var review_template;
 var events_template;
 var featured_news_template;   	
-var featured_item_all_template;
+var showlocations_template;
 
 $(document).ready(function() {
     load_drupal_json();
@@ -50,12 +50,6 @@ $(document).ready(function() {
         return false;
     });
 
-    if (window.localStorage.getItem('location') == null) {
-        window.localStorage.setItem('location', 'tadl');
-        locHoursAndInfo('tadl');
-    } else {
-        locHoursAndInfo(window.localStorage.getItem('location'));
-    }
 
     $('a[rel="lightframe"]').fancybox();
 
@@ -186,6 +180,7 @@ function hidemenu() {
 
 function cleanhouse() {
     hidemenu();
+    document.querySelector('#page_banner').style.display = 'none';
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
     $('#search-params').empty().hide();

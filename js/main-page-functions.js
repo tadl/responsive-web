@@ -4,7 +4,7 @@ featured_item_template = Handlebars.compile($('#showfeatureditembox-template').h
 review_template = Handlebars.compile($('#showreviews-template').html());
 events_template = Handlebars.compile($('#showevents-template').html());
 featured_news_template =  Handlebars.compile($('#showfeaturednews-template').html());
-featured_item_all_template = Handlebars.compile($('#showfeatureditemboxall-template').html());
+showlocations_template = Handlebars.compile($('#showlocations-template').html());
 }
 
 
@@ -21,13 +21,14 @@ function showEastBay() {
         return;
     });
  	} else { 
+ 	changeBanner('East Bay', '#0d4c78');
  	var events_ebb = events_template(data.events_ebb)
  	var infobox_ebb = drupalnode_template(data.infobox_ebb)
  	var news_ebb = featured_news_template(data.news_ebb)
+ 	var hours_ebb = showlocations_template(data.hours_ebb)
  	$('#region-one').html(infobox_ebb);
- 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb);
+ 	$('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb);
  	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ebb);
- 	hoursAndInfo('ebb');
  	}
  	
 }
@@ -45,13 +46,14 @@ function showFifeLake() {
         return;
     });
  	} else { 
+ 	changeBanner('Fife Lake', '#0d4c78');
  	var events_flpl = events_template(data.events_flpl)
  	var infobox_flpl = drupalnode_template(data.infobox_flpl)
  	var news_flpl = featured_news_template(data.news_flpl)
+ 	var hours_flpl = showlocations_template(data.hours_flpl)
  	$('#region-one').html(infobox_flpl);
- 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl);
+ 	$('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl);
  	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_flpl);
- 	hoursAndInfo('flpl');
  	}
 }
 
@@ -68,13 +70,14 @@ function showInterlochen() {
         return;
     });
  	} else { 
+ 	changeBanner('Interlochen', '#0d4c78');
  	var events_ipl = events_template(data.events_ipl)
  	var infobox_ipl = drupalnode_template(data.infobox_ipl)
  	var news_ipl = featured_news_template(data.news_ipl)
+ 	var hours_ipl = showlocations_template(data.hours_ipl)
  	$('#region-one').html(infobox_ipl);
- 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl);
+ 	$('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl);
  	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ipl);
- 	hoursAndInfo('ipl');
  	}
 }
 
@@ -91,13 +94,14 @@ function showKingsley() {
         return;
     });
  	} else { 
+ 	changeBanner('Kingsley', '#0d4c78');
  	var events_kbl = events_template(data.events_kbl)
  	var infobox_kbl = drupalnode_template(data.infobox_kbl)
  	var news_kbl = featured_news_template(data.news_kbl)
+ 	var hours_kbl = showlocations_template(data.hours_kbl)
  	$('#region-one').html(infobox_kbl);
- 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl);
+ 	$('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl);
  	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_kbl);
- 	hoursAndInfo('kbl');
  	}
 }
 
@@ -114,13 +118,14 @@ function showPeninsula() {
         return;
     });
  	} else { 
+ 	changeBanner('Peninsula', '#0d4c78');
  	var events_pcl = events_template(data.events_pcl)
  	var infobox_pcl = drupalnode_template(data.infobox_pcl)
  	var news_pcl = featured_news_template(data.news_pcl)
+ 	var hours_pcl = showlocations_template(data.hours_pcl)
  	$('#region-one').html(infobox_pcl);
- 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl);
+ 	$('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl);
  	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_pcl);
- 	hoursAndInfo('pcl');
  	}
 }
 
@@ -137,13 +142,14 @@ function showWoodmere() {
         return;
     });
  	} else { 
+ 	changeBanner('Woodmere', '#0d4c78');
  	var events_wood = events_template(data.events_wood)
  	var infobox_wood = drupalnode_template(data.infobox_wood)
  	var news_wood = featured_news_template(data.news_wood)
+ 	var hours_wood = showlocations_template(data.hours_wood)
  	$('#region-one').html(infobox_wood);
- 	$('#region-two').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood);
+ 	$('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood);
  	$('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_wood);
- 	hoursAndInfo('wood');
  	}
 }
 
@@ -160,6 +166,7 @@ function showTeensPage() {
         return;
     });
  	} else { 
+ 	changeBanner('Teens', '#8a178a');
  	var teens_new = featured_item_template(data.teens_new)
  	var teens_manga = featured_item_template(data.teens_manga)
  	var teens_events = events_template(data.teens_events)
@@ -184,7 +191,8 @@ function showOnlinePage() {
         showOnlinePage();
         return;
     });
- 	} else {   
+ 	} else {  
+ 	changeBanner('Online', '#99c11f');
  	var online_legal = drupalnode_template(data.online_legal)
  	$('#region-one').append(online_legal);
  	var online_mel = drupalnode_template(data.online_mel)
@@ -209,7 +217,8 @@ function showYouthPage() {
         return;
     });
  	} else {
- 	var youth_display = featured_item_all_template(data.youth_display);
+ 	changeBanner('Youth', '#15b1eb');
+ 	var youth_display = featured_item_template(data.youth_display);
  	var youth_new_books = featured_item_template(data.youth_new_books);
  	var youth_resources = drupalnode_template(data.youth_resources);
  	var youth_award_winners = drupalnode_template(data.youth_award_winners);
@@ -235,11 +244,12 @@ function showVideoPage() {
         return;
     });
  	} else {
+ 	changeBanner('Video', '#ffc341');
  	var videos_new = featured_item_template(data.videos_new);
  	var videos_hot = featured_item_template(data.videos_hot);
  	$('#region-one').append(videos_new + videos_hot);
- 	var videos_met = featured_item_all_template(data.videos_met);
- 	var videos_tcff= featured_item_all_template(data.videos_tcff);
+ 	var videos_met = featured_item_template(data.videos_met);
+ 	var videos_tcff= featured_item_template(data.videos_tcff);
  	$('#region-three').append(videos_met + videos_tcff);
  	var videos_reviews = review_template(data.videos_reviews);
  	$('#region-two').append(videos_reviews);
@@ -259,6 +269,7 @@ function showMusicPage() {
         return;
     });
  	} else {
+ 	changeBanner('Music', '#fe6b18');
  	var music_new = featured_item_template(data.music_new);
  	var music_hot = featured_item_template(data.music_hot);
  	$('#region-one').append(music_new + music_hot);
@@ -282,12 +293,13 @@ function showBooksPage() {
         return;
     });
  	} else {
+ 	changeBanner('Books', '#e03434');
     var books_featured_fiction = featured_item_template(data.books_featured_fiction);
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
-    var books_adult_display = featured_item_all_template(data.books_adult_display)
+    var books_adult_display = featured_item_template(data.books_adult_display)
     $('#region-one').append(books_featured_fiction + books_featured_nonfiction + books_adult_display);
     var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
-    var books_adult_business = featured_item_all_template(data.books_adult_business)
+    var books_adult_business = featured_item_template(data.books_adult_business)
     $('#region-three').append(books_adult_clubkits + books_adult_business);
     var books_book_list = drupalnode_template(data.books_book_list)
     $('#region-two').prepend(books_book_list);
@@ -319,4 +331,10 @@ function showHomePage() {
     var events = events_template(data.events);
     $('#region-one').append(events).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
+}
+
+function changeBanner(content, color) {
+document.querySelector('#page_banner').style.backgroundColor = color;
+$('#page_banner').css({"display" : "block"});
+$('#page_banner').html('<h2>'+content +'</h2>')
 }
