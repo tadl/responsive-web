@@ -333,6 +333,22 @@ function showHomePage() {
     }
 }
 
+function myAccount(){
+	cleanhouse();
+    cleandivs();
+    current_page = "myaccount";
+    changeBanner('My Account', '#0d4c78'); 
+    username = window.localStorage.getItem('username');
+    password = window.localStorage.getItem('password');
+	if (current_user == 'true') {
+    var patron_full_name = window.localStorage.getItem('patron_full_name');
+    	$('#region-two').html('<div class="card"><h4 class="title">Hello '+ patron_full_name  +'!</h4></div>');
+	} else {
+		$('#region-two').append('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+		$("#login_form").slideDown("fast");
+	};
+}
+
 function changeBanner(content, color) {
 document.querySelector('#page_banner').style.backgroundColor = color;
 $('#page_banner').css({"display" : "block"});

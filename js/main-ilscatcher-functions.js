@@ -157,7 +157,8 @@ function logged_in() {
 function logout() {
     $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
     window.localStorage.clear();
-    home(); //probably something else here
+    current_user = 'false';
+    location.reload();
 }
 
 function showmore(record_id) {
@@ -323,6 +324,7 @@ function login() {
 function login_and_fetch_dash(username, password) {
     var username = username;
     var password = password;
+    var first_state = window.localStorage.getItem('current_user');
     if (typeof(username) == 'undefined' || typeof(password) == 'undefined') {
         username = window.localStorage.getItem('username');
         password = window.localStorage.getItem('password');
@@ -340,15 +342,33 @@ function login_and_fetch_dash(username, password) {
                 $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
     			window.localStorage.clear();
                 $('#login_msg').html('<span>Error logging in.</span>');
+                current_user = 'false';
             } else {
                 render_dash(data);
+                var patron_full_name = data.users[0].user.name;
+                var checkouts = data.users[0].user.checkouts;
+                var holds = data.users[0].user.holds;
+                var pickups = data.users[0].user.pickups;
+                var fines = data.users[0].user.fines;
+                window.localStorage.setItem('patron_full_name', patron_full_name);
+                window.localStorage.setItem('checkouts', checkouts);
+                window.localStorage.setItem('holds', holds);
+                window.localStorage.setItem('pickups', pickups);
+                window.localStorage.setItem('fines', fines);
+                window.localStorage.setItem('current_user', "true");
+                current_user = window.localStorage.getItem('current_user');
                 reset_hold_links();
+                if (current_page == 'myaccount' && first_state != 'true' ){
+                	myAccount();      
+            	};
+            	
             }
         });
     } else {
         $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
         window.localStorage.clear();
     }
+
 }
 
 function render_dash(data) {

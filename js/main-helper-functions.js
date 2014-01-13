@@ -4,6 +4,8 @@ var review_template;
 var events_template;
 var featured_news_template;   	
 var showlocations_template;
+var current_page;
+var current_user = window.localStorage.getItem('current_user');
 
 $(document).ready(function() {
     load_drupal_json();
@@ -70,7 +72,10 @@ var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
 }
 
 
-
+function stateLoader(action, title, url){
+var page = {action: action}
+History.pushState(page, title, url);
+}
 
 
 function startsearch() {
@@ -189,6 +194,7 @@ function cleanhouse() {
 }
 
 function cleandivs() {
+    current_page = "";
     $('#region-wide').empty();
     $('#region-one').empty();
     $('#region-two').empty();
@@ -238,15 +244,19 @@ function load(page) {
 
 function nodePage(page) {
     if (page == 'governance') {
+    	changeBanner('Governance', '#0d4c78');
         loadNodes({left:573, middle:7180, right:577});
     }
     if (page == 'tbl') {
+    	changeBanner('Talking Book Library', '#0d4c78');
         loadNodes({third:5048, twothirds:729});
     }
     if (page == 'public-computing') {
+    	changeBanner('Public Computing', '#0d4c78');
         loadNodes({third:851, twothirds:643});
     }
     if (page == 'rooms') {
+    	changeBanner('Meeting Room', '#0d4c78');
         loadNodes({third:863, twothirds:730});
     }
 }
@@ -261,6 +271,8 @@ function loadNode(nid) {
 
 
 function loadlist(list) {
+	cleanhouse();
+    cleandivs();
     var list_id = list;
     state = History.getState();
     if (state.data.list != list) {
@@ -288,8 +300,6 @@ function loadlist(list) {
 function loadNodes(nodes) {
     console.log(nodes);
     if (nodes !== null) {
-        cleanhouse();
-        cleandivs();
         $('#working').show().spin('default');
         if (nodes.left != null) {
             $.getJSON(NODEPREFIX + nodes.left, function(data) {

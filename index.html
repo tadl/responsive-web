@@ -95,6 +95,7 @@
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
+            .route(BASE_URL + 'myaccount', myAccount)         
             ;
     </script>
 </head>
@@ -602,19 +603,20 @@
 </script>
 
 <script id="logedin-template" type="text/template">
-    {{#:users}}
+    {{#users}}
         <div>
-        {{:user.:name}}
+        {{user.name}}
         <div class="accountlinks">
-        <a class="button wide medium gray" onclick="showcheckouts()"><span>Checkouts: {{:user.:checkouts}}</span></a><br />
-        <a class="button wide medium gray" onclick="showholds()"><span>Holds: {{:user.:holds}}</span></a><br />
-        <a class="button wide medium gray" onclick="showpickups()"><span>Ready for Pickup: {{:user.:pickups}}</span></a><br />
+        <a class="button wide medium gray" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
+        <a class="button wide medium gray" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
+        <a class="button wide medium gray" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
         </div>
-        Fines: {{:user.:fines}}
+        Fines: {{user.fines}}
         </div>
-        <a class="button small tadlblue" id="login" onclick="logout()"><span>Logout</span></a>
-        <a class="button small tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a>
-    {{/:users}}
+        <a class="button wide tadlblue" id="myaccount" onclick="stateLoader('myaccount', 'My Account', 'myaccount')"><span>Settings</span></a> </br>
+        <a class="button wide tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a> </br>
+    	<a class="button wide tadlblue" id="login" onclick="logout()"><span>Logout</span></a> 
+    {{/users}}
 </script>
 
 <!-- updated for unsemantic -->
