@@ -341,9 +341,12 @@ function myAccount(){
     changeBanner('My Account', '#0d4c78'); 
     username = window.localStorage.getItem('username');
     password = window.localStorage.getItem('password');
+    account_settings = window.localStorage.getItem('account_settings');
 	if (current_user == 'true') {
-    var patron_full_name = window.localStorage.getItem('patron_full_name');
+    	var patron_full_name = window.localStorage.getItem('patron_full_name');
     	$('#region-two').html('<div class="card"><h4 class="title">Account Settings</h4></div><div class="card"><div id="account_settings">Loading!</div></div>');
+	    
+	    
 	    
 	    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
 	     var prefs = myaccount_template(data);

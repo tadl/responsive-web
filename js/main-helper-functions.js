@@ -192,7 +192,6 @@ function cleanhouse() {
     $("#search_options").slideUp("fast");
     $('#search-params').empty().hide();
     $('#loadmore').hide();
-    $("html, body").animate({ scrollTop: 0}, "slow");
 }
 
 function cleandivs() {
