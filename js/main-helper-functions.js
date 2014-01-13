@@ -5,7 +5,9 @@ var events_template;
 var featured_news_template;   	
 var showlocations_template;
 var current_page;
+var myaccount_template;
 var current_user = window.localStorage.getItem('current_user');
+
 
 $(document).ready(function() {
     load_drupal_json();

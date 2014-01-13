@@ -132,41 +132,6 @@ function showfeaturednews() {
 }
 
 
-function showmain() {
-    cleanhouse();
-    $('#results').html('<div id="mainpage"><div class="mainlogo"><img class="homelogo" src="img/clean-logo-header.png" alt="" /></div><div class="clearfix"></div><div class="mainlinks"></div><div class="clearfix"></div></div>');
-    var action = {action:"showmain"}
-    History.pushState(action,  psTitle + "Search and Explore", "");
-    state = History.getState();
-    $('.mainlinks').html('');
-    $('#results').show();
-    setTimeout(login,1000);
-}
-
-function facebookfeed() { 
-    cleanhouse();
-    var action = {action:"facebookfeed"}
-    History.pushState(action, "Facebook Feed", "facebook"); 
-    state = History.getState();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
-    $.getJSON(FACEBOOK_URL, function(data) {
-        var template = Handlebars.compile($('#facebookfeed-template').html());
-        var info = template(data);
-        if (state.data.action === "facebookfeed") { 
-            $('.load_more').hide();
-            $('#results').html(info);
-            $('.linkable').doLinks();
-            $(".shortDateFormat").each(function (idx, elem) {
-                if ($(elem).is(":input")) {
-                    $(elem).val($.format.date($(elem).val(), 'MM/dd/yyyy'));
-                } else {
-                    $(elem).text($.format.date($(elem).text(), 'MM/dd/yyyy'));
-                }
-            });
-        }
-    });
-}
 
 function locHoursAndInfo(loc) {
     window.localStorage.setItem('location', loc);

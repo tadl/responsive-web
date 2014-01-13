@@ -5,6 +5,7 @@ review_template = Handlebars.compile($('#showreviews-template').html());
 events_template = Handlebars.compile($('#showevents-template').html());
 featured_news_template =  Handlebars.compile($('#showfeaturednews-template').html());
 showlocations_template = Handlebars.compile($('#showlocations-template').html());
+myaccount_template = Handlebars.compile($('#myaccount-template').html());
 }
 
 
@@ -342,9 +343,14 @@ function myAccount(){
     password = window.localStorage.getItem('password');
 	if (current_user == 'true') {
     var patron_full_name = window.localStorage.getItem('patron_full_name');
-    	$('#region-two').html('<div class="card"><h4 class="title">Hello '+ patron_full_name  +'!</h4></div>');
+    	$('#region-two').html('<div class="card"><h4 class="title">Account Settings</h4></div><div class="card"><div id="account_settings">Loading!</div></div>');
+	    
+	    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
+	     var prefs = myaccount_template(data);
+	     $('#account_settings').html(prefs);
+	     });
 	} else {
-		$('#region-two').append('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 		$("#login_form").slideDown("fast");
 	};
 }

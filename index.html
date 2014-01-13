@@ -79,7 +79,6 @@
             .route(BASE_URL + 'interlochen', showInterlochen)
             .route(BASE_URL + 'peninsula', showPeninsula)
             .route(BASE_URL + 'events', showevents)
-            .route(BASE_URL + 'facebook', facebookfeed)
             .route(BASE_URL + 'locations', showlocations)
             .route(BASE_URL + 'card', showcard)
             .route(BASE_URL + 'pickup', showpickups)
@@ -90,7 +89,6 @@
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_id', showitemlist)
-            .route(BASE_URL + 'item/:record_id', viewitem)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
@@ -619,6 +617,23 @@
     {{/users}}
 </script>
 
+<script id="myaccount-template" type="text/template">
+
+	{{#settings}}
+		<h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
+		<h4>Username: {{opac_username}}</h4>
+		<h4>Email: {{email_address}}</h4>
+		<h4>Phone: {{default_phone}}</h4>
+		<h4>Phone Notifications: {{hold_notify_phone}}</h4>
+		<h4>Email Notifications: {{hold_notify_email}}</h4>
+		<h4>Default Pick-up Location: {{pickup}}</h4>
+		<h4>Save Borrowing History: {{circ}}</h4>
+		<h4>Save Hold History: {{hold}}</h4>
+	{{/settings}}
+
+	
+</script>
+
 <!-- updated for unsemantic -->
 <script id="showcheckedout-template" type="text/template">
     {{#:checkouts}}
@@ -701,38 +716,6 @@
 </script>
 
 
-<script id="facebookfeed-template" type="text/template">
-    {{#data}}
-        {{#compare from.id 6113436733 operator="=="}}
-            {{#compare application.name "Photos" operator="!="}}
-                {{#compare privacy.value "" operator="!="}}
-                    <div class="shadow result">
-                        <div class="fb_img">
-                        {{#if picture}}
-                            {{#if object_id}}
-                                <img src="https://graph.facebook.com/{{object_id}}/picture">
-                            {{else}}
-                                <img src="{{make_https picture}}">
-                            {{/if}}
-                        {{else}}
-                            <img src="img/clocktower100.png">
-                        {{/if}}
-                        </div>
-                        <span style="font-size:13px; font-style:italic;">{{description}}</span><br/>
-                        <span class="linkable" style="font-size:14px;">{{message}}</span><br/>Posted on <span class="shortDateFormat">{{created_time}}</span>
-                        
-                        {{#if caption}}
-                            {{#if link}}
-                                <a href="{{link}}" style="font-decoration: none; font-size: 12px;">See More</a>
-                            {{/if}}
-                        {{/if}}
-                        
-                    </div>
-                {{/compare}} 
-            {{/compare}} 
-        {{/compare}}
-    {{/data}}
-</script>
 
 
 <script id="showholds-template" type="text/template">
