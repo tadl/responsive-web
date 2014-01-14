@@ -36,7 +36,6 @@
   -webkit-user-select:none;
   -khtml-user-select: none;
   user-select: none;
-  margin-bottom:10px;
 }
 .button:hover, .button.hover {
   background: -moz-linear-gradient(
