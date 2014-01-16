@@ -34,6 +34,26 @@ Handlebars.registerHelper('encode', function(data, options) {
     return encode_data;
 });
 
+Handlebars.registerHelper('idtoname', function(id) {
+    var idname;
+    if (id == 23) {
+        idname = "Woodmere (Main) Branch Library";
+    } else if (id == 24) {
+        idname = "Interlochen Public Library";
+    } else if (id == 25) {
+        idname = "Kingsley Branch Library";
+    } else if (id == 26) {
+        idname = "Peninsula Community Library";
+    } else if (id == 27) {
+        idname = "Fife Lake Public Library";
+    } else if (id == 28) {
+        idname = "East Bay Branch Library";
+    } else {
+        idname = id;
+    }
+    return idname;
+});
+
 Handlebars.registerHelper('each_upto', function(ary, max, options) {
     if (!ary || ary.length == 0)
         return options.inverse(this);

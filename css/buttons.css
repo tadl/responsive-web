@@ -36,7 +36,6 @@
   -webkit-user-select:none;
   -khtml-user-select: none;
   user-select: none;
-  margin-bottom:10px;
 }
 .button:hover, .button.hover {
   background: -moz-linear-gradient(
@@ -55,7 +54,6 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#33FFFFFF', EndColorStr='#19FFFFFF')"; /* IE8 */
 }
 .button:active, .button.active {
-  top:1px;
   background: -moz-linear-gradient(
     center top,
     rgba(0, 0, 0, .1) 0%,
@@ -71,9 +69,7 @@
   filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#19000000', EndColorStr='#19FFFFFF'); /* IE6,IE7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#19000000', EndColorStr='#19FFFFFF')"; /* IE8 */
 }
-.button:active, .button.active {
-  top:1px;
-}
+
 .button span {
   position: relative;
   color:#fff;
