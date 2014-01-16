@@ -187,6 +187,7 @@ function hidemenu() {
 
 function cleanhouse() {
     hidemenu();
+    $('body').scrollTop(0);
     document.querySelector('#page_banner').style.display = 'none';
     $("#login_form").slideUp("fast");
     $("#search_options").slideUp("fast");
