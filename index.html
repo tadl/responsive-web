@@ -214,8 +214,8 @@
                     <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
                 </div>
             </div>
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
-            	<div id="page_banner">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop"">
+            	<div id="page_banner" class="">
          		</div>
          	</div>
         </div>
@@ -232,13 +232,13 @@
                 <div id="third-pad">&nbsp;</div>
                 <div id="one-third"></div>
             </div>
-            <div class="grid-50 tablet-grid-75 mobile-grid-100 push-25 tablet-push-25 mobile-push-100">
+            <div class="grid-50 tablet-grid-65 mobile-grid-100 push-25 tablet-push-35 mobile-push-100">
                 <div id="two-pad">&nbsp;</div>
                 <div id="search-params" class="card padv hidden"></div>
                 <div id="region-two"></div>
                 <div id="loadmore"><div id="loadmoretext"></div></div>
             </div>
-            <div class="grid-25 tablet-grid-25 mobile-grid-100 pull-50 tablet-pull-75 mobile-pull-100">
+            <div class="grid-25 tablet-grid-35 mobile-grid-100 pull-50 tablet-pull-65 mobile-pull-100">
                 <div id="one-pad">&nbsp;</div>
                 <div id="region-one"></div>
             </div>
@@ -370,10 +370,12 @@
                             <a class="button small green" id="place_hold_{{item.record_id}}" onclick="pre_hold({{item.record_id}})"><span>Place Hold</span></a> 
                         {{/compare}}
                         {{#compare item.availability null operator="=="}}
-                            <a class="button small green" target="_blank" href="{{item.online}}"><span>View Online</span></a>
+                            <a class="button small red" target="_blank" href="{{item.online}}"><span>View Online</span></a>
                         {{/compare}}
- <a class="button small purple" onclick="addtolist('{{item.record_id}}', '{{make_https item.image}}', '{{make_https item.format_icon}}', '{{encode item.author}}', '{{item.record_year}}', '{{item.online}}', '{{encode item.title}}' )"><span>Add to List</span></a> 
-                    </div>
+                        {{#compare item.availability null operator="!="}}
+ <a class="button small purple" onclick="addtolist('{{item.record_id}}', '{{make_https item.image}}', '{{make_https item.format_icon}}', '{{encode item.author}}', '{{item.record_year}}', '{{item.online}}', '{{encode item.title}}' )"><span>Add to Bag</span></a> 
+                   		{{/compare}}
+                   </div>
                     <div id="hold_message_{{item.record_id}}" class="holdmessage"></div>
                 </div>
                 
@@ -414,7 +416,7 @@
                     <div id="showmore-{{node.item}}" class="padtop">
                         <a class="button small tadlblue" id="more_details_{{node.item}}" onclick="showmore({{node.item}})"><span>More Details</span></a>
                         <a class="button small green" id="place_hold_{{node.item}}" onclick="pre_hold({{node.item}})"><span>Place Hold</span></a>
-                        <a class="button small purple" onclick="addtolist('{{node.item}}', 'https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}', '', '{{encode node.author}}', '', '', '{{encode node.title}}' )"><span>Add to List</span></a> 
+                        <a class="button small purple" onclick="addtolist('{{node.item}}', 'https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}', '', '{{encode node.author}}', '', '', '{{encode node.title}}' )"><span>Add to Bag</span></a> 
                     </div>
                     <div id="hold_message_{{node.item}}" class="holdmessage"></div>
                 </div>
@@ -537,7 +539,7 @@
 
 <!-- updated for unsemantic -->
 <script id="showfeaturednews-template" type="text/template">
-    {{#nodes}}
+    {{#each_upto nodes 5}}
         <div class="card">
             <img src="{{node.image}}" />
             <div class="grid-container">
@@ -551,7 +553,7 @@
                 </div>
             </div>
         </div>
-    {{/nodes}}
+    {{/each_upto}}
 </script>
 
 <!-- updated for unsemantic -->
@@ -616,7 +618,7 @@
 		<h4>Phone: {{default_phone}}</h4>
 		<h4>Phone Notifications: {{hold_notify_phone}}</h4>
 		<h4>Email Notifications: {{hold_notify_email}}</h4>
-		<h4>Default Pick-up Location: {{pickup}}</h4>
+		<h4>Default Pick-up Location: {{idtoname pickup}}</h4>
 		<h4>Save Borrowing History: {{circ}}</h4>
 		<h4>Save Hold History: {{hold}}</h4>
 	{{/settings}}
@@ -647,7 +649,7 @@
 
 <!-- updated for unsemantic -->
 <script id="showevents-template" type="text/template">
-    {{#each_upto nodes 10}}
+    {{#each_upto nodes 6}}
         <div class="card">
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35">
