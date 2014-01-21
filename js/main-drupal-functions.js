@@ -131,38 +131,48 @@ function showfeaturednews() {
     });
 }
 
-
-
 function locHoursAndInfo(loc) {
     window.localStorage.setItem('location', loc);
     $('#locinfo').hide();
-    $('#locsel').css('background-image', 'url(img/' + loc + '.jpg)');
+    var template = Handlebars.compile($('#locationinfo-template').html());
     if (loc == 'tadl') {
         var data = {"nodes": [{"node": {"fullname": "Traverse Area District Library","shortname": "tadl","sunday": "12pm to 5pm","monday": "9am to 9pm","tuesday": "9am to 9pm","wednesday": "9am to 9pm","thursday": "9am to 9pm","friday": "9am to 6pm","saturday": "9am to 6pm","address": "610 Woodmere Ave","citystatezip": "Traverse City, MI 49686","phone": "(231) 932-8500","fax": "(231) 932-8538","email": "libadmin@tadl.org","libfirstname": "Traverse Area","liblastname": "District Library"}}]}
-        var template = Handlebars.compile($('#locationinfo-template').html());
         var info = template(data);
         $('#locinfo').html(info).show();
     } else {
-        var currentLoc = JSON.parse(sessionStorage.getItem(loc + "hours"));
-        if (currentLoc == null) {
-            $('#working').show().spin('default');
-            $.getJSON(LOCATION_BASE + loc, function(data) {
-                sessionStorage.setItem(loc + "hours", JSON.stringify(data));
-                var template = Handlebars.compile($('#locationinfo-template').html());
-                var info = template(data);
-                $('#locinfo').html(info).show();
-                $('#working').hide().spin(false);
+        var data = JSON.parse(sessionStorage.getItem("everything"));
+        if (data == null) {
+            $.getJSON(drupal_json_url, function(data) {
+                var cat = JSON.stringify(data);
+                sessionStorage.setItem('everything', cat);
+                locHoursAndInfo(loc);
+                return;
             });
         } else {
-            var template = Handlebars.compile($('#locationinfo-template').html());
-            var info = template(currentLoc);
+            var current_loc = data['hours_' + loc];
+            var info = template(current_loc);
             $('#locinfo').html(info).show();
         }
     }
 }
 
-
-
+function hoursAndInfo(loc) {
+    $('#locinfo').hide();
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+    if (data == null) {
+        $.getJSON(drupal_json_url, function(data) {
+            var cat = JSON.stringify(data)
+            sessionStorage.setItem('everything', cat );
+            hoursAndInfo(loc);
+            return;
+        });
+    } else {
+        var template = Handlebars.compile($('#locationinfo-template').html());
+        var current_loc = data['hours_' + loc];
+        var info = template(current_loc);
+        $('#locinfo').html(info).show();
+    }
+}
 
 function showNode(nid) {
     cleanhouse();

@@ -29,6 +29,13 @@ $(document).ready(function() {
 
     jQuery.support.cors = true;
 
+    if (window.localStorage.getItem('location') == null) {
+        window.localStorage.setItem('location', 'tadl');
+        locHoursAndInfo('tadl');
+    } else {
+        locHoursAndInfo(window.localStorage.getItem('location'));
+    }
+
     // pushmenu
     $menuLeft = $('.pushmenu-left');
     $nav_list = $('#nav_list');

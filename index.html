@@ -303,19 +303,9 @@
                         <li class="last"><a href="node/141432">Menu item</a></li>
                     </ul>
                 </div>
-                <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
-                    <h3 class="footer-heading">Why so many links</h3>
-                    <ul id="footer-right-menu" class="footer-menu">
-                        <li><a href="node/141432">Do</a></li>
-                        <li><a href="node/141432">We</a></li>
-                        <li><a href="node/141432">Really</a></li>
-                        <li><a href="node/141432">Want</a></li>
-                        <li><a href="node/141432">So</a></li>
-                        <li><a href="node/141432">Many</a></li>
-                        <li><a href="node/141432">Links</a></li>
-                        <li><a href="node/135312">Here?</a></li>
-                        <li class="last"><a href="node/141432">Probably not.</a></li>
-                    </ul>
+                <div class="grid-25 tablet-grid-50 mobile-grid-100">
+                    <div id="locinfo">
+                    </div>
                 </div>
             </div>
             <div id="footer-pad" class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
@@ -686,12 +676,10 @@
 <script id="showlocations-template" type="text/template">
 	
   	{{#nodes}}
-  		<div class="grid-100 tablet-grid-100 mobile-grid-100">
-          	<div class="card">
-          	<div class="grid-container">
-          	<div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-top: 5px;">
-        	<img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
-        	<h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
+        <div class="card padtop">
+  		<div class="grid-50 tablet-grid-50 mobile-grid-50">
+        <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
+        <h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
         {{node.address}}<br/>
         {{node.citystatezip}}<br/>
         <a href="tel:{{node.phone}}">{{node.phone}}</a><br/>
@@ -709,8 +697,6 @@
         </table>
         </div>
         </div>
-        </div>
-          </div>
     {{/nodes}}
        
 </script>
@@ -779,15 +765,7 @@
 
 <script id="locationinfo-template" type="text/template">
     {{#nodes}}
-        <div id="lochours" class="grid-33 hide-on-tablet hide-on-mobile">
-            <table class="hours" style="font-size:12px;">
-                <tr><td class="day left">Monday {{node.monday}}</td><td class="day right"></td></tr>
-                <tr><td class="day left">Tuesday {{node.tuesday}}</td><td class="day right">Friday {{node.friday}}</td></tr>
-                <tr><td class="day left">Wednesday {{node.wednesday}}</td><td class="day right">Saturday {{node.saturday}}</td></tr>
-                <tr><td class="day left">Thursday {{node.thursday}}</td><td class="day right">Sunday {{node.sunday}}</td></tr>
-            </table>
-        </div>
-        <div id="locloc" class="grid-33 hide-on-tablet hide-on-mobile">
+        <div id="locloc">
             <div class="padtop" style="font-size:26px;line-height:24px;">
                 {{node.libfirstname}}<br/>
                 <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
@@ -799,35 +777,21 @@
                 {{/compare}}
             </div>
         </div>
-        <div id="loccontact" class="grid-33 hide-on-tablet hide-on-mobile">
+        <div id="loccontact">
             {{node.address}}<br/>
             {{node.citystatezip}}<br/>
             {{node.phone}}
         </div>
-        <div id="lochours" class="hide-on-desktop tablet-grid-45 mobile-grid-45">
+        <div id="lochours" style="text-align:center;">
             <table class="hours" style="font-size:12px;">
-                <tr><td class="day left">Monday {{node.monday}}</td><td class="day right"></td></tr>
-                <tr><td class="day left">Tuesday {{node.tuesday}}</td><td class="day right">Friday {{node.friday}}</td></tr>
-                <tr><td class="day left">Wednesday {{node.wednesday}}</td><td class="day right">Saturday {{node.saturday}}</td></tr>
-                <tr><td class="day left">Thursday {{node.thursday}}</td><td class="day right">Sunday {{node.sunday}}</td></tr>
+                <tr><td class="day left">Sunday</td><td class="day right">{{node.sunday}}</td></tr>
+                <tr><td class="day left">Monday</td><td class="day right">{{node.monday}}</td></tr>
+                <tr><td class="day left">Tuesday</td><td class="day right">{{node.tuesday}}</td></tr>
+                <tr><td class="day left">Wednesday</td><td class="day right">{{node.wednesday}}</td></tr>
+                <tr><td class="day left">Thursday</td><td class="day right">{{node.thursday}}</td></tr>
+                <tr><td class="day left">Friday</td><td class="day right">{{node.friday}}</td></tr>
+                <tr><td class="day left">Saturday</td><td class="day right">{{node.saturday}}</td></tr>
             </table>
-        </div>
-        <div id="locloc" class="hide-on-desktop tablet-grid-20 mobile-grid-20">
-            <div class="padtop" style="font-size:26px;line-height:24px;">
-                {{node.libfirstname}}<br/>
-                <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
-                {{#compare node.shortname "tadl" operator="=="}}
-                    <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>set location</span></a>
-                {{/compare}}
-                {{#compare node.shortname "tadl" operator="!="}}
-                    <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
-                {{/compare}}
-            </div>
-        </div>
-        <div id="loccontact" class="hide-on-desktop tablet-grid-35 mobile-grid-35">
-            {{node.address}}<br/>
-            {{node.citystatezip}}<br/>
-            {{node.phone}}
         </div>
     {{/nodes}}
 </script>
@@ -869,6 +833,17 @@
         </div>
     {{/nodes}}
 </script>
+
+<div id="dropdown-1" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a onclick="locHoursAndInfo('wood')">Woodmere</a></li>
+        <li><a onclick="locHoursAndInfo('kbl')">Kingsley</a></li>
+        <li><a onclick="locHoursAndInfo('ipl')">Interlochen</a></li>
+        <li><a onclick="locHoursAndInfo('flpl')">Fife Lake</a></li>
+        <li><a onclick="locHoursAndInfo('pcl')">Peninsula</a></li>
+        <li><a onclick="locHoursAndInfo('ebb')">East Bay</a></li>
+    </ul>
+</div>
 
 
 <!-- Piwik -->

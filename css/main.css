@@ -585,26 +585,15 @@ input.search {
   text-align:left;
   font-size: 25px;
   padding: 8px;
-  
 }
 
 #locinfo {
-    display:block;
-    position:absolute;
-    bottom:0px;
-    background:rgba(0,0,0,0.5);
-    color:#f0f2f5;
 }
 
-#loccontact {
-    padding-top:10px;
-    text-align:right;
+table.hours {
+    width:70%;
+    margin: auto;
 }
-
-#lochours {
-    padding-top:10px;
-}
-
 .left {
     text-align:left;
     padding-right:5px;
