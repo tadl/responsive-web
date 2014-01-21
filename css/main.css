@@ -414,7 +414,7 @@ img.icon.logo {
 }
 
 .padtop {
-    padding:15px 0 0 0;
+    padding: 10px 0 0 0;
 }
 
 .padbot {
@@ -576,6 +576,9 @@ input.search {
    display: none;
    height: 50px;
    color: #fff;
+   margin-right: 10px;
+   margin-left: 10px;
+   margin-bottom: 5px;
    -webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5);
    -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5);
    box-shadow:1px 1px 2px rgba(0,0,0,0.5);
@@ -585,7 +588,6 @@ input.search {
   text-align:left;
   font-size: 25px;
   padding: 8px;
-  
 }
 
 #locinfo {

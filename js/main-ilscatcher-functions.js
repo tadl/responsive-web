@@ -505,10 +505,16 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
     var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
     var savelist = JSON.stringify(listvalue);
     if (current_list) {
-        var mergelist = []
+    	var mergelist = []
         mergelist.push(JSON.parse(current_list));
         mergelist.unshift(listvalue);
-        localStorage['list'] = JSON.stringify(mergelist);  
+        var prep = JSON.parse(current_list);
+        var test = Object.keys(prep).length;
+        if (test <= 9){
+        localStorage['list'] = JSON.stringify(mergelist); 
+        }else{
+        alert("Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!");
+        }
     } else {
         window.localStorage.setItem('list', savelist);
     };
@@ -520,8 +526,6 @@ function mylist() {
 
 if (window.localStorage.getItem('list')){
     var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-  
-   
     var mylist_decode = decodeURI(mylist);
     var wrapper = '{"objects": ['+ mylist_decode +']}';
     var test = JSON.stringify(eval("(" + wrapper + ")"));

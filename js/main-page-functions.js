@@ -326,7 +326,8 @@ function showHomePage() {
     var books_featured_fiction = featured_item_template(data.books_featured_fiction);
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
     var music_new = featured_item_template(data.music_new);
-    $('#region-three').append(books_featured_fiction + books_featured_nonfiction + music_new);
+    var videos_new = featured_item_template(data.videos_new);
+    $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
 	var featured_news = featured_news_template(data.featured_news);
     $('#region-two').append(featured_news).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
     var events = events_template(data.events);
