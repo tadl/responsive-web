@@ -254,17 +254,17 @@
             <div class="grid-container" id="footer-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
                     <ul id="footer-top-menu" class="footer-top-menu">
-                        <li class="first"><a class="pointer" onclick="load('eastbay')">East Bay</a></li>
-                        <li><a class="pointer" onclick="load('fifelake')">Fife Lake</a></li>
+                        <li class="first"><a class="pointer" onclick="load('woodmere')">Woodmere</a></li>
+                        <li><a class="pointer" onclick="load('fifelake')">Fife&nbsp;Lake</a></li>
                         <li><a class="pointer" onclick="load('interlochen')">Interlochen</a></li>
                         <li><a class="pointer" onclick="load('kingsley')">Kingsley</a></li>
                         <li><a class="pointer" onclick="load('peninsula')">Peninsula</a></li>
-                        <li class="last"><a class="pointer" onclick="load('woodmere')">Woodmere</a></li>
+                        <li class="last"><a class="pointer" onclick="load('eastbay')">East&nbsp;Bay</a></li>
                     </ul>
                 </div><!-- all of these links should use onclick instead of href
                            to avoid reloading the page and triggering document.ready -->
                 <div class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
-                    <h3 class="footer-heading"><a href="node/571">About Us</h3>
+                    <h3 class="footer-heading"><a href="node/571">About Us</a></h3>
                     <ul id="footer-left-menu" class="footer-menu">
                         <li><a href="node/338">Policies</a></li>
                         <li><a href="node/141432">Director</a></li>
@@ -287,6 +287,7 @@
                         <li><a href="node/6639">Notary Public</a></li>
                         <li><a href="node/9383">Genealogical Research</a></li>
                         <li><a href="node/411">Power Meter Lending</a></li>
+                        <li><a href="node/411">Something Else</a></li>
                         <li class="last"><a href="node/376">SCORE Small Business</a></li>
                     </ul>
                 </div>
@@ -303,9 +304,7 @@
                         <li class="last"><a href="node/141432">Menu item</a></li>
                     </ul>
                 </div>
-                <div class="grid-25 tablet-grid-50 mobile-grid-100">
-                    <div id="locinfo">
-                    </div>
+                <div id="locinfo" class="grid-25 tablet-grid-50 mobile-grid-100 padtop">
                 </div>
             </div>
             <div id="footer-pad" class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
@@ -558,18 +557,16 @@
 
 <!-- updated for unsemantic -->
 <script id="showfeatureditembox-template" type="text/template">
-    <div class="card">
+    <div class="card" onclick="loadlist('{{node.termid}}')">
         {{#each_upto nodes 1}}
-        <div class="grid-container pointer" onclick="loadlist('{{node.termid}}')">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
-                    <h4 class="title pointer">{{node.term}}</h4>
-                {{/each_upto}}
-                {{#each_upto nodes 4}}
-                    <div class="img-viewer pointer">
-                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
-                    </div>
-                {{/each_upto}}
-            </div>
+        <div class="grid-100 tablet-grid-100 mobile-grid-100 itemboxtab">
+                <h4 class="title pointer">{{node.term}}</h4>
+            {{/each_upto}}
+            {{#each_upto nodes 4}}
+                <div class="img-viewer pointer">
+                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                </div>
+            {{/each_upto}}
         </div>
     </div>
 </script>
@@ -768,24 +765,22 @@
 <script id="locationinfo-template" type="text/template">
     {{#nodes}}
         <div id="locloc">
-            <div class="padtop" style="font-size:26px;line-height:24px;">
-                {{node.libfirstname}}<br/>
-                <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
-                {{#compare node.shortname "tadl" operator="=="}}
-                    <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>set location</span></a>
-                {{/compare}}
-                {{#compare node.shortname "tadl" operator="!="}}
-                    <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
-                {{/compare}}
-            </div>
+            {{node.libfirstname}}<br/>
+            <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
+            {{#compare node.shortname "tadl" operator="=="}}
+                <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>set location</span></a>
+            {{/compare}}
+            {{#compare node.shortname "tadl" operator="!="}}
+                <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>change location</span></a>
+            {{/compare}}
         </div>
         <div id="loccontact">
             {{node.address}}<br/>
             {{node.citystatezip}}<br/>
             {{node.phone}}
         </div>
-        <div id="lochours" style="text-align:center;">
-            <table class="hours" style="font-size:12px;">
+        <div id="lochours">
+            <table class="hours">
                 <tr><td class="day left">Sunday</td><td class="day right">{{node.sunday}}</td></tr>
                 <tr><td class="day left">Monday</td><td class="day right">{{node.monday}}</td></tr>
                 <tr><td class="day left">Tuesday</td><td class="day right">{{node.tuesday}}</td></tr>
@@ -841,9 +836,9 @@
         <li><a onclick="locHoursAndInfo('wood')">Woodmere</a></li>
         <li><a onclick="locHoursAndInfo('kbl')">Kingsley</a></li>
         <li><a onclick="locHoursAndInfo('ipl')">Interlochen</a></li>
-        <li><a onclick="locHoursAndInfo('flpl')">Fife Lake</a></li>
+        <li><a onclick="locHoursAndInfo('flpl')">Fife&nbsp;Lake</a></li>
         <li><a onclick="locHoursAndInfo('pcl')">Peninsula</a></li>
-        <li><a onclick="locHoursAndInfo('ebb')">East Bay</a></li>
+        <li><a onclick="locHoursAndInfo('ebb')">East&nbsp;Bay</a></li>
     </ul>
 </div>
 

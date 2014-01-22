@@ -443,6 +443,12 @@ img.icon.logo {
 .itembox {
     max-width:240px;
 }
+.itemboxmob {
+    max-width:320px;
+}
+.itemboxtab {
+    max-width:480px;
+}
 
 .img-viewer {
     position:relative;
@@ -590,21 +596,25 @@ input.search {
   padding: 8px;
 }
 
-#locinfo {
+#locloc {
+    font-size:26px;
+    line-height:24px;
+}
+
+#lochours {
+    font-size:12px;
 }
 
 table.hours {
     width:70%;
     margin: auto;
 }
+
 .left {
     text-align:left;
-    padding-right:5px;
 }
-
 .right {
     text-align:right;
-    padding-left:5px;
 }
 
 .mobile-grid-10.menu {
