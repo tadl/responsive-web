@@ -555,7 +555,24 @@
     {{/each_upto}}
 </script>
 
-<!-- updated for unsemantic -->
+<script id="showfeatureditembox-template" type="text/template">
+    <div class="card">
+        {{#each_upto nodes 1}}
+            <div class="grid-container pointer" onclick="loadlist('{{node.termid}}')">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
+                    <h4 class="title pointer">{{node.term}}</h4>
+        {{/each_upto}}
+                    {{#each_upto nodes 4}}
+                        <div class="img-viewer pointer">
+                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                        </div>
+                    {{/each_upto}}
+                </div>
+            </div>
+    </div>
+</script>
+                                                                                                                                                                                            
+                                                                                                                                                                                            
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card" onclick="loadlist('{{node.termid}}')">
         {{#each_upto nodes 1}}
@@ -666,6 +683,33 @@
                         <a id="more{{node.nid}}" class="button verysmall tadlblue" onclick="unhide({{node.nid}})"><span>view details</span></a>
                     </div>
                     <span id="{{node.nid}}" style="display:none;">{{{node.body}}}</span>
+                </div>
+            </div>
+        </div>
+    {{/each_upto}}
+</script>
+
+<!-- new events template -->
+<script id="events-template" type="text/template">
+    {{#each_upto nodes 10}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-35 tablet-grid-35 mobile-grid-35">
+                    {{#if node.image}}
+                        <img class="result_img" src="{{make_https node.image}}" />
+                    {{else}}
+                        <img class="result_img" src="img/clocktower100.png" />
+                    {{/if}}
+                </div>
+                <div class="grid-65 tablet-grid-65 mobile-grid-65">
+                    <span class="cardtitle">{{node.title}}</span><br/>
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
+                </div>
+                <div class="clearfix"></div>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    <div class="padtop">
+                        <a id="view-{{node.nid}}" class="viewmore" onclick="">view details</a>
+                    </div>
                 </div>
             </div>
         </div>
