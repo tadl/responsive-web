@@ -690,8 +690,8 @@
 </script>
 
 <!-- new events template -->
-<script id="events-template" type="text/template">
-    {{#each_upto nodes 10}}
+<script id="allevents-template" type="text/template">
+    {{#nodes}}
         <div class="card">
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35 mobile-grid-35">
@@ -708,12 +708,12 @@
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div class="padtop">
-                        <a id="view-{{node.nid}}" class="viewmore" onclick="">view details</a>
+                        <a onclick="loadNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
                     </div>
                 </div>
             </div>
         </div>
-    {{/each_upto}}
+    {{/nodes}}
 </script>
 
 <script id="showlocations-template" type="text/template">
@@ -864,8 +864,12 @@
                     {{#if node.title}}
                         <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
                     {{/if}}
+                    {{#if node.event-date}}
+                        <br/><br/><div class="subtitle">{{{node.event-date}}}</div>
+                    {{/if}}
                 </div>
                 {{#if node.body}}
+                    <br/><br/>
                     <div class="grid-100 tablet-grid-100 mobile-grid-100">
                         {{{node.body}}}
                     </div>

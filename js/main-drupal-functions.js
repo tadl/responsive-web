@@ -188,3 +188,23 @@ function showNode(nid) {
         $('#working').hide().spin(false);
     });
 }
+
+function showAllEventsByTerm(term) {
+    cleanhouse();
+    cleandivs();
+    $('#working').show().spin('default');
+    var alljson = JSON.parse(sessionStorage.getItem("everything"));
+    if (alljson == null) {
+        $.getJSON(drupal_json_url, function(data) {
+            var jstring = JSON.stringify(data);
+            sessionStorage.setItem('everything', jstring);
+            showAllEventsByTerm(term);
+            return;
+        });
+    } else {
+        var template = Handlebars.compile($('#allevents-template').html());
+        var info = template(alljson[term]);
+        $('#region-wide').html(info).show();
+        $('#working').hide().spin(false);
+    }
+}
