@@ -1,17 +1,26 @@
-function showevents() { 
+function showAllEventsByTerm(term) {
     cleanhouse();
-    var action = {action:"showevents"}
-    History.pushState(action, "Upcoming Event", "events"); 
-    state = History.getState();
+    cleandivs();
     $('#working').show().spin('default');
-    $.getJSON(EVENTS_URL, function(data) {
-        var template = Handlebars.compile($('#showevents-template').html());
-        var info = template(data);
-        if (state.data.action === "showevents") {
-            $('#region-two').html(info);
-            $('#working').hide().spin(false);
-        }
-    });
+    if ((term == null) || (term == 'all')) { 
+        term = 'events'; 
+    } else {
+        term = 'events_' + term;
+    }
+    var alljson = JSON.parse(sessionStorage.getItem("everything"));
+    if (alljson == null) {
+        $.getJSON(drupal_json_url, function(data) {
+            var jstring = JSON.stringify(data);
+            sessionStorage.setItem('everything', jstring);
+            showAllEventsByTerm(term);
+            return;
+        });
+    } else {
+        var template = Handlebars.compile($('#allevents-template').html());
+        var info = template(alljson[term]);
+        $('#region-wide').html(info).show();
+        $('#working').hide().spin(false);
+    }
 }
 
 function showlocations() { 
@@ -187,24 +196,4 @@ function showNode(nid) {
         $('#region-wide').html(info).show();
         $('#working').hide().spin(false);
     });
-}
-
-function showAllEventsByTerm(term) {
-    cleanhouse();
-    cleandivs();
-    $('#working').show().spin('default');
-    var alljson = JSON.parse(sessionStorage.getItem("everything"));
-    if (alljson == null) {
-        $.getJSON(drupal_json_url, function(data) {
-            var jstring = JSON.stringify(data);
-            sessionStorage.setItem('everything', jstring);
-            showAllEventsByTerm(term);
-            return;
-        });
-    } else {
-        var template = Handlebars.compile($('#allevents-template').html());
-        var info = template(alljson[term]);
-        $('#region-wide').html(info).show();
-        $('#working').hide().spin(false);
-    }
 }
