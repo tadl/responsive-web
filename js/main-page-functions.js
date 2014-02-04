@@ -342,17 +342,22 @@ function myAccount(){
     changeBanner('My Account', '#0d4c78'); 
     username = window.localStorage.getItem('username');
     password = window.localStorage.getItem('password');
-    account_settings = window.localStorage.getItem('account_settings');
+    account_settings = JSON.parse(window.sessionStorage.getItem('account_settings'));
 	if (current_user == 'true') {
+	     $('#region-two').html('<div class="card"><h4 class="title">Account Settings</h4></div><div class="card"><div id="account_settings">Loading!</div></div>');
     	var patron_full_name = window.localStorage.getItem('patron_full_name');
-    	$('#region-two').html('<div class="card"><h4 class="title">Account Settings</h4></div><div class="card"><div id="account_settings">Loading!</div></div>');
-	    
-	    
-	    
+	    if (account_settings == null) {
+	    $.ajaxSetup( { "async": false } );
 	    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
-	     var prefs = myaccount_template(data);
-	     $('#account_settings').html(prefs);
+	    var cat = JSON.stringify(data)
+        sessionStorage.setItem('account_settings', cat );
 	     });
+	     $.ajaxSetup( { "async": true } );
+	     }
+	     account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+	     var prefs = myaccount_template(account_settings);
+	     $('#account_settings').html(prefs);
+	     
 	} else {
 		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 		$("#login_form").slideDown("fast");
