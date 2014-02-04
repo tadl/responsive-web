@@ -78,7 +78,8 @@
             .route(BASE_URL + 'fifelake', showFifeLake)
             .route(BASE_URL + 'interlochen', showInterlochen)
             .route(BASE_URL + 'peninsula', showPeninsula)
-            .route(BASE_URL + 'events', showevents)
+            .route(BASE_URL + 'events/:term', showAllEventsByTerm)
+            .route(BASE_URL + 'events', showAllEventsByTerm)
             .route(BASE_URL + 'locations', showlocations)
             .route(BASE_URL + 'card', showcard)
             .route(BASE_URL + 'pickup', showpickups)
@@ -186,11 +187,6 @@
     <div id="working" class="grid-100 tablet-grid-100 mobile-grid-100 hidden"></div>
     <main role="main" class="grid-container">
         <div class="grid-container">
-            <div id="mobile-hero" class="hide-on-desktop hide-on-tablet mobile-100">
-                <div id="mobile-hero-inner" class="grid-100 tablet-grid-100 mobile-grid-100">
-                    This is a mobile header/banner not cached.
-                </div>
-            </div>
             <div id="locsel" class="grid-100 tablet-grid-100 hide-on-mobile padtop">
                 <div class="grid-10 tablet-grid-10 hide-on-mobile" style="width: 14.28%">
                     <a class="button wide large tadlblue" id="link-home" onclick="load('home');"><span>Home</span></a>
@@ -660,7 +656,7 @@
 </script>
 
 <!-- updated for unsemantic -->
-<script id="showevents-template" type="text/template">
+<script id="someevents-template" type="text/template">
     {{#each_upto nodes 6}}
         <div class="card">
             <div class="grid-container">
@@ -863,15 +859,14 @@
                         <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
                     {{/if}}
                     {{#if node.event-date}}
-                        <br/><br/><div class="subtitle">{{{node.event-date}}}</div>
+                        <div class="subtitle padtop">{{{node.event-date}}}</div>
+                    {{/if}}
+                    {{#if node.body}}
+                        <div class="padtop">
+                            {{{node.body}}}
+                        </div>
                     {{/if}}
                 </div>
-                {{#if node.body}}
-                    <br/><br/>
-                    <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                        {{{node.body}}}
-                    </div>
-                {{/if}}
             </div>
         </div>
     {{/nodes}}
