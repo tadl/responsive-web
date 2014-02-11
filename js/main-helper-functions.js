@@ -70,11 +70,11 @@ $(document).ready(function() {
 
 function load_drupal_json(content) {
 
-if ( content != null){
-var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=" + content;
+if (content == 'home'){
+var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=home";
  $.getJSON(drupal_json_url, function(data) {
  		var payload = JSON.stringify(data)
-        sessionStorage.setItem(content, payload );
+        sessionStorage.setItem('home', payload );
     });
 }
 else
@@ -82,7 +82,7 @@ else
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
  $.getJSON(drupal_json_url, function(data) {
  		var payload = JSON.stringify(data)
-        sessionStorage.setItem(everything, payload );
+        sessionStorage.setItem('everything', payload );
     });
 }
 
