@@ -10,7 +10,7 @@ var current_user = window.localStorage.getItem('current_user');
 
 
 $(document).ready(function() {
-    load_drupal_json();
+    load_drupal_json('home');
     compile_templates(); 
     router.perform();
     
@@ -68,14 +68,24 @@ $(document).ready(function() {
 
 });
 
-function load_drupal_json() {
+function load_drupal_json(content) {
 
-var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
-
+if ( content != null){
+var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=" + content;
  $.getJSON(drupal_json_url, function(data) {
- 		var cat = JSON.stringify(data)
-        sessionStorage.setItem('everything', cat );
+ 		var payload = JSON.stringify(data)
+        sessionStorage.setItem(content, payload );
     });
+}
+else
+{
+var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
+ $.getJSON(drupal_json_url, function(data) {
+ 		var payload = JSON.stringify(data)
+        sessionStorage.setItem(everything, payload );
+    });
+}
+
 
 
 }

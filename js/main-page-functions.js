@@ -312,9 +312,9 @@ function showBooksPage() {
 function showHomePage() {
     cleanhouse();
     cleandivs();
-     var data = JSON.parse(sessionStorage.getItem("everything"));
+     var data = JSON.parse(sessionStorage.getItem("home"));
      if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=home";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );

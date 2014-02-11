@@ -1,3 +1,5 @@
+var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+
 function showAllEventsByTerm(term) {
     cleanhouse();
     cleandivs();
