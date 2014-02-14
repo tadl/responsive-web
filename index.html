@@ -533,13 +533,13 @@
 <!-- updated for unsemantic -->
 <script id="showfeaturednews-template" type="text/template">
     {{#each_upto nodes 5}}
-        <div class="card">
+        <div class="card" id="card-{{node.nid}}">
             <img src="{{node.image}}" />
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
-                    <a id="more{{node.nid}}" class="button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
-                    <div id="{{node.nid}}" style="display:none;" class="news_story">
+                    <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
+                    <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
                         {{{node.body}}}
                         <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
@@ -658,29 +658,32 @@
 <!-- updated for unsemantic -->
 <script id="someevents-template" type="text/template">
     {{#each_upto nodes 6}}
-        <div class="card">
+        <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
-                <div class="grid-35 tablet-grid-35">
+                <div class="grid-35 tablet-grid-35 mobile-grid-35">
                     {{#if node.image}}
                         <img class="result_img" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
                 </div>
-                <div class="grid-65 tablet-grid-65">
+                <div class="grid-65 tablet-grid-65 mobile-grid-65">
                     <span class="cardtitle">{{node.title}}</span><br/>
                     <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
                 </div>
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div class="padtop">
-                        <a id="more{{node.nid}}" class="button verysmall tadlblue" onclick="unhide({{node.nid}})"><span>view details</span></a>
+                        <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" onclick="unhide({{node.nid}})"><span>view details</span></a>
                     </div>
-                    <span id="{{node.nid}}" style="display:none;">{{{node.body}}}</span>
+                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{node.body}}}</span>
                 </div>
             </div>
         </div>
     {{/each_upto}}
+    <div class="card">
+        hello
+    </div>
 </script>
 
 <!-- new events template -->

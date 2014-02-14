@@ -129,14 +129,16 @@ function facetstartsearch(facet) {
 }
 
 function unhide(eventId) {
-    var eventId = eventId;
     var e = document.getElementById(eventId);
     if (e.style.display === 'none') {
-        $('#' + eventId).css('display', 'block');
-        $('#more' + eventId).css('display', 'none');
+        $('.cardblock').not('#' + eventId).hide();
+        $('#' + eventId).show();
+        $(window).scrollTop($("#card-" + eventId).offset().top - 40);
+        $('#more' + eventId).hide();
+        $('.showmore').not('#more' + eventId).show();
     } else {
-        $('#' + eventId).css('display', 'none');
-        $('#more' + eventId).css('display', 'block');
+        $('#' + eventId).hide();
+        $('#more' + eventId).show();
     }
 }
 
