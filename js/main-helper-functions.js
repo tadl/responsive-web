@@ -220,8 +220,10 @@ function cleandivs() {
     $('#region-one').empty();
     $('#region-two').empty();
     $('#region-three').empty();
-    $('#one-third').empty();
-    $('#two-thirds').empty();
+    $('#one-third').empty(); // on the left
+    $('#two-thirds').empty(); // on the right
+    $('#third-one').empty(); // on the right
+    $('#third-two').empty(); //on the left
 }
 
 function load(page) {
@@ -256,6 +258,8 @@ function load(page) {
             var title = psTitle + separator + "Interlochen Public Library";
         } else if (page == 'peninsula') {
             var title = psTitle + separator + "Peninsula Community Library";
+        } else if (page == 'events') {
+            var title = psTitle + separator + "Events";
         }
         if (page != null) {
             History.pushState(action, title, page);
