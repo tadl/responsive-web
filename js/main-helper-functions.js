@@ -10,7 +10,6 @@ var current_user = window.localStorage.getItem('current_user');
 
 
 $(document).ready(function() {
-    load_drupal_json('home');
     compile_templates(); 
     router.perform();
     
@@ -75,6 +74,7 @@ var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?cont
  $.getJSON(drupal_json_url, function(data) {
  		var payload = JSON.stringify(data)
         sessionStorage.setItem('home', payload );
+        load_drupal_json();
     });
 }
 else
