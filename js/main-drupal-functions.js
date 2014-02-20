@@ -10,17 +10,19 @@ function showAllEventsByTerm(term) {
         term = 'events_' + term;
     }
     var alljson = JSON.parse(sessionStorage.getItem("everything"));
-    if (alljson == null) {
+//    if (alljson == null) {
+    if ((alljson == null) || (Math.round(new Date().getTime()/1000.0) - 900 > Math.round(new Date(alljson.time).getTime()/1000.0))) {
+        console.log('fetching updated json');
         $.getJSON(drupal_json_url, function(data) {
             var jstring = JSON.stringify(data);
             sessionStorage.setItem('everything', jstring);
-            showAllEventsByTerm(term);
-            return;
         });
+        showAllEventsByTerm(term);
     } else {
         var template = Handlebars.compile($('#allevents-template').html());
         var info = template(alljson[term]);
-        $('#region-wide').html(info).show();
+        $('#third-two').html(info).show();
+        $('#third-two').prepend("(json time) " + Math.round(new Date(alljson.time).getTime()/1000.0) + " > " + (Math.round(new Date().getTime()/1000.0) - 900) + " (now minus 900 seconds)");
         $('#working').hide().spin(false);
     }
 }

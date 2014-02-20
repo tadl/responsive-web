@@ -129,14 +129,16 @@ function facetstartsearch(facet) {
 }
 
 function unhide(eventId) {
-    var eventId = eventId;
     var e = document.getElementById(eventId);
     if (e.style.display === 'none') {
-        $('#' + eventId).css('display', 'block');
-        $('#more' + eventId).css('display', 'none');
+        $('.cardblock').not('#' + eventId).hide();
+        $('#' + eventId).show();
+        $(window).scrollTop($("#card-" + eventId).offset().top - 40);
+        $('#more' + eventId).hide();
+        $('.showmore').not('#more' + eventId).show();
     } else {
-        $('#' + eventId).css('display', 'none');
-        $('#more' + eventId).css('display', 'block');
+        $('#' + eventId).hide();
+        $('#more' + eventId).show();
     }
 }
 
@@ -218,8 +220,10 @@ function cleandivs() {
     $('#region-one').empty();
     $('#region-two').empty();
     $('#region-three').empty();
-    $('#one-third').empty();
-    $('#two-thirds').empty();
+    $('#one-third').empty(); // on the left
+    $('#two-thirds').empty(); // on the right
+    $('#third-one').empty(); // on the right
+    $('#third-two').empty(); //on the left
 }
 
 function load(page) {
@@ -254,6 +258,8 @@ function load(page) {
             var title = psTitle + separator + "Interlochen Public Library";
         } else if (page == 'peninsula') {
             var title = psTitle + separator + "Peninsula Community Library";
+        } else if (page == 'events') {
+            var title = psTitle + separator + "Events";
         }
         if (page != null) {
             History.pushState(action, title, page);
