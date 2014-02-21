@@ -561,21 +561,6 @@
 </script>
                                                                                                                                                                                             
                                                                                                                                                                                             
-<script id="showfeatureditembox-template" type="text/template">
-    <div class="card" onclick="loadlist('{{node.termid}}')">
-        {{#each_upto nodes 1}}
-        <div class="grid-100 tablet-grid-100 mobile-grid-100 itemboxtab">
-                <h4 class="title pointer">{{node.term}}</h4>
-            {{/each_upto}}
-            {{#each_upto nodes 4}}
-                <div class="img-viewer pointer">
-                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
-                </div>
-            {{/each_upto}}
-        </div>
-    </div>
-</script>
-
 
 <script id="shelf-template" type="text/template">
     <table>
