@@ -513,9 +513,9 @@ tr.smaller td:first-child {
 }
 
 .summary {
-    border-bottom:1px solid #f0f2f5;
     padding:0 0 5px 0;
     margin-bottom:5px;
+    margin-top: 5px;
 }
 
 input.search {

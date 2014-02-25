@@ -10,7 +10,6 @@ var current_user = window.localStorage.getItem('current_user');
 
 
 $(document).ready(function() {
-    load_drupal_json('home');
     compile_templates(); 
     router.perform();
     
@@ -69,25 +68,11 @@ $(document).ready(function() {
 });
 
 function load_drupal_json(content) {
-
-if (content == 'home'){
-var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=home";
- $.getJSON(drupal_json_url, function(data) {
- 		var payload = JSON.stringify(data)
-        sessionStorage.setItem('home', payload );
-    });
-}
-else
-{
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
- $.getJSON(drupal_json_url, function(data) {
+$.getJSON(drupal_json_url, function(data) {
  		var payload = JSON.stringify(data)
         sessionStorage.setItem('everything', payload );
     });
-}
-
-
-
 }
 
 

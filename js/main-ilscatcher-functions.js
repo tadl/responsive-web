@@ -176,7 +176,7 @@ function showmore(record_id) {
               
             
                 $('#'+ record_id).html(info).promise().done(function() {
-                    $('#more_details_' + record_id).hide();
+                    $('#more_details_' + record_id).remove();
                 });
                 $('#'+ record_id).show();
                 check_googlebooks(record_id, isbn);

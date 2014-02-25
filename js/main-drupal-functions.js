@@ -48,57 +48,64 @@ function showlocations() {
 
 
 
+function list_node_to_name(list_id){
+       if (list_id == "67") {
+       var info = 'books_featured_fiction'
+       } else if (list_id == "68") {
+       var info = 'books_featured_nonfiction'
+       } else if (list_id == "45") {
+       var info = 'books_adult_display' 
+       } else if (list_id == "224") {
+       var info = 'books_adult_clubkits' 
+       } else if (list_id == "234") {
+       var info = 'books_adult_business' 
+       } else if (list_id == "29") {
+       var info = 'music_new' 
+       } else if (list_id == "31") {
+       var info = 'music_hot' 
+       } else if (list_id == "32") {
+       var info = 'videos_new' 
+       } else if (list_id == "34") {
+       var info = 'videos_hot' 
+       } else if (list_id == "165") {
+       var info = 'videos_tcff' 
+       } else if (list_id == "286") {
+       var info = 'videos_met' 
+       } else if (list_id == "47") {
+       var info = 'youth_display' 
+       } else if (list_id == "52") {
+       var info = 'youth_new_books' 
+       } else if (list_id == "41") {
+       var info = 'teens_manga'
+       } else if (list_id == "51") {
+       var info = 'teens_new'
+       };
+       return info;
+}
+
+
+
 function showitemlist(list_id) {
     cleanhouse();
     cleandivs();
     changeBanner('Featured Items', '#0d4c78');
+    var list_name = list_node_to_name(list_id, 'full');
     var data = JSON.parse(sessionStorage.getItem("everything"));
- 	if (data == null) {
- 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+ 	if (data == null || typeof data[list_name] == undefined ) {
+ 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=lists";
  	 $.getJSON(drupal_json_url, function(data) {
  		var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
-        showitemlistall(list_id);
+        showitemlist(list_id);
+        load_drupal_json();
         return;
     });
  	} else { 
  	   var template = Handlebars.compile($('#showitemlist-template').html());
-       if (list_id == "67") {
-       var info = template(data.books_featured_fiction)
-       } else if (list_id == "68") {
-       var info = template(data.books_featured_nonfiction)
-       } else if (list_id == "45") {
-       var info = template(data.books_adult_display) 
-       } else if (list_id == "224") {
-       var info = template(data.books_adult_clubkits) 
-       } else if (list_id == "234") {
-       var info = template(data.books_adult_business) 
-       } else if (list_id == "29") {
-       var info = template(data.music_new) 
-       } else if (list_id == "31") {
-       var info = template(data.music_hot) 
-       } else if (list_id == "32") {
-       var info = template(data.videos_new) 
-       } else if (list_id == "34") {
-       var info = template(data.videos_hot) 
-       } else if (list_id == "165") {
-       var info = template(data.videos_tcff) 
-       } else if (list_id == "286") {
-       var info = template(data.videos_met) 
-       } else if (list_id == "47") {
-       var info = template(data.youth_display) 
-       } else if (list_id == "52") {
-       var info = template(data.youth_new_books) 
-       } else if (list_id == "41") {
-       var info = template(data.teens_manga) 
-       } else if (list_id == "51") {
-       var info = template(data.teens_new) 
-       } else {
-       return;
-       }
+       var info = template(data[list_name])
         $('#region-two').html(info);
         mylist();
-      }
+        }
 }
 
 function showreviews(review_type) { 

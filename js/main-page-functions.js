@@ -13,12 +13,13 @@ function showEastBay() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-    if (data == null) {
-        var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+    if (data == null || typeof data['infobox_ebb'] == undefined) {
+        var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
             var cat = JSON.stringify(data)
             sessionStorage.setItem('everything', cat );
             showEastBay();
+            load_drupal_json();
             return;
         });
     } else { 
@@ -38,12 +39,13 @@ function showFifeLake() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['infobox_flpl'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showFifeLake();
+        load_drupal_json();
         return;
     });
      } else { 
@@ -63,12 +65,13 @@ function showInterlochen() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['infobox_ipl'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showInterlochen();
+        load_drupal_json();
         return;
     });
      } else { 
@@ -88,12 +91,13 @@ function showKingsley() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['infobox_kbl'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showKingsley();
+        load_drupal_json();
         return;
     });
      } else { 
@@ -113,12 +117,13 @@ function showPeninsula() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null  || typeof data['infobox_pcl'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showPeninsula();
+        load_drupal_json();
         return;
     });
      } else { 
@@ -138,12 +143,13 @@ function showWoodmere() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['infobox_wood'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showWoodmere();
+        load_drupal_json();
         return;
     });
      } else { 
@@ -163,12 +169,13 @@ function showTeensPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['teen_reviews'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=teens";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showTeensPage();
+        load_drupal_json();
         return;
     });
      } else { 
@@ -189,12 +196,13 @@ function showOnlinePage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['online_legal'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=online";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showOnlinePage();
+        load_drupal_json();
         return;
     });
      } else {  
@@ -214,12 +222,13 @@ function showYouthPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-    if (data == null) {
-        var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+    if (data == null || typeof data['youth_reviews'] == undefined) {
+        var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=youth";
         $.getJSON(drupal_json_url, function(data) {
             var cat = JSON.stringify(data)
             sessionStorage.setItem('everything', cat );
             showYouthPage();
+            load_drupal_json();
             return;
         });
     } else {
@@ -241,12 +250,13 @@ function showVideoPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['videos_reviews'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=video";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showVideoPage();
+        load_drupal_json();
         return;
     });
      } else {
@@ -266,12 +276,13 @@ function showMusicPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null || typeof data['music_reviews'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=music";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showMusicPage();
+        load_drupal_json();
         return;
     });
      } else {
@@ -290,12 +301,13 @@ function showBooksPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
+     if (data == null ||  typeof data['books_reviews'] == undefined) {
+     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=books";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
         sessionStorage.setItem('everything', cat );
         showBooksPage();
+        load_drupal_json();
         return;
     });
      } else {
@@ -318,23 +330,24 @@ function showBooksPage() {
 function showHomePage() {
     cleanhouse();
     cleandivs();
-     var data = JSON.parse(sessionStorage.getItem("home"));
-     if (data == null) {
-     var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=home";
-      $.getJSON(drupal_json_url, function(data) {
-         var cat = JSON.stringify(data)
-        sessionStorage.setItem('home', cat );
+    var data = JSON.parse(sessionStorage.getItem("everything"));
+    if (data == null || typeof data['featured_news'] == undefined) {
+    var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=home";
+    $.getJSON(drupal_json_url, function(data) {
+        var cat = JSON.stringify(data)
+        sessionStorage.setItem('everything', cat );
         showHomePage();
+        load_drupal_json();
         return;
     });
-     } else {
+    } else {
     var books_featured_fiction = featured_item_template(data.books_featured_fiction);
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
     var music_new = featured_item_template(data.music_new);
     var videos_new = featured_item_template(data.videos_new);
     $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
     var featured_news = featured_news_template(data.featured_news);
-    $('#region-two').append(featured_news).prepend('<div class="card"><h4 class="title">Featured News</h4></div>');
+    $('#region-two').append(featured_news);
     var events = events_template(data.events);
     $('#region-one').append(events).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
     }
