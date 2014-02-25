@@ -98,3 +98,8 @@ var embed_code = '<iframe class="youtube-player" type="text/html" width="320" he
 return embed_code;
 }
 });
+
+Handlebars.registerHelper('trunc', function(str) {
+        return str.truncate(100);
+});
+

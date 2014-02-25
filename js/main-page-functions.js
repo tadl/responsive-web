@@ -27,8 +27,9 @@ function showEastBay() {
         var infobox_ebb = drupalnode_template(data.infobox_ebb)
         var news_ebb = featured_news_template(data.news_ebb)
         var hours_ebb = showlocations_template(data.hours_ebb)
+        var alleventslink = "load('events/ebb')";
         $('#region-one').html(infobox_ebb);
-        $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb);
+        $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All East Bay events</a></h4></div>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ebb);
     }
 }
@@ -51,8 +52,9 @@ function showFifeLake() {
      var infobox_flpl = drupalnode_template(data.infobox_flpl)
      var news_flpl = featured_news_template(data.news_flpl)
      var hours_flpl = showlocations_template(data.hours_flpl)
+        var alleventslink = "load('events/flpl')";
      $('#region-one').html(infobox_flpl);
-     $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl);
+        $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Fife Lake events</a></h4></div>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_flpl);
      }
 }
@@ -75,8 +77,9 @@ function showInterlochen() {
      var infobox_ipl = drupalnode_template(data.infobox_ipl)
      var news_ipl = featured_news_template(data.news_ipl)
      var hours_ipl = showlocations_template(data.hours_ipl)
+        var alleventslink = "load('events/ipl')";
      $('#region-one').html(infobox_ipl);
-     $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl);
+        $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Interlochen  events</a></h4></div>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ipl);
      }
 }
@@ -99,8 +102,9 @@ function showKingsley() {
      var infobox_kbl = drupalnode_template(data.infobox_kbl)
      var news_kbl = featured_news_template(data.news_kbl)
      var hours_kbl = showlocations_template(data.hours_kbl)
+        var alleventslink = "load('events/kbl')";
      $('#region-one').html(infobox_kbl);
-     $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl);
+        $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Kingsley events</a></h4></div>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_kbl);
      }
 }
@@ -123,8 +127,9 @@ function showPeninsula() {
      var infobox_pcl = drupalnode_template(data.infobox_pcl)
      var news_pcl = featured_news_template(data.news_pcl)
      var hours_pcl = showlocations_template(data.hours_pcl)
+        var alleventslink = "load('events/pcl')";
      $('#region-one').html(infobox_pcl);
-     $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl);
+        $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Peninsula events</a></h4></div>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_pcl);
      }
 }
@@ -147,8 +152,9 @@ function showWoodmere() {
      var infobox_wood = drupalnode_template(data.infobox_wood)
      var news_wood = featured_news_template(data.news_wood)
      var hours_wood = showlocations_template(data.hours_wood)
+        var alleventslink = "load('events/wood')";
      $('#region-one').html(infobox_wood);
-     $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood);
+        $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Woodmere events</a></h4></div>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_wood);
      }
 }
