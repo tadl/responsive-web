@@ -558,14 +558,14 @@
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
         {{#each_upto nodes 1}}
             <div class="grid-container pointer" onclick="loadlist('{{node.termid}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <h4 class="title pointer">{{node.term}}</h4>
         {{/each_upto}}
+                        <div class="pointer item25">
                     {{#each_upto nodes 4}}
-                        <div class="img-viewer pointer">
                             <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
-                        </div>
                     {{/each_upto}}
+                        </div>
                 </div>
             </div>
     </div>

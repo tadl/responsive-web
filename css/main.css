@@ -460,6 +460,10 @@ img.icon.logo {
     overflow:hidden;
 }
 
+.item25 img {
+    max-width:23%;
+}
+
 .img-viewer img {
     margin:0;
     padding:0;
