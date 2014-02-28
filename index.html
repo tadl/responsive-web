@@ -351,6 +351,52 @@
 
 
 <!-- updated for unsemantic -->
+<script id="results-template_2" type="text/template">
+    {{#items}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/>
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle"><img src="{{make_https format_icon}}"/>&nbsp;{{title}}</span><br/>
+                    {{#if author}}
+                        <em class="subtitle">{{author}}&nbsp;</em>
+                    {{/if}}
+                    {{#if record_year}}
+                        <em class="subtitle">{{record_year}}</em>
+                    {{/if}}
+
+                    <div id="showmore-{{record_id}}" class="padtop">
+                        <a id="more_details_{{record_id}}" class="button small tadlblue" onclick="showmore({{record_id}});"><span>More Details</span></a>
+                        {{#compare availability null operator="!="}} 
+                            <a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a> 
+                        {{/compare}}
+                        {{#compare availability null operator="=="}}
+                            <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a>
+                        {{/compare}}
+                        {{#compare availability null operator="!="}}
+ <a class="button small purple" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
+                   		{{/compare}}
+                   </div>
+                    <div id="hold_message_{{record_id}}" class="holdmessage">
+                    </div>
+                    <div id="{{record_id}}">
+                    	<p class="subtitle">
+                    	{{abstract}}
+                    	<p>
+                    	<p class="subtitle">
+                    	{{availability}}
+                    	</p>
+               		</div>
+            	</div>
+        	</div>
+   </div>
+   {{/items}}
+    
+</script>
+
+<!-- updated for unsemantic -->
 <script id="results-template" type="text/template">
     {{#items}}
         <div class="card">
@@ -395,6 +441,13 @@
    {{/items}}
     
 </script>
+
+
+
+
+
+
+
 
 <!-- updated for unsemantic -->
 <script id="showitemlist-template" type="text/template">
@@ -562,8 +615,8 @@
                     <h4 class="title pointer">{{node.term}}</h4>
         {{/each_upto}}
                         <div class="pointer item25">
-                    {{#each_upto nodes 4}}
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                    {{#each_upto items 4}}
+                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
                     {{/each_upto}}
                         </div>
                 </div>
@@ -577,7 +630,7 @@
         {{/each_upto}}
                     {{#each_upto nodes 4}}
                         <div class="img-viewer pointer">
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
                         </div>
                     {{/each_upto}}
                 </div>

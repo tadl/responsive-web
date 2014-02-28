@@ -196,7 +196,7 @@ function showOnlinePage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null || typeof data['online_legal'] == undefined) {
+     if (data == null || typeof data['online_legal'] == undefined || data['online_legal'] == null ) {
      var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=online";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
@@ -222,7 +222,7 @@ function showYouthPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-    if (data == null || typeof data['youth_reviews'] == undefined) {
+    if (data == null || typeof data['youth_reviews'] == undefined || data['youth_reviews'] == null) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=youth";
         $.getJSON(drupal_json_url, function(data) {
             var cat = JSON.stringify(data)
@@ -301,7 +301,7 @@ function showBooksPage() {
     cleanhouse();
     cleandivs();
     var data = JSON.parse(sessionStorage.getItem("everything"));
-     if (data == null ||  typeof data['books_reviews'] == undefined) {
+     if (data == null || typeof data['books_reviews'] == undefined) {
      var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=books";
       $.getJSON(drupal_json_url, function(data) {
          var cat = JSON.stringify(data)
@@ -387,3 +387,5 @@ function changeBanner(content, color) {
     $('#page_banner').css({"display" : "block"});
     $('#page_banner').html('<h2>'+content +'</h2>')
 }
+
+
