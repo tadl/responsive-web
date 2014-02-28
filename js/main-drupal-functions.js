@@ -88,24 +88,23 @@ function list_node_to_name(list_id){
 function showitemlist(list_id) {
     cleanhouse();
     cleandivs();
-    changeBanner('Featured Items', '#0d4c78');
-    var list_name = list_node_to_name(list_id, 'full');
+    changeBanner('Loading Featured Items...', '#0d4c78');
+
     var data = JSON.parse(sessionStorage.getItem("everything"));
- 	if (data == null || typeof data[list_name] == undefined ) {
- 	var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=lists";
+ 	var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
  	 $.getJSON(drupal_json_url, function(data) {
- 		var cat = JSON.stringify(data)
-        sessionStorage.setItem('everything', cat );
-        showitemlist(list_id);
-        load_drupal_json();
-        return;
+	var template = Handlebars.compile($('#results-template_2').html());
+	var info = template(data)
+    $('#region-two').html(info);
+    var list_name = data.list_name
+    changeBanner(list_name, '#0d4c78');
+    mylist();
     });
- 	} else { 
- 	   var template = Handlebars.compile($('#showitemlist-template').html());
-       var info = template(data[list_name])
-        $('#region-two').html(info);
-        mylist();
-        }
+
+ 	   
+       
+       
+        
 }
 
 function showreviews(review_type) { 
