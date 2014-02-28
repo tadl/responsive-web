@@ -127,6 +127,14 @@ function unhide(eventId) {
     }
 }
 
+function toggleBody(id) {
+    $('.full-review-body').not('#review_full_' + id).hide();
+    $('.review-body').not('#review_' + id).show();
+    $('#review_' + id).hide();
+    $('#review_full_' + id).show();
+    $(window).scrollTop($("#card-" + id).offset().top - 40);
+}
+
 function openForm() {
     if ($("#login_form").is(":hidden")) {
         $("#search_options").slideUp("fast");
@@ -165,6 +173,14 @@ $.fn.doLinks = function() {
 
 String.prototype.trunc = function(n) {
     return this.substr(0,n-1)+(this.length>n?'&hellip;':'');
+}
+
+String.prototype.truncate = function(n) {
+    var p  = new RegExp("^.{0," + n + "}[\\S]*", 'g');
+    var re = this.match(p);
+    var l  = re[0].length;
+    var re = re[0].replace(/\s$/,'');
+    if (l < this.length) return re + '&hellip;';
 }
 
 function img_check(img) {
@@ -245,6 +261,24 @@ function load(page) {
             var title = psTitle + separator + "Peninsula Community Library";
         } else if (page == 'events') {
             var title = psTitle + separator + "Events";
+        } else if (page == 'events/kbl') {
+            var title = psTitle + separator + "Kingsley Events";
+        } else if (page == 'events/ebb') {
+            var title = psTitle + separator + "East BayEvents";
+        } else if (page == 'events/flpl') {
+            var title = psTitle + separator + "Fife Lake Events";
+        } else if (page == 'events/pcl') {
+            var title = psTitle + separator + "Peninsula Events";
+        } else if (page == 'events/ipl') {
+            var title = psTitle + separator + "Interlochen Events";
+        } else if (page == 'events/wood') {
+            var title = psTitle + separator + "Woodmere Events";
+        } else if (page == 'events/teens') {
+            var title = psTitle + separator + "Teen Events";
+        } else if (page == 'events/youth') {
+            var title = psTitle + separator + "Youth Events";
+        } else if (page == 'events/adults') {
+            var title = psTitle + separator + "Adult Events";
         }
         if (page != null) {
             History.pushState(action, title, page);
@@ -389,3 +423,8 @@ $.fn.spin.presets.tiny = {
     className: 'tinyspinner',
     zIndex: 2e9
 }
+
+var eventsnav = '<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>';
+
+
+

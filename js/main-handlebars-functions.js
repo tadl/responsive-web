@@ -94,7 +94,12 @@ jQuery.extend({
 
 var test = $.getValues(check_url)
 if (test != "fail"){
-var embed_code = '<iframe class="youtube-player" type="text/html" width="320" height="240" src="https://www.youtube.com/embed/'+ test +'" allowfullscreen frameborder="0"></iframe>'
+var embed_code = '<iframe class="youtube-player" type="text/html" style="width:100%;height:320px;" src="https://www.youtube.com/embed/'+ test +'" allowfullscreen frameborder="0"></iframe>'
 return embed_code;
 }
 });
+
+Handlebars.registerHelper('trunc', function(str) {
+        return str.truncate(100);
+});
+

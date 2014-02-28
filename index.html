@@ -427,7 +427,7 @@
         <h4 class="title">Staff Reviews</h4>
     </div>
     {{#nodes}}
-        <div class="card">
+        <div id="card-{{node.record}}" class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-30">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.record}}"/>
@@ -440,7 +440,10 @@
                     <span>Reviewed by: {{node.reviewer}}</span>
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-100">
-                    <div id="review_{{node.record}}">
+                    <div id="review_{{node.record}}" class="review-body">
+                        {{{trunc node.body}}} <a class="pointer smaller" onclick="toggleBody({{node.record}})">more</a>
+                    </div>
+                    <div id="review_full_{{node.record}}" class="hidden full-review-body">
                         {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
@@ -545,14 +548,14 @@
 
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card">
-        {{#each_upto nodes 1}}
-            <div class="grid-container pointer" onclick="loadlist('{{node.termid}}')">
+        
+            <div class="grid-container pointer" onclick="loadlist('{{list_id}}')">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
-                    <h4 class="title pointer">{{node.term}}</h4>
-        {{/each_upto}}
-                    {{#each_upto nodes 4}}
+                    <h4 class="title pointer">{{list_name}}</h4>
+       
+                    {{#each_upto items 4}}
                         <div class="img-viewer pointer">
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
+                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
                         </div>
                     {{/each_upto}}
                 </div>
@@ -641,7 +644,7 @@
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35">
                     {{#if node.image}}
-                        <img class="result_img" src="{{make_https node.image}}" />
+                        <img class="result_img" onerror="this.onerror=null;this.src='img/clocktower100.png';" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
@@ -669,7 +672,7 @@
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35 mobile-grid-35">
                     {{#if node.image}}
-                        <img class="result_img" src="{{make_https node.image}}" />
+                        <img class="result_img" onerror="this.onerror=null;this.src='img/clocktower100.png';" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
@@ -859,6 +862,27 @@
         <li><a onclick="locHoursAndInfo('flpl')">Fife&nbsp;Lake</a></li>
         <li><a onclick="locHoursAndInfo('pcl')">Peninsula</a></li>
         <li><a onclick="locHoursAndInfo('ebb')">East&nbsp;Bay</a></li>
+    </ul>
+</div>
+
+<div id="dropdown-2" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a onclick="load('events/wood')">Woodmere</a></li>
+        <li><a onclick="load('events/ipl')">Interlochen</a></li>
+        <li><a onclick="load('events/kbl')">Kingsley</a></li>
+        <li><a onclick="load('events/flpl')">Fife&nbsp;Lake</a></li>
+        <li><a onclick="load('events/pcl')">Peninsula</a></li>
+        <li><a onclick="load('events/ebb')">East&nbsp;Bay</a></li>
+        <li><a onclick="load('events')">All</a></li>
+    </ul>
+</div>
+
+<div id="dropdown-3" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a onclick="load('events/teens')">Teens</a></li>
+        <li><a onclick="load('events/youth')">Youth</a></li>
+        <li><a onclick="load('events/adults')">Adults</a></li>
+        <li><a onclick="load('events')">All</a></li>
     </ul>
 </div>
 
