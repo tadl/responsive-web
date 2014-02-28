@@ -558,7 +558,7 @@
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
         {{#each_upto nodes 1}}
             <div class="grid-container pointer" onclick="loadlist('{{node.termid}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100" style="margin:0 auto;">
                     <h4 class="title pointer">{{node.term}}</h4>
         {{/each_upto}}
                         <div class="pointer item25">
@@ -572,7 +572,7 @@
     <div class="card hide-on-mobile hide-on-tablet"> <!-- desktop only section -->
         {{#each_upto nodes 1}}
             <div class="grid-container pointer" onclick="loadlist('{{node.termid}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox" style="margin:0 auto;">
                     <h4 class="title pointer">{{node.term}}</h4>
         {{/each_upto}}
                     {{#each_upto nodes 4}}
