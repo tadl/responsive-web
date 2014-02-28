@@ -89,7 +89,7 @@ function showitemlist(list_id) {
     cleanhouse();
     cleandivs();
     changeBanner('Loading Featured Items...', '#0d4c78');
-
+     $('#working').show().spin('default');
     var data = JSON.parse(sessionStorage.getItem("everything"));
  	var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
  	 $.getJSON(drupal_json_url, function(data) {
@@ -97,6 +97,7 @@ function showitemlist(list_id) {
 	var info = template(data)
     $('#region-two').html(info);
     var list_name = data.list_name
+    $('#working').hide().spin(false);
     changeBanner(list_name, '#0d4c78');
     mylist();
     });

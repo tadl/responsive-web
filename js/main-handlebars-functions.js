@@ -94,7 +94,8 @@ jQuery.extend({
 
 var test = $.getValues(check_url)
 if (test != "fail"){
-var embed_code = '<iframe class="youtube-player" type="text/html" style="width:100%;height:320px;" src="https://www.youtube.com/embed/'+ test +'" allowfullscreen frameborder="0"></iframe>'
+var url = 'https://www.youtube.com/embed/'+ test +'?iv_load_policy=3&rel=0'
+var embed_code = '<iframe class="youtube-player" type="text/html" style="width:100%;height:320px;" src="'+ url +'"allowfullscreen frameborder="0"></iframe>'
 return embed_code;
 }
 });
