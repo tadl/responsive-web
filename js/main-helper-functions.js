@@ -25,6 +25,20 @@ $(document).ready(function() {
     });
 
     $('#search').click(getResults);
+    
+    $('.checkChangedbutton').click(function() {
+  		if($(this).closest('form').data('changed')) {
+    	 
+  		}
+	});
+	
+	$('#account_settings').change(function(){
+		$("#settings_save").show()
+	});
+	$('#account_settings').on('input', function(){
+		$("#settings_save").show()
+	});
+
 
     jQuery.support.cors = true;
 
@@ -425,6 +439,5 @@ $.fn.spin.presets.tiny = {
 }
 
 var eventsnav = '<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>';
-
 
 
