@@ -69,6 +69,17 @@ Handlebars.registerHelper('each_upto', function(ary, max, options) {
     return result.join('');
 });
 
+Handlebars.registerHelper('checked_or_not', function(value) {
+    if (value == 'on'){
+    check = "checked"
+    }else{
+    check = ''
+    }
+    return check
+});
+
+
+
 Handlebars.registerHelper('youtubeify', function(record_id){
 	var check_url = 'http://trailer-tank.herokuapp.com/main/get_trailer.json?id=' + record_id
 

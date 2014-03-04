@@ -675,20 +675,70 @@
 </script>
 
 <script id="myaccount-template" type="text/template">
-
+<form id="account_settings">
 	{{#settings}}
-		<h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
-		<h4>Username: {{opac_username}}</h4>
-		<h4>Email: {{email_address}}</h4>
-		<h4>Phone: {{default_phone}}</h4>
-		<h4>Phone Notifications: {{hold_notify_phone}}</h4>
-		<h4>Email Notifications: {{hold_notify_email}}</h4>
-		<h4>Default Pick-up Location: {{idtoname pickup}}</h4>
-		<h4>Save Borrowing History: {{circ}}</h4>
-		<h4>Save Hold History: {{hold}}</h4>
+		<h4>Hold Shelf Alias: <input type="text" name="alias" value="{{hold_shelf_alias}}"></h4>
+		<h4>Username: <input type="text" name="username" value="{{opac_username}}"></h4>
+		<h4>Email: <input type="text" name="username" value="{{email_address}}"></h4>
+		<h4>Default Pick-up Location:    
+			<select id="location">
+                <option value="23">Woodmere</option>
+                <option value="25">Kingsley</option>
+                <option value="24">Interlochen</option>
+                <option value="27">Fife Lake</option>
+                <option value="28">East Bay</option>
+             </select></h4>
+		<h4 style="float: left;">Phone Notifications: </h4>
+		<div class="onoffswitch" style="float: left;">
+		<input type="checkbox" name="hold_notify_phone" class="onoffswitch-checkbox" id="hold_notify_phone" {{checked_or_not hold_notify_phone}}>
+		
+		<label class="onoffswitch-label" for="hold_notify_phone">
+        		<div class="onoffswitch-inner"></div>
+        		<div class="onoffswitch-switch"></div>
+    	</label>
+    	
+    	</div>
+    	<div class="clear"></div>
+    	<h4 style="float: left;">Email Notifications: </h4>
+		<div class="onoffswitch" style="float: left;">
+		<input type="checkbox" name="hold_notify_email" class="onoffswitch-checkbox" id="hold_notify_email" {{checked_or_not hold_notify_email}}>
+		
+		<label class="onoffswitch-label" for="hold_notify_email">
+        		<div class="onoffswitch-inner"></div>
+        		<div class="onoffswitch-switch"></div>
+    	</label>
+    	
+    	</div>
+    	<div class="clear"></div>
+    	<h4 style="float: left;">Save Borrowing History: </h4>
+		<div class="onoffswitch" style="float: left;">
+		<input type="checkbox" name="borrowing_history" class="onoffswitch-checkbox" id="borrowing_history" {{checked_or_not circ}}>
+		
+		<label class="onoffswitch-label" for="borrowing_history">
+        		<div class="onoffswitch-inner"></div>
+        		<div class="onoffswitch-switch"></div>
+    	</label>
+    	
+    	</div>
+    	<div class="clear"></div>
+		<h4 style="float: left;">Save Holds History: </h4>
+		<div class="onoffswitch" style="float: left;">
+		<input type="checkbox" name="holds_history" class="onoffswitch-checkbox" id="holds_history" {{checked_or_not hold}}>
+		
+		<label class="onoffswitch-label" for="holds_history">
+        		<div class="onoffswitch-inner"></div>
+        		<div class="onoffswitch-switch"></div>
+    	</label>
+    	
+    	</div>
+    	<div class="clear"></div>
 	{{/settings}}
+	<div id="settings_save" style="display: none">
+	<a class="button small green">Save Changes</a>
+	<a class="button small red">Cancel</a>
+	</div>
 
-	
+</form>	
 </script>
 
 <!-- updated for unsemantic -->
