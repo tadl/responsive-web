@@ -32,13 +32,6 @@ $(document).ready(function() {
   		}
 	});
 	
-	$('#account_settings').change(function(){
-		$("#settings_save").show()
-	});
-	$('#account_settings').on('input', function(){
-		$("#settings_save").show()
-	});
-
 
     jQuery.support.cors = true;
 
@@ -440,4 +433,15 @@ $.fn.spin.presets.tiny = {
 
 var eventsnav = '<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>';
 
+function account_settings_reset(){	
+	$('#account_settings_form').get(0).reset();
+	$("#account_settings_form").hide();
+	$("#settings_save").hide();
+	$("#account_settings_display").show()
+}
 
+function show_edit_account_settings(){
+	$("#account_settings_display").hide()
+	$("#settings_save").show();
+	$("#account_settings_form").show();
+}

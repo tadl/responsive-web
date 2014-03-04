@@ -74,6 +74,26 @@ Handlebars.registerHelper('checked_or_not', function(value) {
 
 
 
+Handlebars.registerHelper('checkbox_value', function(value) {
+    if (value == 'on'){
+    check = "true"
+    }else{
+    check = "false"
+    }
+    return check
+});
+
+
+Handlebars.registerHelper('check_for_select', function(value1, value2) {
+    if (value1 == value2){
+    check = 'selected="selected"'
+    }else{
+    check = ''
+    }
+    return check
+});
+
+
 Handlebars.registerHelper('youtubeify', function(record_id){
 	var check_url = 'http://trailer-tank.herokuapp.com/main/get_trailer.json?id=' + record_id
 

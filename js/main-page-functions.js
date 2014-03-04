@@ -356,13 +356,15 @@ function showHomePage() {
 function myAccount(){
     cleanhouse();
     cleandivs();
+
+
     current_page = "myaccount";
     changeBanner('My Account', '#0d4c78'); 
     username = window.localStorage.getItem('username');
     password = window.localStorage.getItem('password');
     account_settings = JSON.parse(window.sessionStorage.getItem('account_settings'));
 	if (current_user == 'true') {
-	     $('#region-two').html('<div class="card"><h4 class="title">Account Settings</h4></div><div class="card"><div id="account_settings">Loading!</div></div>');
+	     $('#region-two').html('<div class="card"><h4 class="title">Account Settings<a onclick="show_edit_account_settings()"> edit</a></h4><div id="account_settings">Loading!</div></div>');
     	var patron_full_name = window.localStorage.getItem('patron_full_name');
 	    if (account_settings == null) {
 	    $.ajaxSetup( { "async": false } );
