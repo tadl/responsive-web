@@ -688,7 +688,7 @@ var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?'
 var new_username = encodeURIComponent($('#new_username').val());
 var new_alias = encodeURIComponent($('#new_alias').val());
 var new_email = encodeURIComponent($('#new_email').val());
-var new_pickup_location = encodeURIComponent($('#new_pickup_location').val()).toString();
+var new_pickup_location = $('#new_pickup_location').val();
 var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
 var new_email_notify = $('#hold_notify_email').is(':checked').toString();
 var new_save_circs = $('#save_circs').is(':checked').toString();
@@ -696,7 +696,7 @@ var new_save_holds = $('#save_holds').is(':checked').toString();
 var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
 var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
 var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
-var old_pickup_location = $('#new_pickup_location option:selected').val();
+var old_pickup_location = $('#new_pickup_location option[selected]').val();
 var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
 var old_email_notify = $('#hold_notify_email').prop("defaultValue");
 var old_save_circs = $('#save_circs').prop("defaultValue").toString();
@@ -735,8 +735,8 @@ if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify
 var username = window.localStorage.getItem('username');
 var password = window.localStorage.getItem('password');
 
-url = username_param + alias_param + email_param + search_param + notify_param
-
+var url = username_param + alias_param + email_param + search_param + notify_param
+alert(url);
 //alert(new_username +' '+ new_alias +' '+ new_email +' '+ new_pickup_location +' '+ new_phone_notify +' '+  new_email_notify +' '+ new_save_holds + ' '+ new_save_circs);
 $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
 		var cat = JSON.stringify(data)
