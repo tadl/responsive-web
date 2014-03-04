@@ -1,3 +1,9 @@
+Handlebars.registerHelper('fixurls', function(text) {
+    var response = text.replace(/href="\//gi, 'href="https://www.tadl.org/');
+    response = response.replace('src="/', 'src="https://www.tadl.org/');
+    return response;
+});
+
 Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
