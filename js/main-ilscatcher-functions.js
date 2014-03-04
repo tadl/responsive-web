@@ -677,6 +677,10 @@ $.fancybox({
      });
 }
 
+
+
+
+
 function change_account_settings(){
 
 $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
@@ -743,5 +747,6 @@ $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + pas
 });
 
 }
+
 
 

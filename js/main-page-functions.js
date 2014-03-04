@@ -354,34 +354,36 @@ function showHomePage() {
 }
 
 function myAccount(){
-    cleanhouse();
     cleandivs();
-
-
+    cleanhouse();
+    $('#working').show().spin('default');
     current_page = "myaccount";
-    changeBanner('My Account', '#0d4c78'); 
     username = window.localStorage.getItem('username');
     password = window.localStorage.getItem('password');
     account_settings = JSON.parse(window.sessionStorage.getItem('account_settings'));
 	if (current_user == 'true') {
-	     $('#region-two').html('<div class="card"><h4 class="title">Account Settings<a onclick="show_edit_account_settings()"> edit</a></h4><div id="account_settings">Loading!</div></div>');
-    	var patron_full_name = window.localStorage.getItem('patron_full_name');
 	    if (account_settings == null) {
-	    $.ajaxSetup( { "async": false } );
-	    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
-	    var cat = JSON.stringify(data)
-        sessionStorage.setItem('account_settings', cat );
-	     });
-	     $.ajaxSetup( { "async": true } );
-	     }
-	     account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-	     var prefs = myaccount_template(account_settings);
-	     $('#account_settings').html(prefs);
-	     
+	    	$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
+	    	var cat = JSON.stringify(data)
+       		sessionStorage.setItem('account_settings', cat );
+        	myAccount();
+	    	});
+	    }else{
+	    account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+	    var prefs = myaccount_template(account_settings);
+	    $('#working').hide().spin('default');
+	    changeBanner('My Account', '#0d4c78');
+	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings<a onclick="show_edit_account_settings()"> edit</a></h4><div id="account_settings">Loading!</div></div>');
+	    $('#account_settings').html(prefs);
+	    }
 	} else {
+	   $('#working').hide().spin('default');
+	    changeBanner('My Account', '#0d4c78');
 		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 		$("#login_form").slideDown("fast");
+		
 	};
+	
 }
 
 function changeBanner(content, color) {
