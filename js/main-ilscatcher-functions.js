@@ -61,7 +61,8 @@ function getResults(query, mt, avail, location, searchtype) {
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype, function(data) {
-        var results = data.message;
+        var results = data.message
+        var more = data.more_results;
         linked_search = "false";
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
@@ -72,7 +73,9 @@ function getResults(query, mt, avail, location, searchtype) {
                 $('#region-one').html(info_facets);
                 $('#loadmoretext').empty().append(loadmoreText);
                 $('#loadmoretext').trigger("create");
-                $('#loadmore').show();
+                if (more == "true"){
+                	$('#loadmore').show();
+                	}
                 $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             } else {
                 $('#search-params').html("No Results");
@@ -111,6 +114,7 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&facet=" + facet, function(data) {
         var results = data.message;
+        var more = data.more_results;
         state = History.getState();
         linked_search = "false";
         if (results != "no results") {
@@ -126,7 +130,9 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
             $('#loadmoretext').trigger("create");
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').append(info_selected_facets);
-            $('#loadmore').show();
+            if (more == "true"){
+            	$('#loadmore').show();
+             }
         } else {
             $('#second-region').replaceWith("No Results");
             
