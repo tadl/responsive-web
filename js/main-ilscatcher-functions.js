@@ -13,13 +13,17 @@ function loadmore() {
     $('#loadmoretext').trigger("create");
     $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
         var results = data.message
-         
+        var more = data.more_results;
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var info = template(data);
                 $('#region-two').append(info).promise().done(function() {
+                    if (more == "true"){
                     $('#loadmoretext').empty().append(loadmoreText);
                     $('#loadmoretext').trigger("create");
+                    } else {
+                    $('#loadmore').hide();
+                    }
                 });
             } else {
                 $('#loadmoretext').html("No Further Results");
