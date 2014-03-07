@@ -87,8 +87,8 @@
             .route(BASE_URL + 'checkout', showcheckouts)
             .route(BASE_URL + 'featured', showfeatureditembox)
             .route(BASE_URL + 'featurednews', showfeaturednews)
-            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype', getResults)
-            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:facet', facetsearch)
+            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
+            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_id', showitemlist)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
@@ -173,6 +173,17 @@
                         <option value="24">Interlochen</option>
                         <option value="27">Fife Lake</option>
                         <option value="28">East Bay</option>
+                    </select>
+                </div>
+                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                    <select id="sort" value="relevance">
+                        <option value="relevance">Relevance</option>
+                        <option value="newest_to_oldest">Newest to Oldest</option>
+                        <option value="oldest_to_newest">Oldest to Newest</option>
+                        <option value="title_az">Title: A to Z</option>
+                        <option value="title_za">Title: Z to A</option>
+                        <option value="author_az">Author: A to Z</option>
+                        <option value="author_za">Author: Z to A</option>
                     </select>
                 </div>
             </div>
@@ -505,7 +516,7 @@
                         {{{trunc node.body}}} <a class="pointer smaller" onclick="toggleBody({{node.record}})">more</a>
                     </div>
                     <div id="review_full_{{node.record}}" class="hidden full-review-body">
-                        {{{fixurls node.body}}}
+                        {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
                         <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});console.log('clicked {{node.record}}');"><span>Details</span></a>
@@ -532,7 +543,7 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">{{{fixurls node.body}}}</div>
+                    <div class="padtop">{{{node.body}}}</div>
                 </div>
             </div>
         </div>
@@ -598,7 +609,7 @@
                     <span class="cardtitle">{{{node.title}}}</span><br/>
                     <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
                     <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
-                        {{{fixurls node.body}}}
+                        {{{node.body}}}
                         <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
                 </div>
@@ -668,29 +679,44 @@
         </div>
         Fines: {{user.fines}}
         </div>
-        <a class="button wide tadlblue" id="myaccount" onclick="stateLoader('myaccount', 'My Account', 'myaccount')"><span>Settings</span></a> </br>
+        <a class="button wide tadlblue" id="account_settings_button" onclick="load('myaccount');"><span>Settings</span></a> </br>
         <a class="button wide tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a> </br>
     	<a class="button wide tadlblue" id="login" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
 </script>
 
 <script id="myaccount-template" type="text/template">
-<form id="account_settings">
+<div id="account_settings_display">
 	{{#settings}}
-		<h4>Hold Shelf Alias: <input type="text" name="alias" value="{{hold_shelf_alias}}"></h4>
-		<h4>Username: <input type="text" name="username" value="{{opac_username}}"></h4>
-		<h4>Email: <input type="text" name="username" value="{{email_address}}"></h4>
+		<h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
+		<h4>Username: {{opac_username}}</h4>
+		<h4>Email: {{email_address}}</h4>
+		<h4>Phone Notifications: {{hold_notify_phone}}</h4>
+		<h4>Email Notifications: {{hold_notify_email}}</h4>
+		<h4>Default Pick-up Location: {{idtoname pickup}}</h4>
+		<h4>Save Borrowing History: {{circ}}</h4>
+		<h4>Save Hold History: {{hold}}</h4>
+	{{/settings}}
+</div>
+
+
+<form id="account_settings_form" style="display: none;">
+	{{#settings}}
+		<h4>Hold Shelf Alias: <input type="text" id="new_alias" value="{{hold_shelf_alias}}"></h4>
+		<h4>Username: <input type="text" id="new_username" value="{{opac_username}}"></h4>
+		<h4>Email: <input type="text" id="new_email" value="{{email_address}}"></h4>
 		<h4>Default Pick-up Location:    
-			<select id="location">
-                <option value="23">Woodmere</option>
-                <option value="25">Kingsley</option>
-                <option value="24">Interlochen</option>
-                <option value="27">Fife Lake</option>
-                <option value="28">East Bay</option>
+			<select id="new_pickup_location"">
+                <option value="23" {{check_for_select pickup 23}}>Woodmere</option>
+                <option value="25" {{check_for_select pickup 25}}>Kingsley</option>
+                <option value="24" {{check_for_select pickup 24}}>Interlochen</option>
+                <option value="27" {{check_for_select pickup 27}}>Fife Lake</option>
+                <option value="28" {{check_for_select pickup 28}}>East Bay</option>
+                <option value="26" {{check_for_select pickup 26}}>Peninsula</option>
              </select></h4>
 		<h4 style="float: left;">Phone Notifications: </h4>
 		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="hold_notify_phone" class="onoffswitch-checkbox" id="hold_notify_phone" {{checked_or_not hold_notify_phone}}>
+		<input type="checkbox" name="hold_notify_phone" class="onoffswitch-checkbox" id="hold_notify_phone" value="{{checkbox_value hold_notify_phone}}" {{checked_or_not hold_notify_phone}}>
 		
 		<label class="onoffswitch-label" for="hold_notify_phone">
         		<div class="onoffswitch-inner"></div>
@@ -701,7 +727,7 @@
     	<div class="clear"></div>
     	<h4 style="float: left;">Email Notifications: </h4>
 		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="hold_notify_email" class="onoffswitch-checkbox" id="hold_notify_email" {{checked_or_not hold_notify_email}}>
+		<input type="checkbox" name="hold_notify_email" class="onoffswitch-checkbox" id="hold_notify_email" value="{{checkbox_value hold_notify_email}}" {{checked_or_not hold_notify_email}}>
 		
 		<label class="onoffswitch-label" for="hold_notify_email">
         		<div class="onoffswitch-inner"></div>
@@ -712,9 +738,9 @@
     	<div class="clear"></div>
     	<h4 style="float: left;">Save Borrowing History: </h4>
 		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="borrowing_history" class="onoffswitch-checkbox" id="borrowing_history" {{checked_or_not circ}}>
+		<input type="checkbox" name="save_circs" class="onoffswitch-checkbox" id="save_circs" value="{{checkbox_value circ}}" {{checked_or_not circ}}>
 		
-		<label class="onoffswitch-label" for="borrowing_history">
+		<label class="onoffswitch-label" for="save_circs">
         		<div class="onoffswitch-inner"></div>
         		<div class="onoffswitch-switch"></div>
     	</label>
@@ -723,9 +749,9 @@
     	<div class="clear"></div>
 		<h4 style="float: left;">Save Holds History: </h4>
 		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="holds_history" class="onoffswitch-checkbox" id="holds_history" {{checked_or_not hold}}>
+		<input type="checkbox" name="save_holds" class="onoffswitch-checkbox" id="save_holds" value="{{checkbox_value hold}}" {{checked_or_not hold}}>
 		
-		<label class="onoffswitch-label" for="holds_history">
+		<label class="onoffswitch-label" for="save_holds">
         		<div class="onoffswitch-inner"></div>
         		<div class="onoffswitch-switch"></div>
     	</label>
@@ -734,8 +760,8 @@
     	<div class="clear"></div>
 	{{/settings}}
 	<div id="settings_save" style="display: none">
-	<a class="button small green">Save Changes</a>
-	<a class="button small red">Cancel</a>
+	<a class="button small green" id="save_settings_button" onclick="change_account_settings()">Save Changes</a>
+	<a class="button small red" onclick="account_settings_reset()">Cancel</a>
 	</div>
 
 </form>	
@@ -783,7 +809,7 @@
                     <div class="padtop">
                         <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" onclick="unhide({{node.nid}})"><span>view details</span></a>
                     </div>
-                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{fixurls node.body}}}</span>
+                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{node.body}}}</span>
                 </div>
             </div>
         </div>
@@ -970,7 +996,7 @@
                     {{/if}}
                     {{#if node.body}}
                         <div class="padtop">
-                            {{{fixurls node.body}}}
+                            {{{node.body}}}
                         </div>
                     {{/if}}
                 </div>

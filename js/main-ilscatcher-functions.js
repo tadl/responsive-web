@@ -13,13 +13,17 @@ function loadmore() {
     $('#loadmoretext').trigger("create");
     $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
         var results = data.message
-         
+        var more = data.more_results;
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
                 var info = template(data);
                 $('#region-two').append(info).promise().done(function() {
+                    if (more == "true"){
                     $('#loadmoretext').empty().append(loadmoreText);
                     $('#loadmoretext').trigger("create");
+                    } else {
+                    $('#loadmore').hide();
+                    }
                 });
             } else {
                 $('#loadmoretext').html("No Further Results");
@@ -30,7 +34,7 @@ function loadmore() {
 
 
 
-function getResults(query, mt, avail, location, searchtype) {      
+function getResults(query, mt, avail, location, searchtype, sort_type) {      
     cleanhouse();
     pagecount = 0;
     var searchquery = query;
@@ -43,6 +47,7 @@ function getResults(query, mt, avail, location, searchtype) {
     window.localStorage.setItem('mt', mediatype);
     window.localStorage.setItem('avail', available);
     window.localStorage.setItem('loc', location);
+    window.localStorage.setItem('sort_type', sort_type);
     localStorage.removeItem('facet');
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
@@ -60,8 +65,9 @@ function getResults(query, mt, avail, location, searchtype) {
     $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype, function(data) {
-        var results = data.message;
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type, function(data) {
+        var results = data.message
+        var more = data.more_results;
         linked_search = "false";
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template').html());
@@ -72,7 +78,9 @@ function getResults(query, mt, avail, location, searchtype) {
                 $('#region-one').html(info_facets);
                 $('#loadmoretext').empty().append(loadmoreText);
                 $('#loadmoretext').trigger("create");
-                $('#loadmore').show();
+                if (more == "true"){
+                	$('#loadmore').show();
+                	}
                 $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             } else {
                 $('#search-params').html("No Results");
@@ -82,7 +90,7 @@ function getResults(query, mt, avail, location, searchtype) {
     mylist();
 }
 
-function facetsearch(query, mt, avail, location, searchtype, facet) {
+function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     state = History.getState();
     pagecount = 0;
     var searchtype = searchtype;
@@ -96,6 +104,7 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
     window.localStorage.setItem('mt', mediatype);
     window.localStorage.setItem('avail', available);
     window.localStorage.setItem('loc', loc);
+    window.localStorage.setItem('sort_type', sort_type);
     if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
@@ -109,8 +118,9 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&facet=" + facet, function(data) {
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
         var results = data.message;
+        var more = data.more_results;
         state = History.getState();
         linked_search = "false";
         if (results != "no results") {
@@ -126,7 +136,9 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
             $('#loadmoretext').trigger("create");
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').append(info_selected_facets);
-            $('#loadmore').show();
+            if (more == "true"){
+            	$('#loadmore').show();
+             }
         } else {
             $('#second-region').replaceWith("No Results");
             
@@ -676,5 +688,77 @@ $.fancybox({
      scrolling : 'no'
      });
 }
+
+
+
+
+
+function change_account_settings(){
+
+$('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
+var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?'
+var new_username = encodeURIComponent($('#new_username').val());
+var new_alias = encodeURIComponent($('#new_alias').val());
+var new_email = encodeURIComponent($('#new_email').val());
+var new_pickup_location = $('#new_pickup_location').val();
+var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
+var new_email_notify = $('#hold_notify_email').is(':checked').toString();
+var new_save_circs = $('#save_circs').is(':checked').toString();
+var new_save_holds = $('#save_holds').is(':checked').toString();
+var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
+var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
+var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
+var old_pickup_location = $('#new_pickup_location option[selected]').val();
+var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
+var old_email_notify = $('#hold_notify_email').prop("defaultValue");
+var old_save_circs = $('#save_circs').prop("defaultValue").toString();
+var old_save_holds = $('#save_holds').prop("defaultValue").toString();
+
+if (new_username != old_username) {
+	var username_param = '&new_username=' + new_username
+}else{
+	var username_param = ''
+}
+
+if (new_alias != old_alias) {
+	var alias_param = '&new_alias=' + new_alias
+}else{
+	var alias_param = ''
+}
+
+if (new_email != old_email) {
+	var email_param = '&new_email=' + new_email
+}else{
+	var email_param = ''
+}
+
+if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ){
+	var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds
+}else{
+	var search_param = ''
+}
+
+if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify){
+	var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify 
+}else{
+	var notify_param = ''
+}
+
+var username = window.localStorage.getItem('username');
+var password = window.localStorage.getItem('password');
+
+var url = username_param + alias_param + email_param + search_param + notify_param
+alert(url);
+//alert(new_username +' '+ new_alias +' '+ new_email +' '+ new_pickup_location +' '+ new_phone_notify +' '+  new_email_notify +' '+ new_save_holds + ' '+ new_save_circs);
+$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
+		var cat = JSON.stringify(data)
+        sessionStorage.setItem('account_settings', cat );
+	    account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+	    var prefs = myaccount_template(account_settings);
+	    $('#account_settings').html(prefs);
+});
+
+}
+
 
 
