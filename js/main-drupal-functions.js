@@ -11,10 +11,7 @@ function showAllEventsByTerm(term) {
     }
     var alljson = JSON.parse(sessionStorage.getItem("everything"));
     if (alljson == null) {
-//    if ((alljson == null) || ((Math.round(new Date().getTime()/1000.0) - 900) > Math.round(new Date(alljson.time).getTime()/1000.0))) {
-        // this apparently doesn't work *at all*
         $.getJSON(drupal_json_url, function(data) {
-        //    console.log('fetching updated json');
             var jstring = JSON.stringify(data);
             sessionStorage.setItem('everything', jstring);
             showAllEventsByTerm(term);
@@ -22,8 +19,6 @@ function showAllEventsByTerm(term) {
     } else {
         var template = Handlebars.compile($('#allevents-template').html());
         var info = template(alljson[term]);
-        var jsontime = Math.round(new Date(alljson.time).getTime()/1000.0);
-        var nowtime = Math.round(new Date().getTime()/1000.0);
         $('#third-two').html(info).show();
         $('#third-one').html('<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>');
         $('#working').hide().spin(false);

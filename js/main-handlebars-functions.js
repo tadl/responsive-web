@@ -1,6 +1,7 @@
 Handlebars.registerHelper('fixurls', function(text) {
     var response = text.replace(/href="\//gi, 'href="https://www.tadl.org/');
-    response = response.replace('src="/', 'src="https://www.tadl.org/');
+    response = response.replace(/src="\/\//gi, 'src="https://');
+    response = response.replace(/src="\//gi, 'src="https://www.tadl.org/');
     return response;
 });
 
@@ -138,6 +139,12 @@ return embed_code;
 });
 
 Handlebars.registerHelper('trunc', function(str) {
-        return str.truncate(100);
+    var textstr = jQuery('<p>' + str + '</p>').text();
+    if (textstr.length > 100) {
+        var retstr = textstr.truncate(100);
+    } else {
+        var retstr = textstr;
+    }
+    return retstr;
 });
 
