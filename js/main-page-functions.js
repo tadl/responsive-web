@@ -6,6 +6,7 @@ function compile_templates() {
     featured_news_template =  Handlebars.compile($('#showfeaturednews-template').html());
     showlocations_template = Handlebars.compile($('#showlocations-template').html());
     myaccount_template = Handlebars.compile($('#myaccount-template').html());
+    mylists_template = Handlebars.compile($('#mylists-template').html());
 }
 
 
@@ -380,11 +381,33 @@ function myAccount(){
 	   $('#working').hide().spin('default');
 	    changeBanner('My Account', '#0d4c78');
 		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
-		$("#login_form").slideDown("fast");
-		
+		$("#login_form").slideDown("fast");	
 	};
 	
 }
+
+function my_lists(){
+	$('#working').show().spin('default');
+	if (current_user == 'true') {
+		cleandivs();
+    	cleanhouse();
+    	changeBanner('My Lists', '#0d4c78');
+		token = window.localStorage.getItem('token');
+		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+			var my_lists = mylists_template(data)
+			$('#region-two').html(my_lists);
+			$('#working').hide().spin('default');
+		});
+	} else {
+	  	$('#working').hide().spin('default');
+	  	$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+	  	$("#login_form").slideDown("fast");	
+	};
+
+}
+
+
+
 
 function changeBanner(content, color) {
     document.querySelector('#page_banner').style.backgroundColor = color;

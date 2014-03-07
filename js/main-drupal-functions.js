@@ -85,10 +85,12 @@ function list_node_to_name(list_id){
 
 
 
-function showitemlist(list_id) {
+function showitemlist(list_name, list_id) {
     cleanhouse();
     cleandivs();
-    changeBanner('Loading Featured Items...', '#0d4c78');
+    var list_name = decodeURIComponent(list_name);
+    loading_text = 'Loading '+ list_name +'...'
+    changeBanner(loading_text, '#0d4c78');
      $('#working').show().spin('default');
     var data = JSON.parse(sessionStorage.getItem("everything"));
  	var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
@@ -96,16 +98,10 @@ function showitemlist(list_id) {
 	var template = Handlebars.compile($('#results-template_2').html());
 	var info = template(data)
     $('#region-two').html(info);
-    var list_name = data.list_name
     $('#working').hide().spin(false);
     changeBanner(list_name, '#0d4c78');
     mylist();
-    });
-
- 	   
-       
-       
-        
+    });       
 }
 
 function showreviews(review_type) { 

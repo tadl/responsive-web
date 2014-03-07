@@ -325,15 +325,14 @@ function loadNode(nid) {
 }
 
 
-function loadlist(list) {
+function loadlist(list_id, list_name) {
 	cleanhouse();
     cleandivs();
-    var list_id = list;
     state = History.getState();
-    if (state.data.list != list) {
+    if (state.data.list != list_id) {
         var action = {action:'showlist', list:list_id}
-        var url = 'list/'+list_id;
-        History.pushState(action, psTitle + separator + "Featured", url);
+        var url = 'list/'+ list_name +'/'+list_id;
+        History.pushState(action, psTitle + separator + "Lists", url);
     };
 }
 

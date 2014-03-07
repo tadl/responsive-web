@@ -362,12 +362,14 @@ function login_and_fetch_dash(username, password) {
                 var holds = data.users[0].user.holds;
                 var pickups = data.users[0].user.pickups;
                 var fines = data.users[0].user.fines;
+                var token = data.token;
                 window.localStorage.setItem('patron_full_name', patron_full_name);
                 window.localStorage.setItem('checkouts', checkouts);
                 window.localStorage.setItem('holds', holds);
                 window.localStorage.setItem('pickups', pickups);
                 window.localStorage.setItem('fines', fines);
                 window.localStorage.setItem('current_user', "true");
+                window.localStorage.setItem('token', token)
                 current_user = window.localStorage.getItem('current_user');
                 reset_hold_links();
                 if (current_page == 'myaccount' && first_state != 'true' ){

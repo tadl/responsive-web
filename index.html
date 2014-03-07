@@ -89,12 +89,13 @@
             .route(BASE_URL + 'featurednews', showfeaturednews)
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
-            .route(BASE_URL + 'list/:list_id', showitemlist)
+            .route(BASE_URL + 'list/:list_name/:list_id', showitemlist)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
-            .route(BASE_URL + 'myaccount', myAccount)         
+            .route(BASE_URL + 'myaccount', myAccount)
+            .route(BASE_URL + 'my_lists', my_lists)
             ;
     </script>
 </head>
@@ -493,6 +494,16 @@
     {{/nodes}}
 </script>
 
+
+<script id="mylists-template" type="text/template">
+	<div class="card">
+		{{#lists}}
+			<a onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a>
+			<br>
+		{{/lists}}
+	</div>
+</script>
+
 <!-- updated for unsemantic -->
 <script id="showreviews-template" type="text/template">
     <div class="card">
@@ -621,7 +632,7 @@
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
       
-            <div class="grid-container pointer" onclick="loadlist('{{list_id}}')">
+            <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100" style="margin:0 auto;">
                     <h4 class="title pointer">{{list_name}}</h4>
         
@@ -635,7 +646,7 @@
     </div>
     <div class="card hide-on-mobile hide-on-tablet"> <!-- desktop only section -->
       
-            <div class="grid-container pointer" onclick="loadlist('{{list_id}}')">
+            <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox" style="margin:0 auto;">
                     <h4 class="title pointer">{{list_name}}</h4>
     
@@ -680,6 +691,7 @@
         Fines: {{user.fines}}
         </div>
         <a class="button wide tadlblue" id="account_settings_button" onclick="load('myaccount');"><span>Settings</span></a> </br>
+        <a class="button wide tadlblue" id="showbarcode" onclick="load('my_lists')"><span>My Lists</span></a> </br>
         <a class="button wide tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a> </br>
     	<a class="button wide tadlblue" id="login" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
