@@ -1,6 +1,7 @@
 Handlebars.registerHelper('fixurls', function(text) {
     var response = text.replace(/href="\//gi, 'href="https://www.tadl.org/');
-    response = response.replace('src="/', 'src="https://www.tadl.org/');
+    response = response.replace(/src="\/\//gi, 'src="https://');
+    response = response.replace(/src="\//gi, 'src="https://www.tadl.org/');
     return response;
 });
 

@@ -237,12 +237,14 @@ function showYouthPage() {
         var youth_new_books = featured_item_template(data.youth_new_books);
         var youth_resources = drupalnode_template(data.youth_resources);
         var youth_award_winners = drupalnode_template(data.youth_award_winners);
-        $('#region-one').append(youth_display + youth_new_books + youth_resources + youth_award_winners);
+        var youth_homework = drupalnode_template(data.youth_homework);
+        var youth_homeschool = drupalnode_template(data.youth_homeschool);
+        $('#region-one').append(youth_homework + youth_homeschool + youth_award_winners + youth_resources);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
         var youth_reviews = review_template(data.youth_reviews);
         $('#region-two').append(youth_reviews);
         var events_youth = events_template(data.events_youth);
-        $('#region-three').append(events_youth).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth);
     } 
 }
 
