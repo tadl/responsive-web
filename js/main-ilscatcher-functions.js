@@ -34,7 +34,7 @@ function loadmore() {
 
 
 
-function getResults(query, mt, avail, location, searchtype) {      
+function getResults(query, mt, avail, location, searchtype, sort_type) {      
     cleanhouse();
     pagecount = 0;
     var searchquery = query;
@@ -47,6 +47,7 @@ function getResults(query, mt, avail, location, searchtype) {
     window.localStorage.setItem('mt', mediatype);
     window.localStorage.setItem('avail', available);
     window.localStorage.setItem('loc', location);
+    window.localStorage.setItem('sort_type', sort_type);
     localStorage.removeItem('facet');
     $("#mediatype").val(decodeURIComponent(mediatype));
     $("#term").val(decodeURIComponent(searchquery));
@@ -64,7 +65,7 @@ function getResults(query, mt, avail, location, searchtype) {
     $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype, function(data) {
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type, function(data) {
         var results = data.message
         var more = data.more_results;
         linked_search = "false";
@@ -89,7 +90,7 @@ function getResults(query, mt, avail, location, searchtype) {
     mylist();
 }
 
-function facetsearch(query, mt, avail, location, searchtype, facet) {
+function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     state = History.getState();
     pagecount = 0;
     var searchtype = searchtype;
@@ -103,6 +104,7 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
     window.localStorage.setItem('mt', mediatype);
     window.localStorage.setItem('avail', available);
     window.localStorage.setItem('loc', loc);
+    window.localStorage.setItem('sort_type', sort_type);
     if (available === "true") {
         $('#available').prop('checked', true);
         var availablemsg = "Only Available";
@@ -116,7 +118,7 @@ function facetsearch(query, mt, avail, location, searchtype, facet) {
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&facet=" + facet, function(data) {
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
         var results = data.message;
         var more = data.more_results;
         state = History.getState();

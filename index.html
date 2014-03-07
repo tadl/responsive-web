@@ -87,8 +87,8 @@
             .route(BASE_URL + 'checkout', showcheckouts)
             .route(BASE_URL + 'featured', showfeatureditembox)
             .route(BASE_URL + 'featurednews', showfeaturednews)
-            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype', getResults)
-            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:facet', facetsearch)
+            .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
+            .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_id', showitemlist)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
@@ -173,6 +173,17 @@
                         <option value="24">Interlochen</option>
                         <option value="27">Fife Lake</option>
                         <option value="28">East Bay</option>
+                    </select>
+                </div>
+                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                    <select id="sort" value="relevance">
+                        <option value="relevance">Relevance</option>
+                        <option value="newest_to_oldest">Newest to Oldest</option>
+                        <option value="oldest_to_newest">Oldest to Newest</option>
+                        <option value="title_az">Title: A to Z</option>
+                        <option value="title_za">Title: Z to A</option>
+                        <option value="author_az">Author: A to Z</option>
+                        <option value="author_za">Author: Z to A</option>
                     </select>
                 </div>
             </div>
@@ -505,7 +516,7 @@
                         {{{trunc node.body}}} <a class="pointer smaller" onclick="toggleBody({{node.record}})">more</a>
                     </div>
                     <div id="review_full_{{node.record}}" class="hidden full-review-body">
-                        {{{fixurls node.body}}}
+                        {{{node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
                         <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});console.log('clicked {{node.record}}');"><span>Details</span></a>
@@ -532,7 +543,7 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">{{{fixurls node.body}}}</div>
+                    <div class="padtop">{{{node.body}}}</div>
                 </div>
             </div>
         </div>
@@ -598,7 +609,7 @@
                     <span class="cardtitle">{{{node.title}}}</span><br/>
                     <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
                     <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
-                        {{{fixurls node.body}}}
+                        {{{node.body}}}
                         <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
                 </div>
@@ -798,7 +809,7 @@
                     <div class="padtop">
                         <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" onclick="unhide({{node.nid}})"><span>view details</span></a>
                     </div>
-                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{fixurls node.body}}}</span>
+                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{node.body}}}</span>
                 </div>
             </div>
         </div>
@@ -985,7 +996,7 @@
                     {{/if}}
                     {{#if node.body}}
                         <div class="padtop">
-                            {{{fixurls node.body}}}
+                            {{{node.body}}}
                         </div>
                     {{/if}}
                 </div>
