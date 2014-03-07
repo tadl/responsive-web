@@ -186,9 +186,10 @@ function showTeensPage() {
      var teens_reviews = review_template(data.teens_reviews)
      var teens_homework = drupalnode_template(data.teens_homework)
      var teens_lists = drupalnode_template(data.teens_lists)
+     var alleventslink = "load('events/teens')";
      $('#region-one').html(teens_new + teens_manga);
      $('#region-two').html(teens_lists + teens_reviews);
-     $('#region-three').html(events_teens);
+     $('#region-three').html(events_teens + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Teen events</a></h4></div>');
      }
 }
 
@@ -239,12 +240,13 @@ function showYouthPage() {
         var youth_award_winners = drupalnode_template(data.youth_award_winners);
         var youth_homework = drupalnode_template(data.youth_homework);
         var youth_homeschool = drupalnode_template(data.youth_homeschool);
+        var youth_reviews = review_template(data.youth_reviews);
+        var events_youth = events_template(data.events_youth);
+        var alleventslink = "load('events/youth')";
         $('#region-one').append(youth_homework + youth_homeschool + youth_award_winners + youth_resources);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-        var youth_reviews = review_template(data.youth_reviews);
         $('#region-two').append(youth_reviews);
-        var events_youth = events_template(data.events_youth);
-        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth);
+        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Youth events</a></h4></div>');
     } 
 }
 

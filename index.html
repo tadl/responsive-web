@@ -516,7 +516,7 @@
                         {{{trunc node.body}}} <a class="pointer smaller" onclick="toggleBody({{node.record}})">more</a>
                     </div>
                     <div id="review_full_{{node.record}}" class="hidden full-review-body">
-                        {{{node.body}}}
+                        {{{fixurls node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
                         <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});console.log('clicked {{node.record}}');"><span>Details</span></a>
@@ -543,7 +543,7 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">{{{node.body}}}</div>
+                    <div class="padtop">{{{fixurls node.body}}}</div>
                 </div>
             </div>
         </div>
@@ -609,7 +609,7 @@
                     <span class="cardtitle">{{{node.title}}}</span><br/>
                     <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
                     <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
-                        {{{node.body}}}
+                        {{{fixurls node.body}}}
                         <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
                 </div>
@@ -809,7 +809,7 @@
                     <div class="padtop">
                         <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" onclick="unhide({{node.nid}})"><span>view details</span></a>
                     </div>
-                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{node.body}}}</span>
+                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{fixurls node.body}}}</span>
                 </div>
             </div>
         </div>
@@ -830,7 +830,8 @@
                 </div>
                 <div class="grid-65 tablet-grid-65 mobile-grid-65">
                     <span class="cardtitle">{{node.title}}</span><br/>
-                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
+                    {{{trunc node.body}}}
                 </div>
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -992,11 +993,11 @@
                         <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
                     {{/if}}
                     {{#if node.event-date}}
-                        <div class="subtitle padtop">{{{node.event-date}}}</div>
+                        <div class="subtitle padtop">{{{node.event-date}}} at {{node.location}}</div>
                     {{/if}}
                     {{#if node.body}}
                         <div class="padtop">
-                            {{{node.body}}}
+                            {{{fixurls node.body}}}
                         </div>
                     {{/if}}
                 </div>

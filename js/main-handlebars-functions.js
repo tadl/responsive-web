@@ -139,6 +139,12 @@ return embed_code;
 });
 
 Handlebars.registerHelper('trunc', function(str) {
-        return str.truncate(100);
+    var textstr = jQuery('<p>' + str + '</p>').text();
+    if (textstr.length > 100) {
+        var retstr = textstr.truncate(100);
+    } else {
+        var retstr = textstr;
+    }
+    return retstr;
 });
 
