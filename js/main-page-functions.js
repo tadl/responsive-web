@@ -268,12 +268,13 @@ function showVideoPage() {
      changeBanner('Video', '#ffc341');
      var videos_new = featured_item_template(data.videos_new);
      var videos_hot = featured_item_template(data.videos_hot);
-     $('#region-one').append(videos_new + videos_hot);
      var videos_met = featured_item_template(data.videos_met);
-     var videos_tcff= featured_item_template(data.videos_tcff);
-     $('#region-three').append(videos_met + videos_tcff);
+     var videos_tcff = featured_item_template(data.videos_tcff);
+     var video_games = featured_item_template(data.video_games);
      var videos_reviews = review_template(data.videos_reviews);
+     $('#region-one').append(videos_new + videos_hot + video_games);
      $('#region-two').append(videos_reviews);
+     $('#region-three').append(videos_met + videos_tcff);
      }
 }
 
