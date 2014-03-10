@@ -618,10 +618,9 @@
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
-                    <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
+                    <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="loadNode('{{node.nid}}')"><span>read story</span></a>
                     <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
                         {{{fixurls node.body}}}
-                        <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
                 </div>
             </div>

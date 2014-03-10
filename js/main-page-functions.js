@@ -316,20 +316,19 @@ function showBooksPage() {
         return;
     });
      } else {
-     changeBanner('Books', '#e03434');
+    changeBanner('Books', '#e03434');
     var books_featured_fiction = featured_item_template(data.books_featured_fiction);
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
     var books_adult_display = featured_item_template(data.books_adult_display)
-    $('#region-one').append(books_featured_fiction + books_featured_nonfiction + books_adult_display);
     var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
     var books_adult_business = featured_item_template(data.books_adult_business)
-    $('#region-three').append(books_adult_clubkits + books_adult_business);
     var books_book_list = drupalnode_template(data.books_book_list)
-    $('#region-two').prepend(books_book_list);
-    $('a[rel="lightframe"]').fancybox({type: 'iframe'});
     var books_reviews = review_template(data.books_reviews)
-    $('#region-two').prepend(books_reviews);
-     }
+    $('#region-three').html(books_adult_clubkits + books_adult_business);
+    $('#region-two').html(books_reviews + books_book_list);
+    $('#region-one').html(books_featured_fiction + books_featured_nonfiction + books_adult_display);
+    $('a[rel="lightframe"]').fancybox({type: 'iframe'});
+    }
 }
 
 function showHomePage() {
@@ -350,11 +349,12 @@ function showHomePage() {
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
     var music_new = featured_item_template(data.music_new);
     var videos_new = featured_item_template(data.videos_new);
-    $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
     var featured_news = featured_news_template(data.featured_news);
-    $('#region-two').append(featured_news);
     var events = events_template(data.events);
-    $('#region-one').append(events).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    var alleventslink = "load('events')";
+    $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
+    $('#region-two').append(featured_news);
+    $('#region-one').append('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">View all events</a></h4></div>');
     }
 }
 
