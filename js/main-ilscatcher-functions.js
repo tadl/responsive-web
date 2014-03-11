@@ -335,9 +335,7 @@ function submit_password_reset() {
     var uservalue = $("#username_or_barcode").val();
     if (uservalue = '') { return };
     set_login_form_keypress_event();
-    console.log("Requesting password reset for user " + uservalue);
     $.getJSON(ILSCATCHER_BASE + 'main/passwordreset.json?user=' + uservalue, function(data) {
-        console.log('Result from request was: ' + data['status']);
         var login_form = $("#login_form");
         var source = $("#password-reset-complete-template").html();
         login_form.html(source);
