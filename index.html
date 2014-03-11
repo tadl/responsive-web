@@ -111,17 +111,8 @@
         <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a class="pointer" onclick="load('events');$('#nav_list').trigger('click');">Events</a>
-        <a class="pointer" href="#">Reviews</a>
         <a class="pointer" href="node/338">Policies</a>
         <a class="pointer" href="page/governance">Governance</a>
-        <a class="pointer" href="#">Etc...</a>
-        <a class="pointer" href="#">wat</a>
-        <a class="pointer" href="#">is</a>
-        <a class="pointer" href="#">this</a>
-        <a class="pointer" href="#">i</a>
-        <a class="pointer" href="#">dont</a>
-        <a class="pointer" href="#">even</a>
-        <a class="pointer" href="#">because reasons</a>
     </nav>
     <header class="searchbar card">
         <div class="grid-container">
@@ -700,17 +691,18 @@
 </script>
 
 <script id="myaccount-template" type="text/template">
+<div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100">
 <div id="account_settings_display">
-	{{#settings}}
-		<h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
-		<h4>Username: {{opac_username}}</h4>
-		<h4>Email: {{email_address}}</h4>
-		<h4>Phone Notifications: {{hold_notify_phone}}</h4>
-		<h4>Email Notifications: {{hold_notify_email}}</h4>
-		<h4>Default Pick-up Location: {{idtoname pickup}}</h4>
-		<h4>Save Borrowing History: {{circ}}</h4>
-		<h4>Save Hold History: {{hold}}</h4>
-	{{/settings}}
+    {{#settings}}
+        <h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
+        <h4>Username: {{opac_username}}</h4>
+        <h4>Email: {{email_address}}</h4>
+        <h4>Phone Notifications: {{hold_notify_phone}}</h4>
+        <h4>Email Notifications: {{hold_notify_email}}</h4>
+        <h4>Default Pick-up Location: {{idtoname pickup}}</h4>
+        <h4>Save Borrowing History: {{circ}}</h4>
+        <h4>Save Hold History: {{hold}}</h4>
+    {{/settings}}
 </div>
 
 
@@ -779,6 +771,7 @@
 	</div>
 
 </form>	
+</div></div>
 </script>
 
 <!-- updated for unsemantic -->
@@ -942,9 +935,15 @@
         </div>
     {{/objects}}
     <div class="card">
-        <p><span class="cardtitle">Manage Book Bag</span></p>
-       <a id="multi-pre-hold" class="button green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a>
-       <a id="empty-bag-button" class="button blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <span class="cardtitle">Manage Book Bag</span><br/>
+                <div class="buttons padtop">
+                    <a id="multi-pre-hold" class="button medium green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a><br/><br/>
+                    <a id="empty-bag-button" class="button medium blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
+                </div>
+            </div>
+        </div>
     </div>
 </script>
 

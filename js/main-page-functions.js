@@ -379,7 +379,7 @@ function myAccount(){
 	    var prefs = myaccount_template(account_settings);
 	    $('#working').hide().spin('default');
 	    changeBanner('My Account', '#0d4c78');
-	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings<a onclick="show_edit_account_settings()"> edit</a></h4><div id="account_settings">Loading!</div></div>');
+	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings <a onclick="show_edit_account_settings()" class="pointer">edit</a></h4><div id="account_settings">Loading!</div></div>');
 	    $('#account_settings').html(prefs);
 	    }
 	} else {
