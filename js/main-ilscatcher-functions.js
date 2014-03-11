@@ -167,7 +167,8 @@ function logged_in() {
 }
 
 function logout() {
-    $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
+    var source   = $("#login_form-template").html();
+    $("#login_form").html(source);
     window.localStorage.clear();
     current_user = 'false';
     location.reload();
@@ -351,7 +352,8 @@ function login_and_fetch_dash(username, password) {
         } // I need help understanding this bit. what does the length of the login button have to do with anything? // wjr
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
-                $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
+                var source   = $("#login_form-template").html();
+                $("#login_form").html(source);
     			window.localStorage.clear();
                 $('#login_msg').html('<span>Error logging in.</span>');
                 current_user = 'false';
@@ -379,7 +381,8 @@ function login_and_fetch_dash(username, password) {
             }
         });
     } else {
-        $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
+        var source   = $("#login_form-template").html();
+        $("#login_form").html(source);
         window.localStorage.clear();
     }
 
