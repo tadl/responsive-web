@@ -328,7 +328,20 @@
     Password: <input type="password" id="pword" /><br />
     <a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a>
     <span id="login_msg"></span><br/>
+    <a onclick="load_password_reset()">Forgot password?</a><br />
     <a href="https://www.tadl.org/newuser">Register for a library card</a>
+</script>
+
+<script id="password-reset-template" type="text/template">
+    Username or library card / license:<br />
+    <input type="text" id="username_or_barcode" /><br />
+    <a id="submit_password_reset" class="button small tadlblue" onclick="submit_password_reset()"><span>Submit Password Reset Request</span></a>
+    <a id="cancel_password_reset" onclick="cancel_password_reset()"><span>Cancel</span></a>
+</script>
+
+<script id="password-reset-complete-template" type="text/template">
+    <p>Request for password reset has been submitted. Please check your e-mail for further instructions.</p>
+    <a id="complete_password_reset" class="button small tadlblue" onclick="complete_password_reset()"><span>Return to Login</span></a>
 </script>
 
 <!-- updated for unsemantic -->
