@@ -15,7 +15,7 @@ function loadmore() {
         var results = data.message
         var more = data.more_results;
             if (results != "no results") {
-                var template = Handlebars.compile($('#results-template').html());
+                var template = Handlebars.compile($('#results-template_2').html());
                 var info = template(data);
                 $('#region-two').append(info).promise().done(function() {
                     if (more == "true"){
@@ -70,7 +70,7 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
         var more = data.more_results;
         linked_search = "false";
             if (results != "no results") {
-                var template = Handlebars.compile($('#results-template').html());
+                var template = Handlebars.compile($('#results-template_2').html());
                 var facet_template = Handlebars.compile($('#searchfacets-template').html());
                 var info = template(data);
                 var info_facets = facet_template(data);
@@ -124,7 +124,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
         state = History.getState();
         linked_search = "false";
         if (results != "no results") {
-            var template = Handlebars.compile($('#results-template').html());
+            var template = Handlebars.compile($('#results-template_2').html());
             var facet_template = Handlebars.compile($('#searchfacets-template').html());
             var selected_facet_template = Handlebars.compile($('#searchfacetsselected-template').html());
             var info = template(data);
