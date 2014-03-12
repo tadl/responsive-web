@@ -391,7 +391,7 @@ function myAccount(){
 }
 
 function my_lists(){
-	$('#working').show().spin('default');
+	loading_animation('start');
 	if (current_user == 'true') {
 		cleandivs();
     	cleanhouse();
@@ -400,10 +400,10 @@ function my_lists(){
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
 			$('#region-two').html(my_lists);
-			$('#working').hide().spin('default');
+			loading_animation('stop');
 		});
 	} else {
-	  	$('#working').hide().spin('default');
+	  	loading_animation('stop');
 	  	$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 	  	$("#login_form").slideDown("fast");	
 	};

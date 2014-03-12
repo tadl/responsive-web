@@ -448,3 +448,14 @@ function show_edit_account_settings(){
 	$("#settings_save").show();
 	$("#account_settings_form").show();
 }
+
+function loading_animation(state){
+	if (state == 'start'){
+		$('#working').show().spin('default');
+		$('#footer-wrapper').hide();
+	};
+	if(state == 'stop'){
+		$('#working').hide().spin('default');
+		$('#footer-wrapper').show();
+	};
+}
