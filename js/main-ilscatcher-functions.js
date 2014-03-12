@@ -167,7 +167,8 @@ function logged_in() {
 }
 
 function logout() {
-    $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><button id="login" onclick="login()">Login</button><span id="login_msg"></span>'); 
+    var source   = $("#login_form-template").html();
+    $("#login_form").html(source);
     window.localStorage.clear();
     current_user = 'false';
     location.reload();
@@ -323,6 +324,51 @@ function partB() {
     });
 }
 
+function load_password_reset() {
+    var login_form = $("#login_form");
+    var source = $("#password-reset-template").html();
+    login_form.html(source);
+    set_login_form_keypress_event('password_reset');
+}
+
+function submit_password_reset() {
+    var uservalue = $("#username_or_barcode").val();
+    if (uservalue = '') { return };
+    set_login_form_keypress_event();
+    $.getJSON(ILSCATCHER_BASE + 'main/passwordreset.json?user=' + uservalue, function(data) {
+        var login_form = $("#login_form");
+        var source = $("#password-reset-complete-template").html();
+        login_form.html(source);
+    });
+}
+
+function cancel_password_reset() {
+    var login_form = $("#login_form");
+    var source = $("#login_form-template").html();
+    login_form.html(source);
+    set_login_form_keypress_event();
+}
+
+function complete_password_reset() {
+    // Same as cancel -- show the login form
+    cancel_password_reset();
+}
+
+function set_login_form_keypress_event(do_what) {
+    var login_form = $("#login_form");
+    // Remove existing keydown
+    login_form.off('keydown');
+    if (do_what == 'password_reset') {
+        login_form.keydown(function(event) {
+            if (event.keyCode == 13) { submit_password_reset(); }
+        });
+    } else {
+        login_form.keydown(function(event) {
+            if (event.keyCode == 13) { login(); }
+        });
+    }
+}
+
 function login() {
     var username = $('#username').val();
     var password = $('#pword').val();
@@ -351,7 +397,8 @@ function login_and_fetch_dash(username, password) {
         } // I need help understanding this bit. what does the length of the login button have to do with anything? // wjr
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
-                $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
+                var source   = $("#login_form-template").html();
+                $("#login_form").html(source);
     			window.localStorage.clear();
                 $('#login_msg').html('<span>Error logging in.</span>');
                 current_user = 'false';
@@ -379,7 +426,10 @@ function login_and_fetch_dash(username, password) {
             }
         });
     } else {
-        $("#login_form").html('Username: <input type="text" id="username" /><br /> Password: <input type="password" id="pword" /><br /><a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a><span id="login_msg"></span>'); 
+        // Not logged in. Display the default login form.
+        var source   = $("#login_form-template").html();
+        $("#login_form").html(source);
+        set_login_form_keypress_event();
         window.localStorage.clear();
     }
 

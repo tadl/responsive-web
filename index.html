@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/navmenu.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
   		google.load("books", "0");
@@ -111,17 +112,8 @@
         <a class="pointer" onclick="load('youth');$('#nav_list').trigger('click');">Youth</a>
         <a class="pointer" onclick="load('teens');$('#nav_list').trigger('click');">Teens</a>
         <a class="pointer" onclick="load('events');$('#nav_list').trigger('click');">Events</a>
-        <a class="pointer" href="#">Reviews</a>
         <a class="pointer" href="node/338">Policies</a>
         <a class="pointer" href="page/governance">Governance</a>
-        <a class="pointer" href="#">Etc...</a>
-        <a class="pointer" href="#">wat</a>
-        <a class="pointer" href="#">is</a>
-        <a class="pointer" href="#">this</a>
-        <a class="pointer" href="#">i</a>
-        <a class="pointer" href="#">dont</a>
-        <a class="pointer" href="#">even</a>
-        <a class="pointer" href="#">because reasons</a>
     </nav>
     <header class="searchbar card">
         <div class="grid-container">
@@ -161,6 +153,10 @@
                     <select id="mediatype">
                         <option value="ALL FORMATS">All Formats</option>
                         <option value="BOOKS">Books</option>
+                        <option value="LPBOOKS">&nbsp;&nbsp;&nbsp;&nbsp;Large Print Books</option>
+                        <option value="EBOOKS">&nbsp;&nbsp;&nbsp;&nbsp;E-Books</option>
+                        <option value="PBOOKS">&nbsp;&nbsp;&nbsp;&nbsp;Physical Books</option>
+                        <option value="AUDIOBOOKS">&nbsp;&nbsp;&nbsp;&nbsp;Audiobooks</option>
                         <option value="MOVIES">Movies</option>
                         <option value="MUSIC">Music</option>
                         <option value="VIDEO GAMES">Video Games</option>
@@ -232,33 +228,36 @@
                 <div id="wide-pad">&nbsp;</div>
                 <div id="region-wide" style="display:none;"></div>
             </div>
-            <div class="grid-66 tablet-grid-60 mobile-grid-100">
+            <div class="grid-66 tablet-grid-66 mobile-grid-100">
                 <div id="thirdtwo-pad">&nbsp;</div>
                 <div id="third-two"></div>
             </div>
-            <div class="grid-33 tablet-grid-40 mobile-grid-40">
+            <div class="grid-33 tablet-grid-33 mobile-grid-100">
                 <div id="thirdone-pad">&nbsp;</div>
                 <div id="third-one"></div>
             </div>
-            <div class="grid-66 tablet-grid-60 mobile-grid-100 push-33 tablet-push-40 mobile-push-100">
+            <div class="grid-66 tablet-grid-66 mobile-grid-100 push-33 tablet-push-33 mobile-push-100">
                 <div id="twothirds-pad">&nbsp;</div>
                 <div id="two-thirds"></div>
             </div>
-            <div class="grid-33 tablet-grid-40 mobile-grid-100 pull-66 tablet-pull-60 mobile-pull-100">
+            <div class="grid-33 tablet-grid-33 mobile-grid-100 pull-66 tablet-pull-66 mobile-pull-100">
                 <div id="third-pad">&nbsp;</div>
                 <div id="one-third"></div>
             </div>
-            <div class="grid-50 tablet-grid-65 mobile-grid-100 push-25 tablet-push-35 mobile-push-100">
+            <!-- <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25 tablet-push-50 mobile-push-100"> -->
+            <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25">
                 <div id="two-pad">&nbsp;</div>
                 <div id="search-params" class="card padv hidden"></div>
                 <div id="region-two"></div>
                 <div id="loadmore"><div id="loadmoretext"></div></div>
             </div>
-            <div class="grid-25 tablet-grid-35 mobile-grid-100 pull-50 tablet-pull-65 mobile-pull-100">
+            <!-- <div class="grid-25 tablet-grid-33 mobile-grid-100 pull-50 tablet-pull-50 mobile-pull-100"> -->
+            <div class="grid-25 tablet-grid-50 mobile-grid-100 pull-50">
                 <div id="one-pad">&nbsp;</div>
                 <div id="region-one"></div>
             </div>
-            <div class="grid-25 tablet-grid-100 mobile-grid-100">
+            <!-- <div class="grid-25 tablet-grid-100 mobile-grid-100"> -->
+            <div class="grid-25 tablet-grid-50 mobile-grid-100">
                 <div id="three-pad">&nbsp;</div>
                 <div id="region-three"></div>
             </div>
@@ -328,6 +327,27 @@
         </div>
     </footer>
 </div>
+
+<script id="login_form-template" type="text/template">
+    Username: <input type="text" id="username" /><br />
+    Password: <input type="password" id="pword" /><br />
+    <a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a>
+    <span id="login_msg"></span><br/>
+    <a onclick="load_password_reset()">Forgot password?</a><br />
+    <a href="https://www.tadl.org/newuser">Register for a library card</a>
+</script>
+
+<script id="password-reset-template" type="text/template">
+    Username or library card / license:<br />
+    <input type="text" id="username_or_barcode" /><br />
+    <a id="submit_password_reset" class="button small tadlblue" onclick="submit_password_reset()"><span>Submit Password Reset Request</span></a>
+    <a id="cancel_password_reset" onclick="cancel_password_reset()"><span>Cancel</span></a>
+</script>
+
+<script id="password-reset-complete-template" type="text/template">
+    <p>Request for password reset has been submitted. Please check your e-mail for further instructions.</p>
+    <a id="complete_password_reset" class="button small tadlblue" onclick="complete_password_reset()"><span>Return to Login</span></a>
+</script>
 
 <!-- updated for unsemantic -->
 <script id="searchfacets-template" type="text/template">
@@ -618,10 +638,9 @@
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{{node.title}}}</span><br/>
-                    <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="unhide('{{node.nid}}')"><span>read story</span></a>
+                    <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="loadNode('{{node.nid}}')"><span>read story</span></a>
                     <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
                         {{{fixurls node.body}}}
-                        <a class="permalink button verysmall tadlblue padtop floatright" onclick="loadNode({{node.nid}})"><span>permalink</span></a>
                     </div>
                 </div>
             </div>
@@ -698,17 +717,18 @@
 </script>
 
 <script id="myaccount-template" type="text/template">
+<div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100">
 <div id="account_settings_display">
-	{{#settings}}
-		<h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
-		<h4>Username: {{opac_username}}</h4>
-		<h4>Email: {{email_address}}</h4>
-		<h4>Phone Notifications: {{hold_notify_phone}}</h4>
-		<h4>Email Notifications: {{hold_notify_email}}</h4>
-		<h4>Default Pick-up Location: {{idtoname pickup}}</h4>
-		<h4>Save Borrowing History: {{circ}}</h4>
-		<h4>Save Hold History: {{hold}}</h4>
-	{{/settings}}
+    {{#settings}}
+        <h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
+        <h4>Username: {{opac_username}}</h4>
+        <h4>Email: {{email_address}}</h4>
+        <h4>Phone Notifications: {{hold_notify_phone}}</h4>
+        <h4>Email Notifications: {{hold_notify_email}}</h4>
+        <h4>Default Pick-up Location: {{idtoname pickup}}</h4>
+        <h4>Save Borrowing History: {{circ}}</h4>
+        <h4>Save Hold History: {{hold}}</h4>
+    {{/settings}}
 </div>
 
 
@@ -777,6 +797,7 @@
 	</div>
 
 </form>	
+</div></div>
 </script>
 
 <!-- updated for unsemantic -->
@@ -940,9 +961,15 @@
         </div>
     {{/objects}}
     <div class="card">
-        <p><span class="cardtitle">Manage Book Bag</span></p>
-       <a id="multi-pre-hold" class="button green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a>
-       <a id="empty-bag-button" class="button blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <span class="cardtitle">Manage Book Bag</span><br/>
+                <div class="buttons padtop">
+                    <a id="multi-pre-hold" class="button medium green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a><br/><br/>
+                    <a id="empty-bag-button" class="button medium blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
+                </div>
+            </div>
+        </div>
     </div>
 </script>
 

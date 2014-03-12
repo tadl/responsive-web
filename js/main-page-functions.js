@@ -268,12 +268,13 @@ function showVideoPage() {
      changeBanner('Video', '#ffc341');
      var videos_new = featured_item_template(data.videos_new);
      var videos_hot = featured_item_template(data.videos_hot);
-     $('#region-one').append(videos_new + videos_hot);
      var videos_met = featured_item_template(data.videos_met);
-     var videos_tcff= featured_item_template(data.videos_tcff);
-     $('#region-three').append(videos_met + videos_tcff);
+     var videos_tcff = featured_item_template(data.videos_tcff);
+     var video_games = featured_item_template(data.video_games);
      var videos_reviews = review_template(data.videos_reviews);
+     $('#region-one').append(videos_new + videos_hot + video_games);
      $('#region-two').append(videos_reviews);
+     $('#region-three').append(videos_met + videos_tcff);
      }
 }
 
@@ -316,20 +317,19 @@ function showBooksPage() {
         return;
     });
      } else {
-     changeBanner('Books', '#e03434');
+    changeBanner('Books', '#e03434');
     var books_featured_fiction = featured_item_template(data.books_featured_fiction);
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
     var books_adult_display = featured_item_template(data.books_adult_display)
-    $('#region-one').append(books_featured_fiction + books_featured_nonfiction + books_adult_display);
     var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
     var books_adult_business = featured_item_template(data.books_adult_business)
-    $('#region-three').append(books_adult_clubkits + books_adult_business);
     var books_book_list = drupalnode_template(data.books_book_list)
-    $('#region-two').prepend(books_book_list);
-    $('a[rel="lightframe"]').fancybox({type: 'iframe'});
     var books_reviews = review_template(data.books_reviews)
-    $('#region-two').prepend(books_reviews);
-     }
+    $('#region-three').html(books_adult_clubkits + books_adult_business);
+    $('#region-two').html(books_reviews + books_book_list);
+    $('#region-one').html(books_featured_fiction + books_featured_nonfiction + books_adult_display);
+    $('a[rel="lightframe"]').fancybox({type: 'iframe'});
+    }
 }
 
 function showHomePage() {
@@ -350,11 +350,12 @@ function showHomePage() {
     var books_featured_nonfiction = featured_item_template(data.books_featured_nonfiction);
     var music_new = featured_item_template(data.music_new);
     var videos_new = featured_item_template(data.videos_new);
-    $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
     var featured_news = featured_news_template(data.featured_news);
-    $('#region-two').append(featured_news);
     var events = events_template(data.events);
-    $('#region-one').append(events).prepend('<div class="card"><h4 class="title">Upcoming Events</h4></div>');
+    var alleventslink = "load('events')";
+    $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
+    $('#region-two').append(featured_news);
+    $('#region-one').append('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">View all events</a></h4></div>');
     }
 }
 
@@ -378,7 +379,7 @@ function myAccount(){
 	    var prefs = myaccount_template(account_settings);
 	    $('#working').hide().spin('default');
 	    changeBanner('My Account', '#0d4c78');
-	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings<a onclick="show_edit_account_settings()"> edit</a></h4><div id="account_settings">Loading!</div></div>');
+	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings <a onclick="show_edit_account_settings()" class="pointer">edit</a></h4><div id="account_settings">Loading!</div></div>');
 	    $('#account_settings').html(prefs);
 	    }
 	} else {
