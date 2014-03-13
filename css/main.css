@@ -441,7 +441,7 @@ img.icon.logo {
 }
 
 .itembox {
-    max-width:240px;
+    max-width:280px;
 }
 .itemboxmob {
     max-width:320px;
@@ -456,7 +456,7 @@ img.icon.logo {
     margin:0;
     padding:0;
     width:50%;
-    height:110px;
+    height:120px;
     overflow:hidden;
 }
 
@@ -469,8 +469,8 @@ img.icon.logo {
 .img-viewer img {
     margin:0;
     padding:0;
-    min-height:110px;
-    min-width:110px;
+    min-height:125px;
+    min-width:125px;
     position:absolute;
 }
 

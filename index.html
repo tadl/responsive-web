@@ -219,7 +219,7 @@
                 </div>
             </div>
             <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop"">
-            	<div id="page_banner" class="">
+            	<div id="page_banner">
          		</div>
          	</div>
         </div>
@@ -612,10 +612,10 @@
 <script id="showfeaturednews-template" type="text/template">
     {{#each_upto nodes 5}}
         <div class="card" id="card-{{node.nid}}">
-            <img src="{{node.image}}" />
+            <img src="{{node.image}}" class="pointer" onclick="loadNode('{{node.nid}}')" />
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <span class="cardtitle">{{{node.title}}}</span><br/>
+                    <span class="cardtitle" onclick="loadNode('{{node.nid}}')">{{{node.title}}}</span><br/>
                     <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="loadNode('{{node.nid}}')"><span>read story</span></a>
                     <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
                         {{{fixurls node.body}}}
@@ -628,36 +628,29 @@
 
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
-      
-            <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100" style="margin:0 auto;">
-                    <h4 class="title pointer">{{list_name}}</h4>
-        
-                        <div class="pointer item25">
-                    {{#each_upto items 4}}
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
-                    {{/each_upto}}
-                        </div>
-                </div>
-            </div>
-    </div>
-    <div class="card hide-on-mobile hide-on-tablet"> <!-- desktop only section -->
-      
-            <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox" style="margin:0 auto;">
-                    <h4 class="title pointer">{{list_name}}</h4>
+        <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100" style="margin:0 auto;">
+                <h4 class="title pointer">{{list_name}}</h4>
     
-                    {{#each_upto items 4}}
-                        <div class="img-viewer pointer">
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
-                        </div>
-                    {{/each_upto}}
-                </div>
+                    <div class="pointer item25">
+                {{#each_upto items 4}}
+                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
+                {{/each_upto}}
+                    </div>
             </div>
+        </div>
+    </div>
+    <div class="card hide-on-mobile hide-on-tablet" style="padding:0;"> <!-- desktop only section -->
+        <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')" style="padding:0;">
+            <h4 class="title pointer" style="padding:0 0 5px 0;margin-top:5px;">{{list_name}}</h4>
+            {{#each_upto items 4}}
+                <div class="img-viewer pointer">
+                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
+                </div>
+            {{/each_upto}}
+        </div>
     </div>
 </script>
-                                                                                                                                                                                            
-                                                                                                                                                                                            
 
 <script id="shelf-template" type="text/template">
     <table>
