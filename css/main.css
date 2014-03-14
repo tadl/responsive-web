@@ -259,7 +259,7 @@ figure {
 }
 
 body {
-  padding: 57px 0 0 0;
+  padding: 62px 0 0 0;
   background: #f0f2f5;
   color: #000000;
   text-align: center;
@@ -324,7 +324,7 @@ div[class*="pull-"] section {
     background: linear-gradient(center top, #f0f2f5, #dddddd);
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, from(#f0f2f5), to(#dddddd));
     background: -moz-linear-gradient(center top , #f0f2f5, #dddddd);
-    padding-top:10px;
+    padding-top:8px;
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;
     box-sizing:border-box;
@@ -332,9 +332,6 @@ div[class*="pull-"] section {
     top:0px;
     left:0px;
     right:0px;
-    -webkit-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
-    -moz-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
-    box-shadow:2px 2px 3px rgba(0,0,0,0.5);
     z-index:1000;
 }
 
@@ -400,10 +397,18 @@ h4.title {
 }
 
 img.icon {
-    max-width:30px;
-    min-width:30px;
-    max-height:30px;
-    min-height:30px;
+    max-width:35px;
+    min-width:35px;
+    max-height:35px;
+    min-height:35px;
+}
+
+img.icon.acct {
+    max-width:40px;
+    min-width:40px;
+    max-height:40px;
+    min-height:40px;
+    padding-right:10px;
 }
 
 img.icon.logo {
@@ -528,8 +533,8 @@ input.search {
     width:100%;
     height:25px;
     font-size:16px;
-    padding:0 5px;
-    margin-top:2px;
+//    padding:0 5px;
+//    margin-top:2px;
 }
 
 .hidden {
@@ -625,7 +630,7 @@ table.hours {
     text-align:right;
 }
 
-.mobile-grid-10.menu {
+.mobile-grid-10.nav {
     padding-left:0;
 }
 
