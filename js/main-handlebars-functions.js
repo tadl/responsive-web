@@ -133,7 +133,7 @@ jQuery.extend({
 var test = $.getValues(check_url)
 if (test != "fail"){
 var url = 'https://www.youtube.com/embed/'+ test +'?iv_load_policy=3&rel=0'
-var embed_code = '<iframe class="youtube-player" type="text/html" style="width:100%;height:320px;" src="'+ url +'"allowfullscreen frameborder="0"></iframe>'
+var embed_code = '<div class="videoWrapper"><iframe class="youtube-player" type="text/html" src="'+ url +'"allowfullscreen frameborder="0"></iframe></div>';
 return embed_code;
 }
 });

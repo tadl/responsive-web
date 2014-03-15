@@ -141,7 +141,7 @@ function toggleBody(id) {
     $('.review-body').not('#review_' + id).show();
     $('#review_' + id).hide();
     $('#review_full_' + id).show();
-    $(window).scrollTop($("#card-" + id).offset().top - 40);
+    $(window).scrollTop($("#card-" + id).offset().top - 60);
 }
 
 function openForm() {
