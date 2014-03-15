@@ -36,6 +36,7 @@ function loadmore() {
 
 function getResults(query, mt, avail, location, searchtype, sort_type) {      
     cleanhouse();
+    cleandivs();
     pagecount = 0;
     var searchquery = query;
     var mediatype = mt;
