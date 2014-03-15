@@ -353,9 +353,10 @@ function showHomePage() {
     var featured_news = featured_news_template(data.featured_news);
     var events = events_template(data.events);
     var alleventslink = "load('events')";
-    $('#region-three').append(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
-    $('#region-two').append(featured_news);
-    $('#region-one').append('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">View all events</a></h4></div>');
+    var logo = '<img src="img/logo.png" style="padding-bottom:5px;width:100%;" />';
+    $('#region-three').html(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
+    $('#region-two').html(featured_news);
+    $('#region-one').html(logo + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">View all events</a></h4></div>');
     }
 }
 

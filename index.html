@@ -122,9 +122,9 @@
             </div>
             <div class="grid-90 tablet-grid-90 mobile-grid-75">
                 <div class="grid-container" style="border:1px solid gray;padding:4px 95px 3px 0;border-radius:5px;margin:0;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5); -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5); box-shadow:1px 1px 2px rgba(0,0,0,0.5);white-space:nowrap;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
-                    <img src="img/icon-arrow-down-b-256.png" class="icon pointer" title="Search Options" alt="Options" onclick="openSearch_options()" style="padding:0 0 0 2px;margin:0;display:inline-block;box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
+                    <img src="img/icon-arrow-down-b-256.png" id="searchicon" class="icon pointer" title="Search Options" alt="Options" onclick="openSearch_options()" style="padding:0 0 1px 3px;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
                     <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" style="display:inline-block;padding:0px 5px;"/>
-                    <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" style="padding:0 3px 3px 0;margin:0;display:inline-block;box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
+                    <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" style="padding:0 3px 3px 0;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
                 </div>
             </div>
             <div class="grid-5 tablet-grid-5 mobile-grid-15">
@@ -134,9 +134,11 @@
         <div id="search_options">
             <div class="grid-container">
                 <div class="grid-25 tablet-grid-25 mobile-grid-100"> 
-                    <input class="left" type="checkbox" id="available" value="false" /> Limit to Available
+                    <div style="padding-top:10px;">
+                        <input class="left" type="checkbox" id="available" value="false" /> Limit to Available
+                    </div>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50" style="padding-top:4px;">
                     <select id="searchtype">
                         <option value="keyword">Keyword</option>
                         <option value="author">Author</option>
@@ -144,7 +146,7 @@
                         <option value="subject">Subject</option>
                     </select>
                 </div>
-                <div class="grid-20 tablet-grid-20 mobile-grid-50">
+                <div class="grid-20 tablet-grid-20 mobile-grid-50" style="padding-top:4px;">
                     <select id="mediatype">
                         <option value="ALL FORMATS">All Formats</option>
                         <option value="BOOKS">Books</option>
@@ -157,7 +159,7 @@
                         <option value="VIDEO GAMES">Video Games</option>
                     </select>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50" style="padding-top:4px;">
                     <select id="location">
                         <option value="22">All Locations</option>
                         <option value="23">Woodmere</option>
@@ -167,7 +169,7 @@
                         <option value="28">East Bay</option>
                     </select>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50" style="padding-top:4px;">
                     <select id="sort" value="relevance">
                         <option value="relevance">Relevance</option>
                         <option value="newest_to_oldest">Newest to Oldest</option>
