@@ -127,7 +127,7 @@ function unhide(eventId) {
     if (e.style.display === 'none') {
         $('.cardblock').not('#' + eventId).hide();
         $('#' + eventId).show();
-        $(window).scrollTop($("#card-" + eventId).offset().top - 40);
+        $(window).scrollTop($("#card-" + eventId).offset().top - 60);
         $('#more' + eventId).hide();
         $('.showmore').not('#more' + eventId).show();
     } else {
