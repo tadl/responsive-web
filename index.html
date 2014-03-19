@@ -363,7 +363,6 @@
     <a id="complete_password_reset" class="button small tadlblue" onclick="complete_password_reset()"><span>Return to Login</span></a>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="searchfacets-template" type="text/template">
     <div class="card">
      <h4 class="title">Filter Your Search:</h4>
@@ -396,7 +395,6 @@
 </script>
 
 
-<!-- updated for unsemantic -->
 <script id="results-template_2" type="text/template">
     {{#items}}
         <div class="card">
@@ -443,15 +441,6 @@
 </script>
 
 
-
-
-
-
-
-
-
-
-<!-- updated for unsemantic -->
 <script id="showitemlist-template" type="text/template">
         <div class="card">
         {{#each_upto nodes 1}}
@@ -494,7 +483,6 @@
 	</div>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="showreviews-template" type="text/template">
     <div class="card">
         <h4 class="title">Staff Reviews</h4>
@@ -532,7 +520,7 @@
     {{/nodes}}
 </script>
 
-<script id="drupalnode-template" type="text/template">
+<script id="simplenode-template" type="text/template">
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
@@ -545,14 +533,12 @@
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div class="padtop">{{{fixurls node.body}}}</div>
-                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                 </div>
             </div>
         </div>
     {{/nodes}}
 </script>
 
-<!-- updated for unsemantic -->
 <script id="more_details-template" type="text/template">
    <div>
   {{#items}}
@@ -623,7 +609,6 @@
     </div>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="showfeaturednews-template" type="text/template">
     {{#each_upto nodes 5}}
         <div class="card" id="card-{{node.nid}}">
@@ -789,7 +774,6 @@
 </div></div>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="showcheckedout-template" type="text/template">
     {{#:checkouts}}
         <div class="card">
@@ -810,7 +794,6 @@
     {{/:checkouts}}
 </script>
 
-<!-- updated for unsemantic -->
 <script id="someevents-template" type="text/template">
     {{#each_upto nodes 6}}
         <div class="card" id="card-{{node.nid}}">
@@ -819,14 +802,14 @@
                     <span class="cardtitle">{{node.title}}</span><br/>
                     <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
                 </div>
-                <div class="grid-35 tablet-grid-35 mobile-grid-35">
+                <div class="grid-35 tablet-grid-35 mobile-grid-35 center">
                     {{#if node.image}}
                         <img class="result_img" onerror="this.onerror=null;this.src='img/clocktower100.png';" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
                     <div class="padtop">
-                        <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" onclick="unhide({{node.nid}})"><span>view details</span></a>
+                        <a id="more{{node.nid}}" class="showmore button verysmall tadlblue" onclick="unhide({{node.nid}})"><span>view details</span></a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -915,7 +898,6 @@
     {{/:holds}}
 </script>
 
-<!-- updated for unsemantic -->
 <script id="renew-template" type="text/template">
     {{#:checkouts}}
         Due: {{:checkout.:due_date}}<br/>
@@ -1027,7 +1009,7 @@
                         <div class="padtop">
                             {{{fixurls node.body}}}
                         </div>
-                        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                     {{/if}}
                 </div>
             </div>

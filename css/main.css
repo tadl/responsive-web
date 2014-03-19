@@ -630,6 +630,9 @@ table.hours {
 .right {
     text-align:right;
 }
+.center {
+    text-align:center;
+}
 
 .mobile-grid-10.nav {
     padding-left:0;

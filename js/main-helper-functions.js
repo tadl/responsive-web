@@ -1,4 +1,4 @@
-var drupalnode_template;
+var simplenode_template;
 var featured_item_template;
 var review_template;
 var events_template;
@@ -362,7 +362,7 @@ function loadNodes(nodes) {
         loading_animation('start');
         if (nodes.left != null) {
             $.getJSON(NODEPREFIX + nodes.left, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-one').append(info);
                 loading_animation('stop');
@@ -370,7 +370,7 @@ function loadNodes(nodes) {
         }
         if (nodes.middle != null) {
             $.getJSON(NODEPREFIX + nodes.middle, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-two').append(info);
                 loading_animation('stop');
@@ -378,7 +378,7 @@ function loadNodes(nodes) {
         }
         if (nodes.right != null) {
             $.getJSON(NODEPREFIX + nodes.right, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-three').append(info);
                 loading_animation('stop');
@@ -386,7 +386,7 @@ function loadNodes(nodes) {
         }
         if (nodes.third != null) {
             $.getJSON(NODEPREFIX + nodes.third, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#one-third').append(info);
                 loading_animation('stop');
@@ -394,7 +394,7 @@ function loadNodes(nodes) {
         }
         if (nodes.twothirds != null) {
             $.getJSON(NODEPREFIX + nodes.twothirds, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#two-thirds').append(info);
                 loading_animation('stop');
