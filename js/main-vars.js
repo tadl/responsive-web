@@ -20,6 +20,7 @@ var linked_search = false;
 var templist = {};
 templist.localArray = []; 
 var mylist2 = []
+var color_tadlblue = '#0d4c78';
 
 var NODEPREFIX = 'https://www.tadl.org/export/node/json/';
 

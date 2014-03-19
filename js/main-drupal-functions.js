@@ -1,11 +1,32 @@
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
 
 function showAllEventsByTerm(term) {
+    var banner;
     cleanhouse();
     cleandivs();
     loading_animation('start');
+    if (term == 'kbl') {
+        banner = "Kingsley Events";
+    } else if (term == 'pcl') {
+        banner = "Peninsula Events";
+    } else if (term == 'wood') {
+        banner = "Woodmere Events";
+    } else if (term == 'flpl') {
+        banner = "Fife Lake Events";
+    } else if (term == 'ipl') {
+        banner = "Interlochen Events";
+    } else if (term == 'ebb') {
+        banner = "East Bay Events";
+    } else if (term == 'youth') {
+        banner = "Youth Events";
+    } else if (term == 'teens') {
+        banner = "Teen Events";
+    } else if (term == 'adults') {
+        banner = "Adult Events";
+    }
     if ((term == null) || (term == 'all')) { 
         term = 'events'; 
+        banner = "All Events";
     } else {
         term = 'events_' + term;
     }
@@ -19,6 +40,7 @@ function showAllEventsByTerm(term) {
     } else {
         var template = Handlebars.compile($('#allevents-template').html());
         var info = template(alljson[term]);
+        changeBanner(banner, color_tadlblue);
         $('#third-two').html(info).show();
         $('#third-one').html('<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>');
         loading_animation('stop');
