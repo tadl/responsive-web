@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <!-- saved from url=(0021)http://www.google.com -->
-<html lang="en">
+<html lang="en" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
     <base href="/responsive-web/">
     <meta charset="UTF-8" />
@@ -102,22 +102,13 @@
 </head>
 <body class="pushmenu-push">
 <div id="fb-root"></div>
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '184331468353470',
-            status     : true,
-            xfbml      : true
-        });
-    };
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=184331468353470";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="wrapper">
     <nav class="pushmenu pushmenu-left">
         <h3>Site Navigation</h3>
@@ -1009,7 +1000,7 @@
                         <div class="padtop">
                             {{{fixurls node.body}}}
                         </div>
-                        <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <fb:like layout="standard" action="like" show_faces="true" share="true"></fb:like>
                     {{/if}}
                 </div>
             </div>
