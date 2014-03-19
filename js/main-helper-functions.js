@@ -74,6 +74,13 @@ $(document).ready(function() {
 
 });
 
+$(document).ajaxComplete(function(){
+    try{
+        FB.XFBML.parse(); 
+    }catch(ex){}
+});
+
+
 function load_drupal_json(content) {
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
 $.getJSON(drupal_json_url, function(data) {
