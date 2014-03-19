@@ -3,7 +3,7 @@ var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
 function showAllEventsByTerm(term) {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
+    loading_animation('start');
     if ((term == null) || (term == 'all')) { 
         term = 'events'; 
     } else {
@@ -21,7 +21,7 @@ function showAllEventsByTerm(term) {
         var info = template(alljson[term]);
         $('#third-two').html(info).show();
         $('#third-one').html('<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>');
-        $('#working').hide().spin(false);
+        loading_animation('stop');
     }
 }
 
@@ -30,13 +30,13 @@ function showlocations() {
     var action = {action:"showlocations"}
     History.pushState(action, "Locations", "locations"); 
     state = History.getState();
-    $('#working').show().spin('default');
+    loading_animation('start');
     $.getJSON(LOCATIONS_BASE + "/all", function(data) {
         var template = Handlebars.compile($('#showlocations-template').html());
         var info = template(data);
         if (state.data.action === "showlocations") {
             $('#region-two').html(info);
-            $('#working').hide().spin(false);
+            loading_animation('stop');
         }
     });
 }
@@ -101,11 +101,11 @@ function showitemlist(list_name, list_id) {
 
 function showreviews(review_type) { 
     cleanhouse();
-    $('#working').show().spin('default');
+    loading_animation('start');
     $.getJSON('https://www.tadl.org/export/reviews/'+ review_type +'/json', function(data) {
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
-        $('#working').hide().spin(false);
+        loading_animation('stop');
         $('#region-two').html(info);
         
     });
@@ -191,7 +191,7 @@ function hoursAndInfo(loc) {
 function showNode(nid) {
     cleanhouse();
     cleandivs();
-    $('#working').show().spin('default');
+    loading_animation('start');
     // this will eventually need some logic that checks what *kind* of node it is
     // so we can handle different node types differently (images are different sizes
     // etc, for example).
@@ -199,6 +199,6 @@ function showNode(nid) {
         var template = Handlebars.compile($('#node-template').html());
         var info = template(data);
         $('#region-wide').html(info).show();
-        $('#working').hide().spin(false);
+        loading_animation('stop');
     });
 }

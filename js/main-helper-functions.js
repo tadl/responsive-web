@@ -359,13 +359,13 @@ function loadlist(list_id, list_name) {
 
 function loadNodes(nodes) {
     if (nodes !== null) {
-        $('#working').show().spin('default');
+        loading_animation('start');
         if (nodes.left != null) {
             $.getJSON(NODEPREFIX + nodes.left, function(data) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#region-one').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.middle != null) {
@@ -373,7 +373,7 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#region-two').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.right != null) {
@@ -381,7 +381,7 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#region-three').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.third != null) {
@@ -389,7 +389,7 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#one-third').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.twothirds != null) {
@@ -397,7 +397,7 @@ function loadNodes(nodes) {
                 var template = Handlebars.compile($('#drupalnode-template').html());
                 var info = template(data);
                 $('#two-thirds').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
     }

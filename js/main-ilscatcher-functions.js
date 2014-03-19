@@ -447,7 +447,7 @@ function showcheckouts() {
     cleandivs();
     var action = {action:"showcheckouts"}
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
     state = History.getState();
@@ -456,7 +456,7 @@ function showcheckouts() {
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
             $('#region-wide').html(info).show();
-            $('#working').hide().spin(false);
+            loading_animation('stop');
         }
     });
 }
@@ -489,7 +489,7 @@ function showholds() {
     cleandivs();
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -498,7 +498,7 @@ function showholds() {
         var info = template(data);
         if (state.data.action === "showholds") {
             $('#region-wide').html(info).show();
-            $('#working').hide().spin(false);
+            loading_animation('stop');
         }
     });   
 }
@@ -508,7 +508,7 @@ function showpickups() {
     cleandivs();
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
@@ -518,7 +518,7 @@ function showpickups() {
         var info = template(data);
         if (state.data.action === "showpickups") {
             $('#region-wide').html(info).show();
-            $('#working').hide().spin(false);
+            loading_animation('stop');
         }
     });
 }
@@ -542,7 +542,7 @@ function showcard() {
     cleanhouse();
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -550,7 +550,7 @@ function showcard() {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('#working').hide().spin(false);
+            loading_animation('stop');
             $('#region-wide').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
         }
