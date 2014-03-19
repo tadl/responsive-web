@@ -980,7 +980,7 @@
         <div class="card">
             <div class="grid-container">
                 {{#if node.image}}
-                    <div class="grid-40 tablet-grid-50 hide-on-mobile">
+                    <div class="grid-30 tablet-grid-40 hide-on-mobile">
                         <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
                     </div>
                     <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
@@ -988,14 +988,14 @@
                     </div>
                 {{/if}}
                 {{#if node.images}}
-                    <div class="grid-40 tablet-grid-50 hide-on-mobile">
+                    <div class="grid-30 tablet-grid-40 hide-on-mobile">
                         <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
                     </div>
                     <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
                         <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
                     </div>
                 {{/if}}
-                <div class="grid-60 tablet-grid-50 mobile-grid-100">
+                <div class="grid-70 tablet-grid-60 mobile-grid-100">
                     {{#if node.nodetitle}}
                         <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
                     {{/if}}
