@@ -373,6 +373,7 @@ div[class*="pull-"] section {
     padding-top:15px;
     font-weight:bold;
     vertical-align:bottom;
+    white-space:normal;
 }
 
 em.subtitle {
