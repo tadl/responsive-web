@@ -26,7 +26,7 @@ function showAllEventsByTerm(term) {
     }
     if ((term == null) || (term == 'all')) { 
         term = 'events'; 
-        banner = "All Events";
+        banner = "Events";
     } else {
         term = 'events_' + term;
     }
