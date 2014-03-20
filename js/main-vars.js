@@ -21,6 +21,7 @@ var templist = {};
 templist.localArray = []; 
 var mylist2 = []
 var color_tadlblue = '#0d4c78';
+var itemlists = ["13541","15132","13512","11234","15153"];
 
 var NODEPREFIX = 'https://www.tadl.org/export/node/json/';
 
