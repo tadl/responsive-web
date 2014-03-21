@@ -800,7 +800,7 @@ var username = window.localStorage.getItem('username');
 var password = window.localStorage.getItem('password');
 
 var url = username_param + alias_param + email_param + search_param + notify_param
-alert(url);
+//alert(url);
 //alert(new_username +' '+ new_alias +' '+ new_email +' '+ new_pickup_location +' '+ new_phone_notify +' '+  new_email_notify +' '+ new_save_holds + ' '+ new_save_circs);
 $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
 		var cat = JSON.stringify(data)
