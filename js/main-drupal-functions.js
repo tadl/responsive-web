@@ -228,11 +228,12 @@ function showEventNode(nid) {
     cleanhouse();
     cleandivs();
     loading_animation('start');
-    // this will eventually need some logic that checks what *kind* of node it is
-    // so we can handle different node types differently (images are different sizes
-    // etc, for example).
     $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
         var template = Handlebars.compile($('#eventnode-template').html());
+        var shortname = data.nodes[0].node.location; // TODO though
+// knowing the location, I should be able to display other events
+// for that location, but alas... not yet. but soon.
+        console.log(shortname);
         var info = template(data);
         $('#region-wide').html(info).show();
         loading_animation('stop');
