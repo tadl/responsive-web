@@ -91,6 +91,7 @@
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_name/:list_id', showitemlist)
+            .route(BASE_URL + 'event/:nid', showEventNode)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
@@ -832,7 +833,7 @@
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div class="padtop">
-                        <a onclick="loadNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
+                        <a onclick="loadEventNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
                     </div>
                 </div>
             </div>
@@ -965,6 +966,54 @@
         </div>
     {{/nodes}}
 </script>
+
+<script id="eventnode-template" type="text/template">
+    {{#nodes}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-75 tablet-grid-70 mobile-grid-100">
+                    {{#if node.image}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.images}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.nodetitle}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
+                    {{/if}}
+                    {{#if node.title}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
+                    {{/if}}
+                    {{#if node.event-date}}
+                        <div class="subtitle padtop">{{{node.event-date}}} at {{node.location}}</div>
+                    {{/if}}
+                    {{#if node.body}}
+                        <div class="padtop">
+                            {{{fixurls node.body}}}
+                        </div>
+                        {{#if node.simplestartdate}}
+                            <div class="padbot">
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{{encode node.title}}}{{{encode node.nodetitle}}}&dates={{makedate node.simplestartdate}}/{{makedate node.simplestartdate}}&details={{{encode node.body}}}&location=TADL%20{{node.location}}&trp=false&sprop=Traverse%20Area%20District%20Library&sprop=name:http%3A%2F%2Fwww.tadl.org%2F" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button6.gif" border="0"></a>
+                            </div>
+                        {{/if}}
+                        <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    {{/nodes}}
+</script>
+                            <!-- http://www.google.com/calendar/event?action=TEMPLATE&text=Tell-A-Tail&dates=20140321T200000Z/20140321T213000Z&details=Yes,%20that%27s%20Tell-A-%20%22Tail!%22%20Children%20come%20read%20to%20our%20tail%20wagging%20friends!%20This%20program%20allows%20children%20to%20practice%20their%20reading%20out-loud%20skills%20to%20our%20kind%20and%20gentle%20therapy%20dogs.%20Dogs%20are%20nationally%20certified%20and%20offer%20a%20non-judgmental%20ear%20for%20children%20to%20improve%20confidence%20and%20fluency.&location=TADL%20Woodmere&trp=false&sprop=Traverse%20Area%20District%20Library&sprop=name:http%3A%2F%2Fwww.tadl.org%2F -->
 
 <script id="node-template" type="text/template">
     {{#nodes}}
