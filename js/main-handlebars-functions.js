@@ -151,6 +151,6 @@ Handlebars.registerHelper('trunc', function(str) {
 
 
 Handlebars.registerHelper('makedate', function(str) {
-    return $.format.date(str, "yyyyMMdd") + "T" + $.format.date(str, "HHmmss") + "Z";
+    return $.format.toBrowserTimeZone(str, "yyyyMMdd") + "T" + $.format.date(str, "HHmmss");
 });
 
