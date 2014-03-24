@@ -449,9 +449,9 @@ function showcheckouts() {
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
     loading_animation('start');
     var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
+    var token = window.localStorage.getItem('token');
     state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?u='+ username +'&pw=' + password, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?user='+ username +'&token=' + token, function(data) {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
