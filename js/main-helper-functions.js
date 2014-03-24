@@ -281,7 +281,7 @@ function load(page) {
             var title = psTitle + separator + "Interlochen Public Library";
         } else if (page == 'peninsula') {
             var title = psTitle + separator + "Peninsula Community Library";
-        } else if (page == 'l') {
+        } else if (page == 'myaccount') {
             var title = psTitle + separator + "My Account";
         } else if (page == 'events') {
             var title = psTitle + separator + "Events";
