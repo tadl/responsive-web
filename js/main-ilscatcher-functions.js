@@ -7,8 +7,6 @@ function loadmore() {
     var loc = window.localStorage.getItem('loc');
     var facet = window.localStorage.getItem('facet');
     var searchtype = window.localStorage.getItem('searchtype');
-    
-    
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $('#loadmoretext').trigger("create");
     $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
@@ -505,8 +503,10 @@ function showholds() {
 }
 
 function show_checkout_history() {
+    historycount=0;
     cleanhouse();
     cleandivs();
+    changeBanner("Checkout History", color_tadlblue);
     loading_animation('start');
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
@@ -514,7 +514,6 @@ function show_checkout_history() {
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         var more = data.more;
-        console.log(more);
         $('#region-two').html(info).show().promise().done(function() {
             if (more == "true") {
                 $('#loadmoretext').empty().append(moreHistoryText);
@@ -534,7 +533,6 @@ function more_history() {
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $('#loadmoretext').trigger("create");
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
-        console.log(data.checkouts.more);
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
@@ -546,14 +544,8 @@ function more_history() {
                 $('#loadmore').hide();
             }
         });
-//         } else {
-//                $('#loadmoretext').html("No Further Results");
-//            }
-        
     });
 }
-
-
 
 
 function showpickups() {
