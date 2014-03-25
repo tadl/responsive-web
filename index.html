@@ -97,6 +97,7 @@
             .route(BASE_URL + 'reviews', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
             .route(BASE_URL + 'myaccount', myAccount)
+            .route(BASE_URL + 'history', show_checkout_history)
             .route(BASE_URL + 'my_lists', my_lists)
             ;
     </script>
@@ -675,11 +676,11 @@
         </div>
         Fines: {{user.fines}}
         </div>
-        <a class="button wide tadlblue" id="account_settings_button" onclick="load('myaccount');"><span>My Account</span></a> </br>
-        <a class="button wide tadlblue" id="checkout_history_button" onclick="load('hist_checkout');"><span>Checkout History</span></a> </br>
-        <a class="button wide tadlblue" id="my_lists" onclick="load('my_lists')"><span>My Lists</span></a> </br>
-        <a class="button wide tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a> </br>
-    	<a class="button wide tadlblue" id="login" onclick="logout()"><span>Logout</span></a> 
+        <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="load('history');"><span>Checkout History</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="load('my_lists')"><span>My Lists</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
+    	<a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
 </script>
 
@@ -877,10 +878,10 @@
     {{#:holds}}
         <div id="hold_{{:hold.:hold_id}}" class="card">
             <div class="grid-container">
-                <div class="grid-10 tablet-grid-20 mobile-grid-30">
+                <div class="grid-20 tablet-grid-10 mobile-grid-20">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}"/>
                 </div>
-                <div class="grid-90 tablet-grid-80 mobile-grid-70">
+                <div class="grid-80 tablet-grid-90 mobile-grid-80">
                     <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}"/>&nbsp;{{:hold.:name}}</span><br/>
                     Pick-up Location: {{:hold.:pickup_location}}<br/>
                     Status: {{:hold.:status}}<br/>
@@ -889,6 +890,23 @@
             </div>
         </div>
     {{/:holds}}
+</script>
+
+<script id="showcheckout-history-template" type="text/template">
+    {{#checkouts}}
+        <div id="checkout_{{record_id}}" class="card">
+            <div class="grid-container">
+                <div class="grid-20 tablet-grid-10 mobile-grid-20">
+                    <img class="result_img" onload="img_check(this)" onerror="img_error(this)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{record_id}}"/>
+                </div>
+                <div class="grid-80 tablet-grid-90 mobile-grid-80">
+                    <span class="cardtitle">{{title}}</span><br/>
+                    <em>{{author}}</em><br/>
+                    <span class="smaller">Out: {{date_out}}, Due: {{date_due}}, In: {{date_in}}</span>
+                </div>
+            </div>
+        </div>
+    {{/checkouts}}
 </script>
 
 <script id="renew-template" type="text/template">

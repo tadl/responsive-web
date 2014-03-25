@@ -283,6 +283,8 @@ function load(page) {
             var title = psTitle + separator + "Peninsula Community Library";
         } else if (page == 'myaccount') {
             var title = psTitle + separator + "My Account";
+        } else if (page == 'history') {
+            var title = psTitle + separator + "Checkout History";
         } else if (page == 'events') {
             var title = psTitle + separator + "Events";
         } else if (page == 'events/kbl') {

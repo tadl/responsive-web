@@ -10,11 +10,13 @@ var FACEBOOK_URL = 'https://graph.facebook.com/TraverseAreaDistrictLibrary/feed?
 var loadingmoreText = '<span class="loadmore"><img class="spinner" src="img/spinner.gif">Loading...</span>';
 var logoutText = '<span class="loadmore"><img class="spinner" src="img/spinner.gif">Logging Out...</span>';
 var loadmoreText = '<a class="button wide large tadlblue" style="color: #fff;"onclick="loadmore();">Load More Results</a>';
+var moreHistoryText = '<a class="button wide large tadlblue" style="color: #fff;"onclick="more_history();">Load More Results</a>';
 var psTitle = "Traverse Area District Library";
 var separator = " | ";
 var platform = 'web';
 var version_id = '0';
 var pagecount = 0;
+var historycount = 0;
 var state = {}
 var linked_search = false;
 var templist = {};

@@ -504,6 +504,58 @@ function showholds() {
     });   
 }
 
+function show_checkout_history() {
+    cleanhouse();
+    cleandivs();
+    loading_animation('start');
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token, function(data) {
+        var template = Handlebars.compile($('#showcheckout-history-template').html());
+        var info = template(data);
+        var more = data.more;
+        console.log(more);
+        $('#region-two').html(info).show().promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(moreHistoryText);
+                $('#loadmoretext').trigger("create");
+                $('#loadmore').show();
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+        loading_animation('stop');
+    });
+}
+function more_history() {
+    historycount++;
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#loadmoretext').trigger("create");
+    $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
+        console.log(data.checkouts.more);
+        var more = data.more;
+        var template = Handlebars.compile($('#showcheckout-history-template').html());
+        var info = template(data);
+        $('#region-two').append(info).promise().done(function() {
+            if (more == "true"){
+                $('#loadmoretext').empty().append(moreHistoryText);
+                $('#loadmoretext').trigger("create");
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+//         } else {
+//                $('#loadmoretext').html("No Further Results");
+//            }
+        
+    });
+}
+
+
+
+
 function showpickups() {
     cleanhouse();
     cleandivs();
