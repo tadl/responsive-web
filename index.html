@@ -675,9 +675,9 @@
         </div>
         Fines: {{user.fines}}
         </div>
-        <a class="button wide tadlblue" id="account_settings_button" onclick="load('myaccount');"><span>Settings</span></a> </br>
+        <a class="button wide tadlblue" id="account_settings_button" onclick="load('myaccount');"><span>My Account</span></a> </br>
         <a class="button wide tadlblue" id="checkout_history_button" onclick="load('hist_checkout');"><span>Checkout History</span></a> </br>
-        <a class="button wide tadlblue" id="showbarcode" onclick="load('my_lists')"><span>My Lists</span></a> </br>
+        <a class="button wide tadlblue" id="my_lists" onclick="load('my_lists')"><span>My Lists</span></a> </br>
         <a class="button wide tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a> </br>
     	<a class="button wide tadlblue" id="login" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
@@ -1008,6 +1008,7 @@
                             </div>
                         {{/if}}
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
+                        <br/><br/>
                     {{/if}}
                 </div>
             </div>
@@ -1050,6 +1051,7 @@
                             {{{fixurls node.body}}}
                         </div>
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
+                        <br/><br/>
                     {{/if}}
                 </div>
             </div>

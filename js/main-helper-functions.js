@@ -456,26 +456,36 @@ $.fn.spin.presets.tiny = {
 
 var eventsnav = '<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>';
 
-function account_settings_reset(){	
+function account_settings_reset() {
 	$('#account_settings_form').get(0).reset();
 	$("#account_settings_form").hide();
 	$("#settings_save").hide();
-	$("#account_settings_display").show()
+	$("#account_settings_display").show();
 }
 
 function show_edit_account_settings(){
-	$("#account_settings_display").hide()
+	$("#account_settings_display").hide();
 	$("#settings_save").show();
 	$("#account_settings_form").show();
 }
 
-function loading_animation(state){
-	if (state == 'start'){
-		$('#working').show().spin('default');
-		$('#footer-wrapper').hide();
-	};
-	if(state == 'stop'){
-		$('#working').hide().spin('default');
-		$('#footer-wrapper').show();
-	};
+function loading_animation(state) {
+    if (state == 'start') {
+        $('#working').show().spin('default');
+        $('#footer-wrapper').hide();
+    }
+    if(state == 'stop') {
+        $('#working').hide().spin('default');
+        $('#footer-wrapper').show();
+    }
+}
+
+function myaccount_menu() {
+    // checkouts (if !0)
+    // holds (if !0)
+    // ready for pickup (if !0)
+    // account settings
+    // checkout history (if !0?)
+    // my lists
+    // library card
 }

@@ -394,7 +394,7 @@ function login_and_fetch_dash(username, password) {
         }
         if ($('#login').length != 0) {
             $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
-        } // I need help understanding this bit. what does the length of the login button have to do with anything? // wjr
+        }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
                 var source   = $("#login_form-template").html();
@@ -455,7 +455,8 @@ function showcheckouts() {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
-            $('#region-wide').html(info).show();
+            $('#region-two').html(info).show();
+            myaccount_menu();
             loading_animation('stop');
         }
     });
@@ -497,7 +498,7 @@ function showholds() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showholds") {
-            $('#region-wide').html(info).show();
+            $('#region-two').html(info).show();
             loading_animation('stop');
         }
     });   
@@ -517,7 +518,7 @@ function showpickups() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showpickups") {
-            $('#region-wide').html(info).show();
+            $('#region-two').html(info).show();
             loading_animation('stop');
         }
     });
@@ -551,7 +552,7 @@ function showcard() {
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
             loading_animation('stop');
-            $('#region-wide').html(html).show();
+            $('#region-two').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
         }
     });
