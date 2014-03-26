@@ -417,10 +417,9 @@ function login_and_fetch_dash(username, password) {
                 window.localStorage.setItem('token', token)
                 current_user = window.localStorage.getItem('current_user');
                 reset_hold_links();
-                if (current_page == 'myaccount' && first_state != 'true' ){
+                if (current_page == 'myaccount' && first_state != 'true' ) {
                 	myAccount();      
-            	};
-            	
+            	}
             }
         });
     } else {
@@ -430,7 +429,6 @@ function login_and_fetch_dash(username, password) {
         set_login_form_keypress_event();
         window.localStorage.clear();
     }
-
 }
 
 function render_dash(data) {
@@ -499,6 +497,7 @@ function showholds() {
         var info = template(data);
         if (state.data.action === "showholds") {
             $('#region-two').html(info).show();
+            myaccount_menu();
             loading_animation('stop');
         }
     });   
@@ -525,6 +524,7 @@ function show_checkout_history() {
                 $('#loadmore').hide();
             }
         });
+        myaccount_menu();
         loading_animation('stop');
     });
 }
@@ -566,6 +566,7 @@ function showpickups() {
         var info = template(data);
         if (state.data.action === "showpickups") {
             $('#region-two').html(info).show();
+            myaccount_menu();
             loading_animation('stop');
         }
     });
@@ -598,10 +599,11 @@ function showcard() {
     $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?u='+ username +'&pw=' + password, function(data) {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
-            var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            loading_animation('stop');
+            var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
             $('#region-two').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
+            myaccount_menu();
+            loading_animation('stop');
         }
     });
 }
@@ -853,6 +855,4 @@ function change_account_settings() {
     });
 
 }
-
-
 

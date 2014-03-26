@@ -483,23 +483,35 @@ function loading_animation(state) {
 }
 
 function myaccount_menu() {
+    var acctMenuHtmlStart = '<div class="card"><div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100" style="text-align:center;">';
+    var acctMenuHtmlEnd = '</div></div></div>';
+    var checkouts = window.localStorage.getItem('checkouts');
+    var holds = window.localStorage.getItem('holds');
+    var pickups = window.localStorage.getItem('pickups');
+    var fines = window.localStorage.getItem('fines');
+    if (checkouts >= 1) { var checkoutsHtml = '<a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: ' + checkouts + '</span></a><br/><br/>'; } else { var checkoutsHtml = ''; }
+    if (holds >= 1) { var holdsHtml = '<a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: ' + holds + '</span></a><br/><br/>'; } else { var holdsHtml = ''; }
+    if (pickups >= 1) { var pickupsHtml = '<a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: ' + pickups + '</span></a><br/><br/>'; } else { var pickupsHtml = ''; }
+    if (fines >= 0.05) { var finesHtml = '<span>Fines: ' + fines + '</span><br/><br/>'; } else { var finesHtml = ''; }
+    var settingsHtml = '<a class="button wide medium tadlblue" onclick="load(\'myaccount\')"><span>Account Settings</span></a><br/><br/>';
+    var historyHtml = '<a class="button wide medium tadlblue" onclick="load(\'history\')"><span>Checkout History</span></a><br/><br/>';
+    var cardHtml = '<a class="button wide medium tadlblue" onclick="showcard()"><span>Library Card</span></a><br/><br/>';
+    var listsHtml = '<a class="button wide medium tadlblue" onclick="load(\'my_lists\')"><span>My Lists</span></a><br/><br/>';
+
+
     // need to check if logged in, if not logged in (for any of these pages)
     // we'll need to present a login form (perhaps just drop down the existing form?)
-    // there's a routine for that in pre_Hold I think.
-    var acctMenuHtmlStart = '<div class="card"><div class="grid-container">';
-    var acctMenuHtmlEnd = '</div></div>';
-    // all of these values are available in a single call (the same that is returned
-    // when logging in/refreshing the drop-down account menu) so I should be able
-    // to access that, given that the user is logged in and the token is current.
-    // 
+    // there's a routine for that in pre_Hold I think. THIS ALREADY ALL HAPPENS!!!
+    //
+    //
+    //
     // how are we handling if the token is expired? All of the functions that use token
     // will need to know how to fall back when there's a failure.
     // 
-    // checkouts (if !0)
-    // holds (if !0)
-    // ready for pickup (if !0)
     // account settings
     // checkout history (if !0?)
     // my lists
     // library card
+
+    $('#region-one').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd);
 }

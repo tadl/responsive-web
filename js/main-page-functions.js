@@ -371,23 +371,24 @@ function myAccount(){
 	if (current_user == 'true') {
 	    if (account_settings == null) {
 	    	$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
-	    	var cat = JSON.stringify(data)
-       		sessionStorage.setItem('account_settings', cat );
-        	myAccount();
+                var cat = JSON.stringify(data);
+                sessionStorage.setItem('account_settings', cat);
+                myAccount();
 	    	});
-	    }else{
-	    account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-	    var prefs = myaccount_template(account_settings);
-        loading_animation('stop');
-	    changeBanner('My Account', '#0d4c78');
-	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings <a onclick="show_edit_account_settings()" class="pointer">edit</a></h4><div id="account_settings">Loading!</div></div>');
-	    $('#account_settings').html(prefs);
+	    } else {
+            account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+            var prefs = myaccount_template(account_settings);
+            changeBanner('My Account', '#0d4c78');
+            $('#region-two').html('<div class="card"><h4 class="title">Account Settings <a onclick="show_edit_account_settings()" class="pointer">edit</a></h4><div id="account_settings">Loading!</div></div>');
+            $('#account_settings').html(prefs);
+            myaccount_menu();
+            loading_animation('stop');
 	    }
 	} else {
-        loading_animation('stop');
 	    changeBanner('My Account', '#0d4c78');
 		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 		$("#login_form").slideDown("fast");	
+        loading_animation('stop');
 	};
 	
 }
@@ -402,6 +403,7 @@ function my_lists(){
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
 			$('#region-two').html(my_lists);
+            myaccount_menu();
 			loading_animation('stop');
 		});
 	} else {
