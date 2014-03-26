@@ -733,8 +733,6 @@ function multi_hold(record_ids) {
 function emptylist(){
 	localStorage.removeItem('list');
 	mylist();
-
-
 }
 
 function check_googlebooks(record_id, isbn){
@@ -765,99 +763,94 @@ $.ajax({
 }
 
 function load_googlebooks(isbn){
- var isbn = isbn;
- var content = '<div id="viewerCanvas" style="width: 500px; height: 600px"></div>'
- $.fancybox({
-     content : content,
-     type : 'iframe',
-     autoScale : true,
-     });
- var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
-viewer.load(isbn);
-
+    var content = '<div id="viewerCanvas" style="width: 500px; height: 600px"></div>'
+    $.fancybox({
+        content : content,
+        type : 'iframe',
+        autoScale : true
+    });
+    var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+    viewer.load(isbn);
 }
 
 function shelf_finder(library, location, call_number){
-var shelf_url = 'http://wjr.dev.tadl.org/locator/index.php?location='+ library + '&shelf=' + location +'&call=' + call_number;
-var content = '<iframe style="width: 90%; height: 90%; overflow: hidden" scrolling="no" src="' + shelf_url + '"></iframe>';
-$.fancybox({
-     content : content,
-     type : 'html',
-     width : '90%',
-     height : '90%',
-     autoSize : false,
-     scrolling : 'no'
-     });
+    var shelf_url = 'http://wjr.dev.tadl.org/locator/index.php?location='+ library + '&shelf=' + location +'&call=' + call_number;
+    var content = '<iframe style="width: 90%; height: 90%; overflow: hidden" scrolling="no" src="' + shelf_url + '"></iframe>';
+    $.fancybox({
+        content : content,
+        type : 'html',
+        width : '90%',
+        height : '90%',
+        autoSize : false,
+        scrolling : 'no'
+    });
 }
 
 
 
 
 
-function change_account_settings(){
+function change_account_settings() {
+    $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
+    var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
+    var new_username = encodeURIComponent($('#new_username').val());
+    var new_alias = encodeURIComponent($('#new_alias').val());
+    var new_email = encodeURIComponent($('#new_email').val());
+    var new_pickup_location = $('#new_pickup_location').val();
+    var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
+    var new_email_notify = $('#hold_notify_email').is(':checked').toString();
+    var new_save_circs = $('#save_circs').is(':checked').toString();
+    var new_save_holds = $('#save_holds').is(':checked').toString();
+    var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
+    var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
+    var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
+    var old_pickup_location = $('#new_pickup_location option[selected]').val();
+    var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
+    var old_email_notify = $('#hold_notify_email').prop("defaultValue");
+    var old_save_circs = $('#save_circs').prop("defaultValue").toString();
+    var old_save_holds = $('#save_holds').prop("defaultValue").toString();
 
-$('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
-var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?'
-var new_username = encodeURIComponent($('#new_username').val());
-var new_alias = encodeURIComponent($('#new_alias').val());
-var new_email = encodeURIComponent($('#new_email').val());
-var new_pickup_location = $('#new_pickup_location').val();
-var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
-var new_email_notify = $('#hold_notify_email').is(':checked').toString();
-var new_save_circs = $('#save_circs').is(':checked').toString();
-var new_save_holds = $('#save_holds').is(':checked').toString();
-var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
-var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
-var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
-var old_pickup_location = $('#new_pickup_location option[selected]').val();
-var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
-var old_email_notify = $('#hold_notify_email').prop("defaultValue");
-var old_save_circs = $('#save_circs').prop("defaultValue").toString();
-var old_save_holds = $('#save_holds').prop("defaultValue").toString();
+    if (new_username != old_username) {
+        var username_param = '&new_username=' + new_username;
+    } else {
+        var username_param = '';
+    }
 
-if (new_username != old_username) {
-	var username_param = '&new_username=' + new_username
-}else{
-	var username_param = ''
-}
+    if (new_alias != old_alias) {
+        var alias_param = '&new_alias=' + new_alias;
+    } else {
+        var alias_param = '';
+    }
 
-if (new_alias != old_alias) {
-	var alias_param = '&new_alias=' + new_alias
-}else{
-	var alias_param = ''
-}
+    if (new_email != old_email) {
+        var email_param = '&new_email=' + new_email;
+    } else {
+        var email_param = '';
+    }
 
-if (new_email != old_email) {
-	var email_param = '&new_email=' + new_email
-}else{
-	var email_param = ''
-}
+    if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ) {
+        var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds;
+    } else {
+        var search_param = '';
+    }
 
-if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ){
-	var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds
-}else{
-	var search_param = ''
-}
+    if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify) {
+        var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify;
+    } else {
+        var notify_param = '';
+    }
 
-if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify){
-	var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify 
-}else{
-	var notify_param = ''
-}
+    var username = window.localStorage.getItem('username');
+    var password = window.localStorage.getItem('password');
 
-var username = window.localStorage.getItem('username');
-var password = window.localStorage.getItem('password');
-
-var url = username_param + alias_param + email_param + search_param + notify_param
-//alert(url);
-//alert(new_username +' '+ new_alias +' '+ new_email +' '+ new_pickup_location +' '+ new_phone_notify +' '+  new_email_notify +' '+ new_save_holds + ' '+ new_save_circs);
-$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
-		var cat = JSON.stringify(data)
-        sessionStorage.setItem('account_settings', cat );
-	    account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-	    var prefs = myaccount_template(account_settings);
-	    $('#account_settings').html(prefs);
-});
+    var url = username_param + alias_param + email_param + search_param + notify_param;
+    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
+        var cat = JSON.stringify(data);
+        sessionStorage.setItem('account_settings', cat);
+        account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+        var prefs = myaccount_template(account_settings);
+        $('#account_settings').html(prefs);
+    });
 
 }
 
