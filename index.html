@@ -466,13 +466,17 @@
     {{/nodes}}
 </script>
 
-
 <script id="mylists-template" type="text/template">
 	<div class="card">
-		{{#lists}}
-			<a onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a>
-			<br>
-		{{/lists}}
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <ul style="list-style:none;">
+                    {{#lists}}
+                        <li><a class="pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a></li>
+                    {{/lists}}
+                </ul>
+            </div>
+        </div>
 	</div>
 </script>
 
@@ -990,7 +994,7 @@
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-75 tablet-grid-70 mobile-grid-100">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     {{#if node.image}}
                         <div class="grid-30 tablet-grid-30 hide-on-mobile">
                             <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">

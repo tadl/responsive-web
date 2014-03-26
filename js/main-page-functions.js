@@ -402,25 +402,21 @@ function my_lists(){
 		token = window.localStorage.getItem('token');
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
+            console.log(data);
 			$('#region-two').html(my_lists);
             myaccount_menu();
 			loading_animation('stop');
 		});
 	} else {
-	  	loading_animation('stop');
 	  	$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 	  	$("#login_form").slideDown("fast");	
+	  	loading_animation('stop');
 	};
 
 }
-
-
-
 
 function changeBanner(content, color) {
     document.querySelector('#page_banner').style.backgroundColor = color;
     $('#page_banner').css({"display" : "block"});
     $('#page_banner').html('<h2>'+content +'</h2>')
 }
-
-

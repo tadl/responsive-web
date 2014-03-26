@@ -65,42 +65,57 @@ function showlocations() {
 
 
 
-function list_node_to_name(list_id){
-       if (list_id == "67") {
-       var info = 'books_featured_fiction'
-       } else if (list_id == "68") {
-       var info = 'books_featured_nonfiction'
-       } else if (list_id == "45") {
-       var info = 'books_adult_display' 
-       } else if (list_id == "224") {
-       var info = 'books_adult_clubkits' 
-       } else if (list_id == "234") {
-       var info = 'books_adult_business' 
-       } else if (list_id == "29") {
-       var info = 'music_new' 
-       } else if (list_id == "31") {
-       var info = 'music_hot' 
-       } else if (list_id == "32") {
-       var info = 'videos_new' 
-       } else if (list_id == "34") {
-       var info = 'videos_hot' 
-       } else if (list_id == "165") {
-       var info = 'videos_tcff' 
-       } else if (list_id == "286") {
-       var info = 'videos_met' 
-       } else if (list_id == "47") {
-       var info = 'youth_display' 
-       } else if (list_id == "52") {
-       var info = 'youth_new_books' 
-       } else if (list_id == "41") {
-       var info = 'teens_manga'
-       } else if (list_id == "51") {
-       var info = 'teens_new'
-       };
-       return info;
+function list_node_to_name(list_id) {
+    if (list_id == "67") {
+        var info = 'books_featured_fiction';
+    } else if (list_id == "68") {
+        var info = 'books_featured_nonfiction';
+    } else if (list_id == "45") {
+        var info = 'books_adult_display';
+    } else if (list_id == "224") {
+        var info = 'books_adult_clubkits';
+    } else if (list_id == "234") {
+        var info = 'books_adult_business';
+    } else if (list_id == "29") {
+        var info = 'music_new';
+    } else if (list_id == "31") {
+        var info = 'music_hot';
+    } else if (list_id == "32") {
+        var info = 'videos_new';
+    } else if (list_id == "34") {
+        var info = 'videos_hot';
+    } else if (list_id == "165") {
+        var info = 'videos_tcff';
+    } else if (list_id == "286") {
+        var info = 'videos_met';
+    } else if (list_id == "47") {
+        var info = 'youth_display';
+    } else if (list_id == "52") {
+        var info = 'youth_new_books';
+    } else if (list_id == "41") {
+        var info = 'teens_manga';
+    } else if (list_id == "51") {
+        var info = 'teens_new';
+    }
+    return info;
 }
 
-
+function lib_firstname_to_shortname(name) {
+    if (name == "Fife Lake") {
+        var shortname = "flpl";
+    } else if (name == "East Bay") {
+        var shortname = "ebb";
+    } else if (name == "Interlochen") {
+        var shortname = "ipl";
+    } else if (name == "Peninsula") {
+        var shortname = "pcl";
+    } else if (name == "Kingsley") {
+        var shortname = "kbl";
+    } else if (name == "Woodmere") {
+        var shortname = "wood";
+    }
+    return shortname;
+}
 
 function showitemlist(list_name, list_id) {
     cleanhouse();
@@ -110,14 +125,14 @@ function showitemlist(list_name, list_id) {
     changeBanner(loading_text, '#0d4c78');
     loading_animation('start');
     var data = JSON.parse(sessionStorage.getItem("everything"));
- 	var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
- 	 $.getJSON(drupal_json_url, function(data) {
-	var template = Handlebars.compile($('#results-template_2').html());
-	var info = template(data)
-    $('#region-two').html(info);
-    loading_animation('stop');
-    changeBanner(list_name, '#0d4c78');
-    mylist();
+    var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
+    $.getJSON(drupal_json_url, function(data) {
+        var template = Handlebars.compile($('#results-template_2').html());
+        var info = template(data)
+        $('#region-two').html(info);
+        loading_animation('stop');
+        changeBanner(list_name, '#0d4c78');
+        mylist();
     });       
 }
 
@@ -129,7 +144,6 @@ function showreviews(review_type) {
         var info = template(data);
         loading_animation('stop');
         $('#region-two').html(info);
-        
     });
 }
 
@@ -230,12 +244,16 @@ function showEventNode(nid) {
     loading_animation('start');
     $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
         var template = Handlebars.compile($('#eventnode-template').html());
-        var shortname = data.nodes[0].node.location; // TODO though
-// knowing the location, I should be able to display other events
-// for that location, but alas... not yet. but soon.
-        console.log(shortname);
+        var firstname = data.nodes[0].node.location;
+        var shortname = lib_firstname_to_shortname(firstname);
+        var locnode = 'events_' + shortname;
+        events_template = Handlebars.compile($('#someevents-template').html());
+        var stuff = JSON.parse(sessionStorage.getItem("everything"));
+        var events = events_template(stuff[locnode]);
         var info = template(data);
-        $('#region-wide').html(info).show();
+        var alleventslink = "load('events/" + shortname + "')";
+        $('#third-two').html(info).show();
+        $('#third-one').html('<div class="card"><h4 class="title">Coming soon at ' + firstname + '</h4></div>' + events + '<a class="pointer button tadlblue medium wide center" onclick="' + alleventslink + '"><span>All ' + firstname + ' events</span></a>').show();
         loading_animation('stop');
     });
 }
