@@ -483,6 +483,18 @@ function loading_animation(state) {
 }
 
 function myaccount_menu() {
+    // need to check if logged in, if not logged in (for any of these pages)
+    // we'll need to present a login form (perhaps just drop down the existing form?)
+    // there's a routine for that in pre_Hold I think.
+    var acctMenuHtmlStart = '<div class="card"><div class="grid-container">';
+    var acctMenuHtmlEnd = '</div></div>';
+    // all of these values are available in a single call (the same that is returned
+    // when logging in/refreshing the drop-down account menu) so I should be able
+    // to access that, given that the user is logged in and the token is current.
+    // 
+    // how are we handling if the token is expired? All of the functions that use token
+    // will need to know how to fall back when there's a failure.
+    // 
     // checkouts (if !0)
     // holds (if !0)
     // ready for pickup (if !0)

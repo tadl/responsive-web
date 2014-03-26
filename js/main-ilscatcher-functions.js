@@ -443,6 +443,7 @@ function render_dash(data) {
 function showcheckouts() { 
     cleanhouse();
     cleandivs();
+    changeBanner("Items Checked Out", color_tadlblue);
     var action = {action:"showcheckouts"}
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
     loading_animation('start');
@@ -486,6 +487,7 @@ function cancelhold(hold_id) {
 function showholds() {
     cleanhouse();
     cleandivs();
+    changeBanner("My Holds", color_tadlblue);
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
     loading_animation('start');
@@ -551,6 +553,7 @@ function more_history() {
 function showpickups() {
     cleanhouse();
     cleandivs();
+    changeBanner("Ready for Pickup", color_tadlblue);
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
     loading_animation('start');
@@ -585,6 +588,7 @@ function renew(circulation_id, barcode) {
 
 function showcard() {
     cleanhouse();
+    changeBanner("My Library Card", color_tadlblue);
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
     loading_animation('start');
