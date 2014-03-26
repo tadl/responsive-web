@@ -42,7 +42,7 @@ function showAllEventsByTerm(term) {
         var info = template(alljson[term]);
         changeBanner(banner, color_tadlblue);
         $('#third-two').html(info).show();
-        $('#third-one').html('<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>');
+        $('#third-one').html(eventsnav); // defined in main-vars
         loading_animation('stop');
     }
 }

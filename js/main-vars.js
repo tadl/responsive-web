@@ -12,6 +12,7 @@ var logoutText = '<span class="loadmore"><img class="spinner" src="img/spinner.g
 var loadmoreText = '<a class="button wide large tadlblue" style="color: #fff;"onclick="loadmore();">More</a>';
 var moreHistoryText = '<a class="button wide large tadlblue" style="color: #fff;"onclick="more_history();">More</a>';
 var psTitle = "Traverse Area District Library";
+var eventsnav = '<a class="button small tadlblue wide" id="eventlocs" data-dropdown="#dropdown-2"><span>Filter by location</span></a><br/><br/><a class="button small tadlblue wide" id="eventaudis" data-dropdown="#dropdown-3"><span>Filter by audience</span></a>';
 var separator = " | ";
 var platform = 'web';
 var version_id = '0';

@@ -456,8 +456,6 @@ $.fn.spin.presets.tiny = {
     zIndex: 2e9
 }
 
-var eventsnav = '<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>';
-
 function account_settings_reset() {
 	$('#account_settings_form').get(0).reset();
 	$("#account_settings_form").hide();

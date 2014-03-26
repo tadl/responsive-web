@@ -31,7 +31,7 @@ function showEastBay() {
         var hours_ebb = showlocations_template(data.hours_ebb)
         var alleventslink = "load('events/ebb')";
         $('#region-one').html(infobox_ebb);
-        $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All East Bay events</a></h4></div>');
+        $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All East Bay events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ebb);
     }
 }
@@ -57,7 +57,7 @@ function showFifeLake() {
      var hours_flpl = showlocations_template(data.hours_flpl)
         var alleventslink = "load('events/flpl')";
      $('#region-one').html(infobox_flpl);
-        $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Fife Lake events</a></h4></div>');
+        $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All Fife Lake events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_flpl);
      }
 }
@@ -83,7 +83,7 @@ function showInterlochen() {
      var hours_ipl = showlocations_template(data.hours_ipl)
         var alleventslink = "load('events/ipl')";
      $('#region-one').html(infobox_ipl);
-        $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Interlochen  events</a></h4></div>');
+        $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All Interlochen  events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ipl);
      }
 }
@@ -109,7 +109,7 @@ function showKingsley() {
      var hours_kbl = showlocations_template(data.hours_kbl)
         var alleventslink = "load('events/kbl')";
      $('#region-one').html(infobox_kbl);
-        $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Kingsley events</a></h4></div>');
+        $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Kingsley events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_kbl);
      }
 }
@@ -135,7 +135,7 @@ function showPeninsula() {
      var hours_pcl = showlocations_template(data.hours_pcl)
         var alleventslink = "load('events/pcl')";
      $('#region-one').html(infobox_pcl);
-        $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Peninsula events</a></h4></div>');
+        $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Peninsula events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_pcl);
      }
 }
@@ -161,7 +161,7 @@ function showWoodmere() {
      var hours_wood = showlocations_template(data.hours_wood)
         var alleventslink = "load('events/wood')";
      $('#region-one').html(infobox_wood);
-        $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Woodmere events</a></h4></div>');
+        $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Woodmere events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_wood);
      }
 }
@@ -190,7 +190,7 @@ function showTeensPage() {
      var alleventslink = "load('events/teens')";
      $('#region-one').html(teens_new + teens_manga);
      $('#region-two').html(teens_lists + teens_reviews);
-     $('#region-three').html(events_teens + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Teen events</a></h4></div>');
+     $('#region-three').html(events_teens + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Teen events</span></a>');
      }
 }
 
@@ -247,7 +247,7 @@ function showYouthPage() {
         $('#region-one').append(youth_homework + youth_homeschool + youth_award_winners + youth_resources);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
         $('#region-two').append(youth_reviews);
-        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Youth events</a></h4></div>');
+        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Youth events</span></a>');
     } 
 }
 
@@ -356,7 +356,7 @@ function showHomePage() {
     var logo = '<div class="card"><div class="grid-container"><div class="grid-50 tablet-grid-30 mobile-grid-100"><img src="img/logo.png" style="padding-top:5px;width:100%;" /></div><div class="grid-50 tablet-grid-70 mobile-grid-100" style="text-align:center;padding-top:20px;"><a class="pointer" onclick="load(\'woodmere\')">Woodmere</a> &bull; <a class="pointer" onclick="load(\'interlochen\')">Interlochen</a><br/><a class="pointer" onclick="load(\'kingsley\')">Kingsley</a> &bull; <a class="pointer" onclick="load(\'fifelake\')">Fife Lake</a><br/><a class="pointer" onclick="load(\'peninsula\')">Peninsula</a> &bull; <a class="pointer" onclick="load(\'eastbay\')">East Bay</a></div></div></div>';
     $('#region-three').html(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
     $('#region-two').html(logo + featured_news);
-    $('#region-one').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">View all events</a></h4></div>');
+    $('#region-one').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<a class="pointer button wide tadlblue medium" onclick="' + alleventslink + '"><span>View all events</span></a>');
     }
 }
 
@@ -379,7 +379,7 @@ function myAccount(){
             account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
             var prefs = myaccount_template(account_settings);
             changeBanner('My Account', '#0d4c78');
-            $('#region-two').html('<div class="card"><h4 class="title">Account Settings <a onclick="show_edit_account_settings()" class="pointer">edit</a></h4><div id="account_settings">Loading!</div></div>');
+            $('#region-two').html('<div class="card"><h4 class="title">Account Settings [<a onclick="show_edit_account_settings()" class="pointer">edit</a>]</h4><div id="account_settings">Loading!</div></div>');
             $('#account_settings').html(prefs);
             myaccount_menu();
             loading_animation('stop');
