@@ -402,7 +402,6 @@ function my_lists(){
 		token = window.localStorage.getItem('token');
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
-            console.log(data);
 			$('#region-two').html(my_lists);
             myaccount_menu();
 			loading_animation('stop');
