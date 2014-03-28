@@ -116,32 +116,29 @@
         <a class="pointer" href="page/governance">Governance</a>
     </nav>
     <header class="searchbar card">
-        <div class="grid-container">
-            <div class="mobile-grid-10 tablet-grid-5 grid-5 menu ">
+        <div class="grid-container" style="padding:0 3px;">
+            <div class="grid-5 tablet-grid-5 mobile-grid-10 nav">
                 <div id="nav_list">Show/Hide Navigation Menu</div>
             </div>
-            <div class="tablet-grid-5 grid-5 mobile-grid-10 menu">
-                <img src="img/logo1.png" class="icon logo"/>
+            <div class="grid-90 tablet-grid-90 mobile-grid-75">
+                <div class="grid-container" style="border:1px solid gray;padding:4px 95px 3px 0;border-radius:5px;margin:0;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5); -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5); box-shadow:1px 1px 2px rgba(0,0,0,0.5);white-space:nowrap;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
+                    <img src="img/icon-arrow-down-b-256.png" id="searchicon" class="icon pointer" title="Search Options" alt="Options" onclick="openSearch_options()" style="padding:0 0 1px 3px;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
+                    <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" style="display:inline-block;padding:0px 5px;"/>
+                    <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" style="padding:0 3px 3px 0;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
+                </div>
             </div>
-            <div class="grid-75 tablet-grid-75 mobile-grid-45">
-                <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" />
-            </div>
-            <div class="grid-5 tablet-grid-5 mobile-grid-10">
-                <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" />
-            </div>
-            <div class="grid-5 tablet-grid-5 mobile-grid-10">
-            	<img src="img/settings-gear-black.png" class="icon pointer" alt="Options" title="Search Options" onclick="openSearch_options()" />
-            </div>
-            <div class="grid-5 tablet-grid-5 mobile-grid-10">
-            	<img src="img/account-button.png" class="icon pointer" alt="Account" title="My Account" onclick="openForm()" />
+            <div class="grid-5 tablet-grid-5 mobile-grid-15">
+            	<img src="img/account-button.png" class="icon pointer acct" alt="Account" title="My Account" onclick="openForm()" />
             </div>
         </div>
         <div id="search_options">
             <div class="grid-container">
                 <div class="grid-25 tablet-grid-25 mobile-grid-100"> 
-                    <input class="left" type="checkbox" id="available" value="false" /> Limit to Available
+                    <div style="padding-top:10px;">
+                        <input class="left" type="checkbox" id="available" value="false" /> Limit to Available
+                    </div>
                 </div>
-                  <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50" style="padding-top:4px;">
                     <select id="searchtype">
                         <option value="keyword">Keyword</option>
                         <option value="author">Author</option>
@@ -149,7 +146,7 @@
                         <option value="subject">Subject</option>
                     </select>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-20 tablet-grid-20 mobile-grid-50" style="padding-top:4px;">
                     <select id="mediatype">
                         <option value="ALL FORMATS">All Formats</option>
                         <option value="BOOKS">Books</option>
@@ -162,7 +159,7 @@
                         <option value="VIDEO GAMES">Video Games</option>
                     </select>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50" style="padding-top:4px;">
                     <select id="location">
                         <option value="22">All Locations</option>
                         <option value="23">Woodmere</option>
@@ -172,7 +169,7 @@
                         <option value="28">East Bay</option>
                     </select>
                 </div>
-                <div class="grid-15 tablet-grid-15 mobile-grid-50">
+                <div class="grid-15 tablet-grid-15 mobile-grid-50" style="padding-top:4px;">
                     <select id="sort" value="relevance">
                         <option value="relevance">Relevance</option>
                         <option value="newest_to_oldest">Newest to Oldest</option>
@@ -219,7 +216,7 @@
                 </div>
             </div>
             <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop"">
-            	<div id="page_banner" class="">
+            	<div id="page_banner">
          		</div>
          	</div>
         </div>
@@ -333,8 +330,8 @@
     Password: <input type="password" id="pword" /><br />
     <a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a>
     <span id="login_msg"></span><br/>
-    <a onclick="load_password_reset()">Forgot password?</a><br />
-    <a href="https://www.tadl.org/newuser">Register for a library card</a>
+    <a onclick="load_password_reset()" class="pointer">Forgot password?</a><br />
+    <a href="https://www.tadl.org/newuser" class="pointer">Register for a library card</a>
 </script>
 
 <script id="password-reset-template" type="text/template">
@@ -624,13 +621,16 @@
 <script id="showfeaturednews-template" type="text/template">
     {{#each_upto nodes 5}}
         <div class="card" id="card-{{node.nid}}">
-            <img src="{{node.image}}" />
+            <img src="{{node.image}}" class="pointer" onclick="loadNode('{{node.nid}}')" />
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <span class="cardtitle">{{{node.title}}}</span><br/>
-                    <a id="more{{node.nid}}" class="showmore button verysmall tadlblue padtop floatright" onclick="loadNode('{{node.nid}}')"><span>read story</span></a>
-                    <div id="{{node.nid}}" style="display:none;" class="news_story cardblock">
-                        {{{fixurls node.body}}}
+                    <div class="grid-container" style="margin:0;padding:0;">
+                        <div class="grid-80 tablet-grid-80 mobile-grid-70" style="margin:0;padding:0;">
+                            <span class="cardtitle" onclick="loadNode('{{node.nid}}')">{{{node.title}}}</span>
+                        </div>
+                        <div class="grid-20 tablet-grid-20 mobile-grid-30" style="margin:0;padding:0;">
+                            <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" style="margin-top:15px;" onclick="loadNode('{{node.nid}}')"><span>read story</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -640,36 +640,29 @@
 
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
-      
-            <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100" style="margin:0 auto;">
-                    <h4 class="title pointer">{{list_name}}</h4>
-        
-                        <div class="pointer item25">
-                    {{#each_upto items 4}}
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
-                    {{/each_upto}}
-                        </div>
-                </div>
-            </div>
-    </div>
-    <div class="card hide-on-mobile hide-on-tablet"> <!-- desktop only section -->
-      
-            <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox" style="margin:0 auto;">
-                    <h4 class="title pointer">{{list_name}}</h4>
+        <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100" style="margin:0 auto;">
+                <h4 class="title pointer">{{list_name}}</h4>
     
-                    {{#each_upto items 4}}
-                        <div class="img-viewer pointer">
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
-                        </div>
-                    {{/each_upto}}
-                </div>
+                    <div class="pointer item25">
+                {{#each_upto items 4}}
+                        <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
+                {{/each_upto}}
+                    </div>
             </div>
+        </div>
+    </div>
+    <div class="card hide-on-mobile hide-on-tablet" style="padding:0;"> <!-- desktop only section -->
+        <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')" style="padding:0;">
+            <h4 class="title pointer" style="padding:0 0 5px 0;margin-top:5px;">{{list_name}}</h4>
+            {{#each_upto items 4}}
+                <div class="img-viewer pointer">
+                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
+                </div>
+            {{/each_upto}}
+        </div>
     </div>
 </script>
-                                                                                                                                                                                            
-                                                                                                                                                                                            
 
 <script id="shelf-template" type="text/template">
     <table>

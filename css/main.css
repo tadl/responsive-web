@@ -259,7 +259,7 @@ figure {
 }
 
 body {
-  padding: 57px 0 0 0;
+  padding: 62px 0 0 0;
   background: #f0f2f5;
   color: #000000;
   text-align: center;
@@ -324,7 +324,7 @@ div[class*="pull-"] section {
     background: linear-gradient(center top, #f0f2f5, #dddddd);
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, from(#f0f2f5), to(#dddddd));
     background: -moz-linear-gradient(center top , #f0f2f5, #dddddd);
-    padding-top:10px;
+    padding-top:8px;
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;
     box-sizing:border-box;
@@ -332,13 +332,11 @@ div[class*="pull-"] section {
     top:0px;
     left:0px;
     right:0px;
-    -webkit-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
-    -moz-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
-    box-shadow:2px 2px 3px rgba(0,0,0,0.5);
     z-index:1000;
 }
 
 #search_options {
+    background-color:gray;
     display: none;
 }
 
@@ -400,10 +398,18 @@ h4.title {
 }
 
 img.icon {
-    max-width:30px;
-    min-width:30px;
-    max-height:30px;
-    min-height:30px;
+    max-width:35px;
+    min-width:35px;
+    max-height:35px;
+    min-height:35px;
+}
+
+img.icon.acct {
+    max-width:40px;
+    min-width:40px;
+    max-height:40px;
+    min-height:40px;
+    padding-top:2px;
 }
 
 img.icon.logo {
@@ -441,7 +447,7 @@ img.icon.logo {
 }
 
 .itembox {
-    max-width:240px;
+    max-width:280px;
 }
 .itemboxmob {
     max-width:320px;
@@ -456,7 +462,7 @@ img.icon.logo {
     margin:0;
     padding:0;
     width:50%;
-    height:110px;
+    height:120px;
     overflow:hidden;
 }
 
@@ -469,8 +475,8 @@ img.icon.logo {
 .img-viewer img {
     margin:0;
     padding:0;
-    min-height:110px;
-    min-width:110px;
+    min-height:125px;
+    min-width:125px;
     position:absolute;
 }
 
@@ -528,8 +534,8 @@ input.search {
     width:100%;
     height:25px;
     font-size:16px;
-    padding:0 5px;
-    margin-top:2px;
+//    padding:0 5px;
+//    margin-top:2px;
 }
 
 .hidden {
@@ -625,7 +631,7 @@ table.hours {
     text-align:right;
 }
 
-.mobile-grid-10.menu {
+.mobile-grid-10.nav {
     padding-left:0;
 }
 
@@ -712,3 +718,18 @@ h3.footer-heading {
 #footer h3 a {
     color:#f0f2f5;
 }
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
