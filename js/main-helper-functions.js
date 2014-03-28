@@ -494,7 +494,8 @@ function myaccount_menu() {
     if (checkouts >= 1) { var checkoutsHtml = '<a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: ' + checkouts + '</span></a><br/><br/>'; } else { var checkoutsHtml = ''; }
     if (holds >= 1) { var holdsHtml = '<a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: ' + holds + '</span></a><br/><br/>'; } else { var holdsHtml = ''; }
     if (pickups >= 1) { var pickupsHtml = '<a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: ' + pickups + '</span></a><br/><br/>'; } else { var pickupsHtml = ''; }
-    if (fines >= 0.05) { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines: ' + fines + '</span></a><br/><br/>'; } else { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines and Payments</span></a><br/><br/>'; }
+    if (fines != "") { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines: ' + fines + '</span></a><br/><br/>'; } else { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines and Payments</span></a><br/><br/>'; }
+    console.log(fines);
     var settingsHtml = '<a class="button wide medium tadlblue" onclick="load(\'myaccount\')"><span>Account Settings</span></a><br/><br/>';
     var historyHtml = '<a class="button wide medium tadlblue" onclick="load(\'history\')"><span>Checkout History</span></a><br/><br/>';
     var cardHtml = '<a class="button wide medium tadlblue" onclick="showcard()"><span>Library Card</span></a><br/><br/>';
