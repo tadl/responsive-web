@@ -497,10 +497,17 @@
 	</div>
 </script>
 
-<script id="finesandpayments-template" type="text/template">
+<script id="payments-template" type="text/template">
     <div class="card">
         <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
             <table style="width:100%;" class="padtop">
+                <tr>
+                    <td><strong>Date</strong></td>
+                    <td><strong>Billing Type</strong></td>
+                    <td><strong>Amount</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 {{#payments}}
                     <tr>
                     <td>{{pmt_date}}</td>
@@ -510,6 +517,33 @@
                     <td id="be-{{pmt_id}}"><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
                     </tr>
                 {{/payments}}
+            </table>
+        </div></div>
+    </div>
+</script>
+
+<script id="fines-template" type="text/template">
+    <div class="card">
+        <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
+            <table style="width:100%;" class="padtop">
+                <tr>
+                    <td><strong>Transaction Date</strong></td>
+                    <td><strong>Last Payment</strong></td>
+                    <td><strong>Initial Amount</strong></td>
+                    <td><strong>Amount Paid</strong></td>
+                    <td><strong>Balance Owed</strong></td>
+                    <td><strong>Billing Type</strong></td>
+                </tr>
+                {{#fines}}
+                    <tr>
+                    <td>{{transaction_start_date}}</td>
+                    <td>{{last_pmt_date}}</td>
+                    <td>{{initial_amt_owed}}</td>
+                    <td>{{total_amt_paid}}</td>
+                    <td>{{balance_owed}}</td>
+                    <td>{{billing_type}}</td>
+                    </tr>
+                {{/fines}}
             </table>
         </div></div>
     </div>

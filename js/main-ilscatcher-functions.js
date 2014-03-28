@@ -576,7 +576,7 @@ function show_payment_history() {
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token, function(data) {
-        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var template = Handlebars.compile($('#payments-template').html());
         var info = template(data);
         var more = data.more;
         $('#region-two').html(info).show().promise().done(function() {
@@ -598,7 +598,7 @@ function more_payment_history() {
     $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
     $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
         var more = data.more;
-        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var template = Handlebars.compile($('#payments-template').html());
         var info = template(data);
         $('#region-two').append(info).promise().done(function() {
             if (more == "true") {
@@ -611,6 +611,27 @@ function more_payment_history() {
 }
 
 function show_fines() {
+    finepage = 0;
+    cleanhouse();
+    cleandivs();
+    changeBanner("Fines and Charges", color_tadlblue);
+    loading_animation('start');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_fines.json?token=' + token, function(data) {
+        var template = Handlebars.compile($('#fines-template').html());
+        var info = template(data);
+        var more = data.more;
+        $('#region-two').html(info).show().promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(moreFinesText).trigger("create");
+                $('#loadmore').show();
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+        myaccount_menu();
+        loading_animation('stop');
+    });
 }
 function more_fines() {
 }
