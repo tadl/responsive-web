@@ -825,7 +825,7 @@
 </script>
 
 <script id="someevents-template" type="text/template">
-    {{#each_upto nodes 4}}
+    {{#each_upto . 4}}
         <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
@@ -848,7 +848,7 @@
 </script>
 
 <script id="allevents-template" type="text/template">
-    {{#nodes}}
+    {{#each_upto . 300}}
         <div class="card">
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35 mobile-grid-35">
@@ -871,7 +871,7 @@
                 </div>
             </div>
         </div>
-    {{/nodes}}
+    {{/each_upto}}
 </script>
 
 <script id="showlocations-template" type="text/template">
