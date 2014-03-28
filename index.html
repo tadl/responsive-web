@@ -422,9 +422,23 @@
                     <div id="hold_message_{{record_id}}" class="holdmessage">
                     </div>
                     <div id="{{record_id}}">
-                    	<p class="subtitle">
-                    	{{abstract}}
-                    	<p>
+                    	{{#compare abstract "" operator="!="}}
+            				<p>
+            					<span style="font-weight:bold">
+            						Summary: 
+            					</span>
+	    	        			{{abstract}}
+    	     		   		</p>
+            			{{/compare}}
+            			{{#compare contents null operator="!="}}
+            				<p>
+            					<span style="font-weight:bold">
+            						Contents: 
+            					</span>
+            					{{contents}}
+            				</p>
+            					
+            			{{/compare}}
                     	<p class="subtitle">
                     	{{availability}}
                     	</p>
@@ -562,7 +576,10 @@
   {{#items}}
             <div class="summary" style="position:relative">
             	
-            	{{#compare summary null operator="!="}}
+            	
+            	
+            	
+            	{{#compare summary "" operator="!="}}
             		<p>
             		<span style="font-weight:bold">
             			Summary: 
@@ -571,10 +588,10 @@
             		{{summary}}
             		</p>
             	{{/compare}}
-            	{{#compare contents null operator="!="}}
-            		<br>
+            	{{#compare contents "" operator="!="}}
+            	
             		<span style="font-weight:bold">
-            			Contents/Tracks: 
+            			Contents: 
             		</span>
             		{{contents}}
             	{{/compare}}	
@@ -597,12 +614,7 @@
                 <tr class="smaller">
                     <td>{{shelf_location.library}}</td>
                     <td>{{shelf_location.shelving_location}}</td>
-                    <td>{{shelf_location.call_number}}
-                    {{#compare shelf_location.library 'Woodmere' operator="==="}}
-                    </br>
-                    <a onclick="shelf_finder('{{shelf_location.library}}', '{{shelf_location.shelving_location}}', '{{shelf_location.call_number}}')">Find on Shelf</a>
-                    {{/compare}}
-                    </td>
+                    <td>{{shelf_location.call_number}}</td>
                 </tr>
             {{/if}}
         {{/shelvinglocations}}
@@ -814,7 +826,7 @@
 </script>
 
 <script id="someevents-template" type="text/template">
-    {{#each_upto nodes 4}}
+    {{#each_upto . 4}}
         <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
@@ -837,7 +849,7 @@
 </script>
 
 <script id="allevents-template" type="text/template">
-    {{#nodes}}
+    {{#each_upto . 300}}
         <div class="card">
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35 mobile-grid-35">
@@ -860,7 +872,7 @@
                 </div>
             </div>
         </div>
-    {{/nodes}}
+    {{/each_upto}}
 </script>
 
 <script id="showlocations-template" type="text/template">

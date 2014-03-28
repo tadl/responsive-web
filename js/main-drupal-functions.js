@@ -2,6 +2,7 @@ var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
 
 function showAllEventsByTerm(term) {
     var banner;
+    var term = term;
     cleanhouse();
     cleandivs();
     loading_animation('start');
@@ -24,17 +25,17 @@ function showAllEventsByTerm(term) {
     } else if (term == 'adults') {
         banner = "Adult Events";
     }
-    if ((term == null) || (term == 'all')) { 
+    if ((term == null) || (term == 'events')) { 
         term = 'events'; 
         banner = "Events";
     } else {
         term = 'events_' + term;
     }
-    var alljson = JSON.parse(sessionStorage.getItem("everything"));
-    if (alljson == null) {
-        $.getJSON(drupal_json_url, function(data) {
+    var alljson = JSON.parse(sessionStorage.getItem('events'));
+    if (alljson == null || typeof alljson['events'] == undefined || alljson['events'] == null) {
+        $.getJSON(drupal_json_url + '?content=events', function(data) {
             var jstring = JSON.stringify(data);
-            sessionStorage.setItem('everything', jstring);
+            sessionStorage.setItem('events', jstring);
             showAllEventsByTerm(term);
         });
     } else {
@@ -248,7 +249,14 @@ function showEventNode(nid) {
         var shortname = lib_firstname_to_shortname(firstname);
         var locnode = 'events_' + shortname;
         events_template = Handlebars.compile($('#someevents-template').html());
-        var stuff = JSON.parse(sessionStorage.getItem("everything"));
+        var stuff = JSON.parse(sessionStorage.getItem("events"));
+        if (stuff == null) {
+            $.getJSON(drupal_json_url + '?content=events', function(data) {
+                var jstring = JSON.stringify(data);
+                sessionStorage.setItem('events', jstring);
+                showEventNode(nid);
+            });
+        }
         var events = events_template(stuff[locnode]);
         var info = template(data);
         var alleventslink = "load('events/" + shortname + "')";
