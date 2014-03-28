@@ -1,4 +1,4 @@
-var drupalnode_template;
+var simplenode_template;
 var featured_item_template;
 var review_template;
 var events_template;
@@ -74,6 +74,13 @@ $(document).ready(function() {
 
 });
 
+$(document).ajaxComplete(function(){
+    try{
+        FB.XFBML.parse(); 
+    }catch(ex){}
+});
+
+
 function load_drupal_json(content) {
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
 $.getJSON(drupal_json_url, function(data) {
@@ -127,7 +134,7 @@ function unhide(eventId) {
     if (e.style.display === 'none') {
         $('.cardblock').not('#' + eventId).hide();
         $('#' + eventId).show();
-        $(window).scrollTop($("#card-" + eventId).offset().top - 40);
+        $(window).scrollTop($("#card-" + eventId).offset().top - 60);
         $('#more' + eventId).hide();
         $('.showmore').not('#more' + eventId).show();
     } else {
@@ -274,8 +281,10 @@ function load(page) {
             var title = psTitle + separator + "Interlochen Public Library";
         } else if (page == 'peninsula') {
             var title = psTitle + separator + "Peninsula Community Library";
-        } else if (page == 'l') {
+        } else if (page == 'myaccount') {
             var title = psTitle + separator + "My Account";
+        } else if (page == 'history') {
+            var title = psTitle + separator + "Checkout History";
         } else if (page == 'events') {
             var title = psTitle + separator + "Events";
         } else if (page == 'events/kbl') {
@@ -296,6 +305,10 @@ function load(page) {
             var title = psTitle + separator + "Youth Events";
         } else if (page == 'events/adults') {
             var title = psTitle + separator + "Adult Events";
+        } else if (page == 'fines') {
+            var title = psTitle + separator + "Fines";
+        } else if (page == 'payments') {
+            var title = psTitle + separator + "Payment History";
         }
         if (page != null) {
             History.pushState(action, title, page);
@@ -330,6 +343,14 @@ function loadNode(nid) {
     History.pushState(action, psTitle + separator + "Story " + nid, newpage);
 }
 
+function loadEventNode(nid) {
+    cleanhouse();
+    cleandivs();
+    var newpage = "event/" + nid;
+    var action = {action:newpage}
+    History.pushState(action, psTitle + separator + "Event " + nid, newpage);
+}
+
 
 function loadlist(list_id, list_name) {
 	cleanhouse();
@@ -359,45 +380,45 @@ function loadlist(list_id, list_name) {
 
 function loadNodes(nodes) {
     if (nodes !== null) {
-        $('#working').show().spin('default');
+        loading_animation('start');
         if (nodes.left != null) {
             $.getJSON(NODEPREFIX + nodes.left, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-one').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.middle != null) {
             $.getJSON(NODEPREFIX + nodes.middle, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-two').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.right != null) {
             $.getJSON(NODEPREFIX + nodes.right, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-three').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.third != null) {
             $.getJSON(NODEPREFIX + nodes.third, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#one-third').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
         if (nodes.twothirds != null) {
             $.getJSON(NODEPREFIX + nodes.twothirds, function(data) {
-                var template = Handlebars.compile($('#drupalnode-template').html());
+                var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#two-thirds').append(info);
-                $('#working').hide().spin(false);
+                loading_animation('stop');
             });
         }
     }
@@ -439,28 +460,44 @@ $.fn.spin.presets.tiny = {
     zIndex: 2e9
 }
 
-var eventsnav = '<a class="button verysmall trans" id="eventlocs" data-dropdown="#dropdown-2"><span>Pick a location</span></a><br/>Or, <a class="button verysmall trans" id="eventaudis" data-dropdown="#dropdown-3"><span>Pick an audience</span></a>';
-
-function account_settings_reset(){	
+function account_settings_reset() {
 	$('#account_settings_form').get(0).reset();
 	$("#account_settings_form").hide();
 	$("#settings_save").hide();
-	$("#account_settings_display").show()
+	$("#account_settings_display").show();
 }
 
 function show_edit_account_settings(){
-	$("#account_settings_display").hide()
+	$("#account_settings_display").hide();
 	$("#settings_save").show();
 	$("#account_settings_form").show();
 }
 
-function loading_animation(state){
-	if (state == 'start'){
-		$('#working').show().spin('default');
-		$('#footer-wrapper').hide();
-	};
-	if(state == 'stop'){
-		$('#working').hide().spin('default');
-		$('#footer-wrapper').show();
-	};
+function loading_animation(state) {
+    if (state == 'start') {
+        $('#working').show().spin('default');
+        $('#footer-wrapper').hide();
+    }
+    if(state == 'stop') {
+        $('#working').hide().spin('default');
+        $('#footer-wrapper').show();
+    }
+}
+
+function myaccount_menu() {
+    var acctMenuHtmlStart = '<div class="card"><div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100" style="text-align:center;">';
+    var acctMenuHtmlEnd = '</div></div></div>';
+    var checkouts = window.localStorage.getItem('checkouts');
+    var holds = window.localStorage.getItem('holds');
+    var pickups = window.localStorage.getItem('pickups');
+    var fines = window.localStorage.getItem('fines');
+    if (checkouts >= 1) { var checkoutsHtml = '<a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: ' + checkouts + '</span></a><br/><br/>'; } else { var checkoutsHtml = ''; }
+    if (holds >= 1) { var holdsHtml = '<a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: ' + holds + '</span></a><br/><br/>'; } else { var holdsHtml = ''; }
+    if (pickups >= 1) { var pickupsHtml = '<a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: ' + pickups + '</span></a><br/><br/>'; } else { var pickupsHtml = ''; }
+    if (fines >= 0.05) { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines: ' + fines + '</span></a><br/><br/>'; } else { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines and Payments</span></a><br/><br/>'; }
+    var settingsHtml = '<a class="button wide medium tadlblue" onclick="load(\'myaccount\')"><span>Account Settings</span></a><br/><br/>';
+    var historyHtml = '<a class="button wide medium tadlblue" onclick="load(\'history\')"><span>Checkout History</span></a><br/><br/>';
+    var cardHtml = '<a class="button wide medium tadlblue" onclick="showcard()"><span>Library Card</span></a><br/><br/>';
+    var listsHtml = '<a class="button wide medium tadlblue" onclick="load(\'my_lists\')"><span>My Lists</span></a><br/><br/>';
+    $('#region-one').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd);
 }

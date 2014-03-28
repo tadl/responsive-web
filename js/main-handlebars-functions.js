@@ -37,7 +37,8 @@ Handlebars.registerHelper('make_https', function(url, options) {
 
 Handlebars.registerHelper('encode', function(data, options) {
     var data = data;
-    var encode_data = data.replace(/'/g, "%27");
+    var encode_data = encodeURIComponent(data);
+    var encode_data = encode_data.replace(/'/g, "%27");
     return encode_data;
 });
 
@@ -146,5 +147,10 @@ Handlebars.registerHelper('trunc', function(str) {
         var retstr = textstr;
     }
     return retstr;
+});
+
+
+Handlebars.registerHelper('makedate', function(str) {
+    return $.format.toBrowserTimeZone(str, "yyyyMMdd") + "T" + $.format.date(str, "HHmmss");
 });
 

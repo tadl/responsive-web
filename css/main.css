@@ -373,6 +373,7 @@ div[class*="pull-"] section {
     padding-top:15px;
     font-weight:bold;
     vertical-align:bottom;
+    white-space:normal;
 }
 
 em.subtitle {
@@ -606,8 +607,9 @@ input.search {
 
 #page_banner h2 {
   text-align:left;
-  font-size: 25px;
-  padding: 8px;
+  font-size: 26px;
+  padding: 6px 8px 8px 12px;
+  text-shadow: 1px 2px 2px rgba(0,0,0,0.5);
 }
 
 #locloc {
@@ -629,6 +631,9 @@ table.hours {
 }
 .right {
     text-align:right;
+}
+.center {
+    text-align:center;
 }
 
 .mobile-grid-10.nav {

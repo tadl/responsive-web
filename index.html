@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <!-- saved from url=(0021)http://www.google.com -->
-<html lang="en">
+<html lang="en" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
     <base href="/responsive-web/">
     <meta charset="UTF-8" />
@@ -91,16 +91,28 @@
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_name/:list_id', showitemlist)
+            .route(BASE_URL + 'event/:nid', showEventNode)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'reviews', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
             .route(BASE_URL + 'myaccount', myAccount)
+            .route(BASE_URL + 'history', show_checkout_history)
             .route(BASE_URL + 'my_lists', my_lists)
+            .route(BASE_URL + 'fines', show_fines)
+            .route(BASE_URL + 'payments', show_payment_history)
             ;
     </script>
 </head>
 <body class="pushmenu-push">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=184331468353470";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="wrapper">
     <nav class="pushmenu pushmenu-left">
         <h3>Site Navigation</h3>
@@ -346,7 +358,6 @@
     <a id="complete_password_reset" class="button small tadlblue" onclick="complete_password_reset()"><span>Return to Login</span></a>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="searchfacets-template" type="text/template">
     <div class="card">
      <h4 class="title">Filter Your Search:</h4>
@@ -379,7 +390,6 @@
 </script>
 
 
-<!-- updated for unsemantic -->
 <script id="results-template_2" type="text/template">
     {{#items}}
         <div class="card">
@@ -440,15 +450,6 @@
 </script>
 
 
-
-
-
-
-
-
-
-
-<!-- updated for unsemantic -->
 <script id="showitemlist-template" type="text/template">
         <div class="card">
         {{#each_upto nodes 1}}
@@ -481,17 +482,38 @@
     {{/nodes}}
 </script>
 
-
 <script id="mylists-template" type="text/template">
 	<div class="card">
-		{{#lists}}
-			<a onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a>
-			<br>
-		{{/lists}}
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                <ul style="list-style:none;">
+                    {{#lists}}
+                        <li><a class="pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a></li>
+                    {{/lists}}
+                </ul>
+            </div>
+        </div>
 	</div>
 </script>
 
-<!-- updated for unsemantic -->
+<script id="finesandpayments-template" type="text/template">
+    <div class="card">
+        <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
+            <table style="width:100%;" class="padtop">
+                {{#payments}}
+                    <tr>
+                    <td>{{pmt_date}}</td>
+                    <td>{{pmt_for}}</td>
+                    <td>{{pmt_amt}}</td>
+                    <td><a class="button tadlblue verysmall" onclick="billing_print({{pmt_id}})"><span>print</span></a></td>
+                    <td><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
+                    </tr>
+                {{/payments}}
+            </table>
+        </div></div>
+    </div>
+</script>
+
 <script id="showreviews-template" type="text/template">
     <div class="card">
         <h4 class="title">Staff Reviews</h4>
@@ -529,7 +551,7 @@
     {{/nodes}}
 </script>
 
-<script id="drupalnode-template" type="text/template">
+<script id="simplenode-template" type="text/template">
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
@@ -548,7 +570,6 @@
     {{/nodes}}
 </script>
 
-<!-- updated for unsemantic -->
 <script id="more_details-template" type="text/template">
    <div>
   {{#items}}
@@ -617,7 +638,6 @@
     </div>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="showfeaturednews-template" type="text/template">
     {{#each_upto nodes 5}}
         <div class="card" id="card-{{node.nid}}">
@@ -629,7 +649,7 @@
                             <span class="cardtitle" onclick="loadNode('{{node.nid}}')">{{{node.title}}}</span>
                         </div>
                         <div class="grid-20 tablet-grid-20 mobile-grid-30" style="margin:0;padding:0;">
-                            <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" style="margin-top:15px;" onclick="loadNode('{{node.nid}}')"><span>read story</span></a>
+                            <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" style="margin-top:15px;" onclick="loadNode('{{node.nid}}')"><span>read</span></a>
                         </div>
                     </div>
                 </div>
@@ -692,10 +712,11 @@
         </div>
         Fines: {{user.fines}}
         </div>
-        <a class="button wide tadlblue" id="account_settings_button" onclick="load('myaccount');"><span>Settings</span></a> </br>
-        <a class="button wide tadlblue" id="showbarcode" onclick="load('my_lists')"><span>My Lists</span></a> </br>
-        <a class="button wide tadlblue" id="showbarcode" onclick="showcard()"><span>Card</span></a> </br>
-    	<a class="button wide tadlblue" id="login" onclick="logout()"><span>Logout</span></a> 
+        <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="load('history');"><span>Checkout History</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="load('my_lists')"><span>My Lists</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
+    	<a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
 </script>
 
@@ -774,16 +795,15 @@
     	</div>
     	<div class="clear"></div>
 	{{/settings}}
-	<div id="settings_save" style="display: none">
-	<a class="button small green" id="save_settings_button" onclick="change_account_settings()">Save Changes</a>
-	<a class="button small red" onclick="account_settings_reset()">Cancel</a>
+	<div id="settings_save" class="padtop" style="display: none">
+	<a class="button small green" id="save_settings_button" onclick="change_account_settings()"><span>Save Changes</span></a>
+	<a class="button small red" onclick="account_settings_reset()"><span>Cancel</span></a>
 	</div>
 
 </form>	
 </div></div>
 </script>
 
-<!-- updated for unsemantic -->
 <script id="showcheckedout-template" type="text/template">
     {{#:checkouts}}
         <div class="card">
@@ -804,35 +824,29 @@
     {{/:checkouts}}
 </script>
 
-<!-- updated for unsemantic -->
 <script id="someevents-template" type="text/template">
-    {{#each_upto nodes 6}}
+    {{#each_upto nodes 4}}
         <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
-                <div class="grid-35 tablet-grid-35 mobile-grid-35">
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle">{{node.title}}</span><br/>
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
+                </div>
+                <div class="grid-30 tablet-grid-30 mobile-grid-30 center">
                     {{#if node.image}}
                         <img class="result_img" onerror="this.onerror=null;this.src='img/clocktower100.png';" src="{{make_https node.image}}" />
                     {{else}}
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
                 </div>
-                <div class="grid-65 tablet-grid-65 mobile-grid-65">
-                    <span class="cardtitle">{{node.title}}</span><br/>
-                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em>
-                </div>
-                <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">
-                        <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" onclick="unhide({{node.nid}})"><span>view details</span></a>
-                    </div>
-                    <span id="{{node.nid}}" style="display:none;" class="cardblock">{{{fixurls node.body}}}</span>
+                    {{{trunc node.body}}} <a class="showmore button verysmall tadlblue" onclick="loadEventNode({{node.nid}})"><span>details</span></a>
                 </div>
             </div>
         </div>
     {{/each_upto}}
 </script>
 
-<!-- new events template -->
 <script id="allevents-template" type="text/template">
     {{#nodes}}
         <div class="card">
@@ -852,7 +866,7 @@
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div class="padtop">
-                        <a onclick="loadNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
+                        <a onclick="loadEventNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
                     </div>
                 </div>
             </div>
@@ -895,10 +909,10 @@
     {{#:holds}}
         <div id="hold_{{:hold.:hold_id}}" class="card">
             <div class="grid-container">
-                <div class="grid-10 tablet-grid-20 mobile-grid-30">
+                <div class="grid-20 tablet-grid-10 mobile-grid-20">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}"/>
                 </div>
-                <div class="grid-90 tablet-grid-80 mobile-grid-70">
+                <div class="grid-80 tablet-grid-90 mobile-grid-80">
                     <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}"/>&nbsp;{{:hold.:name}}</span><br/>
                     Pick-up Location: {{:hold.:pickup_location}}<br/>
                     Status: {{:hold.:status}}<br/>
@@ -909,7 +923,23 @@
     {{/:holds}}
 </script>
 
-<!-- updated for unsemantic -->
+<script id="showcheckout-history-template" type="text/template">
+    {{#checkouts}}
+        <div id="checkout_{{record_id}}" class="card">
+            <div class="grid-container">
+                <div class="grid-20 tablet-grid-10 mobile-grid-20">
+                    <img class="result_img" onload="img_check(this)" onerror="img_error(this)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{record_id}}"/>
+                </div>
+                <div class="grid-80 tablet-grid-90 mobile-grid-80">
+                    <span class="cardtitle">{{title}}</span><br/>
+                    <em>{{author}}</em><br/>
+                    <span class="smaller">Out: {{date_out}}, Due: {{date_due}}, In: {{date_in}}</span>
+                </div>
+            </div>
+        </div>
+    {{/checkouts}}
+</script>
+
 <script id="renew-template" type="text/template">
     {{#:checkouts}}
         Due: {{:checkout.:due_date}}<br/>
@@ -987,27 +1017,27 @@
     {{/nodes}}
 </script>
 
-<script id="node-template" type="text/template">
+<script id="eventnode-template" type="text/template">
     {{#nodes}}
         <div class="card">
             <div class="grid-container">
-                {{#if node.image}}
-                    <div class="grid-40 tablet-grid-50 hide-on-mobile">
-                        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
-                    </div>
-                    <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
-                        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
-                    </div>
-                {{/if}}
-                {{#if node.images}}
-                    <div class="grid-40 tablet-grid-50 hide-on-mobile">
-                        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
-                    </div>
-                    <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
-                        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
-                    </div>
-                {{/if}}
-                <div class="grid-60 tablet-grid-50 mobile-grid-100">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    {{#if node.image}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.images}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                    {{/if}}
                     {{#if node.nodetitle}}
                         <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
                     {{/if}}
@@ -1021,6 +1051,56 @@
                         <div class="padtop">
                             {{{fixurls node.body}}}
                         </div>
+                        {{#if node.simplestartdate}}
+                            <div class="padbot">
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{{encode node.title}}}{{{encode node.nodetitle}}}&dates={{makedate node.simplestartdate}}/{{makedate node.simplestartdate}}&details={{{encode node.body}}}&location=TADL%20{{node.location}}&trp=false&sprop=Traverse%20Area%20District%20Library&sprop=name:http%3A%2F%2Fwww.tadl.org%2F" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button6.gif" border="0"></a>
+                            </div>
+                        {{/if}}
+                        <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
+                        <br/><br/>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    {{/nodes}}
+</script>
+
+<script id="node-template" type="text/template">
+    {{#nodes}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-75 tablet-grid-70 mobile-grid-100">
+                    {{#if node.image}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.images}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.nodetitle}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
+                    {{/if}}
+                    {{#if node.title}}
+                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
+                    {{/if}}
+                    {{#if node.event-date}}
+                        <div class="subtitle padtop">{{{node.event-date}}} at {{node.location}}</div>
+                    {{/if}}
+                    {{#if node.body}}
+                        <div class="padtop">
+                            {{{fixurls node.body}}}
+                        </div>
+                        <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
+                        <br/><br/>
                     {{/if}}
                 </div>
             </div>
@@ -1057,6 +1137,13 @@
         <li><a onclick="load('events/youth')">Youth</a></li>
         <li><a onclick="load('events/adults')">Adults</a></li>
         <li><a onclick="load('events')">All</a></li>
+    </ul>
+</div>
+
+<div id="dropdown-4" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a onclick="load('fines')">View outstanding fines</a></li>
+        <li><a onclick="load('payments')">Payment history</a></li>
     </ul>
 </div>
 

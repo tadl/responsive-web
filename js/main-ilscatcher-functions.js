@@ -7,8 +7,6 @@ function loadmore() {
     var loc = window.localStorage.getItem('loc');
     var facet = window.localStorage.getItem('facet');
     var searchtype = window.localStorage.getItem('searchtype');
-    
-    
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $('#loadmoretext').trigger("create");
     $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
@@ -395,7 +393,7 @@ function login_and_fetch_dash(username, password) {
         }
         if ($('#login').length != 0) {
             $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
-        } // I need help understanding this bit. what does the length of the login button have to do with anything? // wjr
+        }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
                 var source   = $("#login_form-template").html();
@@ -420,10 +418,9 @@ function login_and_fetch_dash(username, password) {
                 window.localStorage.setItem('token', token)
                 current_user = window.localStorage.getItem('current_user');
                 reset_hold_links();
-                if (current_page == 'myaccount' && first_state != 'true' ){
+                if (current_page == 'myaccount' && first_state != 'true' ) {
                 	myAccount();      
-            	};
-            	
+            	}
             }
         });
     } else {
@@ -433,7 +430,6 @@ function login_and_fetch_dash(username, password) {
         set_login_form_keypress_event();
         window.localStorage.clear();
     }
-
 }
 
 function render_dash(data) {
@@ -446,18 +442,20 @@ function render_dash(data) {
 function showcheckouts() { 
     cleanhouse();
     cleandivs();
+    changeBanner("Items Checked Out", color_tadlblue);
     var action = {action:"showcheckouts"}
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
+    var token = window.localStorage.getItem('token');
     state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?u='+ username +'&pw=' + password, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?user='+ username +'&token=' + token, function(data) {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
-            $('#region-wide').html(info).show();
-            $('#working').hide().spin(false);
+            $('#region-two').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         }
     });
 }
@@ -488,9 +486,10 @@ function cancelhold(hold_id) {
 function showholds() {
     cleanhouse();
     cleandivs();
+    changeBanner("My Holds", color_tadlblue);
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -498,19 +497,112 @@ function showholds() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showholds") {
-            $('#region-wide').html(info).show();
-            $('#working').hide().spin(false);
+            $('#region-two').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         }
     });   
+}
+
+function show_checkout_history() {
+    historycount=0;
+    cleanhouse();
+    cleandivs();
+    changeBanner("Checkout History", color_tadlblue);
+    loading_animation('start');
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token, function(data) {
+        var template = Handlebars.compile($('#showcheckout-history-template').html());
+        var info = template(data);
+        var more = data.more;
+        $('#region-two').html(info).show().promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(moreHistoryText);
+                $('#loadmoretext').trigger("create");
+                $('#loadmore').show();
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+        myaccount_menu();
+        loading_animation('stop');
+    });
+}
+function more_history() {
+    historycount++;
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
+        var more = data.more;
+        var template = Handlebars.compile($('#showcheckout-history-template').html());
+        var info = template(data);
+        $('#region-two').append(info).promise().done(function() {
+            if (more == "true"){
+                $('#loadmoretext').empty().append(moreHistoryText).trigger("create");
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+    });
+}
+
+function show_payment_history() {
+    historycount = 0;
+    cleanhouse();
+    cleandivs();
+    changeBanner("Payment History", color_tadlblue);
+    loading_animation('start');
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token, function(data) {
+        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var info = template(data);
+        var more = data.more;
+        $('#region-two').html(info).show().promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(morePaymentsText).trigger("create");
+                $('#loadmore').show();
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+        myaccount_menu();
+        loading_animation('stop');
+    });
+}
+function more_payment_history() {
+    historycount++;
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
+        var more = data.more;
+        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var info = template(data);
+        $('#region-two').append(info).promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+    });
+}
+
+function show_fines() {
+}
+function more_fines() {
 }
 
 function showpickups() {
     cleanhouse();
     cleandivs();
+    changeBanner("Ready for Pickup", color_tadlblue);
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
-    $('#working').show().spin('default');
-    var username = window.localStorage.getItem('username');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
@@ -518,8 +610,9 @@ function showpickups() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showpickups") {
-            $('#region-wide').html(info).show();
-            $('#working').hide().spin(false);
+            $('#region-two').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         }
     });
 }
@@ -541,19 +634,21 @@ function renew(circulation_id, barcode) {
 
 function showcard() {
     cleanhouse();
+    changeBanner("My Library Card", color_tadlblue);
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
-    $('#working').show().spin('default');
+    loading_animation('start');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?u='+ username +'&pw=' + password, function(data) {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
-            var html = '<div class="card"><div id="barcodepage"><div class="barcode"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('#working').hide().spin(false);
-            $('#region-wide').html(html).show();
+            var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
+            $('#region-two').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
+            myaccount_menu();
+            loading_animation('stop');
         }
     });
 }
@@ -685,8 +780,6 @@ function multi_hold(record_ids) {
 function emptylist(){
 	localStorage.removeItem('list');
 	mylist();
-
-
 }
 
 function check_googlebooks(record_id, isbn){
@@ -717,101 +810,94 @@ $.ajax({
 }
 
 function load_googlebooks(isbn){
- var isbn = isbn;
- var content = '<div id="viewerCanvas" style="width: 500px; height: 600px"></div>'
- $.fancybox({
-     content : content,
-     type : 'iframe',
-     autoScale : true,
-     });
- var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
-viewer.load(isbn);
-
+    var content = '<div id="viewerCanvas" style="width: 500px; height: 600px"></div>'
+    $.fancybox({
+        content : content,
+        type : 'iframe',
+        autoScale : true
+    });
+    var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+    viewer.load(isbn);
 }
 
 function shelf_finder(library, location, call_number){
-var shelf_url = 'http://wjr.dev.tadl.org/locator/index.php?location='+ library + '&shelf=' + location +'&call=' + call_number;
-var content = '<iframe style="width: 90%; height: 90%; overflow: hidden" scrolling="no" src="' + shelf_url + '"></iframe>';
-$.fancybox({
-     content : content,
-     type : 'html',
-     width : '90%',
-     height : '90%',
-     autoSize : false,
-     scrolling : 'no'
-     });
+    var shelf_url = 'http://wjr.dev.tadl.org/locator/index.php?location='+ library + '&shelf=' + location +'&call=' + call_number;
+    var content = '<iframe style="width: 90%; height: 90%; overflow: hidden" scrolling="no" src="' + shelf_url + '"></iframe>';
+    $.fancybox({
+        content : content,
+        type : 'html',
+        width : '90%',
+        height : '90%',
+        autoSize : false,
+        scrolling : 'no'
+    });
 }
 
 
 
 
 
-function change_account_settings(){
+function change_account_settings() {
+    $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
+    var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
+    var new_username = encodeURIComponent($('#new_username').val());
+    var new_alias = encodeURIComponent($('#new_alias').val());
+    var new_email = encodeURIComponent($('#new_email').val());
+    var new_pickup_location = $('#new_pickup_location').val();
+    var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
+    var new_email_notify = $('#hold_notify_email').is(':checked').toString();
+    var new_save_circs = $('#save_circs').is(':checked').toString();
+    var new_save_holds = $('#save_holds').is(':checked').toString();
+    var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
+    var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
+    var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
+    var old_pickup_location = $('#new_pickup_location option[selected]').val();
+    var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
+    var old_email_notify = $('#hold_notify_email').prop("defaultValue");
+    var old_save_circs = $('#save_circs').prop("defaultValue").toString();
+    var old_save_holds = $('#save_holds').prop("defaultValue").toString();
 
-$('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
-var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?'
-var new_username = encodeURIComponent($('#new_username').val());
-var new_alias = encodeURIComponent($('#new_alias').val());
-var new_email = encodeURIComponent($('#new_email').val());
-var new_pickup_location = $('#new_pickup_location').val();
-var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
-var new_email_notify = $('#hold_notify_email').is(':checked').toString();
-var new_save_circs = $('#save_circs').is(':checked').toString();
-var new_save_holds = $('#save_holds').is(':checked').toString();
-var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
-var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
-var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
-var old_pickup_location = $('#new_pickup_location option[selected]').val();
-var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
-var old_email_notify = $('#hold_notify_email').prop("defaultValue");
-var old_save_circs = $('#save_circs').prop("defaultValue").toString();
-var old_save_holds = $('#save_holds').prop("defaultValue").toString();
+    if (new_username != old_username) {
+        var username_param = '&new_username=' + new_username;
+    } else {
+        var username_param = '';
+    }
 
-if (new_username != old_username) {
-	var username_param = '&new_username=' + new_username
-}else{
-	var username_param = ''
-}
+    if (new_alias != old_alias) {
+        var alias_param = '&new_alias=' + new_alias;
+    } else {
+        var alias_param = '';
+    }
 
-if (new_alias != old_alias) {
-	var alias_param = '&new_alias=' + new_alias
-}else{
-	var alias_param = ''
-}
+    if (new_email != old_email) {
+        var email_param = '&new_email=' + new_email;
+    } else {
+        var email_param = '';
+    }
 
-if (new_email != old_email) {
-	var email_param = '&new_email=' + new_email
-}else{
-	var email_param = ''
-}
+    if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ) {
+        var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds;
+    } else {
+        var search_param = '';
+    }
 
-if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ){
-	var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds
-}else{
-	var search_param = ''
-}
+    if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify) {
+        var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify;
+    } else {
+        var notify_param = '';
+    }
 
-if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify){
-	var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify 
-}else{
-	var notify_param = ''
-}
+    var username = window.localStorage.getItem('username');
+    var password = window.localStorage.getItem('password');
 
-var username = window.localStorage.getItem('username');
-var password = window.localStorage.getItem('password');
-
-var url = username_param + alias_param + email_param + search_param + notify_param
-alert(url);
-//alert(new_username +' '+ new_alias +' '+ new_email +' '+ new_pickup_location +' '+ new_phone_notify +' '+  new_email_notify +' '+ new_save_holds + ' '+ new_save_circs);
-$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
-		var cat = JSON.stringify(data)
-        sessionStorage.setItem('account_settings', cat );
-	    account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-	    var prefs = myaccount_template(account_settings);
-	    $('#account_settings').html(prefs);
-});
+    var url = username_param + alias_param + email_param + search_param + notify_param;
+    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
+        var cat = JSON.stringify(data);
+        sessionStorage.setItem('account_settings', cat);
+        account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+        var prefs = myaccount_template(account_settings);
+        $('#account_settings').html(prefs);
+    });
 
 }
-
-
 

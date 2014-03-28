@@ -1,5 +1,5 @@
 function compile_templates() {
-    drupalnode_template = Handlebars.compile($('#drupalnode-template').html());
+    simplenode_template = Handlebars.compile($('#simplenode-template').html());
     featured_item_template = Handlebars.compile($('#showfeatureditembox-template').html());
     review_template = Handlebars.compile($('#showreviews-template').html());
     events_template = Handlebars.compile($('#someevents-template').html());
@@ -26,12 +26,12 @@ function showEastBay() {
     } else { 
         changeBanner('East Bay', '#0d4c78');
         var events_ebb = events_template(data.events_ebb)
-        var infobox_ebb = drupalnode_template(data.infobox_ebb)
+        var infobox_ebb = simplenode_template(data.infobox_ebb)
         var news_ebb = featured_news_template(data.news_ebb)
         var hours_ebb = showlocations_template(data.hours_ebb)
         var alleventslink = "load('events/ebb')";
         $('#region-one').html(infobox_ebb);
-        $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All East Bay events</a></h4></div>');
+        $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All East Bay events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ebb);
     }
 }
@@ -52,12 +52,12 @@ function showFifeLake() {
      } else { 
      changeBanner('Fife Lake', '#0d4c78');
      var events_flpl = events_template(data.events_flpl)
-     var infobox_flpl = drupalnode_template(data.infobox_flpl)
+     var infobox_flpl = simplenode_template(data.infobox_flpl)
      var news_flpl = featured_news_template(data.news_flpl)
      var hours_flpl = showlocations_template(data.hours_flpl)
         var alleventslink = "load('events/flpl')";
      $('#region-one').html(infobox_flpl);
-        $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Fife Lake events</a></h4></div>');
+        $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All Fife Lake events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_flpl);
      }
 }
@@ -78,12 +78,12 @@ function showInterlochen() {
      } else { 
      changeBanner('Interlochen', '#0d4c78');
      var events_ipl = events_template(data.events_ipl)
-     var infobox_ipl = drupalnode_template(data.infobox_ipl)
+     var infobox_ipl = simplenode_template(data.infobox_ipl)
      var news_ipl = featured_news_template(data.news_ipl)
      var hours_ipl = showlocations_template(data.hours_ipl)
         var alleventslink = "load('events/ipl')";
      $('#region-one').html(infobox_ipl);
-        $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Interlochen  events</a></h4></div>');
+        $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All Interlochen  events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ipl);
      }
 }
@@ -104,12 +104,12 @@ function showKingsley() {
      } else { 
      changeBanner('Kingsley', '#0d4c78');
      var events_kbl = events_template(data.events_kbl)
-     var infobox_kbl = drupalnode_template(data.infobox_kbl)
+     var infobox_kbl = simplenode_template(data.infobox_kbl)
      var news_kbl = featured_news_template(data.news_kbl)
      var hours_kbl = showlocations_template(data.hours_kbl)
         var alleventslink = "load('events/kbl')";
      $('#region-one').html(infobox_kbl);
-        $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Kingsley events</a></h4></div>');
+        $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Kingsley events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_kbl);
      }
 }
@@ -130,12 +130,12 @@ function showPeninsula() {
      } else { 
      changeBanner('Peninsula', '#0d4c78');
      var events_pcl = events_template(data.events_pcl)
-     var infobox_pcl = drupalnode_template(data.infobox_pcl)
+     var infobox_pcl = simplenode_template(data.infobox_pcl)
      var news_pcl = featured_news_template(data.news_pcl)
      var hours_pcl = showlocations_template(data.hours_pcl)
         var alleventslink = "load('events/pcl')";
      $('#region-one').html(infobox_pcl);
-        $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Peninsula events</a></h4></div>');
+        $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Peninsula events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_pcl);
      }
 }
@@ -156,12 +156,12 @@ function showWoodmere() {
      } else { 
      changeBanner('Woodmere', '#0d4c78');
      var events_wood = events_template(data.events_wood)
-     var infobox_wood = drupalnode_template(data.infobox_wood)
+     var infobox_wood = simplenode_template(data.infobox_wood)
      var news_wood = featured_news_template(data.news_wood)
      var hours_wood = showlocations_template(data.hours_wood)
         var alleventslink = "load('events/wood')";
      $('#region-one').html(infobox_wood);
-        $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Woodmere events</a></h4></div>');
+        $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Woodmere events</span></a>');
      $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_wood);
      }
 }
@@ -185,12 +185,12 @@ function showTeensPage() {
      var teens_manga = featured_item_template(data.teens_manga)
      var events_teens = events_template(data.events_teens)
      var teens_reviews = review_template(data.teens_reviews)
-     var teens_homework = drupalnode_template(data.teens_homework)
-     var teens_lists = drupalnode_template(data.teens_lists)
+     var teens_homework = simplenode_template(data.teens_homework)
+     var teens_lists = simplenode_template(data.teens_lists)
      var alleventslink = "load('events/teens')";
      $('#region-one').html(teens_new + teens_manga);
      $('#region-two').html(teens_lists + teens_reviews);
-     $('#region-three').html(events_teens + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Teen events</a></h4></div>');
+     $('#region-three').html(events_teens + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Teen events</span></a>');
      }
 }
 
@@ -209,12 +209,12 @@ function showOnlinePage() {
     });
      } else {  
      changeBanner('Online', '#99c11f');
-     var online_legal = drupalnode_template(data.online_legal)
+     var online_legal = simplenode_template(data.online_legal)
      $('#region-one').append(online_legal);
-     var online_mel = drupalnode_template(data.online_mel)
-     var online_resources = drupalnode_template(data.online_resources)
+     var online_mel = simplenode_template(data.online_mel)
+     var online_resources = simplenode_template(data.online_resources)
      $('#region-two').append(online_resources + online_mel);
-     var online_ebooks = drupalnode_template(data.online_ebooks)
+     var online_ebooks = simplenode_template(data.online_ebooks)
      $('#region-three').append(online_ebooks);
      }
 }
@@ -237,17 +237,17 @@ function showYouthPage() {
         changeBanner('Youth', '#15b1eb');
         var youth_display = featured_item_template(data.youth_display);
         var youth_new_books = featured_item_template(data.youth_new_books);
-        var youth_resources = drupalnode_template(data.youth_resources);
-        var youth_award_winners = drupalnode_template(data.youth_award_winners);
-        var youth_homework = drupalnode_template(data.youth_homework);
-        var youth_homeschool = drupalnode_template(data.youth_homeschool);
+        var youth_resources = simplenode_template(data.youth_resources);
+        var youth_award_winners = simplenode_template(data.youth_award_winners);
+        var youth_homework = simplenode_template(data.youth_homework);
+        var youth_homeschool = simplenode_template(data.youth_homeschool);
         var youth_reviews = review_template(data.youth_reviews);
         var events_youth = events_template(data.events_youth);
         var alleventslink = "load('events/youth')";
         $('#region-one').append(youth_homework + youth_homeschool + youth_award_winners + youth_resources);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
         $('#region-two').append(youth_reviews);
-        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">All Youth events</a></h4></div>');
+        $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Youth events</span></a>');
     } 
 }
 
@@ -298,7 +298,7 @@ function showMusicPage() {
      $('#region-one').append(music_new + music_hot);
      var music_reviews = review_template(data.music_reviews);
      $('#region-two').prepend(music_reviews);
-     var music_links = drupalnode_template(data.music_links);
+     var music_links = simplenode_template(data.music_links);
      $('#region-three').append(music_links);
      }
 }
@@ -323,7 +323,7 @@ function showBooksPage() {
     var books_adult_display = featured_item_template(data.books_adult_display)
     var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
     var books_adult_business = featured_item_template(data.books_adult_business)
-    var books_book_list = drupalnode_template(data.books_book_list)
+    var books_book_list = simplenode_template(data.books_book_list)
     var books_reviews = review_template(data.books_reviews)
     $('#region-three').html(books_adult_clubkits + books_adult_business);
     $('#region-two').html(books_reviews + books_book_list);
@@ -353,17 +353,17 @@ function showHomePage() {
     var featured_news = featured_news_template(data.featured_news);
     var events = events_template(data.events);
     var alleventslink = "load('events')";
-    var logo = '<img src="img/logo.png" style="padding-bottom:5px;width:100%;" />';
+    var logo = '<div class="card"><div class="grid-container"><div class="grid-50 tablet-grid-30 mobile-grid-100"><img src="img/logo.png" style="padding-top:5px;width:100%;" /></div><div class="grid-50 tablet-grid-70 mobile-grid-100" style="text-align:center;padding-top:20px;"><a class="pointer" onclick="load(\'woodmere\')">Woodmere</a> &bull; <a class="pointer" onclick="load(\'interlochen\')">Interlochen</a><br/><a class="pointer" onclick="load(\'kingsley\')">Kingsley</a> &bull; <a class="pointer" onclick="load(\'fifelake\')">Fife Lake</a><br/><a class="pointer" onclick="load(\'peninsula\')">Peninsula</a> &bull; <a class="pointer" onclick="load(\'eastbay\')">East Bay</a></div></div></div>';
     $('#region-three').html(books_featured_fiction + videos_new + books_featured_nonfiction + music_new);
-    $('#region-two').html(featured_news);
-    $('#region-one').html(logo + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<div class="card"><h4 class="title"><a class="pointer" onclick="' + alleventslink + '">View all events</a></h4></div>');
+    $('#region-two').html(logo + featured_news);
+    $('#region-one').html('<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events + '<a class="pointer button wide tadlblue medium" onclick="' + alleventslink + '"><span>View all events</span></a>');
     }
 }
 
 function myAccount(){
     cleandivs();
     cleanhouse();
-    $('#working').show().spin('default');
+    loading_animation('start');
     current_page = "myaccount";
     username = window.localStorage.getItem('username');
     password = window.localStorage.getItem('password');
@@ -371,23 +371,24 @@ function myAccount(){
 	if (current_user == 'true') {
 	    if (account_settings == null) {
 	    	$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
-	    	var cat = JSON.stringify(data)
-       		sessionStorage.setItem('account_settings', cat );
-        	myAccount();
+                var cat = JSON.stringify(data);
+                sessionStorage.setItem('account_settings', cat);
+                myAccount();
 	    	});
-	    }else{
-	    account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-	    var prefs = myaccount_template(account_settings);
-	    $('#working').hide().spin('default');
-	    changeBanner('My Account', '#0d4c78');
-	    $('#region-two').html('<div class="card"><h4 class="title">Account Settings <a onclick="show_edit_account_settings()" class="pointer">edit</a></h4><div id="account_settings">Loading!</div></div>');
-	    $('#account_settings').html(prefs);
+	    } else {
+            account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+            var prefs = myaccount_template(account_settings);
+            changeBanner('My Account', '#0d4c78');
+            $('#region-two').html('<div class="card"><h4 class="title">Account Settings [<a onclick="show_edit_account_settings()" class="pointer">edit</a>]</h4><div id="account_settings">Loading!</div></div>');
+            $('#account_settings').html(prefs);
+            myaccount_menu();
+            loading_animation('stop');
 	    }
 	} else {
-	   $('#working').hide().spin('default');
 	    changeBanner('My Account', '#0d4c78');
 		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 		$("#login_form").slideDown("fast");	
+        loading_animation('stop');
 	};
 	
 }
@@ -402,23 +403,19 @@ function my_lists(){
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
 			$('#region-two').html(my_lists);
+            myaccount_menu();
 			loading_animation('stop');
 		});
 	} else {
-	  	loading_animation('stop');
 	  	$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 	  	$("#login_form").slideDown("fast");	
+	  	loading_animation('stop');
 	};
 
 }
-
-
-
 
 function changeBanner(content, color) {
     document.querySelector('#page_banner').style.backgroundColor = color;
     $('#page_banner').css({"display" : "block"});
     $('#page_banner').html('<h2>'+content +'</h2>')
 }
-
-
