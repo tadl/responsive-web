@@ -48,6 +48,7 @@
     <script type="text/javascript" src="js/jquery.cluetip.min.js"></script>
     <script type="text/javascript" src="js/jquery.hoverIntent.minified.js"></script>
     <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="js/jquery.printElement.min.js"></script>
     <script type="text/javascript" src="js/handlebars.js"></script>
     <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
     <script type="text/javascript" src="js/jquery.dropdown.min.js"></script>
@@ -491,8 +492,8 @@
                     <td>{{pmt_date}}</td>
                     <td>{{pmt_for}}</td>
                     <td>{{pmt_amt}}</td>
-                    <td><a class="button tadlblue verysmall" onclick="billing_print({{pmt_id}})"><span>print</span></a></td>
-                    <td><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
+                    <td id="bp-{{pmt_id}}"><a class="button tadlblue verysmall" onclick="billing_print({{pmt_id}},'lb')"><span>print</span></a></td>
+                    <td id="be-{{pmt_id}}"><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
                     </tr>
                 {{/payments}}
             </table>

@@ -547,6 +547,25 @@ function more_history() {
     });
 }
 
+function billing_print(id,type) {
+    loading_animation('start');
+    $('body').scrollTop(0);
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/receipt_print.json?pmt_id=' + id + '&token=' + token, function(data) {
+        var message = data.message;
+        message = '<div id="printThis">' + message + '</div><div class="clearfix"></div><div><a class="button verysmall tadlblue" onclick="billing_actually_print()"><span>print</span></a></div>';
+        $.fancybox({
+            content: message,
+            type: 'iframe',
+            autoScale: true
+        });
+        loading_animation("stop");
+    });
+}
+function billing_actually_print() {
+    $('#printThis').printElement();
+}
+
 function show_payment_history() {
     historycount = 0;
     cleanhouse();
