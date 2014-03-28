@@ -305,6 +305,10 @@ function load(page) {
             var title = psTitle + separator + "Youth Events";
         } else if (page == 'events/adults') {
             var title = psTitle + separator + "Adult Events";
+        } else if (page == 'fines') {
+            var title = psTitle + separator + "Fines";
+        } else if (page == 'payments') {
+            var title = psTitle + separator + "Payment History";
         }
         if (page != null) {
             History.pushState(action, title, page);
@@ -490,26 +494,10 @@ function myaccount_menu() {
     if (checkouts >= 1) { var checkoutsHtml = '<a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: ' + checkouts + '</span></a><br/><br/>'; } else { var checkoutsHtml = ''; }
     if (holds >= 1) { var holdsHtml = '<a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: ' + holds + '</span></a><br/><br/>'; } else { var holdsHtml = ''; }
     if (pickups >= 1) { var pickupsHtml = '<a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: ' + pickups + '</span></a><br/><br/>'; } else { var pickupsHtml = ''; }
-    if (fines >= 0.05) { var finesHtml = '<span>Fines: ' + fines + '</span><br/><br/>'; } else { var finesHtml = ''; }
+    if (fines >= 0.05) { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines: ' + fines + '</span></a><br/><br/>'; } else { var finesHtml = '<a class="button wide medium tadlblue" data-dropdown="#dropdown-4"><span>Fines and Payments</span></a><br/><br/>'; }
     var settingsHtml = '<a class="button wide medium tadlblue" onclick="load(\'myaccount\')"><span>Account Settings</span></a><br/><br/>';
     var historyHtml = '<a class="button wide medium tadlblue" onclick="load(\'history\')"><span>Checkout History</span></a><br/><br/>';
     var cardHtml = '<a class="button wide medium tadlblue" onclick="showcard()"><span>Library Card</span></a><br/><br/>';
     var listsHtml = '<a class="button wide medium tadlblue" onclick="load(\'my_lists\')"><span>My Lists</span></a><br/><br/>';
-
-
-    // need to check if logged in, if not logged in (for any of these pages)
-    // we'll need to present a login form (perhaps just drop down the existing form?)
-    // there's a routine for that in pre_Hold I think. THIS ALREADY ALL HAPPENS!!!
-    //
-    //
-    //
-    // how are we handling if the token is expired? All of the functions that use token
-    // will need to know how to fall back when there's a failure.
-    // 
-    // account settings
-    // checkout history (if !0?)
-    // my lists
-    // library card
-
     $('#region-one').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd);
 }

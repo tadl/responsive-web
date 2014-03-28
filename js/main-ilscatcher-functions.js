@@ -533,15 +533,13 @@ function more_history() {
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
-    $('#loadmoretext').trigger("create");
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         $('#region-two').append(info).promise().done(function() {
             if (more == "true"){
-                $('#loadmoretext').empty().append(moreHistoryText);
-                $('#loadmoretext').trigger("create");
+                $('#loadmoretext').empty().append(moreHistoryText).trigger("create");
             } else {
                 $('#loadmore').hide();
             }
@@ -549,6 +547,53 @@ function more_history() {
     });
 }
 
+function show_payment_history() {
+    historycount = 0;
+    cleanhouse();
+    cleandivs();
+    changeBanner("Payment History", color_tadlblue);
+    loading_animation('start');
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token, function(data) {
+        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var info = template(data);
+        var more = data.more;
+        $('#region-two').html(info).show().promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(morePaymentsText).trigger("create");
+                $('#loadmore').show();
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+        myaccount_menu();
+        loading_animation('stop');
+    });
+}
+function more_payment_history() {
+    historycount++;
+    var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem('token');
+    $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
+        var more = data.more;
+        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var info = template(data);
+        $('#region-two').append(info).promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+    });
+}
+
+function show_fines() {
+}
+function more_fines() {
+}
 
 function showpickups() {
     cleanhouse();
@@ -557,7 +602,6 @@ function showpickups() {
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
     loading_animation('start');
-    var username = window.localStorage.getItem('username');
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password'); 
     state = History.getState();

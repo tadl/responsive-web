@@ -99,6 +99,8 @@
             .route(BASE_URL + 'myaccount', myAccount)
             .route(BASE_URL + 'history', show_checkout_history)
             .route(BASE_URL + 'my_lists', my_lists)
+            .route(BASE_URL + 'fines', show_fines)
+            .route(BASE_URL + 'payments', show_payment_history)
             ;
     </script>
 </head>
@@ -478,6 +480,24 @@
             </div>
         </div>
 	</div>
+</script>
+
+<script id="finesandpayments-template" type="text/template">
+    <div class="card">
+        <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
+            <table style="width:100%;" class="padtop">
+                {{#payments}}
+                    <tr>
+                    <td>{{pmt_date}}</td>
+                    <td>{{pmt_for}}</td>
+                    <td>{{pmt_amt}}</td>
+                    <td><a class="button tadlblue verysmall" onclick="billing_print({{pmt_id}})"><span>print</span></a></td>
+                    <td><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
+                    </tr>
+                {{/payments}}
+            </table>
+        </div></div>
+    </div>
 </script>
 
 <script id="showreviews-template" type="text/template">
@@ -1105,6 +1125,13 @@
         <li><a onclick="load('events/youth')">Youth</a></li>
         <li><a onclick="load('events/adults')">Adults</a></li>
         <li><a onclick="load('events')">All</a></li>
+    </ul>
+</div>
+
+<div id="dropdown-4" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a onclick="load('fines')">View outstanding fines</a></li>
+        <li><a onclick="load('payments')">Payment history</a></li>
     </ul>
 </div>
 
