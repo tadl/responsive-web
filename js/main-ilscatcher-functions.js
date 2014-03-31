@@ -690,6 +690,7 @@ function renew(circulation_id, barcode) {
 
 function showcard() {
     cleanhouse();
+    cleandivs();
     changeBanner("My Library Card", color_tadlblue);
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 

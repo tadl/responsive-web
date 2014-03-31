@@ -402,12 +402,12 @@ function my_lists(){
 		token = window.localStorage.getItem('token');
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
-			$('#region-two').html(my_lists);
+			$('#two-thirds').html(my_lists);
             myaccount_menu();
 			loading_animation('stop');
 		});
 	} else {
-	  	$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+	  	$('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 	  	$("#login_form").slideDown("fast");	
 	  	loading_animation('stop');
 	};
