@@ -665,7 +665,7 @@
         </table>	
         {{/compare}}
         <span id="preview-{{record_id}}" class="floatright"></span>
-        <a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{record_id}})"><span>marc record</span></a>
+        <a class="button verysmall tadlblue padtop floatright" onclick="viewmarc({{record_id}})"><span>marc record</span></a>
 
         {{/items}}
     </div>
@@ -896,9 +896,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">
-                        <a onclick="loadEventNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
-                    </div>
+                    <a onclick="loadEventNode({{node.nid}})" class="button verysmall tadlblue floatright"><span>details</span></a>
                 </div>
             </div>
         </div>
