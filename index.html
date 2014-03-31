@@ -741,15 +741,13 @@
         <div>
         {{user.name}}
         <div class="accountlinks">
-        <a class="button wide medium gray" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
-        <a class="button wide medium gray" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
-        <a class="button wide medium gray" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
+        <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
+        <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
+        <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
         </div>
         Fines: {{user.fines}}
         </div>
         <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
-        <a class="button wide medium tadlblue" onclick="load('history');"><span>Checkout History</span></a> </br>
-        <a class="button wide medium tadlblue" onclick="load('my_lists')"><span>My Lists</span></a> </br>
         <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
     	<a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
