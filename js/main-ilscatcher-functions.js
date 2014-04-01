@@ -487,10 +487,9 @@ function showholds() {
     var action = {action:"showholds"}
     History.pushState(action, "Your Holds", "holds"); 
     loading_animation('start');
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password'); 
+    var token = window.localStorage.getItem('token');
     state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?u='+ username +'&pw=' + password, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showholds") {

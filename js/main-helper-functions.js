@@ -484,7 +484,8 @@ function loading_animation(state) {
     }
 }
 
-function myaccount_menu() {
+function myaccount_menu_build() {
+    $('#one-third').html('<div id="myaccount_menu" style="display:none;"></div>');
     var acctMenuHtmlStart = '<div class="card"><div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100" style="text-align:center;">';
     var acctMenuHtmlEnd = '</div></div></div>';
     var checkouts = window.localStorage.getItem('checkouts');
@@ -499,5 +500,10 @@ function myaccount_menu() {
     var historyHtml = '<a class="button wide medium tadlblue" onclick="load(\'history\')"><span>Checkout History</span></a><br/><br/>';
     var cardHtml = '<a class="button wide medium tadlblue" onclick="showcard()"><span>Library Card</span></a><br/><br/>';
     var listsHtml = '<a class="button wide medium tadlblue" onclick="load(\'my_lists\')"><span>My Lists</span></a><br/><br/>';
-    $('#one-third').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd);
+    $('#myaccount_menu').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd).hide();
+}
+function myaccount_menu() {
+    myaccount_menu_build();
+    $('#myaccount_menu').show();
+//    $('#one-third').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd);
 }
