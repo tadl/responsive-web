@@ -130,10 +130,14 @@ function showitemlist(list_name, list_id) {
     $.getJSON(drupal_json_url, function(data) {
         var template = Handlebars.compile($('#results-template_2').html());
         var info = template(data)
+        var ids = ''
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, '#0d4c78');
         mylist();
+        $.each(data.items, function(){
+          ids = ids + this.record_id + ','
+        });
     });       
 }
 
