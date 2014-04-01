@@ -1,6 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <!-- saved from url=(0021)http://www.google.com -->
+<!DOCTYPE html>
 <html lang="en" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
     <base href="/responsive-web/">
@@ -48,6 +46,7 @@
     <script type="text/javascript" src="js/jquery.cluetip.min.js"></script>
     <script type="text/javascript" src="js/jquery.hoverIntent.minified.js"></script>
     <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="js/jquery.printElement.min.js"></script>
     <script type="text/javascript" src="js/handlebars.js"></script>
     <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
     <script type="text/javascript" src="js/jquery.dropdown.min.js"></script>
@@ -227,7 +226,7 @@
                     <a class="button wide large purple" id="link-teens" onclick="load('teens');"><span>Teens</span></a>
                 </div>
             </div>
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop"">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
             	<div id="page_banner">
          		</div>
          	</div>
@@ -498,19 +497,53 @@
 	</div>
 </script>
 
-<script id="finesandpayments-template" type="text/template">
+<script id="payments-template" type="text/template">
     <div class="card">
         <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
             <table style="width:100%;" class="padtop">
+                <tr>
+                    <td><strong>Date</strong></td>
+                    <td><strong>Billing Type</strong></td>
+                    <td><strong>Amount</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 {{#payments}}
                     <tr>
                     <td>{{pmt_date}}</td>
                     <td>{{pmt_for}}</td>
                     <td>{{pmt_amt}}</td>
-                    <td><a class="button tadlblue verysmall" onclick="billing_print({{pmt_id}})"><span>print</span></a></td>
-                    <td><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
+                    <td id="bp-{{pmt_id}}"><a class="button tadlblue verysmall" onclick="billing_print({{pmt_id}})"><span>print</span></a></td>
+                    <td id="be-{{pmt_id}}"><a class="button tadlblue verysmall" onclick="billing_email({{pmt_id}})"><span>email</span></a></td>
                     </tr>
                 {{/payments}}
+            </table>
+        </div></div>
+    </div>
+</script>
+
+<script id="fines-template" type="text/template">
+    <div class="card">
+        <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
+            <table style="width:100%;" class="padtop">
+                <tr>
+                    <td><strong>Transaction Date</strong></td>
+                    <td><strong>Last Payment</strong></td>
+                    <td><strong>Initial Amount</strong></td>
+                    <td><strong>Amount Paid</strong></td>
+                    <td><strong>Balance Owed</strong></td>
+                    <td><strong>Billing Type</strong></td>
+                </tr>
+                {{#fines}}
+                    <tr>
+                    <td>{{transaction_start_date}}</td>
+                    <td>{{last_pmt_date}}</td>
+                    <td>{{initial_amt_owed}}</td>
+                    <td>{{total_amt_paid}}</td>
+                    <td>{{balance_owed}}</td>
+                    <td>{{billing_type}}</td>
+                    </tr>
+                {{/fines}}
             </table>
         </div></div>
     </div>
@@ -634,7 +667,7 @@
         </table>	
         {{/compare}}
         <span id="preview-{{record_id}}" class="floatright"></span>
-        <a class="permalink button verysmall tadlblue padtop floatright" onclick="viewmarc({{record_id}})"><span>marc record</span></a>
+        <a class="button verysmall tadlblue padtop floatright" onclick="viewmarc({{record_id}})"><span>marc record</span></a>
 
         {{/items}}
     </div>
@@ -708,15 +741,13 @@
         <div>
         {{user.name}}
         <div class="accountlinks">
-        <a class="button wide medium gray" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
-        <a class="button wide medium gray" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
-        <a class="button wide medium gray" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
+        <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
+        <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
+        <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
         </div>
         Fines: {{user.fines}}
         </div>
         <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
-        <a class="button wide medium tadlblue" onclick="load('history');"><span>Checkout History</span></a> </br>
-        <a class="button wide medium tadlblue" onclick="load('my_lists')"><span>My Lists</span></a> </br>
         <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
     	<a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
@@ -867,9 +898,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">
-                        <a onclick="loadEventNode({{node.nid}})" class="permalink button verysmall tadlblue padtop floatright"><span>details</span></a>
-                    </div>
+                    <a onclick="loadEventNode({{node.nid}})" class="button verysmall tadlblue floatright"><span>details</span></a>
                 </div>
             </div>
         </div>

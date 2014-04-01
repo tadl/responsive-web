@@ -379,14 +379,14 @@ function myAccount(){
             account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
             var prefs = myaccount_template(account_settings);
             changeBanner('My Account', '#0d4c78');
-            $('#region-two').html('<div class="card"><h4 class="title">Account Settings [<a onclick="show_edit_account_settings()" class="pointer">edit</a>]</h4><div id="account_settings">Loading!</div></div>');
+            $('#two-thirds').html('<div class="card"><h4 class="title">Account Settings [<a onclick="show_edit_account_settings()" class="pointer">edit</a>]</h4><div id="account_settings">Loading!</div></div>');
             $('#account_settings').html(prefs);
             myaccount_menu();
             loading_animation('stop');
 	    }
 	} else {
 	    changeBanner('My Account', '#0d4c78');
-		$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+		$('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 		$("#login_form").slideDown("fast");	
         loading_animation('stop');
 	};
@@ -402,12 +402,12 @@ function my_lists(){
 		token = window.localStorage.getItem('token');
 		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
 			var my_lists = mylists_template(data)
-			$('#region-two').html(my_lists);
+			$('#two-thirds').html(my_lists);
             myaccount_menu();
 			loading_animation('stop');
 		});
 	} else {
-	  	$('#region-two').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+	  	$('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
 	  	$("#login_form").slideDown("fast");	
 	  	loading_animation('stop');
 	};

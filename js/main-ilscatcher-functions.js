@@ -442,7 +442,7 @@ function render_dash(data) {
 function showcheckouts() { 
     cleanhouse();
     cleandivs();
-    changeBanner("Items Checked Out", color_tadlblue);
+    changeBanner("Checked Out", color_tadlblue);
     var action = {action:"showcheckouts"}
     History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
     loading_animation('start');
@@ -453,7 +453,7 @@ function showcheckouts() {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
         if (state.data.action === "showcheckouts") { 
-            $('#region-two').html(info).show();
+            $('#two-thirds').html(info).show();
             myaccount_menu();
             loading_animation('stop');
         }
@@ -497,7 +497,7 @@ function showholds() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showholds") {
-            $('#region-two').html(info).show();
+            $('#two-thirds').html(info).show();
             myaccount_menu();
             loading_animation('stop');
         }
@@ -516,7 +516,7 @@ function show_checkout_history() {
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         var more = data.more;
-        $('#region-two').html(info).show().promise().done(function() {
+        $('#two-thirds').html(info).show().promise().done(function() {
             if (more == "true") {
                 $('#loadmoretext').empty().append(moreHistoryText);
                 $('#loadmoretext').trigger("create");
@@ -538,13 +538,48 @@ function more_history() {
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
-        $('#region-two').append(info).promise().done(function() {
+        $('#two-thirds').append(info).promise().done(function() {
             if (more == "true"){
                 $('#loadmoretext').empty().append(moreHistoryText).trigger("create");
             } else {
                 $('#loadmore').hide();
             }
         });
+    });
+}
+
+function billing_print(id) {
+    loading_animation('start');
+    $('body').scrollTop(0);
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/receipt_print.json?pmt_id=' + id + '&token=' + token, function(data) {
+        var message = data.message;
+        message = '<div id="printThis">' + message + '</div><div class="clearfix"></div><div><a class="button verysmall tadlblue" onclick="billing_actually_print()"><span>print</span></a></div>';
+        $.fancybox({
+            content: message,
+            type: 'iframe',
+            autoScale: true
+        });
+        loading_animation("stop");
+    });
+}
+function billing_actually_print() {
+    $('#printThis').printElement();
+}
+
+function billing_email(id) {
+    loading_animation('start');
+    $('body').scrollTop(0);
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/receipt_email.json?pmt_id=' + id + '&token=' + token, function(data) {
+        console.log(data.message);
+        var message = data.message[0].message;
+        $.fancybox({
+            content: message,
+            type: 'iframe',
+            autoScale: true
+        });
+        loading_animation("stop");
     });
 }
 
@@ -557,10 +592,10 @@ function show_payment_history() {
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token, function(data) {
-        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var template = Handlebars.compile($('#payments-template').html());
         var info = template(data);
         var more = data.more;
-        $('#region-two').html(info).show().promise().done(function() {
+        $('#two-thirds').html(info).show().promise().done(function() {
             if (more == "true") {
                 $('#loadmoretext').empty().append(morePaymentsText).trigger("create");
                 $('#loadmore').show();
@@ -579,9 +614,9 @@ function more_payment_history() {
     $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
     $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
         var more = data.more;
-        var template = Handlebars.compile($('#finesandpayments-template').html());
+        var template = Handlebars.compile($('#payments-template').html());
         var info = template(data);
-        $('#region-two').append(info).promise().done(function() {
+        $('#two-thirds').append(info).promise().done(function() {
             if (more == "true") {
                 $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
             } else {
@@ -592,6 +627,27 @@ function more_payment_history() {
 }
 
 function show_fines() {
+    finepage = 0;
+    cleanhouse();
+    cleandivs();
+    changeBanner("Fines and Charges", color_tadlblue);
+    loading_animation('start');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/get_fines.json?token=' + token, function(data) {
+        var template = Handlebars.compile($('#fines-template').html());
+        var info = template(data);
+        var more = data.more;
+        $('#two-thirds').html(info).show().promise().done(function() {
+            if (more == "true") {
+                $('#loadmoretext').empty().append(moreFinesText).trigger("create");
+                $('#loadmore').show();
+            } else {
+                $('#loadmore').hide();
+            }
+        });
+        myaccount_menu();
+        loading_animation('stop');
+    });
 }
 function more_fines() {
 }
@@ -610,7 +666,7 @@ function showpickups() {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showpickups") {
-            $('#region-two').html(info).show();
+            $('#two-thirds').html(info).show();
             myaccount_menu();
             loading_animation('stop');
         }
@@ -634,6 +690,7 @@ function renew(circulation_id, barcode) {
 
 function showcard() {
     cleanhouse();
+    cleandivs();
     changeBanner("My Library Card", color_tadlblue);
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
@@ -645,7 +702,7 @@ function showcard() {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('#region-two').html(html).show();
+            $('#two-thirds').html(html).show();
             $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
             myaccount_menu();
             loading_animation('stop');
