@@ -655,10 +655,9 @@ function showpickups() {
     var action = {action:"showpickups"}
     History.pushState(action, "Ready for Pickup", "pickup"); 
     loading_animation('start');
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password'); 
+    var token = window.localStorage.getItem('token');
     state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?u='+ username +'&pw=' + password, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
         if (state.data.action === "showpickups") {
@@ -691,10 +690,9 @@ function showcard() {
     var action = {action:"showcard"}
     History.pushState(action, "Your Card", "card"); 
     loading_animation('start');
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password'); 
+    var token = window.localStorage.getItem('token');
     state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?u='+ username +'&pw=' + password, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?token=' + token, function(data) {
         if (state.data.action === "showcard") {   
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
