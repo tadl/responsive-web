@@ -474,9 +474,8 @@ function pre_cancelhold(hold_id) {
 
 function cancelhold(hold_id) {
     var hold_id = hold_id;
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
-    $.getJSON(ILSCATCHER_BASE + '/main/cancelhold.json?u='+ username +'&pw=' + password + '&hold_id=' + hold_id, function(data) {
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/cancelhold.json?token=' + token + '&hold_id=' + hold_id, function(data) {
         $('#hold_' + hold_id).remove();
     });
 }
