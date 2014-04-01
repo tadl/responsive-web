@@ -310,10 +310,10 @@ function hold(record_id) {
             $(button_id).hide();
         }
     });
-    window.setTimeout(partB,5000);
+    window.setTimeout(hold_partB,5000);
 }
 
-function partB() {
+function hold_partB() {
     var username = window.localStorage.getItem('username');
     var password = window.localStorage.getItem('password');
     $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
