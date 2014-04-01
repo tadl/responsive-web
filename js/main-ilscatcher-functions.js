@@ -800,9 +800,8 @@ function pre_multi_hold(record_ids) {
 
 function multi_hold(record_ids) {
     var record_ids = record_ids;
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
-    $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?u='+ username +'&pw=' + password + '&record_id=' + record_ids, function(data) {
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?token=' + token + '&record_id=' + record_ids, function(data) {
   
       $.each(data.items, function (index, value) {
       var message_div = '#multi_hold_message_'+this.record_id;
