@@ -291,9 +291,8 @@ function reset_hold_links() {
 
 function hold(record_id) {
     var record_id = record_id;
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
-    $.getJSON(ILSCATCHER_BASE + '/main/hold.json?u='+ username +'&pw=' + password + '&record_id=' + record_id, function(data) {
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/hold.json?token='+ token + '&record_id=' + record_id, function(data) {
         var message = data[':message'].replace("Placing this hold could result in longer wait times.", "Unavailable for pick-up at your location.");
         var success = false;
         var button_id = '#place_hold_' + record_id;
