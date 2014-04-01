@@ -671,10 +671,9 @@ function showpickups() {
 function renew(circulation_id, barcode) {
     var circ_id = circulation_id;
     var bc = barcode;
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
+    var token = window.localStorage.getItem('token');
     $('#renew_' + circ_id).removeClass('tadlblue').addClass('black').removeAttr('onclick').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Renewing...</span>');
-    $.getJSON(ILSCATCHER_BASE + '/main/renew.json?u='+ username +'&pw=' + password + '&circ_id=' + circ_id + '&bc=' + bc, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/renew.json?token=' + token + '&circ_id=' + circ_id + '&bc=' + bc, function(data) {
         var template = Handlebars.compile($('#renew-template').html());
         var info = template(data);
         $('#'+ circ_id).html(info);
