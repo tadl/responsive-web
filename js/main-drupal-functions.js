@@ -2,7 +2,7 @@ var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json";
 
 function showAllEventsByTerm(term) {
     var banner;
-    var term = term;
+    var selector = term;
     cleanhouse();
     cleandivs();
     loading_animation('start');
@@ -26,10 +26,10 @@ function showAllEventsByTerm(term) {
         banner = "Adult Events";
     }
     if ((term == null) || (term == 'events')) { 
-        term = 'events'; 
+        selector = 'events'; 
         banner = "Events";
     } else {
-        term = 'events_' + term;
+        selector = 'events_' + term;
     }
     var alljson = JSON.parse(sessionStorage.getItem('events'));
     if (alljson == null || typeof alljson['events'] == undefined || alljson['events'] == null) {
@@ -40,7 +40,7 @@ function showAllEventsByTerm(term) {
         });
     } else {
         var template = Handlebars.compile($('#allevents-template').html());
-        var info = template(alljson[term]);
+        var info = template(alljson[selector]);
         changeBanner(banner, color_tadlblue);
         $('#third-two').html(info).show();
         $('#third-one').html(eventsnav); // defined in main-vars
