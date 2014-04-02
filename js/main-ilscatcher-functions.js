@@ -487,8 +487,10 @@ function holdaction(action,hold_id) {
     $.getJSON(ILSCATCHER_BASE + '/main/holdaction.json?token=' + token + '&hold_id=' + hold_id + '&todo=' + todo, function(data) {
         if (todo == "suspend") {
             $('#suspend_' + hold_id).html('<span>Activate</span>').attr('onclick', 'holdaction(\'activate\',' + hold_id + ');').attr('id', 'activate_' + hold_id).removeClass('black').addClass('tadlblue');
+            $('#holdstatus_' + hold_id).html('Suspended');
         } else if (todo == "activate") {
             $('#activate_' + hold_id).html('<span>Suspend</span>').attr('onclick', 'holdaction(\'suspend\',' + hold_id + ');').attr('id', 'suspend_' + hold_id).removeClass('black').addClass('tadlblue');
+            $('#holdstatus_' + hold_id).html('Active');
         } else if (todo == "cancel") {
             $('#hold_' + hold_id).remove();
         }
