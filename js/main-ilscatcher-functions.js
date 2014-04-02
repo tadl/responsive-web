@@ -462,7 +462,7 @@ function pre_cancelhold(hold_id) {
     var hold_id = hold_id;
     var element = '#cancel_hold_' + hold_id;
     var confirm_text = '<span>Click to confirm</span>';
-    var canceling_text = '<span><img class="spinner" src="img/spinner.gif" width="12" height="12"/>Canceling hold...</span>';
+    var canceling_text = '<span><img class="spinner" src="img/spinner.gif" width="12" height="12"/>&nbsp;Canceling hold...</span>';
     $(element).removeClass('tadlblue').addClass('red').html(confirm_text);
     $(element).prop("onclick", null);
     $(element).on("click", function(event) {
@@ -477,6 +477,21 @@ function cancelhold(hold_id) {
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/cancelhold.json?token=' + token + '&hold_id=' + hold_id, function(data) {
         $('#hold_' + hold_id).remove();
+    });
+}
+
+function holdaction(action,hold_id) {
+    var todo = action;
+    $('#' + todo + '_' + hold_id).html('<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Working...</span>').removeAttr('onclick').removeClass('tadlblue').addClass('black');
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/holdaction.json?token=' + token + '&hold_id=' + hold_id + '&todo=' + todo, function(data) {
+        if (todo == "suspend") {
+            $('#suspend_' + hold_id).html('<span>Activate</span>').attr('onclick', 'holdaction(\'activate\',' + hold_id + ');').attr('id', 'activate_' + hold_id).removeClass('black').addClass('tadlblue');
+        } else if (todo == "activate") {
+            $('#activate_' + hold_id).html('<span>Suspend</span>').attr('onclick', 'holdaction(\'suspend\',' + hold_id + ');').attr('id', 'suspend_' + hold_id).removeClass('black').addClass('tadlblue');
+        } else if (todo == "cancel") {
+            $('#hold_' + hold_id).remove();
+        }
     });
 }
 

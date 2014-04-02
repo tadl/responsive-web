@@ -947,7 +947,12 @@
                     <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}"/>&nbsp;{{:hold.:name}}</span><br/>
                     Pick-up Location: {{:hold.:pickup_location}}<br/>
                     Status: {{:hold.:status}}<br/>
-                    <a class="button small tadlblue" id="cancel_hold_{{:hold.:hold_id}}" onclick="pre_cancelhold({{:hold.:hold_id}});"><span>Cancel Hold</span></a>
+                    <a class="button verysmall tadlblue" id="cancel_{{:hold.:hold_id}}" onclick="pre_cancelhold({{:hold.:hold_id}});"><span>Cancel</span></a>&nbsp;
+                    {{#if :hold.:active}}
+                        <a class="button verysmall tadlblue" id="suspend_{{:hold.:hold_id}}" onclick="holdaction('suspend',{{:hold.:hold_id}});"><span>Suspend</span></a>
+                    {{else}}
+                        <a class="button verysmall tadlblue" id="activate_{{:hold.:hold_id}}" onclick="holdaction('activate',{{:hold.:hold_id}});"><span>Activate</span></a>
+                    {{/if}}
                 </div>
             </div>
         </div>
