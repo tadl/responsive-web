@@ -460,9 +460,9 @@ function showcheckouts() {
 
 function pre_cancelhold(hold_id) {
     var hold_id = hold_id;
-    var element = '#cancel_hold_' + hold_id;
+    var element = '#cancel_' + hold_id;
     var confirm_text = '<span>Click to confirm</span>';
-    var canceling_text = '<span><img class="spinner" src="img/spinner.gif" width="12" height="12"/>&nbsp;Canceling hold...</span>';
+    var canceling_text = '<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Canceling hold...</span>';
     $(element).removeClass('tadlblue').addClass('red').html(confirm_text);
     $(element).prop("onclick", null);
     $(element).on("click", function(event) {
