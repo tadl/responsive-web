@@ -368,14 +368,14 @@ function myAccount(){
     username = window.localStorage.getItem('username');
     password = window.localStorage.getItem('password');
     account_settings = JSON.parse(window.sessionStorage.getItem('account_settings'));
-	if (current_user == 'true') {
-	    if (account_settings == null) {
-	    	$.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
+    if (current_user == 'true') {
+        if (account_settings == null) {
+            $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
                 var cat = JSON.stringify(data);
                 sessionStorage.setItem('account_settings', cat);
                 myAccount();
-	    	});
-	    } else {
+            });
+        } else {
             account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
             var prefs = myaccount_template(account_settings);
             changeBanner('My Account', '#0d4c78');
@@ -383,34 +383,33 @@ function myAccount(){
             $('#account_settings').html(prefs);
             myaccount_menu();
             loading_animation('stop');
-	    }
-	} else {
-	    changeBanner('My Account', '#0d4c78');
-		$('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
-		$("#login_form").slideDown("fast");	
+        }
+    } else {
+        changeBanner('My Account', '#0d4c78');
+        $('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+        $("#login_form").slideDown("fast");
         loading_animation('stop');
-	};
-	
+    }
 }
 
 function my_lists(){
-	loading_animation('start');
-	if (current_user == 'true') {
-		cleandivs();
-    	cleanhouse();
-    	changeBanner('My Lists', '#0d4c78');
-		token = window.localStorage.getItem('token');
-		$.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
-			var my_lists = mylists_template(data)
-			$('#two-thirds').html(my_lists);
+    loading_animation('start');
+    if (current_user == 'true') {
+        cleandivs();
+        cleanhouse();
+        changeBanner('My Lists', '#0d4c78');
+        token = window.localStorage.getItem('token');
+        $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+            var my_lists = mylists_template(data)
+            $('#two-thirds').html(my_lists);
             myaccount_menu();
-			loading_animation('stop');
-		});
-	} else {
-	  	$('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
-	  	$("#login_form").slideDown("fast");	
-	  	loading_animation('stop');
-	};
+            loading_animation('stop');
+        });
+    } else {
+          $('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+          $("#login_form").slideDown("fast");
+          loading_animation('stop');
+    };
 
 }
 

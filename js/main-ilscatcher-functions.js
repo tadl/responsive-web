@@ -468,7 +468,8 @@ function pre_cancelhold(hold_id) {
     $(element).on("click", function(event) {
         $(this).off('click');
         $(this).removeClass('red').addClass('black').html(canceling_text);
-        cancelhold(hold_id);
+        holdaction('cancel',hold_id);
+        //cancelhold(hold_id);
     });
 }
 
@@ -493,6 +494,10 @@ function holdaction(action,hold_id) {
             $('#holdstatus_' + hold_id).html('Active');
         } else if (todo == "cancel") {
             $('#hold_' + hold_id).remove();
+            var tempholdcount = parseInt(window.localStorage.getItem('holds'));
+            tempholdcount--;
+            window.localStorage.setItem('holds',tempholdcount);
+            myaccount_menu();
         }
     });
 }
