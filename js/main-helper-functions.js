@@ -505,5 +505,4 @@ function myaccount_menu_build() {
 function myaccount_menu() {
     myaccount_menu_build();
     $('#myaccount_menu').show();
-//    $('#one-third').html(acctMenuHtmlStart + '<h4 class="title">Account Menu</h4>' + checkoutsHtml + holdsHtml + pickupsHtml + finesHtml + settingsHtml + historyHtml + cardHtml + listsHtml + acctMenuHtmlEnd);
 }

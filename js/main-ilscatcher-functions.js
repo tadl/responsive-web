@@ -469,7 +469,6 @@ function pre_cancelhold(hold_id) {
         $(this).off('click');
         $(this).removeClass('red').addClass('black').html(canceling_text);
         holdaction('cancel',hold_id);
-        //cancelhold(hold_id);
     });
 }
 
