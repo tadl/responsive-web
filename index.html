@@ -132,7 +132,7 @@
                 <div id="nav_list">Show/Hide Navigation Menu</div>
             </div>
             <div class="grid-90 tablet-grid-90 mobile-grid-75">
-                <div class="grid-container" style="border:1px solid gray;padding:4px 95px 3px 0;border-radius:5px;margin:0;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5); -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5); box-shadow:1px 1px 2px rgba(0,0,0,0.5);white-space:nowrap;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
+                <div class="grid-container" style="border:0px solid black;padding:4px 95px 3px 0;border-radius:5px;margin:0;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5); -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5); box-shadow:1px 1px 2px rgba(0,0,0,0.5);white-space:nowrap;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
                     <img src="img/icon-arrow-down-b-256.png" id="searchicon" class="icon pointer" title="Search Options" alt="Options" onclick="openSearch_options()" style="padding:0 0 1px 3px;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
                     <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" style="display:inline-block;padding:0px 5px;"/>
                     <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" style="padding:0 3px 3px 0;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
@@ -381,9 +381,9 @@
 <script id="searchfacetsselected-template" type="text/template">
     <div>Filter(s):
     {{#selected}}
-            {{#facets}}
-                <a onclick="facetstartsearch('{{link}}')" class="pointer">X</a> <span>{{title}}, </span> 
-            {{/facets}}
+        {{#facets}}
+            <a onclick="facetstartsearch('{{link}}')" class="pointer">X</a> <span>{{title}}, </span> 
+        {{/facets}}
     {{/selected}}
     </div>
 </script>
@@ -435,7 +435,6 @@
             					</span>
             					{{contents}}
             				</p>
-            					
             			{{/compare}}
                     	<div id="available_{{record_id}}">
                             <p class="subtitle">
@@ -445,9 +444,13 @@
                		</div>
             	</div>
         	</div>
-   </div>
-   {{/items}}
-    
+    </div>
+    {{/items}}
+    {{#if more_results}}
+        <div class="padtop padbot moresults">
+            <a class="button tadlblue wide large more" onclick="$(this).prop('onclick',null).html('<span>Loading...</span>').removeClass('tadlblue').addClass('black').addClass('spinning').spin('tiny');loadmore();"><span>More results</span></a>
+        </div>
+    {{/if}}
 </script>
 
 
@@ -577,6 +580,7 @@
                         <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});console.log('clicked {{node.record}}');"><span>Details</span></a>
                         <a class="button verysmall green" id="place_hold_{{node.record}}" onclick="pre_hold({{node.record}})"><span>Place Hold</span></a>
                     </div>
+                    <div id="hold_message_{{node.record}}" class="holdmessage"></div>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <div id="{{node.record}}" style="display:none;"></div>
@@ -976,7 +980,7 @@
     {{/checkouts}}
     {{#if more}}
         <div class="padtop padbot morehistory">
-            <a class="button tadlblue wide large more" onclick="$(this).addClass('spinning').spin('tiny');more_history();"><span>Load more</span></a>
+            <a class="button tadlblue wide large more" onclick="$(this).html('<span>Loading...</span>').removeClass('tadlblue').addClass('black').prop('onclick',null).addClass('spinning').spin('tiny');more_history();"><span>Load more</span></a>
         </div>
     {{/if}}
 </script>

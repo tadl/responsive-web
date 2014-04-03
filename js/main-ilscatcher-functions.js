@@ -10,21 +10,17 @@ function loadmore() {
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $('#loadmoretext').trigger("create");
     $.get(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
+        if (data.more_results == "false") { delete data.more_results; }
         var results = data.message
-        var more = data.more_results;
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template_2').html());
                 var info = template(data);
                 $('#region-two').append(info).promise().done(function() {
-                    if (more == "true"){
-                    $('#loadmoretext').empty().append(loadmoreText);
-                    $('#loadmoretext').trigger("create");
-                    } else {
-                    $('#loadmore').hide();
-                    }
+                    $('.spinning').hide();
+                    $('.spinning').parent().html('<h4 class="title">Page ' + (pagecount+1) + '</h4>');
                 });
             } else {
-                $('#loadmoretext').html("No Further Results");
+                $('#loadmoretext').html('<h4 class="title">No Further Results</h4>');
             }
         
     });
@@ -61,12 +57,12 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
     }
     var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
     var mediatypedecode = decodeURIComponent(mediatype);
-    $('#search-params').html('<img class="spinner" src="img/spinner.gif">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.');
+    $('#search-params').html('Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.').spin('tiny');
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type, function(data) {
+        if (data.more_results == "false") { delete data.more_results; }
         var results = data.message
-        var more = data.more_results;
         linked_search = "false";
             if (results != "no results") {
                 var template = Handlebars.compile($('#results-template_2').html());
@@ -75,11 +71,6 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
                 var info_facets = facet_template(data);
                 $('#region-two').html(info);
                 $('#region-one').html(info_facets);
-                $('#loadmoretext').empty().append(loadmoreText);
-                $('#loadmoretext').trigger("create");
-                if (more == "true"){
-                	$('#loadmore').show();
-                	}
                 $('#search-params').html('Results for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             } else {
                 $('#search-params').html("No Results");
@@ -176,31 +167,25 @@ function logout() {
 function showmore(record_id) {
     var record_id = record_id;
     var e = document.getElementById(record_id);
-
-      
-            $('#more_details_' + record_id).removeClass('tadlblue').addClass('black').html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Loading...</span>').removeAttr('onclick');
-            $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
-                var results = data.message;
-                var template = Handlebars.compile($('#more_details-template').html());
-                var info = template(data);
-                var isbn = data.items[0].isbn;
-                
-              
-            
-                $('#'+ record_id).html(info).promise().done(function() {
-                    $('#more_details_' + record_id).remove();
-                });
-                $('#'+ record_id).show();
-                check_googlebooks(record_id, isbn);
-                $(".fancybox").fancybox({
-    				openEffect  : 'none',
-   					closeEffect : 'none',
-    				iframe : {
-        				preload: false
-    						}
-				});
-            });
-    
+    $('#more_details_' + record_id).removeClass('tadlblue').addClass('black').html('<span>Loading...</span>').spin('tiny').removeAttr('onclick');
+    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
+        var results = data.message;
+        var template = Handlebars.compile($('#more_details-template').html());
+        var info = template(data);
+        var isbn = data.items[0].isbn;
+        $('#'+ record_id).html(info).promise().done(function() {
+            $('#more_details_' + record_id).remove();
+        });
+        $('#'+ record_id).show();
+        check_googlebooks(record_id, isbn);
+        $(".fancybox").fancybox({
+            openEffect  : 'none',
+            closeEffect : 'none',
+            iframe : {
+                preload: false
+            }
+        });
+    });
 }
 
 function viewitem(record_id) {
@@ -270,7 +255,7 @@ function pre_hold(record_id) {
     link_id = '#place_hold_' + record_id;
     $(link_id).removeClass('green').addClass('black');
     if (logged_in()) {
-        $(link_id).html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Requesting hold...</span>').removeAttr('onclick');
+        $(link_id).html('<span>Requesting hold...</span>').spin('tiny').removeAttr('onclick');
         hold(record_id);
     } else {
         $(link_id).html('<span>Log in to place hold</span>');
@@ -745,35 +730,29 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
 
 
 function mylist() {
-
-if (window.localStorage.getItem('list')){
-    var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-    var mylist_decode = decodeURI(mylist);
-    var wrapper = '{"objects": ['+ mylist_decode +']}';
-    var test = JSON.stringify(eval("(" + wrapper + ")"));
-    var test2 = JSON.parse(test);
-    var existingIDs = [];
-    test2.objects = $.grep(test2.objects, function(v) {
-        if ($.inArray(v.record, existingIDs) !== -1) {
-            return false;
-        } else { 
-            existingIDs.push(v.record);
-            return true;
-        }
-    });
-    var savelist = JSON.stringify(test2.objects);
-    window.localStorage.setItem('list', savelist);
-    
-	}
-	else
-	{
-	var test2 = "empty";
-	}
+    if (window.localStorage.getItem('list')) {
+        var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
+        var mylist_decode = decodeURIComponent(mylist);
+        var wrapper = '{"objects": ['+ mylist_decode +']}';
+        var test = JSON.stringify(eval("(" + wrapper + ")"));
+        var test2 = JSON.parse(test);
+        var existingIDs = [];
+        test2.objects = $.grep(test2.objects, function(v) {
+            if ($.inArray(v.record, existingIDs) !== -1) {
+                return false;
+            } else { 
+                existingIDs.push(v.record);
+                return true;
+            }
+        });
+        var savelist = JSON.stringify(test2.objects);
+        window.localStorage.setItem('list', savelist);
+    } else {
+        var test2 = "empty";
+    }
     var template = Handlebars.compile($('#mylist-template').html());
     var info = template(test2);
     $('#region-three').html(info);
-  
-
 }
 
 
