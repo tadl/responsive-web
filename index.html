@@ -379,12 +379,12 @@
 </script>
 
 <script id="searchfacetsselected-template" type="text/template">
-    <div>Filter(s):
-    {{#selected}}
-        {{#facets}}
-            <a onclick="facetstartsearch('{{link}}')" class="pointer">X</a> <span>{{title}}, </span> 
-        {{/facets}}
-    {{/selected}}
+    <div>Filter(s)
+        {{#selected}}
+            {{#facets}}
+                : <a onclick="facetstartsearch('{{link}}')" class="button red verysmall"><span>X</span></a> <span>{{title}}</span> 
+            {{/facets}}
+        {{/selected}}
     </div>
 </script>
 

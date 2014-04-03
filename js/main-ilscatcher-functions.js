@@ -82,7 +82,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     pagecount = 0;
     var searchtype = searchtype;
     var facet = facet;
-    var searchquery = query;
+    var searchquery = decodeURIComponent(query);
     var mediatype = mt;
     var available = avail;
     var loc = location;
@@ -106,9 +106,8 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     changeBanner('Searching Catalog', '#0d4c78');
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
+        if (data.more_results == "false") { delete data.more_results; }
         var results = data.message;
-        var more = data.more_results;
-        state = History.getState();
         linked_search = "false";
         if (results != "no results") {
             var template = Handlebars.compile($('#results-template_2').html());
@@ -123,9 +122,6 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
             $('#loadmoretext').trigger("create");
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').append(info_selected_facets);
-            if (more == "true"){
-            	$('#loadmore').show();
-             }
         } else {
             $('#second-region').replaceWith("No Results");
             
