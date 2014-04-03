@@ -445,15 +445,15 @@ $.fn.spin.presets.default = {
 }
 
 $.fn.spin.presets.tiny = {
-    lines: 9,
-    length: 11,
-    width: 4,
-    radius: 12,
+    lines: 10,
+    length: 10,
+    width: 3,
+    radius: 5,
     corners: 1,
     direction: 1,
     color: '#fff',
     speed: 0.6,
-    trail: 35,
+    trail: 11,
     shadow: false,
     hwaccel: false,
     className: 'tinyspinner',

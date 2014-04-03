@@ -482,7 +482,8 @@ function cancelhold(hold_id) {
 
 function holdaction(action,hold_id) {
     var todo = action;
-    $('#' + todo + '_' + hold_id).html('<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Working...</span>').removeAttr('onclick').removeClass('tadlblue').addClass('black');
+    $('#' + todo + '_' + hold_id).html('<span>Working</span>').spin('tiny').removeAttr('onclick').removeClass('tadlblue').addClass('black');
+    //$('#' + todo + '_' + hold_id).html('<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Working...</span>').removeAttr('onclick').removeClass('tadlblue').addClass('black');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/holdaction.json?token=' + token + '&hold_id=' + hold_id + '&todo=' + todo, function(data) {
         if (todo == "suspend") {
@@ -533,15 +534,7 @@ function show_checkout_history() {
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         var more = data.more;
-        $('#two-thirds').html(info).show().promise().done(function() {
-            if (more == "true") {
-                $('#loadmoretext').empty().append(moreHistoryText);
-                $('#loadmoretext').trigger("create");
-                $('#loadmore').show();
-            } else {
-                $('#loadmore').hide();
-            }
-        });
+        $('#two-thirds').html(info).show();
         myaccount_menu();
         loading_animation('stop');
     });
@@ -552,16 +545,14 @@ function more_history() {
     var token = window.localStorage.getItem('token');
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
+        if (data.more == "false") { delete data.more; } // this logic could probably be handled in melcatcher
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         $('#two-thirds').append(info).promise().done(function() {
-            if (more == "true"){
-                $('#loadmoretext').empty().append(moreHistoryText).trigger("create");
-            } else {
-                $('#loadmore').hide();
-            }
-        });
+            $('.spinning').hide()
+            $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
+        }); // this is probably how all "load more" functions should be rewritten, for consistency
     });
 }
 

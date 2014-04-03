@@ -974,6 +974,11 @@
             </div>
         </div>
     {{/checkouts}}
+    {{#if more}}
+        <div class="padtop padbot morehistory">
+            <a class="button tadlblue wide large more" onclick="$(this).addClass('spinning').spin('tiny');more_history();"><span>Load more</span></a>
+        </div>
+    {{/if}}
 </script>
 
 <script id="renew-template" type="text/template">
