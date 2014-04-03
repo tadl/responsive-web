@@ -255,7 +255,7 @@
             <!-- <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25 tablet-push-50 mobile-push-100"> -->
             <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25">
                 <div id="two-pad">&nbsp;</div>
-                <div id="search-params" class="card padv hidden grid-container"></div>
+                <div id="search-params" class="card padv hidden"></div>
                 <div id="region-two"></div>
                 <div id="loadmore"><div id="loadmoretext"></div></div>
             </div>
@@ -671,7 +671,7 @@
         </table>	
         {{/compare}}
         <span id="preview-{{record_id}}" class="floatright"></span>
-        <a class="button verysmall tadlblue padtop floatright" onclick="viewmarc({{record_id}})"><span>marc record</span></a>
+        <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
 
         {{/items}}
     </div>
