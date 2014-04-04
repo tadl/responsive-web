@@ -865,10 +865,11 @@
     {{#each_upto . 5}}
         <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
-                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     <span class="cardtitle">{{node.title}}</span><br/>
                     <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
                 </div>
+                {{!--
                 <div class="grid-30 tablet-grid-30 mobile-grid-30 center">
                     {{#if node.image}}
                         <img class="result_img" onerror="this.onerror=null;this.src='img/clocktower100.png';" src="{{make_https node.image}}" />
@@ -876,6 +877,7 @@
                         <img class="result_img" src="img/clocktower100.png" />
                     {{/if}}
                 </div>
+                --}}
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     {{{trunc node.body}}} <a class="showmore button verysmall tadlblue" onclick="loadEventNode({{node.nid}})"><span>details</span></a>
                 </div>
