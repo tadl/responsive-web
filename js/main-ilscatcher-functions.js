@@ -649,6 +649,7 @@ function showpickups() {
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
         var template = Handlebars.compile($('#showholds-template').html());
+        data.ready = 'ready';
         var info = template(data);
         if (state.data.action === "showpickups") {
             $('#two-thirds').html(info).show();
