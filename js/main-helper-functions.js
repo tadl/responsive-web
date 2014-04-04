@@ -31,7 +31,6 @@ $(document).ready(function() {
     	 
   		}
 	});
-	
 
     jQuery.support.cors = true;
 
@@ -71,7 +70,6 @@ $(document).ready(function() {
     $('a[rel="lightframe"]').fancybox();
 
 
-
 });
 
 $(document).ajaxComplete(function(){
@@ -79,7 +77,6 @@ $(document).ajaxComplete(function(){
         FB.XFBML.parse(); 
     }catch(ex){}
 });
-
 
 function load_drupal_json(content) {
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
@@ -522,3 +519,18 @@ function htmlDecode(value) {
         return '';
     }
 }
+
+(function($) {
+    $.fn.equalHeights = function(minHeight, maxHeight) {
+        tallest = (minHeight) ? minHeight : 0;
+        this.each(function() {
+            if($(this).height() > tallest) {
+                tallest = $(this).height();
+            }
+        });
+        if((maxHeight) && tallest > maxHeight) tallest = maxHeight;
+        return this.each(function() {
+            $(this).height(tallest).css("overflow","hidden");
+        });
+    }
+})(jQuery);

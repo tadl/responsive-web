@@ -678,20 +678,14 @@
 </script>
 
 <script id="showfeaturednews-template" type="text/template">
-    {{#each_upto nodes 5}}
-        <div class="card" id="card-{{node.nid}}">
-            <img src="{{node.image}}" class="pointer" onclick="loadNode('{{node.nid}}')" />
-            <div class="grid-container">
-                <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="grid-container" style="margin:0;padding:0;">
-                        <div class="grid-80 tablet-grid-80 mobile-grid-70" style="margin:0;padding:0;">
-                            <span class="cardtitle" onclick="loadNode('{{node.nid}}')">{{{node.title}}}</span>
-                        </div>
-                        <div class="grid-20 tablet-grid-20 mobile-grid-30" style="margin:0;padding:0;">
-                            <a id="more{{node.nid}}" class="showmore button verysmall tadlblue floatright" style="margin-top:15px;" onclick="loadNode('{{node.nid}}')"><span>read</span></a>
-                        </div>
-                    </div>
-                </div>
+    {{#each_upto nodes 4}}
+        <div class="card flow grid-100 tablet-grid-45 mobile-grid-100 newses">
+            <img src="{{node.image}}" class="pointer" onclick="loadNode('{{node.nid}}')" style="width:100%" />
+            <div class="grid-80 tablet-grid-80 mobile-grid-70">
+                <span class="cardtitle" onclick="loadNode('{{node.nid}}')">{{{node.title}}}</span>
+            </div>
+            <div class="grid-20 tablet-grid-20 mobile-grid-30">
+                <a class="showmore button verysmall tadlblue floatright" style="margin-top:15px;" onclick="loadNode('{{node.nid}}')"><span>read</span></a>
             </div>
         </div>
     {{/each_upto}}
