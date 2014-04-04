@@ -121,7 +121,10 @@ function lib_firstname_to_shortname(name) {
 function showitemlist(list_name, list_id) {
     cleanhouse();
     cleandivs();
-    var list_name = decodeURIComponent(list_name);
+    console.log('1: ' + list_name);
+    var list_name = htmlEncode(decodeURIComponent(list_name));
+    console.log('2: ' + list_name);
+
     loading_text = 'Loading '+ list_name +'...'
     changeBanner(loading_text, '#0d4c78');
     loading_animation('start');
@@ -131,6 +134,7 @@ function showitemlist(list_name, list_id) {
         var template = Handlebars.compile($('#results-template_2').html());
         var info = template(data)
         var ids = ''
+    console.log('3: ' + list_name);
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, '#0d4c78');
