@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     $('a[rel="lightframe"]').fancybox();
 
-
+    setTimeout(function(){ showAnnouncements(); },2000);
 });
 
 $(document).ajaxComplete(function(){

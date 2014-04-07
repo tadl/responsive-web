@@ -269,3 +269,19 @@ function showEventNode(nid) {
         loading_animation('stop');
     });
 }
+
+function showAnnouncements() {
+    var seenIt = window.sessionStorage.getItem('announcements');
+    if (seenIt == null) {
+        $.getJSON('https://www.tadl.org/export/announcements/json', function(data) {
+            var template = Handlebars.compile($('#announcements-template').html());
+            var output = template(data);
+            $.fancybox({
+                content: output,
+                type: 'inline',
+                closeBtn: false,
+                topRatio: 0.2
+            });
+        });
+    }
+}

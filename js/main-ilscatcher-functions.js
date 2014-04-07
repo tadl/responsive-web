@@ -202,8 +202,7 @@ function viewmarc(record_id) {
     $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/marc.json?record_id=" + record_id, function(data) {
         var content = data.marc;
         $.fancybox({
-            content: content,
-            type: 'ajax'
+            content: content
         });
         $('.viewmarc_' + record_id).html('<span>view marc</span>').removeClass('black').addClass('tadlblue');
     });
