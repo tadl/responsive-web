@@ -188,8 +188,8 @@ function showTeensPage() {
      var teens_homework = simplenode_template(data.teens_homework)
      var teens_lists = simplenode_template(data.teens_lists)
      var alleventslink = "load('events/teens')";
-     $('#region-one').html(teens_new + teens_manga);
-     $('#region-two').html(teens_lists + teens_reviews);
+     $('#region-one').html(teens_new + teens_manga + teens_lists);
+     $('#region-two').html(teens_reviews);
      $('#region-three').html(events_teens + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Teen events</span></a>');
      }
 }
