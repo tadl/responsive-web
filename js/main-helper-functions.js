@@ -526,7 +526,9 @@ function scroll_to(div) {
     $('html, body').animate({scrollTop:$(div).offset().top -55}, 750);
 }
 
-
-
-
+function loadJson(key, url) {
+    $.getJSON(url, function(data) {
+        sessionStorage.setItem(key, JSON.stringify(data));
+    });
+}
 
