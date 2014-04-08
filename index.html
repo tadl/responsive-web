@@ -942,11 +942,13 @@
 
 <script id="announcements-template" type="text/template">
     <div class="grid-container announce">
-        {{#nodes}}
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                {{{node.message}}} <a class="button verysmall tadlblue" onclick="window.sessionStorage.setItem('announcements',{{node.nid}});$('.announce').fadeOut(500);"><span>&nbsp;dismiss&nbsp;</span></a>
+        {{#each_upto nodes 1}}
+            <div class="card center">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
+                    {{{node.message}}} <a class="button verysmall tadlblue" onclick="window.sessionStorage.setItem('announcements',{{node.nid}});$('.announce').fadeOut(500);"><span>&nbsp;dismiss&nbsp;</span></a>
+                </div>
             </div>
-        {{/nodes}}
+        {{/each_upto}}
     </div>
 </script>
 
