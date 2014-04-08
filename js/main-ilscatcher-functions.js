@@ -105,7 +105,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     $('#search-params').show();
     changeBanner('Searching Catalog', '#0d4c78');
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
+    $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
         if (data.more_results == "false") { delete data.more_results; }
         var results = data.message;
         linked_search = "false";
@@ -161,7 +161,7 @@ function showmore(record_id) {
     var record_id = record_id;
     var e = document.getElementById(record_id);
     $('#more_details_' + record_id).removeClass('tadlblue').addClass('black').html('<span>Loading...</span>').spin('tiny').removeAttr('onclick');
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
+    $.getJSON(ILSCATCHER_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
         var results = data.message;
         var template = Handlebars.compile($('#more_details-template').html());
         var info = template(data);
@@ -186,7 +186,7 @@ function viewitem(record_id) {
     state = History.getState();
     $('.load_more').show();
     $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
+    $.getJSON(ILSCATCHER_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
         var template = Handlebars.compile($('#result-details-template').html());
         var info = template(data);
         if (state.data.action === "viewitem") {
@@ -199,7 +199,7 @@ function viewitem(record_id) {
 }
 
 function viewmarc(record_id) {
-    $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/marc.json?record_id=" + record_id, function(data) {
+    $.getJSON(ILSCATCHER_BASE + "/main/marc.json?record_id=" + record_id, function(data) {
         var content = data.marc;
         $.fancybox({
             content: content
@@ -225,7 +225,7 @@ function showshelf(record_id) {
     if (e.style.display === 'none') {
         if (!$.trim($('#'+ record_id +'shelf').html()).length) {
             $('#'+ record_id +'-loading').html(loadingmoreText).trigger("create");
-            $.getJSON(ILSCATCHER_INSECURE_BASE + "/main/itemonshelf.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
+            $.getJSON(ILSCATCHER_BASE + "/main/itemonshelf.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
                 var results = data.message;
                 var template = Handlebars.compile($('#shelf-template').html());
                 var info = template(data);
