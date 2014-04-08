@@ -4,6 +4,7 @@ function compile_templates() {
     review_template = Handlebars.compile($('#showreviews-template').html());
     events_template = Handlebars.compile($('#someevents-template').html());
     featured_news_template =  Handlebars.compile($('#showfeaturednews-template').html());
+    location_news_template =  Handlebars.compile($('#locationnews-template').html());
     showlocations_template = Handlebars.compile($('#showlocations-template').html());
     myaccount_template = Handlebars.compile($('#myaccount-template').html());
     mylists_template = Handlebars.compile($('#mylists-template').html());
@@ -27,7 +28,7 @@ function showEastBay() {
         changeBanner('East Bay', '#0d4c78');
         var events_ebb = events_template(data.events_ebb)
         var infobox_ebb = simplenode_template(data.infobox_ebb)
-        var news_ebb = featured_news_template(data.news_ebb)
+        var news_ebb = location_news_template(data.news_ebb)
         var hours_ebb = showlocations_template(data.hours_ebb)
         var alleventslink = "load('events/ebb')";
         $('#region-one').html(infobox_ebb);
@@ -53,7 +54,7 @@ function showFifeLake() {
      changeBanner('Fife Lake', '#0d4c78');
      var events_flpl = events_template(data.events_flpl)
      var infobox_flpl = simplenode_template(data.infobox_flpl)
-     var news_flpl = featured_news_template(data.news_flpl)
+     var news_flpl = location_news_template(data.news_flpl)
      var hours_flpl = showlocations_template(data.hours_flpl)
         var alleventslink = "load('events/flpl')";
      $('#region-one').html(infobox_flpl);
@@ -79,7 +80,7 @@ function showInterlochen() {
      changeBanner('Interlochen', '#0d4c78');
      var events_ipl = events_template(data.events_ipl)
      var infobox_ipl = simplenode_template(data.infobox_ipl)
-     var news_ipl = featured_news_template(data.news_ipl)
+     var news_ipl = location_news_template(data.news_ipl)
      var hours_ipl = showlocations_template(data.hours_ipl)
         var alleventslink = "load('events/ipl')";
      $('#region-one').html(infobox_ipl);
@@ -105,7 +106,7 @@ function showKingsley() {
      changeBanner('Kingsley', '#0d4c78');
      var events_kbl = events_template(data.events_kbl)
      var infobox_kbl = simplenode_template(data.infobox_kbl)
-     var news_kbl = featured_news_template(data.news_kbl)
+     var news_kbl = location_news_template(data.news_kbl)
      var hours_kbl = showlocations_template(data.hours_kbl)
         var alleventslink = "load('events/kbl')";
      $('#region-one').html(infobox_kbl);
@@ -131,7 +132,7 @@ function showPeninsula() {
      changeBanner('Peninsula', '#0d4c78');
      var events_pcl = events_template(data.events_pcl)
      var infobox_pcl = simplenode_template(data.infobox_pcl)
-     var news_pcl = featured_news_template(data.news_pcl)
+     var news_pcl = location_news_template(data.news_pcl)
      var hours_pcl = showlocations_template(data.hours_pcl)
         var alleventslink = "load('events/pcl')";
      $('#region-one').html(infobox_pcl);
@@ -157,7 +158,7 @@ function showWoodmere() {
      changeBanner('Woodmere', '#0d4c78');
      var events_wood = events_template(data.events_wood)
      var infobox_wood = simplenode_template(data.infobox_wood)
-     var news_wood = featured_news_template(data.news_wood)
+     var news_wood = location_news_template(data.news_wood)
      var hours_wood = showlocations_template(data.hours_wood)
         var alleventslink = "load('events/wood')";
      $('#region-one').html(infobox_wood);

@@ -8,7 +8,7 @@ function loadmore() {
     var searchtype = window.localStorage.getItem('searchtype');
     $.get(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatype + "&p=" + pagecount + "&avail=" + available + "&loc=" + loc  + "&facet=" + facet + "&st=" + searchtype, function(data) {
         if (data.more_results == "false") { delete data.more_results; }
-        var results = data.message
+        var results = data.message;
         if (results != "no results") {
             var template = Handlebars.compile($('#results-template_2').html());
             var info = template(data);
@@ -17,7 +17,7 @@ function loadmore() {
                 $('.spinning').parent().html('<h4 class="title">Page ' + (pagecount+1) + '</h4>');
             });
         } else {
-            $('#loadmoretext').html('<h4 class="title">No Further Results</h4>').show();
+            $('#region-two').html('<h4 class="title">No Further Results</h4>').show();
         }
     });
 }
@@ -56,7 +56,7 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
     changeBanner('Searching Catalog', '#0d4c78');
     $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type, function(data) {
         if (data.more_results == "false") { delete data.more_results; }
-        var results = data.message
+        var results = data.message;
         linked_search = "false";
         if (results != "no results") {
             var template = Handlebars.compile($('#results-template_2').html());
@@ -118,12 +118,12 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
             var info_selected_facets = selected_facet_template(data);
             $('#region-two').html(info);
             $('#region-one').html(info_facets);
-            $('#loadmoretext').empty().append(loadmoreText);
+            $('#loadmoretext').empty().append(loadmoreText); // FIXTHIS
             $('#loadmoretext').trigger("create");
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').append(info_selected_facets);
         } else {
-            $('#second-region').replaceWith("No Results");
+            $('#region-two').replaceWith("No Results");
             
         }
     });
@@ -133,11 +133,10 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
 
 
 function subject_search(subject) {
-	var subject = subject.replace(";qtype=subject","");
-   $("#searchtype").val("subject");
-   $("#term").val(decodeURIComponent(subject));
-   startsearch();
-
+    var subject = subject.replace(';qtype=subject','');
+    $('#searchtype').val('subject');
+    $('#term').val(decodeURIComponent(subject));
+    startsearch();
 }
 
 function logged_in() {
@@ -150,8 +149,8 @@ function logged_in() {
 }
 
 function logout() {
-    var source   = $("#login_form-template").html();
-    $("#login_form").html(source);
+    var source = $('#login_form-template').html();
+    $('#login_form').html(source);
     window.localStorage.clear();
     current_user = 'false';
     location.reload();
@@ -169,7 +168,7 @@ function showmore(record_id) {
         $('#'+ record_id).html(info).promise().done(function() {
             $('#more_details_' + record_id).remove();
         });
-        $('#'+ record_id).show();
+        $('#' + record_id).show();
         check_googlebooks(record_id, isbn);
         $(".fancybox").fancybox({
             openEffect  : 'none',
@@ -181,6 +180,7 @@ function showmore(record_id) {
     });
 }
 
+// MAKE THIS WORK FIXTHIS
 function viewitem(record_id) {
     cleanhouse();
     state = History.getState();
@@ -209,9 +209,8 @@ function viewmarc(record_id) {
 }
 
 
-
-
 // not sure what this is for. It might be something I left half-done and has been replaced
+// FIXTHIS
 function loaditem(record_id) {    
     var record_id = record_id;
     var action = {action:"viewitem", record_id:record_id}
@@ -230,15 +229,15 @@ function showshelf(record_id) {
                 var template = Handlebars.compile($('#shelf-template').html());
                 var info = template(data);
                 $('#'+ record_id +'shelf').html(info).promise().done(function() {
-                    $('#'+ record_id +'-loading').empty();
+                    $('#' + record_id + '-loading').empty();
                 });
-                $('#'+ record_id +'shelf').css('display', 'block');
+                $('#' + record_id + 'shelf').css('display', 'block');
             });
         } else {
-            $('#'+ record_id +'shelf').css('display', 'block');
+            $('#' + record_id + 'shelf').css('display', 'block');
         }
     } else {
-        $('#'+ record_id +'shelf').css('display', 'none');
+        $('#' + record_id + 'shelf').css('display', 'none');
     }
 }
 
@@ -252,15 +251,15 @@ function pre_hold(record_id) {
     } else {
         $(link_id).html('<span>Log in to place hold</span>');
         $(link_id).addClass('hold_login_first');
-        $("#login_form").slideDown("fast");
+        $('#login_form').slideDown('fast');
     }
 }
 
 function reset_hold_links() {
-    $(".hold_login_first").each(function() {
+    $('.hold_login_first').each(function() {
         $(this).removeClass('hold_login_first').removeClass('black').addClass('green').html('<span>Place Hold</span>');
     });
-      $(".multi_hold_login_first").each(function() {
+      $('.multi_hold_login_first').each(function() {
         $(this).removeClass('multi_hold_login_first').removeClass('black').addClass('green').html('<span>Place All on Hold</span>');
     });
     
@@ -270,7 +269,7 @@ function hold(record_id) {
     var record_id = record_id;
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/hold.json?token='+ token + '&record_id=' + record_id, function(data) {
-        var message = data[':message'].replace("Placing this hold could result in longer wait times.", "Unavailable for pick-up at your location.");
+        var message = data[':message'].replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
         var success = false;
         var button_id = '#place_hold_' + record_id;
         var hold_message = '#hold_message_' + record_id;
@@ -300,26 +299,26 @@ function hold_partB() {
 }
 
 function load_password_reset() {
-    var login_form = $("#login_form");
-    var source = $("#password-reset-template").html();
+    var login_form = $('#login_form');
+    var source = $('#password-reset-template').html();
     login_form.html(source);
     set_login_form_keypress_event('password_reset');
 }
 
 function submit_password_reset() {
-    var uservalue = $("#username_or_barcode").val();
+    var uservalue = $('#username_or_barcode').val();
     if (uservalue = '') { return };
     set_login_form_keypress_event();
     $.getJSON(ILSCATCHER_BASE + 'main/passwordreset.json?user=' + uservalue, function(data) {
-        var login_form = $("#login_form");
-        var source = $("#password-reset-complete-template").html();
+        var login_form = $('#login_form');
+        var source = $('#password-reset-complete-template').html();
         login_form.html(source);
     });
 }
 
 function cancel_password_reset() {
-    var login_form = $("#login_form");
-    var source = $("#login_form-template").html();
+    var login_form = $('#login_form');
+    var source = $('#login_form-template').html();
     login_form.html(source);
     set_login_form_keypress_event();
 }
@@ -330,7 +329,7 @@ function complete_password_reset() {
 }
 
 function set_login_form_keypress_event(do_what) {
-    var login_form = $("#login_form");
+    var login_form = $('#login_form');
     // Remove existing keydown
     login_form.off('keydown');
     if (do_what == 'password_reset') {
@@ -372,8 +371,8 @@ function login_and_fetch_dash(username, password) {
         }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
-                var source   = $("#login_form-template").html();
-                $("#login_form").html(source);
+                var source   = $('#login_form-template').html();
+                $('#login_form').html(source);
     			window.localStorage.clear();
                 $('#login_msg').html('<span>Error logging in.</span>');
                 current_user = 'false';
@@ -390,7 +389,7 @@ function login_and_fetch_dash(username, password) {
                 window.localStorage.setItem('holds', holds);
                 window.localStorage.setItem('pickups', pickups);
                 window.localStorage.setItem('fines', fines);
-                window.localStorage.setItem('current_user', "true");
+                window.localStorage.setItem('current_user', 'true');
                 window.localStorage.setItem('token', token)
                 current_user = window.localStorage.getItem('current_user');
                 reset_hold_links();
@@ -401,8 +400,8 @@ function login_and_fetch_dash(username, password) {
         });
     } else {
         // Not logged in. Display the default login form.
-        var source   = $("#login_form-template").html();
-        $("#login_form").html(source);
+        var source   = $('#login_form-template').html();
+        $('#login_form').html(source);
         set_login_form_keypress_event();
         window.localStorage.clear();
     }
@@ -418,16 +417,16 @@ function render_dash(data) {
 function showcheckouts() { 
     cleanhouse();
     cleandivs();
-    changeBanner("Checked Out", color_tadlblue);
-    var action = {action:"showcheckouts"}
-    History.pushState(action, psTitle + separator + "Items currently checked out", "checkout");   
+    changeBanner('Checked Out', color_tadlblue);
+    var action = {action:'showcheckouts'}
+    History.pushState(action, psTitle + separator + 'Items currently checked out', 'checkout');   
     loading_animation('start');
     var token = window.localStorage.getItem('token');
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?token=' + token, function(data) {
         var template = Handlebars.compile($('#showcheckedout-template').html());
         var info = template(data);
-        if (state.data.action === "showcheckouts") { 
+        if (state.data.action === 'showcheckouts') { 
             $('#two-thirds').html(info).show();
             myaccount_menu();
             loading_animation('stop');
@@ -441,8 +440,8 @@ function pre_cancelhold(hold_id) {
     var confirm_text = '<span>Click to confirm</span>';
     var canceling_text = '<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Canceling hold...</span>';
     $(element).removeClass('tadlblue').addClass('red').html(confirm_text);
-    $(element).prop("onclick", null);
-    $(element).on("click", function(event) {
+    $(element).prop('onclick', null);
+    $(element).on('click', function(event) {
         $(this).off('click');
         $(this).removeClass('red').addClass('black').html(canceling_text);
         holdaction('cancel',hold_id);
@@ -463,13 +462,13 @@ function holdaction(action,hold_id) {
     //$('#' + todo + '_' + hold_id).html('<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Working...</span>').removeAttr('onclick').removeClass('tadlblue').addClass('black');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/holdaction.json?token=' + token + '&hold_id=' + hold_id + '&todo=' + todo, function(data) {
-        if (todo == "suspend") {
+        if (todo == 'suspend') {
             $('#suspend_' + hold_id).html('<span>Activate</span>').attr('onclick', 'holdaction(\'activate\',' + hold_id + ');').attr('id', 'activate_' + hold_id).removeClass('black').addClass('tadlblue');
             $('#holdstatus_' + hold_id).html('Suspended');
-        } else if (todo == "activate") {
+        } else if (todo == 'activate') {
             $('#activate_' + hold_id).html('<span>Suspend</span>').attr('onclick', 'holdaction(\'suspend\',' + hold_id + ');').attr('id', 'suspend_' + hold_id).removeClass('black').addClass('tadlblue');
             $('#holdstatus_' + hold_id).html('Active');
-        } else if (todo == "cancel") {
+        } else if (todo == 'cancel') {
             $('#hold_' + hold_id).remove();
             var tempholdcount = parseInt(window.localStorage.getItem('holds'));
             tempholdcount--;
@@ -482,16 +481,16 @@ function holdaction(action,hold_id) {
 function showholds() {
     cleanhouse();
     cleandivs();
-    changeBanner("My Holds", color_tadlblue);
-    var action = {action:"showholds"}
-    History.pushState(action, "Your Holds", "holds"); 
+    changeBanner('My Holds', color_tadlblue);
+    var action = {action:'showholds'}
+    History.pushState(action, 'Your Holds', 'holds'); 
     loading_animation('start');
     var token = window.localStorage.getItem('token');
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
         var template = Handlebars.compile($('#showholds-template').html());
         var info = template(data);
-        if (state.data.action === "showholds") {
+        if (state.data.action === 'showholds') {
             $('#two-thirds').html(info).show();
             myaccount_menu();
             loading_animation('stop');
@@ -503,7 +502,7 @@ function show_checkout_history() {
     historycount=0;
     cleanhouse();
     cleandivs();
-    changeBanner("Checkout History", color_tadlblue);
+    changeBanner('Checkout History', color_tadlblue);
     loading_animation('start');
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
@@ -520,15 +519,15 @@ function more_history() {
     historycount++;
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
-        if (data.more == "false") { delete data.more; } // this logic could probably be handled in melcatcher
+        if (data.more == 'false') { delete data.more; } // this logic could probably be handled in melcatcher
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         $('#two-thirds').append(info).promise().done(function() {
             $('.spinning').hide()
-            $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
+            $('.spinning').parent().html('<h4 class='title'>Page ' + (historycount+1) + '</h4>');
         }); // this is probably how all "load more" functions should be rewritten, for consistency
     });
 }
@@ -545,7 +544,7 @@ function billing_print(id) {
             type: 'iframe',
             autoScale: true
         });
-        loading_animation("stop");
+        loading_animation('stop');
     });
 }
 function billing_actually_print() {
@@ -564,7 +563,7 @@ function billing_email(id) {
             type: 'iframe',
             autoScale: true
         });
-        loading_animation("stop");
+        loading_animation('stop');
     });
 }
 
@@ -572,7 +571,7 @@ function show_payment_history() {
     historycount = 0;
     cleanhouse();
     cleandivs();
-    changeBanner("Payment History", color_tadlblue);
+    changeBanner('Payment History', color_tadlblue);
     loading_animation('start');
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
@@ -581,8 +580,8 @@ function show_payment_history() {
         var info = template(data);
         var more = data.more;
         $('#two-thirds').html(info).show().promise().done(function() {
-            if (more == "true") {
-                $('#loadmoretext').empty().append(morePaymentsText).trigger("create");
+            if (more == 'true') {
+                $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
                 $('#loadmore').show();
             } else {
                 $('#loadmore').hide();
@@ -602,7 +601,7 @@ function more_payment_history() {
         var template = Handlebars.compile($('#payments-template').html());
         var info = template(data);
         $('#two-thirds').append(info).promise().done(function() {
-            if (more == "true") {
+            if (more == 'true') {
                 $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
             } else {
                 $('#loadmore').hide();
@@ -615,7 +614,7 @@ function show_fines() {
     finepage = 0;
     cleanhouse();
     cleandivs();
-    changeBanner("Fines and Charges", color_tadlblue);
+    changeBanner('Fines and Charges', color_tadlblue);
     loading_animation('start');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_fines.json?token=' + token, function(data) {
@@ -623,8 +622,8 @@ function show_fines() {
         var info = template(data);
         var more = data.more;
         $('#two-thirds').html(info).show().promise().done(function() {
-            if (more == "true") {
-                $('#loadmoretext').empty().append(moreFinesText).trigger("create");
+            if (more == 'true') {
+                $('#loadmoretext').empty().append(moreFinesText).trigger('create');
                 $('#loadmore').show();
             } else {
                 $('#loadmore').hide();
@@ -640,9 +639,9 @@ function more_fines() {
 function showpickups() {
     cleanhouse();
     cleandivs();
-    changeBanner("Ready for Pickup", color_tadlblue);
-    var action = {action:"showpickups"}
-    History.pushState(action, "Ready for Pickup", "pickup"); 
+    changeBanner('Ready for Pickup', color_tadlblue);
+    var action = {action:'showpickups'}
+    History.pushState(action, 'Ready for Pickup', 'pickup'); 
     loading_animation('start');
     var token = window.localStorage.getItem('token');
     state = History.getState();
@@ -650,7 +649,7 @@ function showpickups() {
         var template = Handlebars.compile($('#showholds-template').html());
         data.ready = 'ready';
         var info = template(data);
-        if (state.data.action === "showpickups") {
+        if (state.data.action === 'showpickups') {
             $('#two-thirds').html(info).show();
             myaccount_menu();
             loading_animation('stop');
@@ -675,18 +674,18 @@ function renew(circulation_id, barcode) {
 function showcard() {
     cleanhouse();
     cleandivs();
-    changeBanner("My Library Card", color_tadlblue);
-    var action = {action:"showcard"}
-    History.pushState(action, "Your Card", "card"); 
+    changeBanner('My Library Card', color_tadlblue);
+    var action = {action:'showcard'}
+    History.pushState(action, 'Your Card', 'card'); 
     loading_animation('start');
     var token = window.localStorage.getItem('token');
     state = History.getState();
     $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?token=' + token, function(data) {
-        if (state.data.action === "showcard") {   
+        if (state.data.action === 'showcard') {   
             var card = data.barcode;
             var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
             $('#two-thirds').html(html).show();
-            $("#bcTarget").barcode(card, "code128", {barWidth:2, barHeight:80, fontSize:12}); 
+            $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12}); 
             myaccount_menu();
             loading_animation('stop');
         }
@@ -701,7 +700,7 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
     var year = year;
     var online = online;
     var title = title;
-    var current_list = localStorage["list"];
+    var current_list = localStorage['list'];
     var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
     var savelist = JSON.stringify(listvalue);
     if (current_list) {
@@ -713,7 +712,7 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
         if (test <= 9){
         localStorage['list'] = JSON.stringify(mergelist); 
         }else{
-        alert("Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!");
+        alert('Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!');
         }
     } else {
         window.localStorage.setItem('list', savelist);
@@ -726,8 +725,8 @@ function mylist() {
     if (window.localStorage.getItem('list')) {
         var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
         var mylist_decode = decodeURIComponent(mylist);
-        var wrapper = '{"objects": ['+ mylist_decode +']}';
-        var test = JSON.stringify(eval("(" + wrapper + ")"));
+        var wrapper = '{"objects": [' + mylist_decode + ']}';
+        var test = JSON.stringify(eval('(' + wrapper + ')'));
         var test2 = JSON.parse(test);
         var existingIDs = [];
         test2.objects = $.grep(test2.objects, function(v) {
@@ -741,7 +740,7 @@ function mylist() {
         var savelist = JSON.stringify(test2.objects);
         window.localStorage.setItem('list', savelist);
     } else {
-        var test2 = "empty";
+        var test2 = 'empty';
     }
     var template = Handlebars.compile($('#mylist-template').html());
     var info = template(test2);
@@ -754,14 +753,14 @@ function removefromlist(record) {
     var record = record;
     var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
     var wrapper = '['+ mylist2 +']';
-    var test = JSON.stringify(eval("(" + wrapper + ")"));
+    var test = JSON.stringify(eval('(' + wrapper + ')'));
     var json = JSON.parse(test);
     for (i=0;i<json.length;i++) {
         if (json[i].record == record) {
             json.splice(i,1);
         }
     }
-    window.localStorage["list"] = JSON.stringify(json);
+    window.localStorage['list'] = JSON.stringify(json);
     mylist();
 }
 
@@ -778,7 +777,7 @@ function pre_multi_hold(record_ids) {
     } else {
         $(link_id).html('<span>Log in to place hold</span>');
         $(link_id).addClass('multi_hold_login_first');
-        $("#login_form").slideDown("fast");
+        $('#login_form').slideDown('fast');
     }
 }
 
@@ -786,33 +785,24 @@ function multi_hold(record_ids) {
     var record_ids = record_ids;
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?token=' + token + '&record_id=' + record_ids, function(data) {
-  
-      $.each(data.items, function (index, value) {
-      var message_div = '#multi_hold_message_'+this.record_id;
-      var status = this.message.replace("Placing this hold could result in longer wait times.", "Unavailable for pick-up at your location.");
-      $(message_div).html(status);
- 
-      
-      if (status == "Hold was successfully placed"){
-      
-      $(message_div).show().addClass('success');
-      }else{
-      
-      $(message_div).show().addClass('error');
-      };
-   
+        $.each(data.items, function (index, value) {
+            var message_div = '#multi_hold_message_' + this.record_id;
+            var status = this.message.replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
+            $(message_div).html(status);
+            if (status == 'Hold was successfully placed') {
+                $(message_div).show().addClass('success');
+            } else {
+                $(message_div).show().addClass('error');
+            }
+        });
+        link_id = '#multi-pre-hold';
+        $(link_id).html('<span>Request Finished: Empty Bag?</span>').removeClass('black').addClass('green').attr("onclick", "emptylist()");
     });
-       link_id = '#multi-pre-hold';
-       $(link_id).html('<span>Request Finished: Empty Bag?</span>').removeClass('black').addClass('green').attr("onclick", "emptylist()");
-        
-
-    });
-  
 }
 
 function emptylist(){
-	localStorage.removeItem('list');
-	mylist();
+    localStorage.removeItem('list');
+    mylist();
 }
 
 function check_googlebooks(record_id, isbn){
@@ -865,8 +855,6 @@ function shelf_finder(library, location, call_number){
         scrolling : 'no'
     });
 }
-
-
 
 
 
