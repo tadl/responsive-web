@@ -70,7 +70,7 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
             }
             $('#region-two').html(cat + info);
             $('#region-one').html(info_facets);
-            $('#search-params').html('Results for '+ unescape(searchtype) +': <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' sorted by '+ unescape(sort_type) +' '+ availablemsg +'. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
+            $('#search-params').html('Results for '+ unescape(searchtype) +': <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' sorted by '+ unescape(sort_type) +' '+ availablemsg +'. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a><a class="hide-on-desktop button verysmall gray" onclick="scroll_to(facets)"><span>Filters</span></a></div><a class="hide-on-desktop button verysmall gray" onclick="scroll_to(book_bag)"><span>Book Bag</span></a></div>');
         } else {
             $('#search-params').html("No Results");
         }
