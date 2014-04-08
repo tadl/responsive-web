@@ -38,18 +38,18 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
     window.localStorage.setItem('loc', location);
     window.localStorage.setItem('sort_type', sort_type);
     localStorage.removeItem('facet');
-    $("#mediatype").val(decodeURIComponent(mediatype));
-    $("#term").val(decodeURIComponent(searchquery));
-    $("#location").val(decodeURIComponent(loc));
-    $("#searchtype").val(decodeURIComponent(searchtype));
-    if (available === "true") {
+    $('#mediatype').val(decodeURIComponent(mediatype));
+    $('#term').val(decodeURIComponent(searchquery));
+    $('#location').val(decodeURIComponent(loc));
+    $('#searchtype').val(decodeURIComponent(searchtype));
+    if (available === 'true') {
         $('#available').prop('checked', true);
-        var availablemsg = "Only Available";
+        var availablemsg = 'Only Available';
     } else {
         $('#available').prop('checked', false);
-        var availablemsg = "";
+        var availablemsg = '';
     }
-    var loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text; 
+    var loctext = document.getElementById('location').options[document.getElementById('location').selectedIndex].text; 
     var mediatypedecode = decodeURIComponent(mediatype);
     $('#search-params').html('<div class="grid-container"><div class="grid-10 tablet-grid-15 mobile-grid-20"><div class="params-content padtop">&nbsp;</div></div><div class="grid-90 tablet-grid-85 mobile-grid-80">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.</div></div>').show(); // the spinner here should be improved. soon.
     $('.params-content').spin();
