@@ -153,40 +153,6 @@ function showreviews(review_type) {
     });
 }
 
-
-function showfeatureditembox() {
-    cleanhouse();
-    state = History.getState();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
-    $('#results').html();
-    if (state.data.action === "showfeatureditembox") {
-        $.getJSON('http://www.tadl.org/mobile/export/items/41/json', function(data) {
-            var template = Handlebars.compile($('#showfeatureditembox-template').html());
-            var info = template(data);
-            $('.load_more').hide();
-            $('#results').append(info);
-        });
-    }
-}
-
-function showfeaturednews() { 
-    cleanhouse();
-    var action = {action:"showfeaturednews"}
-    History.pushState(action, "Featured News", "featurednews");
-    state = History.getState();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
-    $.getJSON(NEWS_URL, function(data) {
-        var template = Handlebars.compile($('#showfeaturednews-template').html());
-        var info = template(data);
-        $('.load_more').hide();
-        if (state.data.action === "showfeaturednews") {
-            $('#results').append(info);
-        }
-    });
-}
-
 function locHoursAndInfo(loc) {
     window.localStorage.setItem('location', loc);
     $('#locinfo').hide();
@@ -234,9 +200,6 @@ function showNode(nid) {
     cleanhouse();
     cleandivs();
     loading_animation('start');
-    // this will eventually need some logic that checks what *kind* of node it is
-    // so we can handle different node types differently (images are different sizes
-    // etc, for example).
     $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
         var template = Handlebars.compile($('#node-template').html());
         var info = template(data);
@@ -244,6 +207,7 @@ function showNode(nid) {
         loading_animation('stop');
     });
 }
+
 function showEventNode(nid) {
     cleanhouse();
     cleandivs();
