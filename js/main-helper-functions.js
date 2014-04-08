@@ -2,7 +2,8 @@ var simplenode_template;
 var featured_item_template;
 var review_template;
 var events_template;
-var featured_news_template;   	
+var featured_news_template;
+var location_news_template;
 var showlocations_template;
 var current_page;
 var myaccount_template;
@@ -12,7 +13,7 @@ var current_user = window.localStorage.getItem('current_user');
 $(document).ready(function() {
     compile_templates(); 
     router.perform();
-    
+
     var state = History.getState();
     var check = state.data.action
 
@@ -25,11 +26,10 @@ $(document).ready(function() {
     });
 
     $('#search').click(getResults);
-    
+
     $('.checkChangedbutton').click(function() {
   		if($(this).closest('form').data('changed')) {
-    	 
-  		}
+        }
 	});
 
     jQuery.support.cors = true;

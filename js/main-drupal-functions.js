@@ -273,16 +273,10 @@ function showEventNode(nid) {
 function showAnnouncements() {
     var seenIt = window.sessionStorage.getItem('announcements');
     if (seenIt == null) {
-        $.getJSON('https://www.tadl.org/export/announcements/json', function(data) {
+        $.getJSON('http://mel-catcher.herokuapp.com/drupal/drupal.json?content=announcements', function(data) {
             var template = Handlebars.compile($('#announcements-template').html());
             var output = template(data);
             $('#locsel').prepend(output);
-//            $.fancybox({
-//                content: output,
-//                type: 'inline',
-//                closeBtn: false,
-//                topRatio: 0.2
-//            });
         });
     }
 }
