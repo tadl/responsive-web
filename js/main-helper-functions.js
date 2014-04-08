@@ -70,6 +70,7 @@ $(document).ready(function() {
     $('a[rel="lightframe"]').fancybox();
 
     setTimeout(function(){ showAnnouncements(); },2000);
+
 });
 
 $(document).ajaxComplete(function(){
@@ -519,4 +520,13 @@ function htmlDecode(value) {
         return '';
     }
 }
+
+function scroll_to(div) {
+    $.trim(div);
+    $('html, body').animate({scrollTop:$(div).offset().top -55}, 750);
+}
+
+
+
+
 
