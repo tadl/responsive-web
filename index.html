@@ -941,13 +941,10 @@
 </script>
 
 <script id="announcements-template" type="text/template">
-    <div class="grid-container">
+    <div class="grid-container announce">
         {{#nodes}}
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <img src="img/logo.png" />
-                <h4 class="title">{{{node.message}}}</h4>
-                <div class="padtop">&nbsp;</div>
-                <a class="button medium tadlblue" onclick="window.sessionStorage.setItem('announcements',{{node.nid}});$.fancybox.close();"><span>&nbsp;close&nbsp;</span></a>
+                {{{node.message}}} <a class="button verysmall tadlblue" onclick="window.sessionStorage.setItem('announcements',{{node.nid}});$('.announce').fadeOut(500);"><span>&nbsp;dismiss&nbsp;</span></a>
             </div>
         {{/nodes}}
     </div>

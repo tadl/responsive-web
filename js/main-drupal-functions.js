@@ -276,12 +276,13 @@ function showAnnouncements() {
         $.getJSON('https://www.tadl.org/export/announcements/json', function(data) {
             var template = Handlebars.compile($('#announcements-template').html());
             var output = template(data);
-            $.fancybox({
-                content: output,
-                type: 'inline',
-                closeBtn: false,
-                topRatio: 0.2
-            });
+            $('#locsel').prepend(output);
+//            $.fancybox({
+//                content: output,
+//                type: 'inline',
+//                closeBtn: false,
+//                topRatio: 0.2
+//            });
         });
     }
 }
