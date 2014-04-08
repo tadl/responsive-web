@@ -526,8 +526,8 @@ function more_history() {
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         $('#two-thirds').append(info).promise().done(function() {
-            $('.spinning').hide()
-            $('.spinning').parent().html('<h4 class='title'>Page ' + (historycount+1) + '</h4>');
+            $('.spinning').hide();
+            $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
         }); // this is probably how all "load more" functions should be rewritten, for consistency
     });
 }
