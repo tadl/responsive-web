@@ -456,14 +456,29 @@ img.icon.logo {
     font-size: 14px;
 }
 
+.boxtitle-bottom {
+    bottom:0;
+}
+
+.boxtitle-top {
+    top:0;
+}
+
+.boxtitle {
+    padding:5px 0;
+    position:absolute;
+    left:0;
+    background:rgba(0,0,0,0.8);
+    color:#fff;
+    width:100%;
+    text-align:center;
+    text-shadow:black 0.1em 0.1em 0.2em;
+    font-size:1.2em;
+}
+
 .itembox {
     max-width:280px;
-}
-.itemboxmob {
-    max-width:320px;
-}
-.itemboxtab {
-    max-width:480px;
+    position:relative;
 }
 
 .img-viewer {
@@ -478,8 +493,8 @@ img.icon.logo {
 
 .item25 img {
     max-width:23%;
-    padding:0;
-    margin:0;
+    padding:auto;
+    margin:auto;
 }
 
 .img-viewer img {
