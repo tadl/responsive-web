@@ -130,8 +130,6 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     mylist();
 }
 
-
-
 function subject_search(subject) {
     var subject = subject.replace(';qtype=subject','');
     $('#searchtype').val('subject');
@@ -181,20 +179,18 @@ function showmore(record_id) {
 }
 
 // MAKE THIS WORK FIXTHIS
-function viewitem(record_id) {
+function viewItem(record_id) {
     cleanhouse();
-    state = History.getState();
-    $('.load_more').show();
-    $('#loadmoretext').empty().append(loadingmoreText).trigger("create");
+    cleandivs();
+    changeBanner('Loading record ' + record_id + '...', color_tadlblue);
+    loading_animation('start');
     $.getJSON(ILSCATCHER_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
-        var template = Handlebars.compile($('#result-details-template').html());
+        var template = Handlebars.compile($('#viewitem-template').html());
         var info = template(data);
-        if (state.data.action === "viewitem") {
-            $('#results').html(info).promise().done(function() {
-                $('#loadmoretext').empty();
-            });
-            $('#'+ record_id).css('display', 'block');
-        }
+        $('#region-two').html(info).promise().done(function() {
+            changeBanner(data.items[0].title, color_tadlblue);
+            loading_animation('stop');
+        });
     });
 }
 
@@ -208,14 +204,12 @@ function viewmarc(record_id) {
     });
 }
 
-
-// not sure what this is for. It might be something I left half-done and has been replaced
-// FIXTHIS
-function loaditem(record_id) {    
+// loader for items (sets state/route which calls viewItem(id))
+function loadItem(record_id) {    
     var record_id = record_id;
     var action = {action:"viewitem", record_id:record_id}
     var newstate = 'item/' + record_id;
-    History.pushState(action, 'Featured Item ' + record_id, newstate);
+    History.pushState(action, 'Item ' + record_id, newstate);
 }
 
 function showshelf(record_id) {
@@ -364,9 +358,11 @@ function login_and_fetch_dash(username, password) {
     if (typeof(username) !== 'undefined' && username != '' && username !== null
         && typeof(password) !== 'undefined' && password != '' && password !== null) {
         if ($('#pword').length != 0) {
-            $('#login_form').html('<span><img src="img/spinner.gif" width="18" height="18"/>&nbsp;Refreshing...</span>');
+            $('#login_form').html('<div class="tempspin">&nbsp;Loading...</div>');
+            $('.tempspin').spin('tinyblack');
         }
         if ($('#login').length != 0) {
+            //$('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
             $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
         }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {

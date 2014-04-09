@@ -89,6 +89,7 @@
             .route(BASE_URL + 'event/:nid', showEventNode)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
+            .route(BASE_URL + 'item/:item', viewItem)
             .route(BASE_URL + 'reviews', showreviews)
             .route(BASE_URL + 'reviews/:review_type', showreviews)
             .route(BASE_URL + 'myaccount', myAccount)
@@ -385,6 +386,36 @@
     </div>
 </script>
 
+<script id="viewitem-template" type="text/template">
+    {{#items}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/>
+                    {{#if eresource}}
+                        <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a>
+                    {{else}}
+                        <a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a>
+                    {{/if}}
+                </div>
+                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                    <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}"/>&nbsp;{{title}}</span><br/>
+                    {{#if author}}
+                        <em class="subtitle">{{author}}&nbsp;</em>
+                    {{/if}}
+                    {{#if record_year}}
+                        <em class="subtitle">{{record_year}}</em>
+                    {{/if}}
+                    <div id="hold_message_{{record_id}}" class="holdmessage"></div>
+                    {{#all_copies}}
+                        <div
+                    {{/all_copies}}
+                </div>
+            </div>
+        </div>
+    {{/items}}
+</script>
+
 
 <script id="results-template_2" type="text/template">
     {{#items}}
@@ -401,7 +432,6 @@
                     {{#if record_year}}
                         <em class="subtitle">{{record_year}}</em>
                     {{/if}}
-
                     <div id="showmore-{{record_id}}" class="padtop">
                         <a id="more_details_{{record_id}}" class="button small tadlblue" onclick="showmore({{record_id}});"><span>More Details</span></a>
                         {{#compare availability null operator="!="}} 
@@ -411,37 +441,24 @@
                             <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a>
                         {{/compare}}
                         {{#compare availability null operator="!="}}
- <a class="button small purple" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
-                   		{{/compare}}
-                   </div>
-                    <div id="hold_message_{{record_id}}" class="holdmessage">
+                            <a class="button small purple" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
+                        {{/compare}}
                     </div>
+                    <div id="hold_message_{{record_id}}" class="holdmessage"></div>
                     <div id="{{record_id}}">
-                    	{{#compare abstract "" operator="!="}}
-            				<p>
-            					<span style="font-weight:bold">
-            						Summary: 
-            					</span>
-	    	        			{{abstract}}
-    	     		   		</p>
-            			{{/compare}}
-            			{{#compare contents null operator="!="}}
-            				<p>
-            					<span style="font-weight:bold">
-            						Contents: 
-            					</span>
-            					{{contents}}
-            				</p>
-            			{{/compare}}
-                    	<div id="available_{{record_id}}">
-                            <p class="subtitle">
-                                {{availability}}
-                    	   </p>
+                        {{#compare abstract "" operator="!="}}
+                            <p><span style="font-weight:bold">Summary: </span> {{abstract}}</p>
+                        {{/compare}}
+                        {{#compare contents null operator="!="}}
+                            <p><span style="font-weight:bold">Contents: </span> {{contents}}</p>
+                        {{/compare}}
+                        <div id="available_{{record_id}}">
+                            <p class="subtitle">{{availability}}</p>
                         </div>
-               		</div>
-            	</div>
-        	</div>
-    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/items}}
     {{#if more_results}}
         <div class="padtop padbot moresults">
@@ -607,69 +624,54 @@
 </script>
 
 <script id="more_details-template" type="text/template">
-   <div>
-  {{#items}}
+    <div>
+        {{#items}}
             <div class="summary" style="position:relative">
-            	
-            	
-            	
-            	
-            	{{#compare summary "" operator="!="}}
-            		<p>
-            		<span style="font-weight:bold">
-            			Summary: 
-            		</span>
-            		
-            		{{summary}}
-            		</p>
-            	{{/compare}}
-            	{{#compare contents "" operator="!="}}
-            	
-            		<span style="font-weight:bold">
-            			Contents: 
-            		</span>
-            		{{contents}}
-            	{{/compare}}	
-        		{{{youtubeify record_id}}}
+                {{#compare summary "" operator="!="}}
+                    <p><span style="font-weight:bold">Summary: </span>{{summary}}</p>
+                {{/compare}}
+                {{#compare contents "" operator="!="}}
+                    <span style="font-weight:bold">Contents: </span>{{contents}}
+                {{/compare}}	
+                {{{youtubeify record_id}}}
             </div>
             {{#compare copies_available null operator="!="}}
                 <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
             {{/compare}}
         {{/items}}
-          <table>
-        {{#compare shelvinglocations.shelf_loaction null operator="!="}}
-             <tr class="smaller">
-                        <td><strong>Library</strong></td>
-                        <td><strong>Location</strong></td>
-                        <td><strong>Call #</strong></td>
-                    </tr>
-        {{/compare}}
-        {{#shelvinglocations}}
-        {{#if shelf_location.library}}
+        <table>
+            {{#compare shelvinglocations.shelf_loaction null operator="!="}}
                 <tr class="smaller">
-                    <td>{{shelf_location.library}}</td>
-                    <td>{{shelf_location.shelving_location}}</td>
-                    <td>{{shelf_location.call_number}}</td>
+                    <td><strong>Library</strong></td>
+                    <td><strong>Location</strong></td>
+                    <td><strong>Call #</strong></td>
                 </tr>
-            {{/if}}
-        {{/shelvinglocations}}
+            {{/compare}}
+            {{#shelvinglocations}}
+                {{#if shelf_location.library}}
+                    <tr class="smaller">
+                        <td>{{shelf_location.library}}</td>
+                        <td>{{shelf_location.shelving_location}}</td>
+                        <td>{{shelf_location.call_number}}</td>
+                    </tr>
+                {{/if}}
+            {{/shelvinglocations}}
         </table>
         {{#items}}
-        {{#compare related_subjects null operator="!="}}
-        <table>
-        <tr>Related Subjects:</tr>
-        {{{ related_subjects }}}
-        </table>	
-        {{/compare}}
-        {{#compare related_genres null operator="!="}}
-        <table>
-        <tr>Related Subjects:</tr>
-        {{{ related_genres }}}
-        </table>	
-        {{/compare}}
-        <span id="preview-{{record_id}}" class="floatright"></span>
-        <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
-
+            {{#compare related_subjects null operator="!="}}
+                <table>
+                    <tr>Related Subjects:</tr>
+                    {{{ related_subjects }}}
+                </table>	
+            {{/compare}}
+            {{#compare related_genres null operator="!="}}
+                <table>
+                    <tr>Related Subjects:</tr>
+                    {{{ related_genres }}}
+                </table>	
+            {{/compare}}
+            <span id="preview-{{record_id}}" class="floatright"></span>
+            <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
         {{/items}}
     </div>
 </script>

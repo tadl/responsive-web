@@ -458,6 +458,22 @@ $.fn.spin.presets.tiny = {
     zIndex: 2e9
 }
 
+$.fn.spin.presets.tinyblack = {
+    lines: 10,
+    length: 10,
+    width: 3,
+    radius: 5,
+    corners: 1,
+    direction: 1,
+    color: '#000',
+    speed: 0.6,
+    trail: 11,
+    shadow: false,
+    hwaccel: false,
+    className: 'tinyspinner',
+    zIndex: 2e9
+}
+
 function account_settings_reset() {
 	$('#account_settings_form').get(0).reset();
 	$("#account_settings_form").hide();
