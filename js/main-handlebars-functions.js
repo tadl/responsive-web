@@ -100,40 +100,35 @@ Handlebars.registerHelper('check_for_select', function(value1, value2) {
 });
 
 Handlebars.registerHelper('youtubeify', function(record_id){
-	var check_url = 'http://trailer-tank.herokuapp.com/main/get_trailer.json?id=' + record_id;
-
-jQuery.extend({
-	getValues: function(url) {
-        var result = null;
-        $.ajax({
-            url: url,
-            type: 'get',
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-            	if (data['message'] != 'error'){
-                result = data['message']
+    var check_url = 'http://trailer-tank.herokuapp.com/main/get_trailer.json?id=' + record_id;
+    jQuery.extend({
+        getValues: function(url) {
+            var result = null;
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                    if (data['message'] != 'error') {
+                        result = data['message']
+                    } else {
+                        result = 'fail';
+                    }
+                },
+                error: function() {
+                    result = "fail";
                 }
-                else
-                {
-                result = "fail"
-                };
-            },
-            error: function() {
-                result = "fail";
-            },
-            
-        });
-       return result;
+            });
+            return result;
+        }
+    });
+    var test = $.getValues(check_url)
+    if (test != 'fail'){
+        var url = 'https://www.youtube.com/embed/'+ test +'?iv_load_policy=3&rel=0'
+        var embed_code = '<div class="videoWrapper"><iframe class="youtube-player" type="text/html" src="'+ url +'"allowfullscreen frameborder="0"></iframe></div>';
+        return embed_code;
     }
-});
-
-var test = $.getValues(check_url)
-if (test != "fail"){
-var url = 'https://www.youtube.com/embed/'+ test +'?iv_load_policy=3&rel=0'
-var embed_code = '<div class="videoWrapper"><iframe class="youtube-player" type="text/html" src="'+ url +'"allowfullscreen frameborder="0"></iframe></div>';
-return embed_code;
-}
 });
 
 Handlebars.registerHelper('trunc', function(str) {
@@ -146,8 +141,6 @@ Handlebars.registerHelper('trunc', function(str) {
     return retstr;
 });
 
-
 Handlebars.registerHelper('makedate', function(str) {
     return $.format.toBrowserTimeZone(str, "yyyyMMdd") + "T" + $.format.date(str, "HHmmss");
 });
-

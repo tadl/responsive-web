@@ -48,23 +48,6 @@ function showAllEventsByTerm(term) {
     }
 }
 
-/* this function is deprecated
-function showlocations() { 
-    cleanhouse();
-    var action = {action:"showlocations"}
-    History.pushState(action, "Locations", "locations"); 
-    state = History.getState();
-    loading_animation('start');
-    $.getJSON(LOCATIONS_BASE + '/all', function(data) {
-        var template = Handlebars.compile($('#showlocations-template').html());
-        var info = template(data);
-        if (state.data.action === "showlocations") {
-            $('#region-two').html(info);
-            loading_animation('stop');
-        }
-    });
-} */
-
 function list_node_to_name(list_id) {
     var info;
     if (list_id == '67') {
@@ -183,8 +166,8 @@ function hoursAndInfo(loc) {
     var data = JSON.parse(sessionStorage.getItem("everything"));
     if (data == null) {
         $.getJSON(drupal_json_url, function(data) {
-            var cat = JSON.stringify(data)
-            sessionStorage.setItem('everything', cat );
+            var cat = JSON.stringify(data);
+            sessionStorage.setItem('everything', cat);
             hoursAndInfo(loc);
             return;
         });
