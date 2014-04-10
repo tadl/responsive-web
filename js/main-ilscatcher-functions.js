@@ -318,13 +318,11 @@ function cancel_password_reset() {
 }
 
 function complete_password_reset() {
-    // Same as cancel -- show the login form
     cancel_password_reset();
 }
 
 function set_login_form_keypress_event(do_what) {
     var login_form = $('#login_form');
-    // Remove existing keydown
     login_form.off('keydown');
     if (do_what == 'password_reset') {
         login_form.keydown(function(event) {
@@ -362,7 +360,6 @@ function login_and_fetch_dash(username, password) {
             $('.tempspin').spin('tinyblack');
         }
         if ($('#login').length != 0) {
-            //$('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
             $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
         }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
@@ -455,7 +452,6 @@ function cancelhold(hold_id) {
 function holdaction(action,hold_id) {
     var todo = action;
     $('#' + todo + '_' + hold_id).html('<span>Working</span>').spin('tiny').removeAttr('onclick').removeClass('tadlblue').addClass('black');
-    //$('#' + todo + '_' + hold_id).html('<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Working...</span>').removeAttr('onclick').removeClass('tadlblue').addClass('black');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/holdaction.json?token=' + token + '&hold_id=' + hold_id + '&todo=' + todo, function(data) {
         if (todo == 'suspend') {
@@ -517,14 +513,14 @@ function more_history() {
     var token = window.localStorage.getItem('token');
     $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
-        if (data.more == 'false') { delete data.more; } // this logic could probably be handled in melcatcher
+        if (data.more == 'false') { delete data.more; } 
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
         $('#two-thirds').append(info).promise().done(function() {
             $('.spinning').hide();
             $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
-        }); // this is probably how all "load more" functions should be rewritten, for consistency
+        });
     });
 }
 
@@ -764,7 +760,6 @@ function removefromlist(record) {
 function pre_multi_hold(record_ids) {
     var record_ids = record_ids
     var record_ids_array = record_ids.split(',');
-    
     link_id = '#multi-pre-hold';
     $(link_id).removeClass('green').addClass('black');
     if (logged_in()) {
@@ -796,36 +791,36 @@ function multi_hold(record_ids) {
     });
 }
 
-function emptylist(){
+function emptylist() {
     localStorage.removeItem('list');
     mylist();
 }
 
-function check_googlebooks(record_id, isbn){
-var isbn = isbn;
-var clean_isbn = isbn.split(",")[0].replace(/[^0-9]/g, "");
-var super_clean_isbn = $.trim(clean_isbn);
-var isbn_google = 'ISBN:'+ super_clean_isbn;
-var isbn_google_prep = "'"+ isbn_google +"'"
-var record_div = record_id
-var url = 'https://books.google.com/books?bibkeys='+ isbn_google +'&jscmd=viewapi&callback=mycallback';
-var reviews = "";
-var googlebook_test = "";
-$.ajax({
-    url: url,
-    type: "GET",
-    dataType: "jsonp",
-    async: false,
-    success: function (msg) {
-         googlebook_test = JSON.stringify(msg[isbn_google].preview);
-          if ( googlebook_test == '"partial"' || googlebook_test == '"full"' ){
-         $('#preview-'+ record_div).append('<a onclick="load_googlebooks('+ isbn_google_prep +')"><img src="https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif"></a>');
-         };
-    },
-    error: function () {
-         $('#preview-'+ record_div).append("fail");
-    },    
-});
+function check_googlebooks(record_id, isbn) {
+    var isbn = isbn;
+    var clean_isbn = isbn.split(",")[0].replace(/[^0-9]/g, "");
+    var super_clean_isbn = $.trim(clean_isbn);
+    var isbn_google = 'ISBN:'+ super_clean_isbn;
+    var isbn_google_prep = "'"+ isbn_google +"'";
+    var record_div = record_id;
+    var url = 'https://books.google.com/books?bibkeys='+ isbn_google +'&jscmd=viewapi&callback=mycallback';
+    var reviews = "";
+    var googlebook_test = "";
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "jsonp",
+        async: false,
+        success: function (msg) {
+            googlebook_test = JSON.stringify(msg[isbn_google].preview);
+            if ( googlebook_test == '"partial"' || googlebook_test == '"full"' ) {
+                $('#preview-'+ record_div).append('<a onclick="load_googlebooks('+ isbn_google_prep +')"><img src="https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif"></a>');
+            }
+        }
+        error: function () {
+            $('#preview-'+ record_div).append("fail");
+        },    
+    });
 }
 
 function load_googlebooks(isbn){
@@ -851,8 +846,6 @@ function shelf_finder(library, location, call_number){
         scrolling : 'no'
     });
 }
-
-
 
 function change_account_settings() {
     $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
@@ -921,17 +914,10 @@ function change_account_settings() {
 function fetch_available_by_id(ids) {
     var url = 'http://railsbox-1-40317.use1.nitrousbox.com/search/by_id?ids=' + ids
     $.getJSON(url, function(data) {
-
         $.each(data.items, function(){
-          var target_div = '#available_' + this.record_id;
-          $(target_div).html(this.availability); 
+            var target_div = '#available_' + this.record_id;
+            $(target_div).html(this.availability); 
         });
-        
-        
     });
 }
-
-
-
-
 
