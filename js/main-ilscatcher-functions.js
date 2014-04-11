@@ -912,8 +912,8 @@ function change_account_settings() {
 }
 
 function fetch_available_by_id(ids) {
-    var url = 'http://railsbox-1-40317.use1.nitrousbox.com/search/by_id?ids=' + ids
-    $.getJSON(url, function(data) {
+    var url = '/search/by_id?ids=' + ids
+    $.getJSON(ILSCATCHER_BASE + url, function(data) {
         $.each(data.items, function(){
             var target_div = '#available_' + this.record_id;
             $(target_div).html(this.availability); 
