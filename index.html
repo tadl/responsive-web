@@ -228,45 +228,7 @@
          		</div>
          	</div>
         </div>
-        <div class="grid-container">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <div id="wide-pad">&nbsp;</div>
-                <div id="region-wide" style="display:none;"></div>
-            </div>
-            <div class="grid-66 tablet-grid-66 mobile-grid-100">
-                <div id="thirdtwo-pad">&nbsp;</div>
-                <div id="third-two"></div>
-            </div>
-            <div class="grid-33 tablet-grid-33 mobile-grid-100">
-                <div id="thirdone-pad">&nbsp;</div>
-                <div id="third-one"></div>
-            </div>
-            <div class="grid-66 tablet-grid-66 mobile-grid-100 push-33 tablet-push-33 mobile-push-100">
-                <div id="twothirds-pad">&nbsp;</div>
-                <div id="two-thirds"></div>
-            </div>
-            <div class="grid-33 tablet-grid-33 mobile-grid-100 pull-66 tablet-pull-66 mobile-pull-100">
-                <div id="third-pad">&nbsp;</div>
-                <div id="one-third"></div>
-            </div>
-            <!-- <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25 tablet-push-50 mobile-push-100"> -->
-            <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25">
-                <div id="two-pad">&nbsp;</div>
-                <div id="search-params" class="card padv hidden"></div>
-                <div id="region-two"></div>
-                <div id="loadmore"><div id="loadmoretext"></div></div>
-            </div>
-            <!-- <div class="grid-25 tablet-grid-33 mobile-grid-100 pull-50 tablet-pull-50 mobile-pull-100"> -->
-            <div class="grid-25 tablet-grid-50 mobile-grid-100 pull-50">
-                <div id="one-pad">&nbsp;</div>
-                <div id="region-one"></div>
-            </div>
-            <!-- <div class="grid-25 tablet-grid-100 mobile-grid-100"> -->
-            <div class="grid-25 tablet-grid-50 mobile-grid-100">
-                <div id="three-pad">&nbsp;</div>
-                <div id="region-three"></div>
-            </div>
-            <a class="back-to-top">Back to Top</a>
+        <div id="layout">
         </div>
     </main>
     <footer id="footer">
@@ -333,6 +295,46 @@
     </footer>
 </div>
 
+<script id="layout-template" type="text/template">
+    <div class="grid-container">
+        <div class="grid-100 tablet-grid-100 mobile-grid-100">
+            <div id="wide-pad">&nbsp;</div>
+            <div id="region-wide" style="display:none;"></div>
+        </div>
+        <div class="grid-66 tablet-grid-66 mobile-grid-100">
+            <div id="thirdtwo-pad">&nbsp;</div>
+            <div id="third-two"></div>
+        </div>
+        <div class="grid-33 tablet-grid-33 mobile-grid-100">
+            <div id="thirdone-pad">&nbsp;</div>
+            <div id="third-one"></div>
+        </div>
+        <div class="grid-66 tablet-grid-66 mobile-grid-100 push-33 tablet-push-33 mobile-push-100">
+            <div id="twothirds-pad">&nbsp;</div>
+            <div id="two-thirds"></div>
+        </div>
+        <div class="grid-33 tablet-grid-33 mobile-grid-100 pull-66 tablet-pull-66 mobile-pull-100">
+            <div id="third-pad">&nbsp;</div>
+            <div id="one-third"></div>
+        </div>
+        <div class="grid-50 tablet-grid-100 mobile-grid-100 push-25">
+            <div id="two-pad">&nbsp;</div>
+            <div id="search-params" class="card padv hidden"></div>
+            <div id="region-two"></div>
+            <div id="loadmore"><div id="loadmoretext"></div></div>
+        </div>
+        <div class="grid-25 tablet-grid-50 mobile-grid-100 pull-50">
+            <div id="one-pad">&nbsp;</div>
+            <div id="region-one"></div>
+        </div>
+        <div class="grid-25 tablet-grid-50 mobile-grid-100">
+            <div id="three-pad">&nbsp;</div>
+            <div id="region-three"></div>
+        </div>
+        <a class="back-to-top">Back to Top</a>
+    </div>
+</script>
+
 <script id="login_form-template" type="text/template">
     Username: <input type="text" id="username" /><br />
     Password: <input type="password" id="pword" /><br />
@@ -390,15 +392,16 @@
     {{#items}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-30 tablet-grid-30 mobile-grid-30">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/>
+                <div class="grid-30 tablet-grid-20 mobile-grid-100 center">
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/><br/>
                     {{#if eresource}}
-                        <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a>
+                        <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br/><br/>
                     {{else}}
-                        <a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a>
+                        <a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br/><br/>
+                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a>
                     {{/if}}
                 </div>
-                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                <div class="grid-70 tablet-grid-80 mobile-grid-100">
                     <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}"/>&nbsp;{{title}}</span><br/>
                     {{#if author}}
                         <em class="subtitle">{{author}}&nbsp;</em>
@@ -406,14 +409,54 @@
                     {{#if record_year}}
                         <em class="subtitle">{{record_year}}</em>
                     {{/if}}
+                    {{#if summary}}
+                        <p><strong>Summary: </strong>{{summary}}</p>
+                    {{/if}}
+                    {{{youtubeify record_id}}}
+                    {{#if contents}}
+                        <p><strong>Contents: </strong>{{contents}}</p>
+                    {{/if}}
                     <div id="hold_message_{{record_id}}" class="holdmessage"></div>
+                </div>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    {{#if related_subjects}}
+                        <div class="grid-60 tablet-grid-60 mobile-grid-60">
+                            <strong>Related Subjects:</strong><br/>
+                            {{{related_subjects}}}
+                        </div>
+                    {{/if}}
+                    {{#if related_genres}}
+                        <div class="grid-40 tablet-grid-40 mobile-grid-40">
+                            <strong>Related Genres:</strong><br/>
+                            {{{related_genres}}}
+                        </div>
+                    {{/if}}
+                    {{#if copies_available}}
+                        <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                            <p class="floatright"><strong>{{copies_available}} of {{copies_total}} copies available</strong></p>
+                        </div>
+                    {{/if}}
+    {{/items}}
+                    <div class="grid-container" style="font-size:0.8em;">
+                        <div class="grid-25 tablet-grid-25 mobile-grid-30" style="font-weight:bold;">Library</div>
+                        <div class="grid-25 tablet-grid-25 mobile-grid-30" style="font-weight:bold;">Location</div>
+                        <div class="grid-25 tablet-grid-25 mobile-grid-20" style="font-weight:bold;">Call Num</div>
+                        <div class="grid-25 tablet-grid-25 mobile-grid-20" style="font-weight:bold;">Status</div>
+                    </div>
                     {{#all_copies}}
-                        <div
+                        <div class="grid-container" style="font-size:0.8em;">
+                            <div class="grid-25 tablet-grid-25 mobile-grid-30">{{library}}</div>
+                            <div class="grid-25 tablet-grid-25 mobile-grid-30">{{shelving_location}}</div>
+                            <div class="grid-25 tablet-grid-25 mobile-grid-20">{{call_number}}</div>
+                            <div class="grid-25 tablet-grid-25 mobile-grid-20">{{available}}</div>
+                        </div>
                     {{/all_copies}}
                 </div>
+                {{#items}}
+                <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a><br/><br/>
+                {{/items}}
             </div>
         </div>
-    {{/items}}
 </script>
 
 
@@ -441,7 +484,7 @@
                             <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a>
                         {{/compare}}
                         {{#compare availability null operator="!="}}
-                            <a class="button small purple" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
+                            <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
                         {{/compare}}
                     </div>
                     <div id="hold_message_{{record_id}}" class="holdmessage"></div>
@@ -488,7 +531,7 @@
                     <div id="showmore-{{node.item}}" class="padtop">
                         <a class="button small tadlblue" id="more_details_{{node.item}}" onclick="showmore({{node.item}})"><span>More Details</span></a>
                         <a class="button small green" id="place_hold_{{node.item}}" onclick="pre_hold({{node.item}})"><span>Place Hold</span></a>
-                        <a class="button small purple" onclick="addtolist('{{node.item}}', 'https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}', '', '{{encode node.author}}', '', '', '{{encode node.title}}' )"><span>Add to Bag</span></a> 
+                        <a class="button small tadlblue" onclick="addtolist('{{node.item}}', 'https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}', '', '{{encode node.author}}', '', '', '{{encode node.title}}' )"><span>Add to Bag</span></a> 
                     </div>
                     <div id="hold_message_{{node.item}}" class="holdmessage"></div>
                 </div>
@@ -1043,7 +1086,7 @@
                     {{/if}}
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
-                    <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove from list</span></a>
+                    <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove from bag</span></a>
                     <a class="button green verysmall" id="place_hold_{{record}}" onclick="pre_hold('{{record}}')"><span>Place Hold</span></a>
                 </div>
                 <div id="multi_hold_message_{{record}}" class="holdmessage"></div>

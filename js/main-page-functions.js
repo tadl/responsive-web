@@ -413,9 +413,3 @@ function my_lists(){
     };
 
 }
-
-function changeBanner(content, color) {
-    document.querySelector('#page_banner').style.backgroundColor = color;
-    $('#page_banner').css({"display" : "block"});
-    $('#page_banner').html('<h2>'+content +'</h2>')
-}

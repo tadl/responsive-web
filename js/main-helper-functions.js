@@ -237,14 +237,8 @@ function cleanhouse() {
 
 function cleandivs() {
     current_page = "";
-    $('#region-wide').empty();
-    $('#region-one').empty();
-    $('#region-two').empty();
-    $('#region-three').empty();
-    $('#one-third').empty(); // on the left
-    $('#two-thirds').empty(); // on the right
-    $('#third-one').empty(); // on the right
-    $('#third-two').empty(); //on the left
+    template = Handlebars.compile($('#layout-template').html());
+    $('#layout').html(template);
 }
 
 function load(page) {
@@ -546,5 +540,11 @@ function loadJson(key, url) {
     $.getJSON(url, function(data) {
         sessionStorage.setItem(key, JSON.stringify(data));
     });
+}
+
+function changeBanner(content, color) {
+    document.querySelector('#page_banner').style.backgroundColor = color;
+    $('#page_banner').css({"display" : "block"});
+    $('#page_banner').html('<h2 class="hide-on-mobile">' + content + '</h2><div class="grid-container"><div class="mobile-grid-100 hide-on-desktop hide-on-tablet small left" style="padding-top:15px;">' + content + '</div></div>')
 }
 

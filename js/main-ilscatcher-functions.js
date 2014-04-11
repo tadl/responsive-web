@@ -191,6 +191,8 @@ function viewItem(record_id) {
             changeBanner(data.items[0].title, color_tadlblue);
             loading_animation('stop');
         });
+        $('#region-two').parent().removeClass('grid-50').removeClass('push-25').addClass('grid-75');
+        mylist();
     });
 }
 
