@@ -393,10 +393,8 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-20 mobile-grid-100 center">
-                    <span style="position:relative;margin:0;padding:0;">
-                        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/>
-                        <div id="preview-{{record_id}}" class="gpreview hide-on-mobile" style="width:100%;position:absolute;top:0;left:0px;"></div>
-                    </span>
+                    <div id="preview-{{record_id}}" class="gpreview hide-on-mobile padtop"></div>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/>
                     {{#if eresource}}
                         <br/><a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br/><br/>
                     {{else}}
