@@ -545,6 +545,6 @@ function loadJson(key, url) {
 function changeBanner(content, color) {
     document.querySelector('#page_banner').style.backgroundColor = color;
     $('#page_banner').css({"display" : "block"});
-    $('#page_banner').html('<h2 class="hide-on-mobile">' + content + '</h2><div class="grid-container"><div class="mobile-grid-100 hide-on-desktop hide-on-tablet small left" style="padding-top:15px;">' + content + '</div></div>')
+    $('#page_banner').html('<h2 class="hide-on-mobile">' + content + '</h2><div class="grid-container"><div class="mobile-grid-100 hide-on-desktop hide-on-tablet small left" style="padding-top:4px;">' + content + '</div></div>')
 }
 

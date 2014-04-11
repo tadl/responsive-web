@@ -359,7 +359,7 @@
 <script id="searchfacets-template" type="text/template">
     <div class="card">
      <a id="facets"></a>   
-     <h4 class="title">Filter Your Search:</h4>
+     <h4 class="title">Search Filters</h4>
      </div>
     {{#subjects}}
         {{#compare count 0 operator=">"}}
@@ -393,12 +393,15 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-20 mobile-grid-100 center">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/><br/>
+                    <span style="position:relative;margin:0;padding:0;">
+                        <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/>
+                        <div id="preview-{{record_id}}" class="gpreview hide-on-mobile" style="width:100%;position:absolute;top:0;left:0px;"></div>
+                    </span>
                     {{#if eresource}}
-                        <a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br/><br/>
+                        <br/><a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br/><br/>
                     {{else}}
-                        <a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br/><br/>
-                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a>
+                        <br/><a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br/><br/>
+                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a><br/>
                     {{/if}}
                 </div>
                 <div class="grid-70 tablet-grid-80 mobile-grid-100">
@@ -436,27 +439,27 @@
                             <p class="floatright"><strong>{{copies_available}} of {{copies_total}} copies available</strong></p>
                         </div>
                     {{/if}}
-    {{/items}}
-                    <div class="grid-container" style="font-size:0.8em;">
-                        <div class="grid-25 tablet-grid-25 mobile-grid-30" style="font-weight:bold;">Library</div>
-                        <div class="grid-25 tablet-grid-25 mobile-grid-30" style="font-weight:bold;">Location</div>
-                        <div class="grid-25 tablet-grid-25 mobile-grid-20" style="font-weight:bold;">Call Num</div>
-                        <div class="grid-25 tablet-grid-25 mobile-grid-20" style="font-weight:bold;">Status</div>
-                    </div>
-                    {{#all_copies}}
-                        <div class="grid-container" style="font-size:0.8em;">
-                            <div class="grid-25 tablet-grid-25 mobile-grid-30">{{library}}</div>
-                            <div class="grid-25 tablet-grid-25 mobile-grid-30">{{shelving_location}}</div>
-                            <div class="grid-25 tablet-grid-25 mobile-grid-20">{{call_number}}</div>
-                            <div class="grid-25 tablet-grid-25 mobile-grid-20">{{available}}</div>
-                        </div>
-                    {{/all_copies}}
-                </div>
-                {{#items}}
-                <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a><br/><br/>
                 {{/items}}
+                <div class="grid-container" style="font-size:0.8em;">
+                    <div class="grid-25 tablet-grid-25 mobile-grid-30" style="font-weight:bold;">Library</div>
+                    <div class="grid-25 tablet-grid-25 mobile-grid-30" style="font-weight:bold;">Location</div>
+                    <div class="grid-25 tablet-grid-25 mobile-grid-20" style="font-weight:bold;">Call Num</div>
+                    <div class="grid-25 tablet-grid-25 mobile-grid-20" style="font-weight:bold;">Status</div>
+                </div>
+                {{#all_copies}}
+                    <div class="grid-container" style="font-size:0.8em;">
+                        <div class="grid-25 tablet-grid-25 mobile-grid-30">{{library}}</div>
+                        <div class="grid-25 tablet-grid-25 mobile-grid-30">{{shelving_location}}</div>
+                        <div class="grid-25 tablet-grid-25 mobile-grid-20">{{call_number}}</div>
+                        <div class="grid-25 tablet-grid-25 mobile-grid-20">{{available}}</div>
+                    </div>
+                {{/all_copies}}
             </div>
+            {{#items}}
+            <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
+            {{/items}}
         </div>
+    </div>
 </script>
 
 
@@ -510,6 +513,59 @@
     {{/if}}
 </script>
 
+<script id="more_details-template" type="text/template">
+    <div>
+        {{#items}}
+            <div class="summary" style="position:relative">
+                {{#compare summary "" operator="!="}}
+                    <p><span style="font-weight:bold">Summary: </span>{{summary}}</p>
+                {{/compare}}
+                {{#compare contents "" operator="!="}}
+                    <span style="font-weight:bold">Contents: </span>{{contents}}
+                {{/compare}}	
+                {{{youtubeify record_id}}}
+            </div>
+            {{#compare copies_available null operator="!="}}
+                <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
+            {{/compare}}
+        {{/items}}
+        <table>
+            {{#compare shelvinglocations.shelf_loaction null operator="!="}}
+                <tr class="smaller">
+                    <td><strong>Library</strong></td>
+                    <td><strong>Location</strong></td>
+                    <td><strong>Call #</strong></td>
+                </tr>
+            {{/compare}}
+            {{#shelvinglocations}}
+                {{#if shelf_location.library}}
+                    <tr class="smaller">
+                        <td>{{shelf_location.library}}</td>
+                        <td>{{shelf_location.shelving_location}}</td>
+                        <td>{{shelf_location.call_number}}</td>
+                    </tr>
+                {{/if}}
+            {{/shelvinglocations}}
+        </table>
+        {{#items}}
+            {{#compare related_subjects null operator="!="}}
+                <table>
+                    <tr>Related Subjects:</tr>
+                    {{{ related_subjects }}}
+                </table>	
+            {{/compare}}
+            {{#compare related_genres null operator="!="}}
+                <table>
+                    <tr>Related Subjects:</tr>
+                    {{{ related_genres }}}
+                </table>	
+            {{/compare}}
+            <span id="preview-{{record_id}}" class="floatright"></span>
+            <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>&nbsp;
+            <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
+        {{/items}}
+    </div>
+</script>
 
 <script id="showitemlist-template" type="text/template">
         <div class="card">
@@ -664,59 +720,6 @@
             </div>
         </div>
     {{/nodes}}
-</script>
-
-<script id="more_details-template" type="text/template">
-    <div>
-        {{#items}}
-            <div class="summary" style="position:relative">
-                {{#compare summary "" operator="!="}}
-                    <p><span style="font-weight:bold">Summary: </span>{{summary}}</p>
-                {{/compare}}
-                {{#compare contents "" operator="!="}}
-                    <span style="font-weight:bold">Contents: </span>{{contents}}
-                {{/compare}}	
-                {{{youtubeify record_id}}}
-            </div>
-            {{#compare copies_available null operator="!="}}
-                <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
-            {{/compare}}
-        {{/items}}
-        <table>
-            {{#compare shelvinglocations.shelf_loaction null operator="!="}}
-                <tr class="smaller">
-                    <td><strong>Library</strong></td>
-                    <td><strong>Location</strong></td>
-                    <td><strong>Call #</strong></td>
-                </tr>
-            {{/compare}}
-            {{#shelvinglocations}}
-                {{#if shelf_location.library}}
-                    <tr class="smaller">
-                        <td>{{shelf_location.library}}</td>
-                        <td>{{shelf_location.shelving_location}}</td>
-                        <td>{{shelf_location.call_number}}</td>
-                    </tr>
-                {{/if}}
-            {{/shelvinglocations}}
-        </table>
-        {{#items}}
-            {{#compare related_subjects null operator="!="}}
-                <table>
-                    <tr>Related Subjects:</tr>
-                    {{{ related_subjects }}}
-                </table>	
-            {{/compare}}
-            {{#compare related_genres null operator="!="}}
-                <table>
-                    <tr>Related Subjects:</tr>
-                    {{{ related_genres }}}
-                </table>	
-            {{/compare}}
-            <span id="preview-{{record_id}}" class="floatright"></span>
-            <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
-        {{/items}}
-    </div>
 </script>
 
 <script id="showfeaturednews-template" type="text/template">
@@ -1014,7 +1017,6 @@
     </div>
 </script>
 
-
 <script id="showholds-template" type="text/template">
     {{#:holds}}
         <div id="hold_{{:hold.:hold_id}}" class="card">
@@ -1070,27 +1072,28 @@
 
 <script id="mylist-template" type="text/template">
     <div class="card">
-      <a id="book_bag"></a> 
-      <h4 class="title">Book Bag</h4>
+        <a id="book_bag"></a> 
+        <h4 class="title">Book Bag</h4>
     </div> 
     {{#objects}}
         <div class="card">
             <div class="grid-container">
-                <div class="grid-30 tablet-grid-30 mobile-grid-30">
+                <div class="grid-35 tablet-grid-35 mobile-grid-35">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/>
                 </div>
-                <div class="grid-70 tablet-grid-70 mobile-grid-70">
+                <div class="grid-65 tablet-grid-65 mobile-grid-65">
                     <span class="cardtitle">{{title}}</span><br/>
+                    {{!--
                     {{#if author}}
-                        <span class="subtitle">{{author}}</span>
+                    <span class="subtitle">{{author}}</span>
                     {{/if}}
+                    --}}
                 </div>
-                <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
-                    <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove from bag</span></a>
+                <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop center">
+                    <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove from Bag</span></a>
                     <a class="button green verysmall" id="place_hold_{{record}}" onclick="pre_hold('{{record}}')"><span>Place Hold</span></a>
                 </div>
                 <div id="multi_hold_message_{{record}}" class="holdmessage"></div>
-                </div>
             </div>
         </div>
     {{/objects}}

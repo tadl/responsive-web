@@ -182,17 +182,19 @@ function showmore(record_id) {
 function viewItem(record_id) {
     cleanhouse();
     cleandivs();
-    changeBanner('Loading record ' + record_id + '...', color_tadlblue);
+    changeBanner('Loading...', color_tadlblue);
     loading_animation('start');
     $.getJSON(ILSCATCHER_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
         var template = Handlebars.compile($('#viewitem-template').html());
         var info = template(data);
+        var isbn = data.items[0].isbn;
         $('#region-two').html(info).promise().done(function() {
             changeBanner(data.items[0].title, color_tadlblue);
             loading_animation('stop');
         });
         $('#region-two').parent().removeClass('grid-50').removeClass('push-25').addClass('grid-75');
         mylist();
+        check_googlebooks(record_id, isbn);
     });
 }
 
@@ -826,11 +828,10 @@ function check_googlebooks(record_id, isbn) {
 }
 
 function load_googlebooks(isbn){
-    var content = '<div id="viewerCanvas" style="width: 500px; height: 600px"></div>'
+    var content = '<div id="viewerCanvas" style="width:600px;height:500px;"></div>';
     $.fancybox({
-        content : content,
-        type : 'iframe',
-        autoScale : true
+        content: content,
+        autoScale: true
     });
     var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
     viewer.load(isbn);
