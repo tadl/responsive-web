@@ -109,21 +109,53 @@ function showitemlist(list_name, list_id) {
     loading_text = 'Loading ' + list_name + '...';
     changeBanner(loading_text, '#0d4c78');
     loading_animation('start');
-    var data = JSON.parse(sessionStorage.getItem('everything'));
     var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
         $.getJSON(drupal_json_url, function(data) {
         var template = Handlebars.compile($('#results-template_2').html());
         var info = template(data);
+        $('#region-two').html(info);
+        loading_animation('stop');
+        changeBanner(list_name, '#0d4c78');
+        mylist();
+    });       
+}
+
+
+function showfeaturedlist(list_name, list_id) {
+    cleanhouse();
+    cleandivs();
+    var list_name = htmlEncode(decodeURIComponent(list_name));
+    loading_text = 'Loading ' + list_name + '...';
+    changeBanner(loading_text, '#0d4c78');
+    loading_animation('start');
+    var data = JSON.parse(sessionStorage.getItem('featured_lists'));
+    if (data == null) {
+        var drupal_json_url = 'http://mel-catcher.herokuapp.com/drupal/drupal.json?content=lists'
+        $.getJSON(drupal_json_url, function(data) {
+                var cat = JSON.stringify(data);
+                sessionStorage.setItem('featured_lists', cat);
+                showfeaturedlist(list_name, list_id);
+                return;
+        });
+    } else {
+        var template = Handlebars.compile($('#results-template_2').html());
+        var list_code = 'l_' + list_id
+        var info = template(data[list_code]);
         var ids = '';
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, '#0d4c78');
         mylist();
-        $.each(data.items, function(){
+        $.each(data[list_code].items, function(){
             ids = ids + this.record_id + ',';
         });
-    });       
+        fetch_available_by_id(ids);
+    }       
 }
+
+
+
+
 
 function showreviews(review_type) { 
     cleanhouse();

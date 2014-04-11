@@ -86,7 +86,6 @@
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_name/:list_id', showitemlist)
-            .route(BASE_URL + 'featured_list/:list_name/:list_id', showfeaturedlist)
             .route(BASE_URL + 'event/:nid', showEventNode)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
@@ -762,7 +761,7 @@
 
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
-        <div class="grid-container pointer" onclick="loadfeaturelist('{{list_id}}','{{encode list_name}}')">
+        <div class="grid-container pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
             <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop" style="margin:0 auto;position:relative;">
                 {{!-- <h4 class="title">{{list_name}}</h4> --}}
                 <div class="item25">
@@ -775,7 +774,7 @@
         </div>
     </div>
     <div class="card hide-on-mobile hide-on-tablet" style="padding:0;"> <!-- desktop only section -->
-        <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox pointer" onclick="loadfeaturelist('{{list_id}}','{{encode list_name}}')" style="padding:0;">
+        <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')" style="padding:0;">
             {{!-- <h4 class="title" style="padding:0 0 5px 0;margin-top:5px;">{{list_name}}</h4> --}}
             {{#each_upto items 4}}
                 <div class="img-viewer">

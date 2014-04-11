@@ -355,6 +355,20 @@ function loadlist(list_id, list_name) {
     };
 }
 
+function loadfeaturelist(list_id, list_name) {
+    cleanhouse();
+    cleandivs();
+    state = History.getState();
+    if (state.data.list != list_id) {
+        var action = {action:'showfeaturedlist', list:list_id}
+        var url = 'featured_list/'+ list_name +'/'+list_id;
+        History.pushState(action, psTitle + separator + "Lists", url);
+    };
+}
+
+
+
+
 // examples of what to pass to the following loadNodes func:
 // 
 // var nodes = {};

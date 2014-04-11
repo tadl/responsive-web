@@ -914,7 +914,7 @@ function change_account_settings() {
 }
 
 function fetch_available_by_id(ids) {
-    var url = '/search/by_id?ids=' + ids
+    var url = 'main/by_id.json?ids=' + ids
     $.getJSON(ILSCATCHER_BASE + url, function(data) {
         $.each(data.items, function(){
             var target_div = '#available_' + this.record_id;
