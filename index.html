@@ -491,12 +491,12 @@
                     </div>
                     <div id="hold_message_{{record_id}}" class="holdmessage"></div>
                     <div id="{{record_id}}">
-                        {{#compare abstract "" operator="!="}}
+                        {{#if abstract}}
                             <p><span style="font-weight:bold">Summary: </span> {{abstract}}</p>
-                        {{/compare}}
-                        {{#compare contents null operator="!="}}
+                        {{/if}}
+                        {{#if contents}}
                             <p><span style="font-weight:bold">Contents: </span> {{contents}}</p>
-                        {{/compare}}
+                        {{/if}}
                         <div id="available_{{record_id}}">
                             <p class="subtitle">{{availability}}</p>
                         </div>
