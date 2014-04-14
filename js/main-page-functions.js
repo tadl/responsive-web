@@ -244,10 +244,11 @@ function showYouthPage() {
         var youth_homeschool = simplenode_template(data.youth_homeschool);
         var youth_reviews = review_template(data.youth_reviews);
         var events_youth = events_template(data.events_youth);
+        var youth_staff = simplenode_template(data.youth_staff);
         var alleventslink = "load('events/youth')";
         $('#region-one').append(youth_homework + youth_homeschool + youth_award_winners + youth_resources);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
-        $('#region-two').append(youth_reviews);
+        $('#region-two').append(youth_staff + youth_reviews);
         $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Youth events</span></a>');
     } 
 }
