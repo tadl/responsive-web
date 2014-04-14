@@ -239,14 +239,13 @@ function showYouthPage() {
         var youth_display = featured_item_template(data.youth_display);
         var youth_new_books = featured_item_template(data.youth_new_books);
         var youth_resources = simplenode_template(data.youth_resources);
-        var youth_award_winners = simplenode_template(data.youth_award_winners);
         var youth_homework = simplenode_template(data.youth_homework);
         var youth_homeschool = simplenode_template(data.youth_homeschool);
         var youth_reviews = review_template(data.youth_reviews);
         var events_youth = events_template(data.events_youth);
         var youth_staff = simplenode_template(data.youth_staff);
         var alleventslink = "load('events/youth')";
-        $('#region-one').append(youth_homework + youth_homeschool + youth_award_winners + youth_resources);
+        $('#region-one').append(youth_homework + youth_homeschool + youth_resources);
         $('a[rel="lightframe"]').fancybox({type: 'iframe'});
         $('#region-two').append(youth_staff + youth_reviews);
         $('#region-three').append(youth_new_books + youth_display + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_youth + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Youth events</span></a>');
@@ -325,10 +324,9 @@ function showBooksPage() {
     var books_adult_display = featured_item_template(data.books_adult_display)
     var books_adult_clubkits = featured_item_template(data.books_adult_clubkits)
     var books_adult_business = featured_item_template(data.books_adult_business)
-    var books_book_list = simplenode_template(data.books_book_list)
     var books_reviews = review_template(data.books_reviews)
     $('#region-three').html(books_adult_clubkits + books_adult_business);
-    $('#region-two').html(books_reviews + books_book_list);
+    $('#region-two').html(books_reviews);
     $('#region-one').html(books_featured_fiction + books_featured_nonfiction + books_adult_display);
     $('a[rel="lightframe"]').fancybox({type: 'iframe'});
     }
