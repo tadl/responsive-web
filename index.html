@@ -193,8 +193,8 @@
         </div>   
     </header>
     <div id="login_form">
-        Username: <input type="text" id="username" /><br/>
-        Password: <input type="password" id="pword" /><br/>
+        Username: <input type="text" id="username" /><br />
+        Password: <input type="password" id="pword" /><br />
         <button id="login" onclick="login()">Login</button>
         <span id="login_msg"></span>
     </div>
@@ -336,17 +336,17 @@
 </script>
 
 <script id="login_form-template" type="text/template">
-    Username: <input type="text" id="username" /><br/>
-    Password: <input type="password" id="pword" /><br/>
+    Username: <input type="text" id="username" /><br />
+    Password: <input type="password" id="pword" /><br />
     <a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a>
-    <span id="login_msg"></span><br/>
-    <a onclick="load_password_reset()" class="pointer">Forgot password?</a><br/>
+    <span id="login_msg"></span><br />
+    <a onclick="load_password_reset()" class="pointer">Forgot password?</a><br />
     <a href="https://www.tadl.org/newuser" class="pointer">Register for a library card</a>
 </script>
 
 <script id="password-reset-template" type="text/template">
-    Username or library card / license:<br/>
-    <input type="text" id="username_or_barcode" /><br/>
+    Username or library card / license:<br />
+    <input type="text" id="username_or_barcode" /><br />
     <a id="submit_password_reset" class="button small tadlblue" onclick="submit_password_reset()"><span>Submit Password Reset Request</span></a>
     <a id="cancel_password_reset" onclick="cancel_password_reset()"><span>Cancel</span></a>
 </script>
@@ -394,16 +394,16 @@
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-20 mobile-grid-100 center">
                     <div id="preview-{{record_id}}" class="gpreview hide-on-mobile padtop"></div>
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" /><br/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" /><br />
                     {{#if eresource}}
-                        <br/><a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br/><br/>
+                        <br /><a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br /><br />
                     {{else}}
-                        <br/><a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br/><br/>
-                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a><br/>
+                        <br /><a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br /><br />
+                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a><br />
                     {{/if}}
                 </div>
                 <div class="grid-70 tablet-grid-80 mobile-grid-100">
-                    <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}" />&nbsp;{{title}}</span><br/>
+                    <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}" />&nbsp;{{title}}</span><br />
                     {{#if author}}
                         <em class="subtitle">{{author}}&nbsp;</em>
                     {{/if}}
@@ -422,13 +422,13 @@
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     {{#if related_subjects}}
                         <div class="grid-60 tablet-grid-60 mobile-grid-60">
-                            <strong>Related Subjects:</strong><br/>
+                            <strong>Related Subjects:</strong><br />
                             {{{related_subjects}}}
                         </div>
                     {{/if}}
                     {{#if related_genres}}
                         <div class="grid-40 tablet-grid-40 mobile-grid-40">
-                            <strong>Related Genres:</strong><br/>
+                            <strong>Related Genres:</strong><br />
                             {{{related_genres}}}
                         </div>
                     {{/if}}
@@ -469,7 +469,7 @@
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle"><img src="{{make_https format_icon}}" />&nbsp;{{title}}</span><br/>
+                    <span class="cardtitle"><img src="{{make_https format_icon}}" />&nbsp;{{title}}</span><br />
                     {{#if author}}
                         <em class="subtitle">{{author}}&nbsp;</em>
                     {{/if}}
@@ -524,7 +524,7 @@
                 {{{youtubeify record_id}}}
             </div>
             {{#compare copies_available null operator="!="}}
-                <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
+                <strong>{{copies_available}} of {{copies_total}} available</strong><br />
             {{/compare}}
         {{/items}}
         <table>
@@ -578,7 +578,7 @@
                     <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle">{{node.title}}</span><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
                     {{#if node.author}}
                         <em class="subtitle">{{node.author}}</em>
                     {{/if}}
@@ -679,9 +679,9 @@
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.record}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle">{{node.title}}</span><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
                     {{#if node.author}}
-                        <span class="subtitle">{{node.author}}</span><br/>
+                        <span class="subtitle">{{node.author}}</span><br />
                     {{/if}}
                     <span>Reviewed by: {{node.reviewer}}</span>
                 </div>
@@ -814,9 +814,9 @@
         <div>
             {{user.name}}
             <div class="accountlinks">
-                <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br/>
-                <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br/>
-                <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br/>
+                <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
             </div>
             Fines: {{user.fines}}
         </div>
@@ -910,9 +910,9 @@
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :checkout.:image}}" />
                 </div>
                 <div class="grid-90 tablet-grid-80 mobile-grid-70">
-                    <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}" />&nbsp;{{:checkout.:name}}</span><br/>
+                    <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}" />&nbsp;{{:checkout.:name}}</span><br />
                     <div id="{{:checkout.:checkout_id}}">
-                        Due: {{:checkout.:due_date}}<br/>
+                        Due: {{:checkout.:due_date}}<br />
                         Remaining Renewals: {{:checkout.:renew_attempts}}
                     </div>
                     <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
@@ -928,8 +928,8 @@
         <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <span class="cardtitle">{{node.title}}</span><br/>
-                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br />
                 </div>
                 {{!--
                 <div class="grid-30 tablet-grid-30 mobile-grid-30 center">
@@ -960,8 +960,8 @@
                     {{/if}}
                 </div>
                 <div class="grid-65 tablet-grid-65 mobile-grid-65">
-                    <span class="cardtitle">{{node.title}}</span><br/>
-                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br />
                     {{{trunc node.body}}}
                 </div>
                 <div class="clearfix"></div>
@@ -979,9 +979,9 @@
             <div class="grid-50 tablet-grid-50 mobile-grid-50">
                 <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
                 <h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
-                {{node.address}}<br/>
-                {{node.citystatezip}}<br/>
-                <a href="tel:{{node.phone}}">{{node.phone}}</a><br/>
+                {{node.address}}<br />
+                {{node.citystatezip}}<br />
+                <a href="tel:{{node.phone}}">{{node.phone}}</a><br />
             </div>
             <div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-top: 10px;">
                 <table>
@@ -1019,9 +1019,9 @@
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}" />
                 </div>
                 <div class="grid-80 tablet-grid-90 mobile-grid-80">
-                    <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}" />&nbsp;{{:hold.:name}}</span><br/>
-                    Pick-up Location: {{:hold.:pickup_location}}<br/>
-                    Status: <span id="holdstatus_{{:hold.:hold_id}}">{{#if :hold.:active}}Active{{else}}Suspended{{/if}}</span>; {{:hold.:status}}<br/>
+                    <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}" />&nbsp;{{:hold.:name}}</span><br />
+                    Pick-up Location: {{:hold.:pickup_location}}<br />
+                    Status: <span id="holdstatus_{{:hold.:hold_id}}">{{#if :hold.:active}}Active{{else}}Suspended{{/if}}</span>; {{:hold.:status}}<br />
                     <a class="button verysmall tadlblue" id="cancel_{{:hold.:hold_id}}" onclick="pre_cancelhold({{:hold.:hold_id}});"><span>Cancel</span></a>
                     {{#if :hold.:active}}
                         <a class="button verysmall tadlblue {{#if ../../ready}}hidden{{/if}}" id="suspend_{{:hold.:hold_id}}" onclick="holdaction('suspend',{{:hold.:hold_id}});"><span>Suspend</span></a>
@@ -1043,8 +1043,8 @@
                     <img class="result_img" onload="img_check(this)" onerror="img_error(this)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{record_id}}" />
                 </div>
                 <div class="grid-80 tablet-grid-90 mobile-grid-80">
-                    <span class="cardtitle">{{title}}</span><br/>
-                    <em>{{author}}</em><br/>
+                    <span class="cardtitle">{{title}}</span><br />
+                    <em>{{author}}</em><br />
                     <span class="smaller">Out: {{date_out}}, Due: {{date_due}}, In: {{date_in}}</span>
                     <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
                 </div>
@@ -1060,8 +1060,8 @@
 
 <script id="renew-template" type="text/template">
     {{#:checkouts}}
-        Due: {{:checkout.:due_date}}<br/>
-        Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
+        Due: {{:checkout.:due_date}}<br />
+        Remaining Renewals: {{:checkout.:renew_attempts}}<br />
     {{/:checkouts}}
         <span>{{:response}}</span>
 </script>
@@ -1078,7 +1078,7 @@
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" />
                 </div>
                 <div class="grid-65 tablet-grid-65 mobile-grid-65">
-                    <span class="cardtitle">{{title}}</span><br/>
+                    <span class="cardtitle">{{title}}</span><br />
                     {{!--
                     {{#if author}}
                     <span class="subtitle">{{author}}</span>
@@ -1096,9 +1096,9 @@
     <div class="card">
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <span class="cardtitle">Manage Book Bag</span><br/>
+                <span class="cardtitle">Manage Book Bag</span><br />
                 <div class="buttons padtop">
-                    <a id="multi-pre-hold" class="button medium green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a><br/><br/>
+                    <a id="multi-pre-hold" class="button medium green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a><br /><br />
                     <a id="empty-bag-button" class="button medium blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
                 </div>
             </div>
@@ -1109,8 +1109,8 @@
 <script id="locationinfo-template" type="text/template">
     {{#nodes}}
         <div id="locloc">
-            {{node.libfirstname}}<br/>
-            <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
+            {{node.libfirstname}}<br />
+            <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br />
             {{#compare node.shortname "tadl" operator="=="}}
                 <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>set location</span></a>
             {{/compare}}
@@ -1119,8 +1119,8 @@
             {{/compare}}
         </div>
         <div id="loccontact">
-            {{node.address}}<br/>
-            {{node.citystatezip}}<br/>
+            {{node.address}}<br />
+            {{node.citystatezip}}<br />
             {{node.phone}}
         </div>
         <div id="lochours">
@@ -1177,7 +1177,7 @@
                             </div>
                         {{/if}}
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
-                        <br/><br/>
+                        <br /><br />
                     {{/if}}
                 </div>
             </div>
@@ -1220,7 +1220,7 @@
                             {{{fixurls node.body}}}
                         </div>
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
-                        <br/><br/>
+                        <br /><br />
                     {{/if}}
                 </div>
             </div>
