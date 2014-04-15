@@ -118,8 +118,6 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
             var info_selected_facets = selected_facet_template(data);
             $('#region-two').html(info);
             $('#region-one').html(info_facets);
-            $('#loadmoretext').empty().append(loadmoreText); // FIXTHIS
-            $('#loadmoretext').trigger("create");
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').append(info_selected_facets);
         } else {
@@ -178,7 +176,6 @@ function showmore(record_id) {
     });
 }
 
-// MAKE THIS WORK FIXTHIS
 function viewItem(record_id) {
     cleanhouse();
     cleandivs();
@@ -214,29 +211,6 @@ function loadItem(record_id) {
     var action = {action:"viewitem", record_id:record_id}
     var newstate = 'item/' + record_id;
     History.pushState(action, 'Item ' + record_id, newstate);
-}
-
-function showshelf(record_id) {
-    var record_id = record_id;
-    var e = document.getElementById(record_id +'shelf');
-    if (e.style.display === 'none') {
-        if (!$.trim($('#'+ record_id +'shelf').html()).length) {
-            $('#'+ record_id +'-loading').html(loadingmoreText).trigger("create");
-            $.getJSON(ILSCATCHER_BASE + "/main/itemonshelf.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
-                var results = data.message;
-                var template = Handlebars.compile($('#shelf-template').html());
-                var info = template(data);
-                $('#'+ record_id +'shelf').html(info).promise().done(function() {
-                    $('#' + record_id + '-loading').empty();
-                });
-                $('#' + record_id + 'shelf').css('display', 'block');
-            });
-        } else {
-            $('#' + record_id + 'shelf').css('display', 'block');
-        }
-    } else {
-        $('#' + record_id + 'shelf').css('display', 'none');
-    }
 }
 
 function pre_hold(record_id) {
@@ -381,14 +355,15 @@ function login_and_fetch_dash(username, password) {
                 var pickups = data.users[0].user.pickups;
                 var fines = data.users[0].user.fines;
                 var token = data.token;
+                current_user = 'true';
                 window.localStorage.setItem('patron_full_name', patron_full_name);
                 window.localStorage.setItem('checkouts', checkouts);
                 window.localStorage.setItem('holds', holds);
                 window.localStorage.setItem('pickups', pickups);
                 window.localStorage.setItem('fines', fines);
-                window.localStorage.setItem('current_user', 'true');
-                window.localStorage.setItem('token', token)
-                current_user = window.localStorage.getItem('current_user');
+                window.localStorage.setItem('current_user', current_user);
+                window.localStorage.setItem('token', token);
+                window.localStorage.setItem('username', username);
                 reset_hold_links();
                 if (current_page == 'myaccount' && first_state != 'true' ) {
                 	myAccount();      
@@ -435,21 +410,9 @@ function pre_cancelhold(hold_id) {
     var hold_id = hold_id;
     var element = '#cancel_' + hold_id;
     var confirm_text = '<span>Click to confirm</span>';
-    var canceling_text = '<span><img src="img/spinner.gif" width="10" height="10" />&nbsp;Canceling hold...</span>';
     $(element).removeClass('tadlblue').addClass('red').html(confirm_text);
-    $(element).prop('onclick', null);
     $(element).on('click', function(event) {
-        $(this).off('click');
-        $(this).removeClass('red').addClass('black').html(canceling_text);
         holdaction('cancel',hold_id);
-    });
-}
-
-function cancelhold(hold_id) {
-    var hold_id = hold_id;
-    var token = window.localStorage.getItem('token');
-    $.getJSON(ILSCATCHER_BASE + '/main/cancelhold.json?token=' + token + '&hold_id=' + hold_id, function(data) {
-        $('#hold_' + hold_id).remove();
     });
 }
 
@@ -498,24 +461,29 @@ function show_checkout_history() {
     historycount=0;
     cleanhouse();
     cleandivs();
-    changeBanner('Checkout History', color_tadlblue);
-    loading_animation('start');
-    var username = window.localStorage.getItem('username');
-    var token = window.localStorage.getItem('token');
-    $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token, function(data) {
-        var template = Handlebars.compile($('#showcheckout-history-template').html());
-        var info = template(data);
-        var more = data.more;
-        $('#two-thirds').html(info).show();
-        myaccount_menu();
-        loading_animation('stop');
-    });
+    if (logged_in()) {
+        changeBanner('Checkout History', color_tadlblue);
+        loading_animation('start');
+        var username = window.localStorage.getItem('username');
+        var token = window.localStorage.getItem('token');
+        $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token, function(data) {
+            var template = Handlebars.compile($('#showcheckout-history-template').html());
+            var info = template(data);
+            var more = data.more;
+            $('#two-thirds').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
+        });
+    } else {
+        changeBanner('Log In', color_tadlblue);
+        $('#login_form').slideDown('fast');
+    }
 }
+
 function more_history() {
     historycount++;
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
-    $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
         if (data.more == 'false') { delete data.more; } 
         var more = data.more;
@@ -567,41 +535,35 @@ function show_payment_history() {
     historycount = 0;
     cleanhouse();
     cleandivs();
-    changeBanner('Payment History', color_tadlblue);
-    loading_animation('start');
-    var username = window.localStorage.getItem('username');
-    var token = window.localStorage.getItem('token');
-    $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token, function(data) {
-        var template = Handlebars.compile($('#payments-template').html());
-        var info = template(data);
-        var more = data.more;
-        $('#two-thirds').html(info).show().promise().done(function() {
-            if (more == 'true') {
-                $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
-                $('#loadmore').show();
-            } else {
-                $('#loadmore').hide();
-            }
+    if (logged_in()) {
+        changeBanner('Payment History', color_tadlblue);
+        loading_animation('start');
+        var username = window.localStorage.getItem('username');
+        var token = window.localStorage.getItem('token');
+        $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?token=' + token, function(data) {
+            if (data.more == 'false') { delete data.more; }
+            var template = Handlebars.compile($('#payments-template').html());
+            var info = template(data);
+            $('#two-thirds').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         });
-        myaccount_menu();
-        loading_animation('stop');
-    });
+    } else {
+        changeBanner('Log In', color_tadlblue);
+        $('#login_form').slideDown('fast');
+    }
 }
 function more_payment_history() {
     historycount++;
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
-    $('#loadmoretext').empty().append(loadingmoreText).trigger('create');
     $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
-        var more = data.more;
+        if (data.more == 'false') { delete data.more; }
         var template = Handlebars.compile($('#payments-template').html());
         var info = template(data);
         $('#two-thirds').append(info).promise().done(function() {
-            if (more == 'true') {
-                $('#loadmoretext').empty().append(morePaymentsText).trigger('create');
-            } else {
-                $('#loadmore').hide();
-            }
+            $('.spinning').hide();
+            $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
         });
     });
 }
@@ -610,47 +572,48 @@ function show_fines() {
     finepage = 0;
     cleanhouse();
     cleandivs();
-    changeBanner('Fines and Charges', color_tadlblue);
-    loading_animation('start');
-    var token = window.localStorage.getItem('token');
-    $.getJSON(ILSCATCHER_BASE + '/main/get_fines.json?token=' + token, function(data) {
-        var template = Handlebars.compile($('#fines-template').html());
-        var info = template(data);
-        var more = data.more;
-        $('#two-thirds').html(info).show().promise().done(function() {
-            if (more == 'true') {
-                $('#loadmoretext').empty().append(moreFinesText).trigger('create');
-                $('#loadmore').show();
-            } else {
-                $('#loadmore').hide();
-            }
+    if (logged_in()) {
+        changeBanner('Fines and Charges', color_tadlblue);
+        loading_animation('start');
+        var token = window.localStorage.getItem('token');
+        $.getJSON(ILSCATCHER_BASE + '/main/get_fines.json?token=' + token, function(data) {
+            var template = Handlebars.compile($('#fines-template').html());
+            var info = template(data);
+            var more = data.more;
+            $('#two-thirds').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         });
-        myaccount_menu();
-        loading_animation('stop');
-    });
-}
-function more_fines() {
+    } else {
+        changeBanner('Log in', color_tadlblue);
+        $('#login_form').slideDown('fast');
+    }
 }
 
 function showpickups() {
     cleanhouse();
     cleandivs();
-    changeBanner('Ready for Pickup', color_tadlblue);
-    var action = {action:'showpickups'}
-    History.pushState(action, 'Ready for Pickup', 'pickup'); 
-    loading_animation('start');
-    var token = window.localStorage.getItem('token');
-    state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
-        var template = Handlebars.compile($('#showholds-template').html());
-        data.ready = 'ready';
-        var info = template(data);
-        if (state.data.action === 'showpickups') {
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
-            loading_animation('stop');
-        }
-    });
+    if (logged_in()) {
+        changeBanner('Ready for Pickup', color_tadlblue);
+        var action = {action:'showpickups'}
+        History.pushState(action, 'Ready for Pickup', 'pickup'); 
+        loading_animation('start');
+        var token = window.localStorage.getItem('token');
+        state = History.getState();
+        $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
+            var template = Handlebars.compile($('#showholds-template').html());
+            data.ready = 'ready';
+            var info = template(data);
+            if (state.data.action === 'showpickups') {
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+                loading_animation('stop');
+            }
+        });
+    } else {
+        changeBanner('Log in', color_tadlblue);
+        $('#login_form').slideDown('fast');
+    }
 }
 
 function renew(circulation_id, barcode) {
@@ -670,22 +633,27 @@ function renew(circulation_id, barcode) {
 function showcard() {
     cleanhouse();
     cleandivs();
-    changeBanner('My Library Card', color_tadlblue);
-    var action = {action:'showcard'}
-    History.pushState(action, 'Your Card', 'card'); 
-    loading_animation('start');
-    var token = window.localStorage.getItem('token');
-    state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?token=' + token, function(data) {
-        if (state.data.action === 'showcard') {   
-            var card = data.barcode;
-            var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('#two-thirds').html(html).show();
-            $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12}); 
-            myaccount_menu();
-            loading_animation('stop');
-        }
-    });
+    if (logged_in()) {
+        changeBanner('My Library Card', color_tadlblue);
+        var action = {action:'showcard'}
+        History.pushState(action, 'Your Card', 'card');
+        loading_animation('start');
+        var token = window.localStorage.getItem('token');
+        state = History.getState();
+        $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?token=' + token, function(data) {
+            if (state.data.action === 'showcard') {
+                var card = data.barcode;
+                var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
+                $('#two-thirds').html(html).show();
+                $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12});
+                myaccount_menu();
+                loading_animation('stop');
+            }
+        });
+    } else {
+        changeBanner('Log in', color_tadlblue);
+        $('#login_form').slideDown('fast');
+    }
 }
 
 function addtolist(record_id, image, format_icon, author, year, online, title) {

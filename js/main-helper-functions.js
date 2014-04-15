@@ -60,12 +60,14 @@ $(document).ready(function() {
             $('.back-to-top').fadeOut(duration);
         }
     });
-    $('.back-to-top').click(function(event) {
-        event.preventDefault();
-        $('html, body').animate({scrollTop: 0}, duration);
-        return false;
-    });
 
+    /*
+     * $('.back-to-top').click(function(event) {
+     *     event.preventDefault();
+     *     $('html, body').animate({scrollTop: 0}, duration);
+     *     return false;
+     * });
+     */
 
     $('a[rel="lightframe"]').fancybox();
 
@@ -560,5 +562,29 @@ function changeBanner(content, color) {
     document.querySelector('#page_banner').style.backgroundColor = color;
     $('#page_banner').css({"display" : "block"});
     $('#page_banner').html('<h2 class="hide-on-mobile">' + content + '</h2><div class="grid-container"><div class="mobile-grid-100 hide-on-desktop hide-on-tablet small left" style="padding-top:4px;">' + content + '</div></div>')
+}
+
+function feedback(action) {
+    if (action == 'show'){
+        var content = '<div id="feedback_form" style="width:300px;height:300px;"> Name: <input type="text" id="feedback_name" /><br />Feedback:<br /> <textarea rows="8" cols="30" id="feedback_text" /></textarea></br><a class="button small green" id="send_feedback_button" onclick="feedback(\'send\')"><span>Send</span></a></div>';
+    $.fancybox({
+        content: content,
+        autoScale: true
+    });
+    } else if (action == 'send'){
+        var feedback_name = encodeURIComponent($('#feedback_name').val());
+        var feedback_text = encodeURIComponent($('#feedback_text').val());
+        var current_url = encodeURIComponent(document.URL);
+        $.get(ILSCATCHER_BASE + '/feedback/staff.json?name='+ feedback_name +'&url='+ current_url +'&issue='+ feedback_text, function(data){
+            console.log('feedback sent');
+        })
+        .done(function() {
+            $('#feedback_form').html('Your feedback has been submitted. Thanks!');   
+        })
+        .fail(function() {
+            $('#feedback_form').html('Sorry. Something went wrong. Please try again later'); 
+        });
+    }
+
 }
 

@@ -324,6 +324,17 @@ div[class*="pull-"] section {
     padding:0;
 }
 
+.topten {
+    margin-top:10px;
+}
+.twelvesixteen {
+    font-size:12px;
+    line-height:16px;
+}
+.nodetitle {
+    font-size:24px;
+    line-height:22px;
+}
 .topmenu {
     background-color:#dddddd;
 }
@@ -634,6 +645,8 @@ input.search {
   font-size: 26px;
   padding: 6px 8px 8px 12px;
   text-shadow: 1px 2px 2px rgba(0,0,0,0.5);
+  text-overflow:hidden;
+  white-space:nowrap;
 }
 
 #locloc {
@@ -666,6 +679,9 @@ table.hours {
 
 .floatright {
     float:right;
+}
+.floatleft {
+    float:left;
 }
 
 #footer {
@@ -762,3 +778,54 @@ h3.footer-heading {
     height: 100%;
 }
 
+.wide {
+    width:100%;
+}
+
+.relative {
+    position:relative;
+}
+
+.undertitle {
+    position:absolute;
+    bottom:0;
+    left:0;
+    padding:10px;
+    background:rgba(255,255,255,0.8);
+    color:#000;
+}
+
+#feedback_link { 
+  height: 100px; 
+  width: 90px; 
+  display: inline-block;
+  position: fixed; 
+  top: 40%;
+  left: 0px; 
+  z-index: 999;
+  margin: 0px;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#feedback_link a { 
+  display: block; 
+  background: #0d4c78;
+  height: 15px; 
+  width: 70px; 
+  padding: 8px 16px;
+  color: #fff; 
+  font-size: 17px; 
+  font-weight: bold; 
+  text-decoration: none; 
+  border-bottom: solid 1px #333;
+  border-left: solid 1px #333;
+  border-right: solid 1px #fff;
+}
+
+#feedback_link a:hover { 
+  background: #f00; 
+}
