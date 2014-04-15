@@ -331,7 +331,7 @@
             <div id="three-pad">&nbsp;</div>
             <div id="region-three"></div>
         </div>
-        <a class="back-to-top">Back to Top</a>
+        <a class="back-to-top" onclick="$('html, body').animate({scrollTop: 0}, 500);">Back to Top</a>
     </div>
 </script>
 
@@ -634,6 +634,11 @@
             </table>
         </div></div>
     </div>
+    {{#if more}}
+        <div class="padtop padbot moresults">
+            <a class="button tadlblue wide large more" onclick="$(this).prop('onclick',null).html('<span>Loading...</span>').removeClass('tadlblue').addClass('black').addClass('spinning').spin('tiny');more_payment_history();"><span>More</span></a>
+        </div>
+    {{/if}}
 </script>
 
 <script id="fines-template" type="text/template">
