@@ -303,6 +303,8 @@ function load(page) {
             var title = psTitle + separator + "Fines";
         } else if (page == 'payments') {
             var title = psTitle + separator + "Payment History";
+        } else if (page == 'page/tbl') {
+            var title = psTitle + separator + "Talking Book Library";
         }
         if (page != null) {
             History.pushState(action, title, page);
@@ -313,7 +315,7 @@ function load(page) {
 function nodePage(page) {
     if (page == 'governance') {
     	changeBanner('Governance', '#0d4c78');
-        loadNodes({left:573, middle:7180, right:577});
+        loadNodes({left:573, middle:572, right:577});
     }
     if (page == 'tbl') {
     	changeBanner('Talking Book Library', '#0d4c78');
@@ -388,6 +390,8 @@ function loadfeaturelist(list_id, list_name) {
 
 function loadNodes(nodes) {
     if (nodes !== null) {
+        cleanhouse();
+        cleandivs();
         loading_animation('start');
         if (nodes.left != null) {
             $.getJSON(NODEPREFIX + nodes.left, function(data) {
@@ -431,9 +435,6 @@ function loadNodes(nodes) {
         }
     }
 }
-
-
-
 
 $.fn.spin.presets.default = {
     lines: 13,
