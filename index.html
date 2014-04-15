@@ -20,8 +20,8 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-  		google.load("books", "0");
-	</script>
+        google.load("books", "0");
+    </script>
     <noscript>
         <link rel="stylesheet" href="css/unsemantic-grid-mobile.css" />
     </noscript>
@@ -60,7 +60,7 @@
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
     <script>
         var BASE_URL = '/responsive-web/';
-  	    var router = new staterouter.Router();
+        var router = new staterouter.Router();
         // Configure routes
         router
             .route(BASE_URL, showHomePage)
@@ -131,13 +131,13 @@
             </div>
             <div class="grid-90 tablet-grid-85 mobile-grid-75">
                 <div class="grid-container" style="border:0px solid black;padding:4px 95px 3px 0;border-radius:5px;margin:0;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.5); -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.5); box-shadow:1px 1px 2px rgba(0,0,0,0.5);white-space:nowrap;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;">
-                    <img src="img/icon-arrow-down-b-256.png" id="searchicon" class="icon pointer" title="Search Options" alt="Options" onclick="openSearch_options()" style="padding:0 0 1px 3px;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
-                    <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" style="display:inline-block;padding:0px 5px;"/>
-                    <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" style="padding:0 3px 3px 0;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"/>
+                    <img src="img/icon-arrow-down-b-256.png" id="searchicon" class="icon pointer" title="Search Options" alt="Options" onclick="openSearch_options()" style="padding:0 0 1px 3px;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;" />
+                    <input class="search" type="text" placeholder="Search for books, movies, music and more!" id="term" style="display:inline-block;padding:0px 5px;" />
+                    <img src="img/search.png" class="icon pointer" title="Search!" alt="Search" onclick="startsearch()" style="padding:0 3px 3px 0;margin:0;display:inline-block;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;" />
                 </div>
             </div>
             <div class="grid-5 tablet-grid-10 mobile-grid-15">
-            	<img src="img/account-button.png" class="icon pointer acct" alt="Account" title="My Account" onclick="openForm()" />
+                <img src="img/account-button.png" class="icon pointer acct" alt="Account" title="My Account" onclick="openForm()" />
             </div>
         </div>
         <div id="search_options">
@@ -225,9 +225,8 @@
                 </div>
             </div>
             <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
-            	<div id="page_banner">
-         		</div>
-         	</div>
+                <div id="page_banner"></div>
+            </div>
         </div>
         <div id="layout">
         </div>
@@ -332,7 +331,7 @@
             <div id="three-pad">&nbsp;</div>
             <div id="region-three"></div>
         </div>
-        <a class="back-to-top">Back to Top</a>
+        <a class="back-to-top" onclick="$('html, body').animate({scrollTop: 0}, 500);">Back to Top</a>
     </div>
 </script>
 
@@ -340,7 +339,7 @@
     Username: <input type="text" id="username" /><br />
     Password: <input type="password" id="pword" /><br />
     <a id="login" class="button small tadlblue" onclick="login()"><span>Login</span></a>
-    <span id="login_msg"></span><br/>
+    <span id="login_msg"></span><br />
     <a onclick="load_password_reset()" class="pointer">Forgot password?</a><br />
     <a href="https://www.tadl.org/newuser" class="pointer">Register for a library card</a>
 </script>
@@ -395,16 +394,16 @@
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-20 mobile-grid-100 center">
                     <div id="preview-{{record_id}}" class="gpreview hide-on-mobile padtop"></div>
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/><br/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" /><br />
                     {{#if eresource}}
-                        <br/><a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br/><br/>
+                        <br /><a class="button small red" target="_blank" href="{{online}}"><span>View Online</span></a><br /><br />
                     {{else}}
-                        <br/><a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br/><br/>
-                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a><br/>
+                        <br /><a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br /><br />
+                        <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a><br />
                     {{/if}}
                 </div>
                 <div class="grid-70 tablet-grid-80 mobile-grid-100">
-                    <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}"/>&nbsp;{{title}}</span><br/>
+                    <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}" />&nbsp;{{title}}</span><br />
                     {{#if author}}
                         <em class="subtitle">{{author}}&nbsp;</em>
                     {{/if}}
@@ -423,13 +422,13 @@
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
                     {{#if related_subjects}}
                         <div class="grid-60 tablet-grid-60 mobile-grid-60">
-                            <strong>Related Subjects:</strong><br/>
+                            <strong>Related Subjects:</strong><br />
                             {{{related_subjects}}}
                         </div>
                     {{/if}}
                     {{#if related_genres}}
                         <div class="grid-40 tablet-grid-40 mobile-grid-40">
-                            <strong>Related Genres:</strong><br/>
+                            <strong>Related Genres:</strong><br />
                             {{{related_genres}}}
                         </div>
                     {{/if}}
@@ -467,10 +466,10 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-30">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle"><img src="{{make_https format_icon}}"/>&nbsp;{{title}}</span><br/>
+                    <span class="cardtitle"><img src="{{make_https format_icon}}" />&nbsp;{{title}}</span><br />
                     {{#if author}}
                         <em class="subtitle">{{author}}&nbsp;</em>
                     {{/if}}
@@ -491,12 +490,12 @@
                     </div>
                     <div id="hold_message_{{record_id}}" class="holdmessage"></div>
                     <div id="{{record_id}}">
-                        {{#compare abstract "" operator="!="}}
+                        {{#if abstract}}
                             <p><span style="font-weight:bold">Summary: </span> {{abstract}}</p>
-                        {{/compare}}
-                        {{#compare contents null operator="!="}}
+                        {{/if}}
+                        {{#if contents}}
                             <p><span style="font-weight:bold">Contents: </span> {{contents}}</p>
-                        {{/compare}}
+                        {{/if}}
                         <div id="available_{{record_id}}">
                             <p class="subtitle">{{availability}}</p>
                         </div>
@@ -521,11 +520,11 @@
                 {{/compare}}
                 {{#compare contents "" operator="!="}}
                     <span style="font-weight:bold">Contents: </span>{{contents}}
-                {{/compare}}	
+                {{/compare}}    
                 {{{youtubeify record_id}}}
             </div>
             {{#compare copies_available null operator="!="}}
-                <strong>{{copies_available}} of {{copies_total}} available</strong><br/>
+                <strong>{{copies_available}} of {{copies_total}} available</strong><br />
             {{/compare}}
         {{/items}}
         <table>
@@ -551,16 +550,16 @@
                 <table>
                     <tr>Related Subjects:</tr>
                     {{{ related_subjects }}}
-                </table>	
+                </table>    
             {{/compare}}
             {{#compare related_genres null operator="!="}}
                 <table>
                     <tr>Related Subjects:</tr>
                     {{{ related_genres }}}
-                </table>	
+                </table>    
             {{/compare}}
             <span id="preview-{{record_id}}" class="floatright"></span>
-            <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>&nbsp;
+            <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
             <a class="button verysmall tadlblue padtop floatright viewmarc_{{record_id}}" onclick="$(this).html('<span>loading...</span>').spin('tiny').removeClass('tadlblue').addClass('black');viewmarc({{record_id}})"><span>marc record</span></a>
         {{/items}}
     </div>
@@ -576,10 +575,10 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-30">
-                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}"/>
+                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.item}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle">{{node.title}}</span><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
                     {{#if node.author}}
                         <em class="subtitle">{{node.author}}</em>
                     {{/if}}
@@ -599,7 +598,7 @@
 </script>
 
 <script id="mylists-template" type="text/template">
-	<div class="card">
+    <div class="card">
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 <ul style="list-style:none;">
@@ -609,7 +608,7 @@
                 </ul>
             </div>
         </div>
-	</div>
+    </div>
 </script>
 
 <script id="payments-template" type="text/template">
@@ -635,6 +634,11 @@
             </table>
         </div></div>
     </div>
+    {{#if more}}
+        <div class="padtop padbot moresults">
+            <a class="button tadlblue wide large more" onclick="$(this).prop('onclick',null).html('<span>Loading...</span>').removeClass('tadlblue').addClass('black').addClass('spinning').spin('tiny');more_payment_history();"><span>More</span></a>
+        </div>
+    {{/if}}
 </script>
 
 <script id="fines-template" type="text/template">
@@ -672,12 +676,12 @@
         <div id="card-{{node.record}}" class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-30">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.record}}"/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{node.record}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
-                    <span class="cardtitle">{{node.title}}</span><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
                     {{#if node.author}}
-                        <span class="subtitle">{{node.author}}</span><br/>
+                        <span class="subtitle">{{node.author}}</span><br />
                     {{/if}}
                     <span>Reviewed by: {{node.reviewer}}</span>
                 </div>
@@ -724,16 +728,16 @@
 <script id="showfeaturednews-template" type="text/template">
     <div class="grid-container">
         {{#each_upto nodes 5}}
-            <div class="card pointer grid-100 tablet-grid-50 mobile-grid-100" onclick="loadNode({{node.nid}})" style="padding:0;position:relative;">
-                <img src="{{make_https node.image}}" class="pointer" style="width:100%" />
-                <div class="grid-100 tablet-grid-100 hide-on-mobile" style="position:absolute;bottom:0;left:0;padding:10px;background:rgba(255,255,255,0.7);color:#000;">
+            <div class="card pointer grid-100 tablet-grid-50 mobile-grid-100 relative nopad" onclick="loadNode({{node.nid}})">
+                <img src="{{make_https node.image}}" class="pointer wide" />
+                <div class="grid-100 tablet-grid-100 hide-on-mobile undertitle">
                     {{#if node.teasertitle}}
                         {{{node.teasertitle}}}
                     {{else}}
                         {{{node.title}}}
                     {{/if}}
                 </div>
-                <div class="hide-on-tablet hide-on-desktop mobile-grid-100" style="position:absolute;bottom:0;left:0;padding:10px;background:rgba(255,255,255,0.7);color:#000;">
+                <div class="hide-on-tablet hide-on-desktop mobile-grid-100 undertitle">
                     {{#if node.teasertitle}}
                         {{{node.teasertitle}}}
                     {{else}}
@@ -764,8 +768,7 @@
 <script id="showfeatureditembox-template" type="text/template">
     <div class="card hide-on-desktop"><!-- mobile/tablet only section -->
         <div class="grid-container pointer" onclick="loadfeaturelist('{{list_id}}','{{encode list_name}}')">
-            <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop" style="margin:0 auto;position:relative;">
-                {{!-- <h4 class="title">{{list_name}}</h4> --}}
+            <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop" style="position:relative;">
                 <div class="item25">
                     {{#each_upto items 4}}
                         <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
@@ -775,9 +778,8 @@
             </div>
         </div>
     </div>
-    <div class="card hide-on-mobile hide-on-tablet" style="padding:0;"> <!-- desktop only section -->
-        <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox pointer" onclick="loadfeaturelist('{{list_id}}','{{encode list_name}}')" style="padding:0;">
-            {{!-- <h4 class="title" style="padding:0 0 5px 0;margin-top:5px;">{{list_name}}</h4> --}}
+    <div class="card hide-on-mobile hide-on-tablet nopad"> <!-- desktop only section -->
+        <div class="grid-100 tablet-grid-100 mobile-grid-100 itembox pointer nopad" onclick="loadfeaturelist('{{list_id}}','{{encode list_name}}')">
             {{#each_upto items 4}}
                 <div class="img-viewer">
                     <img src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
@@ -808,102 +810,94 @@
 <script id="logedin-template" type="text/template">
     {{#users}}
         <div>
-        {{user.name}}
-        <div class="accountlinks">
-        <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
-        <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
-        <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
-        </div>
-        Fines: {{user.fines}}
+            {{user.name}}
+            <div class="accountlinks">
+                <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
+            </div>
+            Fines: {{user.fines}}
         </div>
         <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
         <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
-    	<a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
+        <a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
 </script>
 
 <script id="myaccount-template" type="text/template">
-<div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100">
-<div id="account_settings_display">
-    {{#settings}}
-        <h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
-        <h4>Username: {{opac_username}}</h4>
-        <h4>Email: {{email_address}}</h4>
-        <h4>Phone Notifications: {{hold_notify_phone}}</h4>
-        <h4>Email Notifications: {{hold_notify_email}}</h4>
-        <h4>Default Pick-up Location: {{idtoname pickup}}</h4>
-        <h4>Save Borrowing History: {{circ}}</h4>
-        <h4>Save Hold History: {{hold}}</h4>
-    {{/settings}}
-</div>
-
-
-<form id="account_settings_form" style="display: none;">
-	{{#settings}}
-		<h4>Hold Shelf Alias: <input type="text" id="new_alias" value="{{hold_shelf_alias}}"></h4>
-		<h4>Username: <input type="text" id="new_username" value="{{opac_username}}"></h4>
-		<h4>Email: <input type="text" id="new_email" value="{{email_address}}"></h4>
-		<h4>Default Pick-up Location:    
-			<select id="new_pickup_location"">
-                <option value="23" {{check_for_select pickup 23}}>Woodmere</option>
-                <option value="25" {{check_for_select pickup 25}}>Kingsley</option>
-                <option value="24" {{check_for_select pickup 24}}>Interlochen</option>
-                <option value="27" {{check_for_select pickup 27}}>Fife Lake</option>
-                <option value="28" {{check_for_select pickup 28}}>East Bay</option>
-                <option value="26" {{check_for_select pickup 26}}>Peninsula</option>
-             </select></h4>
-		<h4 style="float: left;">Phone Notifications: </h4>
-		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="hold_notify_phone" class="onoffswitch-checkbox" id="hold_notify_phone" value="{{checkbox_value hold_notify_phone}}" {{checked_or_not hold_notify_phone}}>
-		
-		<label class="onoffswitch-label" for="hold_notify_phone">
-        		<div class="onoffswitch-inner"></div>
-        		<div class="onoffswitch-switch"></div>
-    	</label>
-    	
-    	</div>
-    	<div class="clear"></div>
-    	<h4 style="float: left;">Email Notifications: </h4>
-		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="hold_notify_email" class="onoffswitch-checkbox" id="hold_notify_email" value="{{checkbox_value hold_notify_email}}" {{checked_or_not hold_notify_email}}>
-		
-		<label class="onoffswitch-label" for="hold_notify_email">
-        		<div class="onoffswitch-inner"></div>
-        		<div class="onoffswitch-switch"></div>
-    	</label>
-    	
-    	</div>
-    	<div class="clear"></div>
-    	<h4 style="float: left;">Save Borrowing History: </h4>
-		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="save_circs" class="onoffswitch-checkbox" id="save_circs" value="{{checkbox_value circ}}" {{checked_or_not circ}}>
-		
-		<label class="onoffswitch-label" for="save_circs">
-        		<div class="onoffswitch-inner"></div>
-        		<div class="onoffswitch-switch"></div>
-    	</label>
-    	
-    	</div>
-    	<div class="clear"></div>
-		<h4 style="float: left;">Save Holds History: </h4>
-		<div class="onoffswitch" style="float: left;">
-		<input type="checkbox" name="save_holds" class="onoffswitch-checkbox" id="save_holds" value="{{checkbox_value hold}}" {{checked_or_not hold}}>
-		
-		<label class="onoffswitch-label" for="save_holds">
-        		<div class="onoffswitch-inner"></div>
-        		<div class="onoffswitch-switch"></div>
-    	</label>
-    	
-    	</div>
-    	<div class="clear"></div>
-	{{/settings}}
-	<div id="settings_save" class="padtop" style="display: none">
-	<a class="button small green" id="save_settings_button" onclick="change_account_settings()"><span>Save Changes</span></a>
-	<a class="button small red" onclick="account_settings_reset()"><span>Cancel</span></a>
-	</div>
-
-</form>	
-</div></div>
+    <div class="grid-container">
+        <div class="grid-100 mobile-grid-100 tablet-grid-100">
+            <div id="account_settings_display">
+                {{#settings}}
+                    <h4>Hold Shelf Alias: {{hold_shelf_alias}}</h4>
+                    <h4>Username: {{opac_username}}</h4>
+                    <h4>Email: {{email_address}}</h4>
+                    <h4>Phone Notifications: {{hold_notify_phone}}</h4>
+                    <h4>Email Notifications: {{hold_notify_email}}</h4>
+                    <h4>Default Pick-up Location: {{idtoname pickup}}</h4>
+                    <h4>Save Borrowing History: {{circ}}</h4>
+                    <h4>Save Hold History: {{hold}}</h4>
+                {{/settings}}
+            </div>
+            <form id="account_settings_form" style="display: none;">
+            {{#settings}}
+                <h4>Hold Shelf Alias: <input type="text" id="new_alias" value="{{hold_shelf_alias}}"></h4>
+                <h4>Username: <input type="text" id="new_username" value="{{opac_username}}"></h4>
+                <h4>Email: <input type="text" id="new_email" value="{{email_address}}"></h4>
+                <h4>Default Pick-up Location:    
+                    <select id="new_pickup_location"">
+                        <option value="23" {{check_for_select pickup 23}}>Woodmere</option>
+                        <option value="25" {{check_for_select pickup 25}}>Kingsley</option>
+                        <option value="24" {{check_for_select pickup 24}}>Interlochen</option>
+                        <option value="27" {{check_for_select pickup 27}}>Fife Lake</option>
+                        <option value="28" {{check_for_select pickup 28}}>East Bay</option>
+                        <option value="26" {{check_for_select pickup 26}}>Peninsula</option>
+                    </select>
+                </h4>
+                <h4 class="floatleft">Phone Notifications: </h4>
+                <div class="onoffswitch floatleft">
+                    <input type="checkbox" name="hold_notify_phone" class="onoffswitch-checkbox" id="hold_notify_phone" value="{{checkbox_value hold_notify_phone}}" {{checked_or_not hold_notify_phone}}>
+                    <label class="onoffswitch-label" for="hold_notify_phone">
+                        <div class="onoffswitch-inner"></div>
+                        <div class="onoffswitch-switch"></div>
+                    </label>
+                </div>
+                <div class="clear"></div>
+                <h4 class="floatleft">Email Notifications: </h4>
+                <div class="onoffswitch floatleft">
+                    <input type="checkbox" name="hold_notify_email" class="onoffswitch-checkbox" id="hold_notify_email" value="{{checkbox_value hold_notify_email}}" {{checked_or_not hold_notify_email}}>
+                    <label class="onoffswitch-label" for="hold_notify_email">
+                        <div class="onoffswitch-inner"></div>
+                        <div class="onoffswitch-switch"></div>
+                    </label>
+                </div>
+                <div class="clear"></div>
+                <h4 class="floatleft">Save Borrowing History: </h4>
+                <div class="onoffswitch floatleft">
+                    <input type="checkbox" name="save_circs" class="onoffswitch-checkbox" id="save_circs" value="{{checkbox_value circ}}" {{checked_or_not circ}}>
+                    <label class="onoffswitch-label" for="save_circs">
+                        <div class="onoffswitch-inner"></div>
+                        <div class="onoffswitch-switch"></div>
+                    </label>
+                </div>
+                <div class="clear"></div>
+                <h4 class="floatleft">Save Holds History: </h4>
+                <div class="onoffswitch floatleft">
+                    <input type="checkbox" name="save_holds" class="onoffswitch-checkbox" id="save_holds" value="{{checkbox_value hold}}" {{checked_or_not hold}}>
+                    <label class="onoffswitch-label" for="save_holds">
+                        <div class="onoffswitch-inner"></div>
+                        <div class="onoffswitch-switch"></div>
+                    </label>
+                </div>
+                <div class="clear"></div>
+            {{/settings}}
+            <div id="settings_save" class="padtop" style="display:none">
+                <a class="button small green" id="save_settings_button" onclick="change_account_settings()"><span>Save Changes</span></a>
+                <a class="button small red" onclick="account_settings_reset()"><span>Cancel</span></a>
+            </div>
+            </form> 
+        </div>
+    </div>
 </script>
 
 <script id="showcheckedout-template" type="text/template">
@@ -911,14 +905,15 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-10 tablet-grid-20 mobile-grid-30">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :checkout.:image}}"/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :checkout.:image}}" />
                 </div>
                 <div class="grid-90 tablet-grid-80 mobile-grid-70">
-                    <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}"/>&nbsp;{{:checkout.:name}}</span><br/>
+                    <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}" />&nbsp;{{:checkout.:name}}</span><br />
                     <div id="{{:checkout.:checkout_id}}">
-                        Due: {{:checkout.:due_date}}<br/>
+                        Due: {{:checkout.:due_date}}<br />
                         Remaining Renewals: {{:checkout.:renew_attempts}}
                     </div>
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
                     <a class="button small tadlblue" id="renew_{{:checkout.:checkout_id}}" onclick="renew({{:checkout.:checkout_id}}, {{:checkout.:barcode}});"><span>Renew this item</span></a>
                 </div>
             </div>
@@ -931,8 +926,8 @@
         <div class="card" id="card-{{node.nid}}">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <span class="cardtitle">{{node.title}}</span><br/>
-                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br />
                 </div>
                 {{!--
                 <div class="grid-30 tablet-grid-30 mobile-grid-30 center">
@@ -963,8 +958,8 @@
                     {{/if}}
                 </div>
                 <div class="grid-65 tablet-grid-65 mobile-grid-65">
-                    <span class="cardtitle">{{node.title}}</span><br/>
-                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br/>
+                    <span class="cardtitle">{{node.title}}</span><br />
+                    <em class="subtitle">{{node.event-date}} at {{node.location}}</em><br />
                     {{{trunc node.body}}}
                 </div>
                 <div class="clearfix"></div>
@@ -977,31 +972,29 @@
 </script>
 
 <script id="showlocations-template" type="text/template">
-	
-  	{{#nodes}}
+    {{#nodes}}
         <div class="card padtop">
-  		<div class="grid-50 tablet-grid-50 mobile-grid-50">
-        <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
-        <h3 style="padding:0;margin:0;">{{node.fullname}}</h3>
-        {{node.address}}<br/>
-        {{node.citystatezip}}<br/>
-        <a href="tel:{{node.phone}}">{{node.phone}}</a><br/>
-       </div>
-        <div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-top: 10px;">
-        <table>
-        <tr><td><strong>Hours:</strong></td><td></td></tr>
-        <tr><td>Sunday</td><td>{{node.sunday}}</td></tr>
-        <tr><td>Monday</td><td>{{node.monday}}</td></tr>
-        <tr><td>Tuesday</td><td>{{node.tuesday}}</td></tr>
-        <tr><td>Wednesday</td><td>{{node.wednesday}}</td></tr>
-        <tr><td>Thursday</td><td>{{node.thursday}}</td></tr>
-        <tr><td>Friday</td><td>{{node.friday}}</td></tr>
-        <tr><td>Saturday</td><td>{{node.saturday}}</td></tr>
-        </table>
-        </div>
+            <div class="grid-50 tablet-grid-50 mobile-grid-50">
+                <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
+                <h3 class="wrapper">{{node.fullname}}</h3>
+                {{node.address}}<br />
+                {{node.citystatezip}}<br />
+                <a href="tel:{{node.phone}}">{{node.phone}}</a><br />
+            </div>
+            <div class="grid-50 tablet-grid-50 mobile-grid-100 topten">
+                <table>
+                    <tr><td><strong>Hours:</strong></td><td></td></tr>
+                    <tr><td>Sunday</td><td>{{node.sunday}}</td></tr>
+                    <tr><td>Monday</td><td>{{node.monday}}</td></tr>
+                    <tr><td>Tuesday</td><td>{{node.tuesday}}</td></tr>
+                    <tr><td>Wednesday</td><td>{{node.wednesday}}</td></tr>
+                    <tr><td>Thursday</td><td>{{node.thursday}}</td></tr>
+                    <tr><td>Friday</td><td>{{node.friday}}</td></tr>
+                    <tr><td>Saturday</td><td>{{node.saturday}}</td></tr>
+                </table>
+            </div>
         </div>
     {{/nodes}}
-       
 </script>
 
 <script id="announcements-template" type="text/template">
@@ -1021,18 +1014,19 @@
         <div id="hold_{{:hold.:hold_id}}" class="card">
             <div class="grid-container">
                 <div class="grid-20 tablet-grid-10 mobile-grid-20">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}"/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}" />
                 </div>
                 <div class="grid-80 tablet-grid-90 mobile-grid-80">
-                    <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}"/>&nbsp;{{:hold.:name}}</span><br/>
-                    Pick-up Location: {{:hold.:pickup_location}}<br/>
-                    Status: <span id="holdstatus_{{:hold.:hold_id}}">{{#if :hold.:active}}Active{{else}}Suspended{{/if}}</span>; {{:hold.:status}}<br/>
+                    <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}" />&nbsp;{{:hold.:name}}</span><br />
+                    Pick-up Location: {{:hold.:pickup_location}}<br />
+                    Status: <span id="holdstatus_{{:hold.:hold_id}}">{{#if :hold.:active}}Active{{else}}Suspended{{/if}}</span>; {{:hold.:status}}<br />
                     <a class="button verysmall tadlblue" id="cancel_{{:hold.:hold_id}}" onclick="pre_cancelhold({{:hold.:hold_id}});"><span>Cancel</span></a>
                     {{#if :hold.:active}}
                         <a class="button verysmall tadlblue {{#if ../../ready}}hidden{{/if}}" id="suspend_{{:hold.:hold_id}}" onclick="holdaction('suspend',{{:hold.:hold_id}});"><span>Suspend</span></a>
                     {{else}}
                         <a class="button verysmall tadlblue" id="activate_{{:hold.:hold_id}}" onclick="holdaction('activate',{{:hold.:hold_id}});"><span>Activate</span></a>
                     {{/if}}
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
                 </div>
             </div>
         </div>
@@ -1044,12 +1038,13 @@
         <div id="checkout_{{record_id}}" class="card">
             <div class="grid-container">
                 <div class="grid-20 tablet-grid-10 mobile-grid-20">
-                    <img class="result_img" onload="img_check(this)" onerror="img_error(this)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{record_id}}"/>
+                    <img class="result_img" onload="img_check(this)" onerror="img_error(this)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{record_id}}" />
                 </div>
                 <div class="grid-80 tablet-grid-90 mobile-grid-80">
-                    <span class="cardtitle">{{title}}</span><br/>
-                    <em>{{author}}</em><br/>
+                    <span class="cardtitle">{{title}}</span><br />
+                    <em>{{author}}</em><br />
                     <span class="smaller">Out: {{date_out}}, Due: {{date_due}}, In: {{date_in}}</span>
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
                 </div>
             </div>
         </div>
@@ -1063,8 +1058,8 @@
 
 <script id="renew-template" type="text/template">
     {{#:checkouts}}
-        Due: {{:checkout.:due_date}}<br/>
-        Remaining Renewals: {{:checkout.:renew_attempts}}<br/>
+        Due: {{:checkout.:due_date}}<br />
+        Remaining Renewals: {{:checkout.:renew_attempts}}<br />
     {{/:checkouts}}
         <span>{{:response}}</span>
 </script>
@@ -1078,10 +1073,10 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35 mobile-grid-35">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}"/>
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" />
                 </div>
                 <div class="grid-65 tablet-grid-65 mobile-grid-65">
-                    <span class="cardtitle">{{title}}</span><br/>
+                    <span class="cardtitle">{{title}}</span><br />
                     {{!--
                     {{#if author}}
                     <span class="subtitle">{{author}}</span>
@@ -1099,9 +1094,9 @@
     <div class="card">
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                <span class="cardtitle">Manage Book Bag</span><br/>
+                <span class="cardtitle">Manage Book Bag</span><br />
                 <div class="buttons padtop">
-                    <a id="multi-pre-hold" class="button medium green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a><br/><br/>
+                    <a id="multi-pre-hold" class="button medium green" onclick="pre_multi_hold('{{#objects}}{{record}},{{/objects}}')"><span>Place All on Hold</span></a><br /><br />
                     <a id="empty-bag-button" class="button medium blue" onclick="emptylist()"><span>Empty Book Bag</span></a>
                 </div>
             </div>
@@ -1112,8 +1107,8 @@
 <script id="locationinfo-template" type="text/template">
     {{#nodes}}
         <div id="locloc">
-            {{node.libfirstname}}<br/>
-            <span style="font-size:12px;line-height:16px;">{{node.liblastname}}</span><br/>
+            {{node.libfirstname}}<br />
+            <span class="twelvesixteen">{{node.liblastname}}</span><br />
             {{#compare node.shortname "tadl" operator="=="}}
                 <a class="button verysmall trans" id="changeloc" data-dropdown="#dropdown-1"><span>set location</span></a>
             {{/compare}}
@@ -1122,8 +1117,8 @@
             {{/compare}}
         </div>
         <div id="loccontact">
-            {{node.address}}<br/>
-            {{node.citystatezip}}<br/>
+            {{node.address}}<br />
+            {{node.citystatezip}}<br />
             {{node.phone}}
         </div>
         <div id="lochours">
@@ -1162,10 +1157,10 @@
                         </div>
                     {{/if}}
                     {{#if node.nodetitle}}
-                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
+                        <div class="cardtitle nodetitle">{{{node.nodetitle}}}</div>
                     {{/if}}
                     {{#if node.title}}
-                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
+                        <div class="cardtitle nodetitle">{{{node.title}}}</div>
                     {{/if}}
                     {{#if node.event-date}}
                         <div class="subtitle padtop">{{{node.event-date}}} at {{node.location}}</div>
@@ -1180,7 +1175,7 @@
                             </div>
                         {{/if}}
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
-                        <br/><br/>
+                        <br /><br />
                     {{/if}}
                 </div>
             </div>
@@ -1210,10 +1205,10 @@
                         </div>
                     {{/if}}
                     {{#if node.nodetitle}}
-                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.nodetitle}}}</div>
+                        <div class="cardtitle nodetitle">{{{node.nodetitle}}}</div>
                     {{/if}}
                     {{#if node.title}}
-                        <div class="cardtitle" style="font-size:24px;line-height:22px;">{{{node.title}}}</div>
+                        <div class="cardtitle nodetitle">{{{node.title}}}</div>
                     {{/if}}
                     {{#if node.event-date}}
                         <div class="subtitle padtop">{{{node.event-date}}} at {{node.location}}</div>
@@ -1223,7 +1218,7 @@
                             {{{fixurls node.body}}}
                         </div>
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
-                        <br/><br/>
+                        <br /><br />
                     {{/if}}
                 </div>
             </div>
@@ -1269,7 +1264,6 @@
         <li><a onclick="load('payments')">Payment history</a></li>
     </ul>
 </div>
-
 
 <!-- Piwik -->
 <script type="text/javascript">

@@ -828,7 +828,7 @@ function check_googlebooks(record_id, isbn) {
 }
 
 function load_googlebooks(isbn){
-    var content = '<div id="viewerCanvas" style="width:600px;height:500px;"></div>';
+    var content = '<div id="viewerCanvas" style="width:700px;height:500px;"></div>';
     $.fancybox({
         content: content,
         autoScale: true
