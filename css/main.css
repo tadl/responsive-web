@@ -669,6 +669,9 @@ table.hours {
 .floatright {
     float:right;
 }
+.floatleft {
+    float:left;
+}
 
 #footer {
     color:#f0f2f5;
@@ -763,4 +766,5 @@ h3.footer-heading {
     width: 100%;
     height: 100%;
 }
+
 
