@@ -365,12 +365,11 @@ function myAccount(){
     cleanhouse();
     loading_animation('start');
     current_page = "myaccount";
-    username = window.localStorage.getItem('username');
-    password = window.localStorage.getItem('password');
+    token = window.localStorage.getItem('token');
     account_settings = JSON.parse(window.sessionStorage.getItem('account_settings'));
-    if (current_user == 'true') {
+    if (logged_in()) {
         if (account_settings == null) {
-            $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw='+ password, function(data) {
+            $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?token='+ token, function(data) {
                 var cat = JSON.stringify(data);
                 sessionStorage.setItem('account_settings', cat);
                 myAccount();

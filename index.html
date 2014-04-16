@@ -908,7 +908,7 @@
                         Due: {{:checkout.:due_date}}<br />
                         Remaining Renewals: {{:checkout.:renew_attempts}}
                     </div>
-                    <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{:checkout.:record_id}}" onclick="loadItem({{:checkout.:record_id}})"><span>link to item</span></a>
                     <a class="button small tadlblue" id="renew_{{:checkout.:checkout_id}}" onclick="renew({{:checkout.:checkout_id}}, {{:checkout.:barcode}});"><span>Renew this item</span></a>
                 </div>
             </div>
@@ -1021,7 +1021,7 @@
                     {{else}}
                         <a class="button verysmall tadlblue" id="activate_{{:hold.:hold_id}}" onclick="holdaction('activate',{{:hold.:hold_id}});"><span>Activate</span></a>
                     {{/if}}
-                    <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{:hold.:record_id}}" onclick="loadItem({{:hold.:record_id}})"><span>link to item</span></a>
                 </div>
             </div>
         </div>
