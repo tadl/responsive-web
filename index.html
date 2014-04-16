@@ -20,8 +20,8 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-  		google.load("books", "0");
-	</script>
+        google.load("books", "0");
+    </script>
     <noscript>
         <link rel="stylesheet" href="css/unsemantic-grid-mobile.css" />
     </noscript>
@@ -60,7 +60,7 @@
     <script type="text/javascript" src="js/main-ilscatcher-functions.js"></script>
     <script>
         var BASE_URL = '/responsive-web/';
-  	    var router = new staterouter.Router();
+        var router = new staterouter.Router();
         // Configure routes
         router
             .route(BASE_URL, showHomePage)
@@ -102,6 +102,9 @@
     </script>
 </head>
 <body class="pushmenu-push">
+<div id="feedback_link">
+  <a onclick="feedback('show')">feedback</a>
+</div>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -137,7 +140,7 @@
                 </div>
             </div>
             <div class="grid-5 tablet-grid-10 mobile-grid-15">
-            	<img src="img/account-button.png" class="icon pointer acct" alt="Account" title="My Account" onclick="openForm()" />
+                <img src="img/account-button.png" class="icon pointer acct" alt="Account" title="My Account" onclick="openForm()" />
             </div>
         </div>
         <div id="search_options">
@@ -225,8 +228,8 @@
                 </div>
             </div>
             <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
-            	<div id="page_banner"></div>
-         	</div>
+                <div id="page_banner"></div>
+            </div>
         </div>
         <div id="layout">
         </div>
@@ -515,7 +518,7 @@
                 {{/compare}}
                 {{#compare contents "" operator="!="}}
                     <span style="font-weight:bold">Contents: </span>{{contents}}
-                {{/compare}}	
+                {{/compare}}    
                 {{{youtubeify record_id}}}
             </div>
             {{#compare copies_available null operator="!="}}
@@ -545,13 +548,13 @@
                 <table>
                     <tr>Related Subjects:</tr>
                     {{{ related_subjects }}}
-                </table>	
+                </table>    
             {{/compare}}
             {{#compare related_genres null operator="!="}}
                 <table>
                     <tr>Related Subjects:</tr>
                     {{{ related_genres }}}
-                </table>	
+                </table>    
             {{/compare}}
             <span id="preview-{{record_id}}" class="floatright"></span>
             <a class="button verysmall tadlblue padtop floatright linkto_{{record_id}}" onclick="loadItem({{record_id}})"><span>link to item</span></a>
@@ -593,7 +596,7 @@
 </script>
 
 <script id="mylists-template" type="text/template">
-	<div class="card">
+    <div class="card">
         <div class="grid-container">
             <div class="grid-100 tablet-grid-100 mobile-grid-100">
                 <ul style="list-style:none;">
@@ -603,7 +606,7 @@
                 </ul>
             </div>
         </div>
-	</div>
+    </div>
 </script>
 
 <script id="payments-template" type="text/template">
@@ -815,7 +818,7 @@
         </div>
         <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
         <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
-    	<a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
+        <a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
 </script>
 
@@ -890,7 +893,7 @@
                 <a class="button small green" id="save_settings_button" onclick="change_account_settings()"><span>Save Changes</span></a>
                 <a class="button small red" onclick="account_settings_reset()"><span>Cancel</span></a>
             </div>
-            </form>	
+            </form> 
         </div>
     </div>
 </script>
@@ -968,7 +971,7 @@
 
 <script id="showlocations-template" type="text/template">
   	{{#nodes}}
-        <div class="card padtop">
+        <div class="card padtop"
             <div class="grid-50 tablet-grid-50 mobile-grid-50">
                 <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
                 <h3 class="wrapper">{{node.fullname}}</h3>
@@ -1220,6 +1223,8 @@
         </div>
     {{/nodes}}
 </script>
+
+
 
 <div id="dropdown-1" class="dropdown dropdown-tip">
     <ul class="dropdown-menu">

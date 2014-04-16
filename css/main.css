@@ -479,9 +479,8 @@ img.icon.logo {
     padding:5px 0;
     position:absolute;
     left:0;
-    background:rgba(0,0,0,0.5);
-    text-shadow: black 1px 1px 1px;
-    color:#fff;
+    background:rgba(255,255,255,0.8);
+    color:#000;
     width:100%;
     text-align:center;
     font-size:1.2em;
@@ -792,7 +791,38 @@ h3.footer-heading {
     bottom:0;
     left:0;
     padding:10px;
-    background:rgba(0,0,0,0.5);
-    text-shadow: black 1px 1px 1px;
-    color:#fff;
+    background:rgba(255,255,255,0.8);
+    color:#000;
+}
+
+#feedback_link { 
+  height: auto; 
+  width: 30px; 
+  display: inline-block;
+  position: fixed; 
+  top: 40%;
+  left: 0px; 
+  z-index: 999;
+  margin: 0px;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#feedback_link a { 
+  display: block; 
+  background: #0d4c78;
+  height: 15px; 
+  width: 70px; 
+  padding: 8px 16px;
+  color: #fff; 
+  font-size: 17px; 
+  font-weight: bold; 
+  text-decoration: none; 
+}
+
+#feedback_link a:hover { 
+  background: #f00; 
 }
