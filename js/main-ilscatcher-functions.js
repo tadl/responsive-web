@@ -464,9 +464,8 @@ function show_checkout_history() {
     if (logged_in()) {
         changeBanner('Checkout History', color_tadlblue);
         loading_animation('start');
-        var username = window.localStorage.getItem('username');
         var token = window.localStorage.getItem('token');
-        $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token, function(data) {
+        $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?token=' + token, function(data) {
             var template = Handlebars.compile($('#showcheckout-history-template').html());
             var info = template(data);
             var more = data.more;
