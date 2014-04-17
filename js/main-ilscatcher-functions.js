@@ -656,7 +656,7 @@ function showcard() {
 }
 
 function addtolist(record_id, image, format_icon, author, year, online, title) {
-    var record_id = record_id;
+    var record_id = record_id; //not sure if this is all necessary...
     var image = image;
     var format_icon = format_icon;
     var author = author;
@@ -672,10 +672,10 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
         mergelist.unshift(listvalue);
         var prep = JSON.parse(current_list);
         var test = Object.keys(prep).length;
-        if (test <= 9){
-        localStorage['list'] = JSON.stringify(mergelist); 
-        }else{
-        alert('Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!');
+        if (test <= 9) {
+            localStorage['list'] = JSON.stringify(mergelist); 
+        } else {
+            alert('Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!'); // should probably be fancybox.
         }
     } else {
         window.localStorage.setItem('list', savelist);
@@ -706,16 +706,9 @@ function mylist() {
     $('#region-three').html(info);
 }
 
-function isInBag(record) {
-    // this should be a quick-lookup function wrapper for localstorage list.
-    // return true if the item is in the list, return false otherwise.
-    // so we can do: if (!isInBag(id)) before printing the Add to Bag buttons.
-    coin = Math.floor(Math.random(1)*2);
-    if (coin == 0) {
-        return false;
-    } else {
-        return true;
-    }
+function bagIsEmpty() {
+    var bag = (window.localStorage.getItem('list') ? false : true);
+    return bag;
 }
 
 function removefromlist(record) {
@@ -723,7 +716,7 @@ function removefromlist(record) {
     var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
     var wrapper = '['+ mylist2 +']';
     var test = JSON.stringify(eval('(' + wrapper + ')'));
-    var json = JSON.parse(test);
+    var json = JSON.parse(test); // this needs work
     for (i=0;i<json.length;i++) {
         if (json[i].record == record) {
             json.splice(i,1);

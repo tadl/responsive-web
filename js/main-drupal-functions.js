@@ -145,16 +145,20 @@ function showfeaturedlist(list_name, list_id) {
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, '#0d4c78');
-        mylist();
+        if (!bagIsEmpty()) {
+            mylist();
+        } else {
+            $('#region-two').parent()
+                .removeClass('grid-50')
+                .addClass('grid-75');
+        }
         $.each(data[list_code].items, function(){
+            fetch_available_by_id(this.record_id);
             ids = ids + this.record_id + ',';
         });
-        fetch_available_by_id(ids);
+        //fetch_available_by_id(ids);
     }       
 }
-
-
-
 
 
 function showreviews(review_type) { 
