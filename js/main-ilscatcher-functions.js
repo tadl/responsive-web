@@ -686,13 +686,9 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
 
 function mylist() {
     if (window.localStorage.getItem('list')) {
-        var mylist = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-        var mylist_decode = decodeURIComponent(mylist);
-        var wrapper = '{"objects": [' + mylist_decode + ']}';
-        var test = JSON.stringify(eval('(' + wrapper + ')'));
-        var test2 = JSON.parse(test);
+        var data = JSON.parse('{"objects": [' + decodeURIComponent(window.localStorage.getItem('list').replace(/[\[\]']+/g,'')) + ']}');
         var existingIDs = [];
-        test2.objects = $.grep(test2.objects, function(v) {
+        data.objects = $.grep(data.objects, function(v) {
             if ($.inArray(v.record, existingIDs) !== -1) {
                 return false;
             } else { 
@@ -700,17 +696,27 @@ function mylist() {
                 return true;
             }
         });
-        var savelist = JSON.stringify(test2.objects);
+        var savelist = JSON.stringify(data.objects);
         window.localStorage.setItem('list', savelist);
     } else {
-        var test2 = 'empty';
+        var data = 'empty';
     }
     var template = Handlebars.compile($('#mylist-template').html());
-    var info = template(test2);
+    var info = template(data);
     $('#region-three').html(info);
 }
 
-
+function isInBag(record) {
+    // this should be a quick-lookup function wrapper for localstorage list.
+    // return true if the item is in the list, return false otherwise.
+    // so we can do: if (!isInBag(id)) before printing the Add to Bag buttons.
+    coin = Math.floor(Math.random(1)*2);
+    if (coin == 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function removefromlist(record) {
     var record = record;
