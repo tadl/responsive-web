@@ -137,7 +137,8 @@ function subject_search(subject) {
 
 function logged_in() {
     var username = window.localStorage.getItem('username');
-    if (username) {
+    var token = window.localStorage.getItem('token');
+    if (username || token) {
         return true;
     } else {
         return false;
@@ -261,9 +262,8 @@ function hold(record_id) {
 }
 
 function hold_partB() {
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
-    $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
+    var token = window.localStorage.getItem('token');
+    $.getJSON(ILSCATCHER_BASE + '/main/acctinfo.json?token=' + token, function(data) {
         var template = Handlebars.compile($('#logedin-template').html());
         var info = template(data);
         $('#login_form').html(info);
@@ -410,10 +410,7 @@ function pre_cancelhold(hold_id) {
     var hold_id = hold_id;
     var element = '#cancel_' + hold_id;
     var confirm_text = '<span>Click to confirm</span>';
-    $(element).removeClass('tadlblue').addClass('red').html(confirm_text);
-    $(element).on('click', function(event) {
-        holdaction('cancel',hold_id);
-    });
+    $(element).removeClass('tadlblue').addClass('red').html(confirm_text).attr('onclick', 'holdaction(\'cancel\',' + hold_id + ');');
 }
 
 function holdaction(action,hold_id) {
