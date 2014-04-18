@@ -136,9 +136,8 @@ function subject_search(subject) {
 }
 
 function logged_in() {
-    var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
-    if (username || token) {
+    if (token && token != "undefined") {
         return true;
     } else {
         return false;
@@ -148,7 +147,14 @@ function logged_in() {
 function logout() {
     var source = $('#login_form-template').html();
     $('#login_form').html(source);
-    window.localStorage.clear();
+    window.localStorage.removeItem('patron_full_name');
+    window.localStorage.removeItem('checkouts');
+    window.localStorage.removeItem('holds');
+    window.localStorage.removeItem('pickups');
+    window.localStorage.removeItem('fines');
+    window.localStorage.removeItem('current_user');
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('username');
     current_user = 'false';
     location.reload();
 }
@@ -317,8 +323,6 @@ function login() {
     var username = $('#username').val();
     var password = $('#pword').val();
     if (typeof(username) !== 'undefined' && username != '' && typeof(password) !== 'undefined' && password != '') {
-        window.localStorage.setItem('username', username);
-        window.localStorage.setItem('password', password);
         login_and_fetch_dash(username, password);
     }
 }
@@ -327,10 +331,6 @@ function login_and_fetch_dash(username, password) {
     var username = username;
     var password = password;
     var first_state = window.localStorage.getItem('current_user');
-    if (typeof(username) == 'undefined' || typeof(password) == 'undefined') {
-        username = window.localStorage.getItem('username');
-        password = window.localStorage.getItem('password');
-    }
     if (typeof(username) !== 'undefined' && username != '' && username !== null
         && typeof(password) !== 'undefined' && password != '' && password !== null) {
         if ($('#pword').length != 0) {
@@ -342,9 +342,8 @@ function login_and_fetch_dash(username, password) {
         }
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
-                var source   = $('#login_form-template').html();
+                var source = $('#login_form-template').html();
                 $('#login_form').html(source);
-    			window.localStorage.clear();
                 $('#login_msg').html('<span>Error logging in.</span>');
                 current_user = 'false';
             } else {
@@ -375,7 +374,39 @@ function login_and_fetch_dash(username, password) {
         var source   = $('#login_form-template').html();
         $('#login_form').html(source);
         set_login_form_keypress_event();
-        window.localStorage.clear();
+        //window.localStorage.clear();
+    }
+}
+
+function refresh_acctinfo() {
+    var token = window.localStorage.getItem('token');
+    var username = window.localStorage.getItem('username');
+    var first_state = window.localStorage.getItem('current_user');
+    if (logged_in()) {
+        $.getJSON(ILSCATCHER_BASE + '/main/acctinfo.json?token=' + token, function(data) {
+            if (data['status'] == 'error') {
+                var source = $('#login_form-template').html();
+                $('#login_form').html(source);
+                $('#login_msg').html('<span>Error logging in.</span>');
+                current_user = 'false';
+            } else {
+                render_dash(data);
+                var patron_full_name = data.users[0].user.name;
+                var checkouts = data.users[0].user.checkouts;
+                var holds = data.users[0].user.holds;
+                var pickups = data.users[0].user.pickups;
+                var fines = data.users[0].user.fines;
+                current_user = 'true';
+                window.localStorage.setItem('patron_full_name', patron_full_name);
+                window.localStorage.setItem('checkouts', checkouts);
+                window.localStorage.setItem('holds', holds);
+                window.localStorage.setItem('pickups', pickups);
+                window.localStorage.setItem('fines', fines);
+                window.localStorage.setItem('current_user', current_user);
+                window.localStorage.setItem('username', username);
+                reset_hold_links();
+            }
+        });
     }
 }
 
@@ -814,67 +845,69 @@ function shelf_finder(library, location, call_number){
 }
 
 function change_account_settings() {
-    $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
-    var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
-    var new_username = encodeURIComponent($('#new_username').val());
-    var new_alias = encodeURIComponent($('#new_alias').val());
-    var new_email = encodeURIComponent($('#new_email').val());
-    var new_pickup_location = $('#new_pickup_location').val();
-    var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
-    var new_email_notify = $('#hold_notify_email').is(':checked').toString();
-    var new_save_circs = $('#save_circs').is(':checked').toString();
-    var new_save_holds = $('#save_holds').is(':checked').toString();
-    var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
-    var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
-    var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
-    var old_pickup_location = $('#new_pickup_location option[selected]').val();
-    var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
-    var old_email_notify = $('#hold_notify_email').prop("defaultValue");
-    var old_save_circs = $('#save_circs').prop("defaultValue").toString();
-    var old_save_holds = $('#save_holds').prop("defaultValue").toString();
+    if (logged_in()) {
+        $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
+        var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
+        var new_username = encodeURIComponent($('#new_username').val());
+        var new_alias = encodeURIComponent($('#new_alias').val());
+        var new_email = encodeURIComponent($('#new_email').val());
+        var new_pickup_location = $('#new_pickup_location').val();
+        var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
+        var new_email_notify = $('#hold_notify_email').is(':checked').toString();
+        var new_save_circs = $('#save_circs').is(':checked').toString();
+        var new_save_holds = $('#save_holds').is(':checked').toString();
+        var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
+        var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
+        var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
+        var old_pickup_location = $('#new_pickup_location option[selected]').val();
+        var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
+        var old_email_notify = $('#hold_notify_email').prop("defaultValue");
+        var old_save_circs = $('#save_circs').prop("defaultValue").toString();
+        var old_save_holds = $('#save_holds').prop("defaultValue").toString();
 
-    if (new_username != old_username) {
-        var username_param = '&new_username=' + new_username;
+        if (new_username != old_username) {
+            var username_param = '&new_username=' + new_username;
+        } else {
+            var username_param = '';
+        }
+
+        if (new_alias != old_alias) {
+            var alias_param = '&new_alias=' + new_alias;
+        } else {
+            var alias_param = '';
+        }
+
+        if (new_email != old_email) {
+            var email_param = '&new_email=' + new_email;
+        } else {
+            var email_param = '';
+        }
+
+        if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ) {
+            var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds;
+        } else {
+            var search_param = '';
+        }
+
+        if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify) {
+            var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify;
+        } else {
+            var notify_param = '';
+        }
+
+        // this is going to need a form to enter current password to change things.
+
+        var url = username_param + alias_param + email_param + search_param + notify_param;
+        $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
+            var cat = JSON.stringify(data);
+            sessionStorage.setItem('account_settings', cat);
+            account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+            var prefs = myaccount_template(account_settings);
+            $('#account_settings').html(prefs);
+        });
     } else {
-        var username_param = '';
+        // hey you're not logged in.
     }
-
-    if (new_alias != old_alias) {
-        var alias_param = '&new_alias=' + new_alias;
-    } else {
-        var alias_param = '';
-    }
-
-    if (new_email != old_email) {
-        var email_param = '&new_email=' + new_email;
-    } else {
-        var email_param = '';
-    }
-
-    if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ) {
-        var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds;
-    } else {
-        var search_param = '';
-    }
-
-    if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify) {
-        var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify;
-    } else {
-        var notify_param = '';
-    }
-
-    var username = window.localStorage.getItem('username');
-    var password = window.localStorage.getItem('password');
-
-    var url = username_param + alias_param + email_param + search_param + notify_param;
-    $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
-        var cat = JSON.stringify(data);
-        sessionStorage.setItem('account_settings', cat);
-        account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-        var prefs = myaccount_template(account_settings);
-        $('#account_settings').html(prefs);
-    });
-
 }
 
 function fetch_available_by_id(ids) {

@@ -71,6 +71,9 @@ $(document).ready(function() {
 
     $('a[rel="lightframe"]').fancybox();
 
+    $('#login_form').html($('#login_form-template').html());
+
+
     setTimeout(function(){ showAnnouncements(); },2000);
 
 });
@@ -157,7 +160,7 @@ function openForm() {
             openSearch_options();
         }
         $("#login_form").slideDown("fast");
-        login_and_fetch_dash();
+        refresh_acctinfo();
     } else {
         $("#login_form").slideUp("fast");
     }

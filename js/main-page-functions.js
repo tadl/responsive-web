@@ -385,7 +385,7 @@ function myAccount(){
         }
     } else {
         changeBanner('My Account', '#0d4c78');
-        $('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+        $('#two-thirds').html('<div class="card"><h4 class="title">Log in to View Your Account</h4></div>');
         $("#login_form").slideDown("fast");
         loading_animation('stop');
     }
@@ -405,7 +405,7 @@ function my_lists(){
             loading_animation('stop');
         });
     } else {
-          $('#two-thirds').html('<div class="card"><h4 class="title">Login to View Your Account</h4></div>');
+          $('#two-thirds').html('<div class="card"><h4 class="title">Log in to View Your Account</h4></div>');
           $("#login_form").slideDown("fast");
           loading_animation('stop');
     };
