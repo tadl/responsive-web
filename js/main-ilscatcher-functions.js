@@ -100,6 +100,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
         var availablemsg = "";
     }
     cleanhouse();
+    cleandivs();
     var mediatypedecode = decodeURIComponent(mediatype);    
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
