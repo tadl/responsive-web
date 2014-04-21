@@ -49,7 +49,7 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
         $('#available').prop('checked', false);
         var availablemsg = '';
     }
-    var loctext = document.getElementById('location').options[document.getElementById('location').selectedIndex].text; 
+    var loctext = document.getElementById('location').options[document.getElementById('location').selectedIndex].text;
     var mediatypedecode = decodeURIComponent(mediatype);
     $('#search-params').html('<div class="grid-container"><div class="grid-10 tablet-grid-15 mobile-grid-20"><div class="params-content padtop">&nbsp;</div></div><div class="grid-90 tablet-grid-85 mobile-grid-80">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.</div></div>').show(); // the spinner here should be improved. soon.
     $('.params-content').spin();
@@ -101,7 +101,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     }
     cleanhouse();
     cleandivs();
-    var mediatypedecode = decodeURIComponent(mediatype);    
+    var mediatypedecode = decodeURIComponent(mediatype);
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
     changeBanner('Searching Catalog', color_tadlblue);
@@ -123,7 +123,6 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
             $('#search-params').append(info_selected_facets);
         } else {
             $('#region-two').replaceWith("No Results");
-            
         }
     });
     mylist();
@@ -214,7 +213,7 @@ function viewmarc(record_id) {
 }
 
 // loader for items (sets state/route which calls viewItem(id))
-function loadItem(record_id) {    
+function loadItem(record_id) {
     var record_id = record_id;
     var action = {action:"viewitem", record_id:record_id}
     var newstate = 'item/' + record_id;
@@ -242,7 +241,6 @@ function reset_hold_links() {
       $('.multi_hold_login_first').each(function() {
         $(this).removeClass('multi_hold_login_first').removeClass('black').addClass('green').html('<span>Place All on Hold</span>');
     });
-    
 }
 
 function hold(record_id) {
@@ -366,7 +364,7 @@ function login_and_fetch_dash(username, password) {
                 window.localStorage.setItem('username', username);
                 reset_hold_links();
                 if (current_page == 'myaccount' && first_state != 'true' ) {
-                	myAccount();      
+                	myAccount();
             	}
             }
         });
@@ -375,7 +373,6 @@ function login_and_fetch_dash(username, password) {
         var source   = $('#login_form-template').html();
         $('#login_form').html(source);
         set_login_form_keypress_event();
-        //window.localStorage.clear();
     }
 }
 
@@ -418,24 +415,29 @@ function render_dash(data) {
     $('#login_form').html(info);
 }
 
-function showcheckouts() { 
+function showcheckouts() {
     cleanhouse();
     cleandivs();
-    changeBanner('Checked Out', color_tadlblue);
-    var action = {action:'showcheckouts'}
-    History.pushState(action, psTitle + separator + 'Items currently checked out', 'checkout');   
-    loading_animation('start');
-    var token = window.localStorage.getItem('token');
-    state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?token=' + token, function(data) {
-        var template = Handlebars.compile($('#showcheckedout-template').html());
-        var info = template(data);
-        if (state.data.action === 'showcheckouts') { 
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
-            loading_animation('stop');
-        }
-    });
+    if (logged_in()) {
+        changeBanner('Checked Out', color_tadlblue);
+        //var action = {action:'showcheckouts'}
+        //History.pushState(action, psTitle + separator + 'Items currently checked out', 'checkout');
+        loading_animation('start');
+        var token = window.localStorage.getItem('token');
+        state = History.getState();
+        $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?token=' + token, function(data) {
+            var template = Handlebars.compile($('#showcheckedout-template').html());
+            var info = template(data);
+            if (state.data.action === 'showcheckouts') {
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+                loading_animation('stop');
+            }
+        });
+    } else {
+        changeBanner('Log In', color_tadlblue);
+        openForm();
+    }
 }
 
 function pre_cancelhold(hold_id) {
@@ -469,21 +471,24 @@ function holdaction(action,hold_id) {
 function showholds() {
     cleanhouse();
     cleandivs();
-    changeBanner('My Holds', color_tadlblue);
-    var action = {action:'showholds'}
-    History.pushState(action, 'Your Holds', 'holds'); 
-    loading_animation('start');
-    var token = window.localStorage.getItem('token');
-    state = History.getState();
-    $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
-        var template = Handlebars.compile($('#showholds-template').html());
-        var info = template(data);
-        if (state.data.action === 'showholds') {
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
-            loading_animation('stop');
-        }
-    });   
+    if (logged_in()) {
+        changeBanner('My Holds', color_tadlblue);
+        loading_animation('start');
+        var token = window.localStorage.getItem('token');
+        state = History.getState();
+        $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
+            var template = Handlebars.compile($('#showholds-template').html());
+            var info = template(data);
+            if (state.data.action === 'showholds') {
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+                loading_animation('stop');
+            }
+        });
+    } else {
+        changeBanner('Log In', color_tadlblue);
+        openForm();
+    }
 }
 
 function show_checkout_history() {
@@ -513,7 +518,7 @@ function more_history() {
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
-        if (data.more == 'false') { delete data.more; } 
+        if (data.more == 'false') { delete data.more; }
         var more = data.more;
         var template = Handlebars.compile($('#showcheckout-history-template').html());
         var info = template(data);
@@ -624,7 +629,7 @@ function showpickups() {
     if (logged_in()) {
         changeBanner('Ready for Pickup', color_tadlblue);
         var action = {action:'showpickups'}
-        History.pushState(action, 'Ready for Pickup', 'pickup'); 
+        History.pushState(action, 'Ready for Pickup', 'pickup');
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         state = History.getState();
@@ -702,7 +707,7 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
         var prep = JSON.parse(current_list);
         var test = Object.keys(prep).length;
         if (test <= 9) {
-            localStorage['list'] = JSON.stringify(mergelist); 
+            localStorage['list'] = JSON.stringify(mergelist);
         } else {
             alert('Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!'); // should probably be fancybox.
         }
@@ -720,7 +725,7 @@ function mylist() {
         data.objects = $.grep(data.objects, function(v) {
             if ($.inArray(v.record, existingIDs) !== -1) {
                 return false;
-            } else { 
+            } else {
                 existingIDs.push(v.record);
                 return true;
             }
@@ -820,7 +825,7 @@ function check_googlebooks(record_id, isbn) {
         },
         error: function () {
             $('#preview-'+ record_div).append("fail");
-        },    
+        },
     });
 }
 
@@ -918,7 +923,7 @@ function fetch_available_by_id(ids) {
     $.getJSON(ILSCATCHER_BASE + url, function(data) {
         $.each(data.items, function(){
             var target_div = '#available_' + this.record_id;
-            $(target_div).html(this.availability); 
+            $(target_div).html(this.availability);
         });
     });
 }
