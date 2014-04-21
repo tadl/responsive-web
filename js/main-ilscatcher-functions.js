@@ -810,9 +810,11 @@ function check_googlebooks(record_id, isbn) {
         dataType: "jsonp",
         async: false,
         success: function (msg) {
-            googlebook_test = JSON.stringify(msg[isbn_google].preview);
-            if ( googlebook_test == '"partial"' || googlebook_test == '"full"' ) {
-                $('#preview-'+ record_div).append('<a onclick="load_googlebooks('+ isbn_google_prep +')"><img src="https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif"></a>');
+            if (msg[isbn_google]) {
+                googlebook_test = JSON.stringify(msg[isbn_google].preview);
+                if ( googlebook_test == '"partial"' || googlebook_test == '"full"' ) {
+                    $('#preview-'+ record_div).append('<a onclick="load_googlebooks('+ isbn_google_prep +')"><img src="https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif"></a>');
+                }
             }
         },
         error: function () {
