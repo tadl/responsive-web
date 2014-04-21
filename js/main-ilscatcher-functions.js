@@ -504,7 +504,7 @@ function show_checkout_history() {
         });
     } else {
         changeBanner('Log In', color_tadlblue);
-        $('#login_form').slideDown('fast');
+        openForm();
     }
 }
 
@@ -578,7 +578,7 @@ function show_payment_history() {
         });
     } else {
         changeBanner('Log In', color_tadlblue);
-        $('#login_form').slideDown('fast');
+        openForm();
     }
 }
 function more_payment_history() {
@@ -614,7 +614,7 @@ function show_fines() {
         });
     } else {
         changeBanner('Log in', color_tadlblue);
-        $('#login_form').slideDown('fast');
+        openForm();
     }
 }
 
@@ -640,7 +640,7 @@ function showpickups() {
         });
     } else {
         changeBanner('Log in', color_tadlblue);
-        $('#login_form').slideDown('fast');
+        openForm();
     }
 }
 
@@ -680,7 +680,7 @@ function showcard() {
         });
     } else {
         changeBanner('Log in', color_tadlblue);
-        $('#login_form').slideDown('fast');
+        openForm();
     }
 }
 

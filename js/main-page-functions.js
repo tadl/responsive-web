@@ -383,9 +383,8 @@ function myAccount(){
             loading_animation('stop');
         }
     } else {
-        changeBanner('My Account', color_tadlblue);
-        $('#two-thirds').html('<div class="card"><h4 class="title">Log in to View Your Account</h4></div>');
-        $("#login_form").slideDown("fast");
+        changeBanner('Log in', color_tadlblue);
+        openForm();
         loading_animation('stop');
     }
 }
