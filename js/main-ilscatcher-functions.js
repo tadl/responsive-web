@@ -420,8 +420,8 @@ function showcheckouts() {
     cleandivs();
     if (logged_in()) {
         changeBanner('Checked Out', color_tadlblue);
-        //var action = {action:'showcheckouts'}
-        //History.pushState(action, psTitle + separator + 'Items currently checked out', 'checkout');
+        var action = {action:'showcheckouts'}
+        History.pushState(action, psTitle + separator + 'Items currently checked out', 'checkout');
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         state = History.getState();
@@ -472,6 +472,8 @@ function showholds() {
     cleanhouse();
     cleandivs();
     if (logged_in()) {
+        var action = {action:'showholds'}
+        History.pushState(action, psTitle + separator + 'Items currently on hold', 'holds');
         changeBanner('My Holds', color_tadlblue);
         loading_animation('start');
         var token = window.localStorage.getItem('token');
