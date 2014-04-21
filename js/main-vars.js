@@ -11,6 +11,8 @@ var state = {}
 //var templist = {};
 //templist.localArray = []; 
 //var mylist2 = []
+
+// colors
 var color_tadlblue = '#0d4c78';
 var color_red = '#e03434';
 var color_orange = '#fe6b18';
