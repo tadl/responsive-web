@@ -71,7 +71,7 @@ $(document).ready(function() {
 
     $('a[rel="lightframe"]').fancybox();
 
-    $('#login_form').html($('#login_form-template').html());
+//    $('#login_form').html($('#login_form-template').html());
 
 
     setTimeout(function(){ showAnnouncements(); },2000);
