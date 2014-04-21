@@ -826,3 +826,16 @@ h3.footer-heading {
 #feedback_link a:hover { 
   background: #f00; 
 }
+
+#pleasewait {
+    position:absolute;
+    right:20px;
+    top:25px;
+    text-align:center;
+}
+
+#formtemp {
+    position:relative;
+    width:100%;
+    text-align:center;
+}

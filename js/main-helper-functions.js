@@ -72,6 +72,7 @@ $(document).ready(function() {
     $('a[rel="lightframe"]').fancybox();
 
 //    $('#login_form').html($('#login_form-template').html());
+    $('#pleasewait').spin('tinyblack');
 
 
     setTimeout(function(){ showAnnouncements(); },2000);
@@ -497,6 +498,7 @@ function loading_animation(state) {
 }
 
 function myaccount_menu_build() {
+    refresh_acctinfo();
     $('#one-third').html('<div id="myaccount_menu" style="display:none;"></div>');
     var acctMenuHtmlStart = '<div class="card"><div class="grid-container"><div class="grid-100 mobile-grid-100 tablet-grid-100" style="text-align:center;">';
     var acctMenuHtmlEnd = '</div></div></div>';
