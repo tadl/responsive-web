@@ -104,7 +104,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
     changeBanner('Searching Catalog', color_tadlblue);
-    $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
+    $('#search-params').html('&nbsp;Changing filter.').spin('tinyblack');
     $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
         if (data.more_results == "false") { delete data.more_results; }
         var results = data.message;
@@ -337,9 +337,9 @@ function login_and_fetch_dash(username, password) {
             $('#login_form').html('<div class="tempspin">&nbsp;Loading...</div>');
             $('.tempspin').spin('tinyblack');
         }
-        if ($('#login').length != 0) {
+        /* if ($('#login').length != 0) {
             $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
-        }
+        } this doesn't seem to get used by anything */
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (data['status'] == 'error') {
                 var source = $('#login_form-template').html();
@@ -761,7 +761,7 @@ function pre_multi_hold(record_ids) {
     link_id = '#multi-pre-hold';
     $(link_id).removeClass('green').addClass('black');
     if (logged_in()) {
-        $(link_id).html('<span><img src="img/spinner.gif" width="12" height="12" />&nbsp;Requesting holds...</span>').removeAttr('onclick');
+        $(link_id).html('<span>&nbsp;Requesting holds...</span>').removeAttr('onclick').spin('tiny');
         multi_hold(record_ids);
     } else {
         $(link_id).html('<span>Log in to place hold</span>');
@@ -848,7 +848,7 @@ function shelf_finder(library, location, call_number){
 
 function change_account_settings() {
     if (logged_in()) {
-        $('#save_settings_button').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
+        $('#save_settings_button').html('<span>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
         var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
         var new_username = encodeURIComponent($('#new_username').val());
         var new_alias = encodeURIComponent($('#new_alias').val());

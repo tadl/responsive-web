@@ -161,7 +161,11 @@ function openForm() {
             openSearch_options();
         }
         $("#login_form").slideDown("fast");
-        refresh_acctinfo();
+        if (logged_in()) {
+            refresh_acctinfo();
+        } else {
+            $('#login_form').html($('#login_form-template').html());
+        }
     } else {
         $("#login_form").slideUp("fast");
     }

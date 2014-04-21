@@ -830,12 +830,11 @@ h3.footer-heading {
 #pleasewait {
     position:absolute;
     right:20px;
-    top:25px;
+    top:20px;
     text-align:center;
 }
 
 #formtemp {
     position:relative;
-    width:100%;
     text-align:center;
 }
