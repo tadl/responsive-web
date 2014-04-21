@@ -302,19 +302,19 @@ function load(page) {
 
 function nodePage(page) {
     if (page == 'governance') {
-    	changeBanner('Governance', '#0d4c78');
+    	changeBanner('Governance', color_tadlblue);
         loadNodes({left:573, middle:572, right:577});
     }
     if (page == 'tbl') {
-    	changeBanner('Talking Book Library', '#0d4c78');
+    	changeBanner('Talking Book Library', color_tadlblue);
         loadNodes({third:5048, twothirds:729});
     }
     if (page == 'public-computing') {
-    	changeBanner('Public Computing', '#0d4c78');
+    	changeBanner('Public Computing', color_tadlblue);
         loadNodes({third:851, twothirds:643});
     }
     if (page == 'rooms') {
-    	changeBanner('Meeting Room', '#0d4c78');
+    	changeBanner('Meeting Room', color_tadlblue);
         loadNodes({third:863, twothirds:730});
     }
 }

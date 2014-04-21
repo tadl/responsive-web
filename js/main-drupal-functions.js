@@ -107,7 +107,7 @@ function showitemlist(list_name, list_id) {
     cleandivs();
     var list_name = htmlEncode(decodeURIComponent(list_name));
     loading_text = 'Loading ' + list_name + '...';
-    changeBanner(loading_text, '#0d4c78');
+    changeBanner(loading_text, color_tadlblue);
     loading_animation('start');
     var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
         $.getJSON(drupal_json_url, function(data) {
@@ -115,7 +115,7 @@ function showitemlist(list_name, list_id) {
         var info = template(data);
         $('#region-two').html(info);
         loading_animation('stop');
-        changeBanner(list_name, '#0d4c78');
+        changeBanner(list_name, color_tadlblue);
         mylist();
     });       
 }
@@ -126,7 +126,7 @@ function showfeaturedlist(list_name, list_id) {
     cleandivs();
     var list_name = htmlEncode(decodeURIComponent(list_name));
     loading_text = 'Loading ' + list_name + '...';
-    changeBanner(loading_text, '#0d4c78');
+    changeBanner(loading_text, color_tadlblue);
     loading_animation('start');
     var data = JSON.parse(sessionStorage.getItem('featured_lists'));
     if (data == null) {
@@ -144,7 +144,7 @@ function showfeaturedlist(list_name, list_id) {
         var ids = '';
         $('#region-two').html(info);
         loading_animation('stop');
-        changeBanner(list_name, '#0d4c78');
+        changeBanner(list_name, color_tadlblue);
         if (!bagIsEmpty()) {
             mylist();
         } else {

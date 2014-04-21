@@ -53,7 +53,7 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
     var mediatypedecode = decodeURIComponent(mediatype);
     $('#search-params').html('<div class="grid-container"><div class="grid-10 tablet-grid-15 mobile-grid-20"><div class="params-content padtop">&nbsp;</div></div><div class="grid-90 tablet-grid-85 mobile-grid-80">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.</div></div>').show(); // the spinner here should be improved. soon.
     $('.params-content').spin();
-    changeBanner('Searching Catalog', '#0d4c78');
+    changeBanner('Searching Catalog', color_tadlblue);
     $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type, function(data) {
         if (data.more_results == "false") { delete data.more_results; }
         var results = data.message;
@@ -103,7 +103,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     var mediatypedecode = decodeURIComponent(mediatype);    
     loctext = document.getElementById("location").options[document.getElementById('location').selectedIndex].text;
     $('#search-params').show();
-    changeBanner('Searching Catalog', '#0d4c78');
+    changeBanner('Searching Catalog', color_tadlblue);
     $('#search-params').html('<img class="spinner" src="img/spinner.gif"/>&nbsp;Changing filter.');
     $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
         if (data.more_results == "false") { delete data.more_results; }
