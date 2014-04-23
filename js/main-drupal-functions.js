@@ -231,14 +231,27 @@ function showNewsNode(nid) {
     cleanhouse();
     cleandivs();
     loading_animation('start');
-    $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
-        var template = Handlebars.compile($('#newsnode-template').html());
-        var info = template(data);
-        $('#third-two').html(info).show();
-        loading_animation('stop');
-    });
+    var everything = JSON.parse(sessionStorage.getItem("everything"));
+    if (everything == null || typeof everything['featured_news'] == undefined) {
+        var drupal_json_url = ILSCATCHER_BASE + 'drupal/drupal.json';
+        $.getJSON(drupal_json_url, function(data) {
+            var cat = JSON.stringify(data);
+            window.sessionStorage.setItem('everything', cat);
+            showNewsNode(nid);
+            return;
+        });
+    } else {
+        var featured_news = location_news_template(everything.featured_news);
+        $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
+            var template = Handlebars.compile($('#newsnode-template').html());
+            var info = template(data);
+            $('#third-two').html(info).show();
+            $('#third-one').html(featured_news).show();
+            loading_animation('stop');
+        });
+    }
 }
-        
+
 function showEventNode(nid) {
     cleanhouse();
     cleandivs();
