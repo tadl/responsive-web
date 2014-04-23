@@ -227,11 +227,20 @@ function showNode(nid) {
     });
 }
 
+
 function showNewsNode(nid) {
     cleanhouse();
     cleandivs();
     loading_animation('start');
     var everything = JSON.parse(sessionStorage.getItem("everything"));
+    var newsy = everything.featured_news['nodes'];
+    for (i=0;i<newsy.length;i++) {
+        if (newsy[i]['node']['nid'] == nid) {
+            newsy.splice(i,1);
+        }
+    }
+    var newstring = JSON.stringify(newsy);
+    newsy = JSON.parse('{"nodes":' + newstring + '}');
     if (everything == null || typeof everything['featured_news'] == undefined) {
         var drupal_json_url = ILSCATCHER_BASE + 'drupal/drupal.json';
         $.getJSON(drupal_json_url, function(data) {
@@ -241,12 +250,12 @@ function showNewsNode(nid) {
             return;
         });
     } else {
-        var featured_news = location_news_template(everything.featured_news);
+        var newsfeed = location_news_template(newsy);
         $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
             var template = Handlebars.compile($('#newsnode-template').html());
             var info = template(data);
             $('#third-two').html(info).show();
-            $('#third-one').html(featured_news).show();
+            $('#third-one').html(newsfeed).show();
             loading_animation('stop');
         });
     }
