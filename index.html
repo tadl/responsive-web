@@ -88,6 +88,7 @@
             .route(BASE_URL + 'list/:list_name/:list_id', showitemlist)
             .route(BASE_URL + 'featured_list/:list_name/:list_id', showfeaturedlist)
             .route(BASE_URL + 'event/:nid', showEventNode)
+            .route(BASE_URL + 'news/:nid', showNewsNode)
             .route(BASE_URL + 'node/:nid', showNode)
             .route(BASE_URL + 'page/:page', nodePage)
             .route(BASE_URL + 'item/:item', viewItem)
@@ -726,7 +727,7 @@
 <script id="showfeaturednews-template" type="text/template">
     <div class="grid-container">
         {{#each_upto nodes 5}}
-            <div class="card pointer grid-100 tablet-grid-50 mobile-grid-100 relative nopad" onclick="loadNode({{node.nid}})">
+            <div class="card pointer grid-100 tablet-grid-50 mobile-grid-100 relative nopad" onclick="loadNewsNode({{node.nid}})">
                 <img src="{{make_https node.image}}" class="pointer wide" />
                 <div class="grid-100 tablet-grid-100 hide-on-mobile undertitle">
                     {{#if node.teasertitle}}
@@ -1180,6 +1181,51 @@
         </div>
     {{/nodes}}
 </script>
+
+<script id="newsnode-template" type="text/template">
+    {{#nodes}}
+        <div class="card">
+            <div class="grid-container">
+                <div class="grid-100 tablet-grid-100 mobile-grid-100">
+                    {{#if node.image}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.image}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.images}}
+                        <div class="grid-30 tablet-grid-30 hide-on-mobile">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                        <div class="hide-on-desktop hide-on-tablet mobile-grid-100">
+                            <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https node.images}}">
+                        </div>
+                    {{/if}}
+                    {{#if node.nodetitle}}
+                        <div class="cardtitle nodetitle">{{{node.nodetitle}}}</div>
+                    {{/if}}
+                    {{#if node.title}}
+                        <div class="cardtitle nodetitle">{{{node.title}}}</div>
+                    {{/if}}
+                    {{#if node.event-date}}
+                        <div class="subtitle padtop">{{{node.event-date}}} at {{node.location}}</div>
+                    {{/if}}
+                    {{#if node.body}}
+                        <div class="padtop">
+                            {{{fixurls node.body}}}
+                        </div>
+                        <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
+                        <br /><br />
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    {{/nodes}}
+</script>
+
+
 
 <script id="node-template" type="text/template">
     {{#nodes}}

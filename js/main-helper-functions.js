@@ -331,6 +331,14 @@ function loadNode(nid) {
     History.pushState(action, psTitle + separator + "Story " + nid, newpage);
 }
 
+function loadNewsNode(nid) {
+    cleanhouse();
+    cleandivs();
+    var newpage = "news/" + nid;
+    var action = {action:newpage}
+    History.pushState(action, psTitle + separator + "News " + nid, newpage);
+}
+
 function loadEventNode(nid) {
     cleanhouse();
     cleandivs();

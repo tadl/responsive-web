@@ -227,6 +227,18 @@ function showNode(nid) {
     });
 }
 
+function showNewsNode(nid) {
+    cleanhouse();
+    cleandivs();
+    loading_animation('start');
+    $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
+        var template = Handlebars.compile($('#newsnode-template').html());
+        var info = template(data);
+        $('#third-two').html(info).show();
+        loading_animation('stop');
+    });
+}
+        
 function showEventNode(nid) {
     cleanhouse();
     cleandivs();
