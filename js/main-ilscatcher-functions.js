@@ -734,7 +734,7 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
         var newitem = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title };
         if (idInList(record_id,current_list) != true) {
             current_list.unshift(newitem);
-            if (Object.keys(current_list).length <= 9) {
+            if (Object.keys(current_list).length <= 15) {
                 window.localStorage.setItem('list', JSON.stringify(current_list));
             } else {
                 var content = '<div>Your bag is too heavy. Place holds, remove an item or <s>save your bag to a list</s> to add more!</div><div class="center" style="padding-top:30px;"><a onclick="$.fancybox.close();" class="button tadlblue verysmall"><span>Ok</span></a></div>';
@@ -781,10 +781,13 @@ function removefromlist(record) {
 }
 
 
-function pre_multi_hold(record_ids) {
-    var record_ids = record_ids
-    var record_ids_array = record_ids.split(',');
-    link_id = '#multi-pre-hold';
+function pre_multi_hold() {
+    try { var json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
+    var record_ids = [];
+    for (i=0;i<json.length;i++) {
+        record_ids.push(json[i].record);
+    }
+    var link_id = '#multi-pre-hold';
     $(link_id).removeClass('green').addClass('black');
     if (logged_in()) {
         $(link_id).html('<span>&nbsp;Requesting holds...</span>').removeAttr('onclick').spin('tiny');
@@ -797,9 +800,9 @@ function pre_multi_hold(record_ids) {
 }
 
 function multi_hold(record_ids) {
-    var record_ids = record_ids;
+    var records = record_ids.join();
     var token = window.localStorage.getItem('token');
-    $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?token=' + token + '&record_id=' + record_ids, function(data) {
+    $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?token=' + token + '&record_id=' + records, function(data) {
         $.each(data.items, function (index, value) {
             var message_div = '#multi_hold_message_' + this.record_id;
             var status = this.message.replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
@@ -810,8 +813,8 @@ function multi_hold(record_ids) {
                 $(message_div).show().addClass('error');
             }
         });
-        link_id = '#multi-pre-hold';
-        $(link_id).html('<span>Request Finished: Empty Bag?</span>').removeClass('black').addClass('green').attr("onclick", "emptylist()");
+        $('#multi-pre-hold').hide();
+        refresh_acctinfo();
     });
 }
 
