@@ -762,7 +762,6 @@ function mylist() {
         $('#region-one').parent().removeClass('pull-75').addClass('pull-50');
         var list = window.localStorage.getItem('list');
         var data = JSON.parse('{"objects": ' + decodeURIComponent(list) + ' }');
-        console.log(data);
         var template = Handlebars.compile($('#mylist-template').html());
         var info = template(data);
         $('#region-three').html(info);
@@ -770,17 +769,14 @@ function mylist() {
 }
 
 function removefromlist(record) {
-    var record = record;
-    var mylist2 = window.localStorage.getItem('list').replace(/[\[\]']+/g,'');
-    var wrapper = '['+ mylist2 +']';
-    var test = JSON.stringify(eval('(' + wrapper + ')'));
-    var json = JSON.parse(test); // this needs work
+    var json;
+    try { var json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
     for (i=0;i<json.length;i++) {
         if (json[i].record == record) {
             json.splice(i,1);
         }
     }
-    window.localStorage['list'] = JSON.stringify(json);
+    window.localStorage.setItem('list', JSON.stringify(json));
     mylist();
 }
 
@@ -821,6 +817,7 @@ function multi_hold(record_ids) {
 
 function emptylist() {
     window.localStorage.setItem('list', '');
+    $('html, body').animate({scrollTop: 0}, 500);
     mylist();
 }
 
