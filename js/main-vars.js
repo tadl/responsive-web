@@ -1,3 +1,4 @@
+var logodiv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><img src="img/logo.png" style="padding-top:5px;width:100%;" /></div><div class="grid-100 tablet-grid-100 mobile-grid-100" style="text-align:center;padding-top:20px;"><a class="pointer" onclick="load(\'woodmere\')">Woodmere</a> &bull; <a class="pointer" onclick="load(\'interlochen\')">Interlochen</a><br/><a class="pointer" onclick="load(\'kingsley\')">Kingsley</a> &bull; <a class="pointer" onclick="load(\'fifelake\')">Fife Lake</a><br/><a class="pointer" onclick="load(\'peninsula\')">Peninsula</a> &bull; <a class="pointer" onclick="load(\'eastbay\')">East Bay</a></div></div></div>';
 var ILSCATCHER_HOST = 'mel-catcher.herokuapp.com/';
 var ILSCATCHER_BASE = 'https://' + ILSCATCHER_HOST;
 var PLACEHOLDER_IMG = 'img/clocktower100.png';

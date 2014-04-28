@@ -192,12 +192,18 @@ function viewItem(record_id) {
         var template = Handlebars.compile($('#viewitem-template').html());
         var info = template(data);
         var isbn = data.items[0].isbn;
+        mylist();
         $('#region-two').html(info).promise().done(function() {
             changeBanner(data.items[0].title, color_tadlblue);
             loading_animation('stop');
         });
-        $('#region-two').parent().removeClass('grid-50').removeClass('push-25').addClass('grid-75');
-        mylist();
+        $('#region-one').html(logodiv);
+        /*
+        if (bagIsEmpty()) {
+            $('#region-two').parent().removeClass('grid-50').addClass('grid-100').removeClass('push-25');
+        } else {
+            $('#region-two').parent().removeClass('grid-50').addClass('grid-75').removeClass('push-25');
+        } */
         check_googlebooks(record_id, isbn);
     });
 }
@@ -691,60 +697,76 @@ function showcard() {
     }
 }
 
-function addtolist(record_id, image, format_icon, author, year, online, title) {
-    var record_id = record_id; //not sure if this is all necessary...
-    var image = image;
-    var format_icon = format_icon;
-    var author = author;
-    var year = year;
-    var online = online;
-    var title = title;
-    var current_list = localStorage['list'];
-    var listvalue = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title};
-    var savelist = JSON.stringify(listvalue);
-    if (current_list) {
-    	var mergelist = []
-        mergelist.push(JSON.parse(current_list));
-        mergelist.unshift(listvalue);
-        var prep = JSON.parse(current_list);
-        var test = Object.keys(prep).length;
-        if (test <= 9) {
-            localStorage['list'] = JSON.stringify(mergelist);
+function idInList(id,list) {
+    var list = list;
+    var id = id;
+    var response = false;
+    for (i=0;i<list.length;i++) {
+        if (list[i]['record'] == id) {
+            response = true;
+        }
+    }
+    return response;
+}
+
+function bagIsEmpty() {
+    var result = false;
+    var bag = window.localStorage.getItem('list');
+    if (bag != undefined) {
+        try { bag = JSON.parse(bag);
+        } catch (e) { return true; }
+        if (bag == null) {
+            result = true;
+        } else if (bag.length==0) {
+            result = true;
         } else {
-            alert('Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!'); // should probably be fancybox.
+            result = false;
+        }
+    }
+    return result;
+}
+
+function addtolist(record_id, image, format_icon, author, year, online, title) {
+    var current_list;
+    try { current_list = JSON.parse(window.localStorage.getItem('list')); } catch (e) { current_list = null; }
+    var record_id = record_id;
+    if (current_list) {
+        var newitem = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title };
+        if (idInList(record_id,current_list) != true) {
+            current_list.unshift(newitem);
+            if (Object.keys(current_list).length <= 9) {
+                window.localStorage.setItem('list', JSON.stringify(current_list));
+            } else {
+                var content = '<div>Your bag is too heavy. Place holds, remove an item or <s>save your bag to a list</s> to add more!</div><div class="center" style="padding-top:30px;"><a onclick="$.fancybox.close();" class="button tadlblue verysmall"><span>Ok</span></a></div>';
+                $.fancybox({
+                    content: content,
+                    autoScale: true,
+                    closeBtn: false
+                });
+            }
         }
     } else {
-        window.localStorage.setItem('list', savelist);
+        var newitem = [{"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title }];
+        window.localStorage.setItem('list', JSON.stringify(newitem));
     };
     mylist();
 }
 
-
 function mylist() {
-    if (window.localStorage.getItem('list')) {
-        var data = JSON.parse('{"objects": [' + decodeURIComponent(window.localStorage.getItem('list').replace(/[\[\]']+/g,'')) + ']}');
-        var existingIDs = [];
-        data.objects = $.grep(data.objects, function(v) {
-            if ($.inArray(v.record, existingIDs) !== -1) {
-                return false;
-            } else {
-                existingIDs.push(v.record);
-                return true;
-            }
-        });
-        var savelist = JSON.stringify(data.objects);
-        window.localStorage.setItem('list', savelist);
+    if (bagIsEmpty()) {
+        $('#region-three').empty();
+        $('#region-two').parent().removeClass('grid-50').addClass('grid-75');
+        $('#region-one').parent().removeClass('pull-50').addClass('pull-75');
     } else {
-        var data = 'empty';
+        $('#region-two').parent().removeClass('grid-75').addClass('grid-50');
+        $('#region-one').parent().removeClass('pull-75').addClass('pull-50');
+        var list = window.localStorage.getItem('list');
+        var data = JSON.parse('{"objects": ' + decodeURIComponent(list) + ' }');
+        console.log(data);
+        var template = Handlebars.compile($('#mylist-template').html());
+        var info = template(data);
+        $('#region-three').html(info);
     }
-    var template = Handlebars.compile($('#mylist-template').html());
-    var info = template(data);
-    $('#region-three').html(info);
-}
-
-function bagIsEmpty() {
-    var bag = (window.localStorage.getItem('list') ? false : true);
-    return bag;
 }
 
 function removefromlist(record) {
@@ -774,7 +796,7 @@ function pre_multi_hold(record_ids) {
     } else {
         $(link_id).html('<span>Log in to place hold</span>');
         $(link_id).addClass('multi_hold_login_first');
-        $('#login_form').slideDown('fast');
+        $openForm();
     }
 }
 
@@ -798,7 +820,7 @@ function multi_hold(record_ids) {
 }
 
 function emptylist() {
-    localStorage.removeItem('list');
+    window.localStorage.setItem('list', '');
     mylist();
 }
 

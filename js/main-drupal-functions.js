@@ -145,7 +145,10 @@ function showfeaturedlist(list_name, list_id) {
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, color_tadlblue);
-        if (!bagIsEmpty()) {
+        if (bagIsEmpty() == false) {
+            $('#region-two').parent()
+                .removeClass('grid-75')
+                .addClass('grid-50');
             mylist();
         } else {
             $('#region-two').parent()
@@ -278,6 +281,13 @@ function showEventNode(nid) {
                 sessionStorage.setItem('events', jstring);
                 showEventNode(nid);
             });
+        }
+        var eventsy = stuff[locnode];
+        for (i=0;i<eventsy.length;i++) {
+            if (eventsy[i]['node']['nid'] == nid) {
+                console.log('GOT ONE!');
+                eventsy.splice(i,1);
+            }
         }
         var events = events_template(stuff[locnode]);
         var info = template(data);

@@ -1072,21 +1072,18 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-35 tablet-grid-35 mobile-grid-35">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" />
+                    <img class="result_img pointer" onload="img_check(this);" onerror="img_error(this);" onclick="loadItem({{record}})" src="{{make_https image}}" />
                 </div>
                 <div class="grid-65 tablet-grid-65 mobile-grid-65">
                     <span class="cardtitle">{{title}}</span><br />
-                    {{!--
-                    {{#if author}}
-                    <span class="subtitle">{{author}}</span>
-                    {{/if}}
-                    --}}
+                    <div class="padtop">
+                        <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove</span></a>
+                        <a class="button green verysmall" id="place_hold_{{record}}" onclick="pre_hold('{{record}}')"><span>Place Hold</span></a>
+                    </div>
                 </div>
                 <div class="grid-100 tablet-grid-100 mobile-grid-100 padtop center">
-                    <a class="button tadlblue verysmall" onclick="removefromlist('{{record}}');"><span>Remove from Bag</span></a>
-                    <a class="button green verysmall" id="place_hold_{{record}}" onclick="pre_hold('{{record}}')"><span>Place Hold</span></a>
+                    <div id="multi_hold_message_{{record}}" class="holdmessage"></div>
                 </div>
-                <div id="multi_hold_message_{{record}}" class="holdmessage"></div>
             </div>
         </div>
     {{/objects}}
