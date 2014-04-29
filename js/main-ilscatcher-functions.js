@@ -695,15 +695,13 @@ function idInList(id,list) {
 function bagIsEmpty() {
     var result = false;
     var bag = window.localStorage.getItem('list');
-    if (bag != undefined) {
+    if (bag == null) {
+        result = true;
+    } else if (bag != undefined) {
         try { bag = JSON.parse(bag);
         } catch (e) { return true; }
-        if (bag == null) {
+        if (bag.length==0) {
             result = true;
-        } else if (bag.length==0) {
-            result = true;
-        } else {
-            result = false;
         }
     }
     return result;
