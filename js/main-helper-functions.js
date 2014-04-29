@@ -306,9 +306,6 @@ function load(page) {
         } else if (page == 'card') {
             title += "My Card";
         }
-        console.log(title);
-        console.log(page);
-        console.log(action);
         if (page != null) {
             History.pushState(action, title, page);
         }
@@ -590,7 +587,6 @@ function feedback(action) {
         var feedback_text = encodeURIComponent($('#feedback_text').val());
         var current_url = encodeURIComponent(document.URL);
         $.get(ILSCATCHER_BASE + '/feedback/staff.json?name='+ feedback_name +'&url='+ current_url +'&issue='+ feedback_text, function(data){
-            console.log('feedback sent');
         }).done(function() {
             $('#feedback_form').html('Your feedback has been submitted. Thanks!');   
         }).fail(function() {

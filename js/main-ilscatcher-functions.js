@@ -551,7 +551,6 @@ function billing_email(id) {
     $('body').scrollTop(0);
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/receipt_email.json?pmt_id=' + id + '&token=' + token, function(data) {
-        console.log(data.message);
         var message = data.message[0].message;
         $.fancybox({
             content: message,

@@ -278,7 +278,6 @@ function showEventNode(nid) {
         var eventsy = stuff[locnode];
         for (i=0;i<eventsy.length;i++) {
             if (eventsy[i]['node']['nid'] == nid) {
-                console.log('GOT ONE!');
                 eventsy.splice(i,1);
             }
         }
