@@ -113,6 +113,7 @@ function showitemlist(list_name, list_id) {
         $.getJSON(drupal_json_url, function(data) {
         var template = Handlebars.compile($('#results-template_2').html());
         var info = template(data);
+        $('#region-one').html(logodiv);
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, color_tadlblue);
