@@ -240,63 +240,75 @@ function load(page) {
         cleanhouse();
         cleandivs();
         var action = {action:page}
+        var title = psTitle + separator;
         if (page == 'home') {
-            var title = psTitle + separator + "Home";
+            title += "Home";
         } else if (page == 'books') {
-            var title = psTitle + separator + "Books";
+            title += "Books";
         } else if (page == 'music') {
-            var title = psTitle + separator + "Music";
+            title += "Music";
         } else if (page == 'video') {
-            var title = psTitle + separator + "Video";
+            title += "Video";
         } else if (page == 'online') {
-            var title = psTitle + separator + "Online";
+            title += "Online";
         } else if (page == 'youth') {
-            var title = psTitle + separator + "Youth";
+            title += "Youth";
         } else if (page == 'teens') {
-            var title = psTitle + separator + "Teens";
+            title += "Teens";
         } else if (page == 'woodmere') {
-            var title = psTitle + separator + "Woodmere Main Branch Library";
+            title += "Woodmere Main Branch Library";
         } else if (page == 'kingsley') {
-            var title = psTitle + separator + "Kingsley Branch Library";
+            title += "Kingsley Branch Library";
         } else if (page == 'eastbay') {
-            var title = psTitle + separator + "East Bay Branch Library";
+            title += "East Bay Branch Library";
         } else if (page == 'fifelake') {
-            var title = psTitle + separator + "Fife Lake Public Library";
+            title += "Fife Lake Public Library";
         } else if (page == 'interlochen') {
-            var title = psTitle + separator + "Interlochen Public Library";
+            title += "Interlochen Public Library";
         } else if (page == 'peninsula') {
-            var title = psTitle + separator + "Peninsula Community Library";
+            title += "Peninsula Community Library";
         } else if (page == 'myaccount') {
-            var title = psTitle + separator + "My Account";
+            title += "My Account";
         } else if (page == 'history') {
-            var title = psTitle + separator + "Checkout History";
+            title += "Checkout History";
         } else if (page == 'events') {
-            var title = psTitle + separator + "Events";
+            title += "Events";
         } else if (page == 'events/kbl') {
-            var title = psTitle + separator + "Kingsley Events";
+            title += "Kingsley Events";
         } else if (page == 'events/ebb') {
-            var title = psTitle + separator + "East BayEvents";
+            title += "East BayEvents";
         } else if (page == 'events/flpl') {
-            var title = psTitle + separator + "Fife Lake Events";
+            title += "Fife Lake Events";
         } else if (page == 'events/pcl') {
-            var title = psTitle + separator + "Peninsula Events";
+            title += "Peninsula Events";
         } else if (page == 'events/ipl') {
-            var title = psTitle + separator + "Interlochen Events";
+            title += "Interlochen Events";
         } else if (page == 'events/wood') {
-            var title = psTitle + separator + "Woodmere Events";
+            title += "Woodmere Events";
         } else if (page == 'events/teens') {
-            var title = psTitle + separator + "Teen Events";
+            title += "Teen Events";
         } else if (page == 'events/youth') {
-            var title = psTitle + separator + "Youth Events";
+            title += "Youth Events";
         } else if (page == 'events/adults') {
-            var title = psTitle + separator + "Adult Events";
+            title += "Adult Events";
         } else if (page == 'fines') {
-            var title = psTitle + separator + "Fines";
+            title += "Fines";
         } else if (page == 'payments') {
-            var title = psTitle + separator + "Payment History";
+            title += "Payment History";
         } else if (page == 'page/tbl') {
-            var title = psTitle + separator + "Talking Book Library";
+            title += "Talking Book Library";
+        } else if (page == 'holds') {
+            title += "Holds";
+        } else if (page == 'checkout') {
+            title += "Items Checked Out";
+        } else if (page == 'pickup') {
+            title += "Ready for Pickup";
+        } else if (page == 'card') {
+            title += "My Card";
         }
+        console.log(title);
+        console.log(page);
+        console.log(action);
         if (page != null) {
             History.pushState(action, title, page);
         }

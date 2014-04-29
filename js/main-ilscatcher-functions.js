@@ -426,19 +426,14 @@ function showcheckouts() {
     cleandivs();
     if (logged_in()) {
         changeBanner('Checked Out', color_tadlblue);
-        var action = {action:'showcheckouts'}
-        History.pushState(action, psTitle + separator + 'Items currently checked out', 'checkout');
         loading_animation('start');
         var token = window.localStorage.getItem('token');
-        state = History.getState();
         $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?token=' + token, function(data) {
             var template = Handlebars.compile($('#showcheckedout-template').html());
             var info = template(data);
-            if (state.data.action === 'showcheckouts') {
-                $('#two-thirds').html(info).show();
-                myaccount_menu();
-                loading_animation('stop');
-            }
+            $('#two-thirds').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         });
     } else {
         changeBanner('Log In', color_tadlblue);
@@ -478,20 +473,15 @@ function showholds() {
     cleanhouse();
     cleandivs();
     if (logged_in()) {
-        var action = {action:'showholds'}
-        History.pushState(action, psTitle + separator + 'Items currently on hold', 'holds');
-        changeBanner('My Holds', color_tadlblue);
+        changeBanner('Holds', color_tadlblue);
         loading_animation('start');
         var token = window.localStorage.getItem('token');
-        state = History.getState();
         $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
             var template = Handlebars.compile($('#showholds-template').html());
             var info = template(data);
-            if (state.data.action === 'showholds') {
-                $('#two-thirds').html(info).show();
-                myaccount_menu();
-                loading_animation('stop');
-            }
+            $('#two-thirds').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         });
     } else {
         changeBanner('Log In', color_tadlblue);
@@ -636,20 +626,19 @@ function showpickups() {
     cleandivs();
     if (logged_in()) {
         changeBanner('Ready for Pickup', color_tadlblue);
-        var action = {action:'showpickups'}
-        History.pushState(action, 'Ready for Pickup', 'pickup');
         loading_animation('start');
         var token = window.localStorage.getItem('token');
-        state = History.getState();
         $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
             var template = Handlebars.compile($('#showholds-template').html());
             data.ready = 'ready';
-            var info = template(data);
-            if (state.data.action === 'showpickups') {
-                $('#two-thirds').html(info).show();
-                myaccount_menu();
-                loading_animation('stop');
+            if (data.holds != null) {
+                var info = template(data);
+            } else {
+                var info = 'You have no items ready for pickup!';
             }
+            $('#two-thirds').html(info).show();
+            myaccount_menu();
+            loading_animation('stop');
         });
     } else {
         changeBanner('Log in', color_tadlblue);
@@ -676,20 +665,15 @@ function showcard() {
     cleandivs();
     if (logged_in()) {
         changeBanner('My Library Card', color_tadlblue);
-        var action = {action:'showcard'}
-        History.pushState(action, 'Your Card', 'card');
         loading_animation('start');
         var token = window.localStorage.getItem('token');
-        state = History.getState();
         $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?token=' + token, function(data) {
-            if (state.data.action === 'showcard') {
-                var card = data.barcode;
-                var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-                $('#two-thirds').html(html).show();
-                $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12});
-                myaccount_menu();
-                loading_animation('stop');
-            }
+            var card = data.barcode;
+            var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
+            $('#two-thirds').html(html).show();
+            $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12});
+            myaccount_menu();
+            loading_animation('stop');
         });
     } else {
         changeBanner('Log in', color_tadlblue);

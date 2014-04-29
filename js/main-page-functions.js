@@ -368,15 +368,16 @@ function myAccount(){
     account_settings = JSON.parse(window.sessionStorage.getItem('account_settings'));
     if (logged_in()) {
         if (account_settings == null) {
+            changeBanner('Loading...', color_tadlblue);
             $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?token='+ token, function(data) {
                 var cat = JSON.stringify(data);
                 sessionStorage.setItem('account_settings', cat);
                 myAccount();
             });
         } else {
+            changeBanner('My Account', color_tadlblue);
             account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
             var prefs = myaccount_template(account_settings);
-            changeBanner('My Account', color_tadlblue);
             $('#two-thirds').html('<div class="card"><h4 class="title">Account Settings [<a onclick="show_edit_account_settings()" class="pointer">edit</a>]</h4><div id="account_settings">Loading!</div></div>');
             $('#account_settings').html(prefs);
             myaccount_menu();

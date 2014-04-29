@@ -82,7 +82,7 @@
             .route(BASE_URL + 'card', showcard)
             .route(BASE_URL + 'pickup', showpickups)
             .route(BASE_URL + 'holds', showholds)
-            .route(BASE_URL + 'checkout', showcheckouts)
+            .route(BASE_URL + 'checkouts', showcheckouts)
             .route(BASE_URL + 'search/:query/:mt/:avail/:location/:searchtype/:sort_type', getResults)
             .route(BASE_URL + 'search-facets/:query/:mt/:avail/:location/:searchtype/:sort_type/:facet', facetsearch)
             .route(BASE_URL + 'list/:list_name/:list_id', showitemlist)
@@ -811,14 +811,14 @@
         <div>
             {{user.name}}
             <div class="accountlinks">
-                <a class="button wide medium tadlblue" onclick="showcheckouts()"><span>Checkouts: {{user.checkouts}}</span></a><br />
-                <a class="button wide medium tadlblue" onclick="showholds()"><span>Holds: {{user.holds}}</span></a><br />
-                <a class="button wide medium tadlblue" onclick="showpickups()"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="load('checkouts')"><span>Checkouts: {{user.checkouts}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="load('holds')"><span>Holds: {{user.holds}}</span></a><br />
+                <a class="button wide medium tadlblue" onclick="load('pickup')"><span>Ready for Pickup: {{user.pickups}}</span></a><br />
             </div>
             Fines: {{user.fines}}
         </div>
         <a class="button wide medium tadlblue" onclick="load('myaccount');"><span>My Account</span></a> </br>
-        <a class="button wide medium tadlblue" onclick="showcard()"><span>Card</span></a> </br>
+        <a class="button wide medium tadlblue" onclick="load('card')"><span>Card</span></a> </br>
         <a class="button wide medium tadlblue" onclick="logout()"><span>Logout</span></a> 
     {{/users}}
 </script>
