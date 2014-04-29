@@ -837,6 +837,7 @@
                     <h4>Save Borrowing History: {{circ}}</h4>
                     <h4>Save Hold History: {{hold}}</h4>
                 {{/settings}}
+                <a onclick="show_edit_account_settings()" class="button medium tadlblue"><span>Edit Settings</span></a>
             </div>
             <form id="account_settings_form" style="display: none;">
             {{#settings}}
@@ -889,10 +890,13 @@
                     </label>
                 </div>
                 <div class="clear"></div>
+                <label for="acct_password" id="password_label">Enter your password to make changes</label>
+                <input id="acct_password" type="password" name="acct_password" placeholder="Password" />
+                <div class="clear"></div>
             {{/settings}}
             <div id="settings_save" class="padtop" style="display:none">
-                <a class="button small green" id="save_settings_button" onclick="change_account_settings()"><span>Save Changes</span></a>
-                <a class="button small red" onclick="account_settings_reset()"><span>Cancel</span></a>
+                <a class="button medium tadlblue" id="save_settings_button" onclick="change_account_settings()"><span>Save Changes</span></a>
+                <a class="button medium red" onclick="account_settings_reset()"><span>Cancel</span></a>
             </div>
             </form> 
         </div>

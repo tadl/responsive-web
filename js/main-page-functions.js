@@ -375,10 +375,10 @@ function myAccount(){
                 myAccount();
             });
         } else {
-            changeBanner('My Account', color_tadlblue);
+            changeBanner('Account Settings', color_tadlblue);
             account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
             var prefs = myaccount_template(account_settings);
-            $('#two-thirds').html('<div class="card"><h4 class="title">Account Settings [<a onclick="show_edit_account_settings()" class="pointer">edit</a>]</h4><div id="account_settings">Loading!</div></div>');
+            $('#two-thirds').html('<div class="card padtop"><div id="account_settings">Loading!</div></div>');
             $('#account_settings').html(prefs);
             myaccount_menu();
             loading_animation('stop');

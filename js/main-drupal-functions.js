@@ -142,19 +142,11 @@ function showfeaturedlist(list_name, list_id) {
         var list_code = 'l_' + list_id
         var info = template(data[list_code]);
         var ids = '';
+        $('#region-one').html(logodiv);
         $('#region-two').html(info);
         loading_animation('stop');
         changeBanner(list_name, color_tadlblue);
-        if (bagIsEmpty() == false) {
-            $('#region-two').parent()
-                .removeClass('grid-75')
-                .addClass('grid-50');
-            mylist();
-        } else {
-            $('#region-two').parent()
-                .removeClass('grid-50')
-                .addClass('grid-75');
-        }
+        mylist();
         $.each(data[list_code].items, function(){
             fetch_available_by_id(this.record_id);
             ids = ids + this.record_id + ',';

@@ -539,6 +539,11 @@ img.icon.logo {
     background-color:#DDFF74;
 }
 
+#password_label.error {
+    border:2px solid #E62727;
+    background-color:#FFB6B8;
+}
+
 .smaller {
     font-size:0.8em;
 }

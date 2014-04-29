@@ -862,67 +862,78 @@ function shelf_finder(library, location, call_number){
 
 function change_account_settings() {
     if (logged_in()) {
-        $('#save_settings_button').html('<span>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick')
-        var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
-        var new_username = encodeURIComponent($('#new_username').val());
-        var new_alias = encodeURIComponent($('#new_alias').val());
-        var new_email = encodeURIComponent($('#new_email').val());
-        var new_pickup_location = $('#new_pickup_location').val();
-        var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
-        var new_email_notify = $('#hold_notify_email').is(':checked').toString();
-        var new_save_circs = $('#save_circs').is(':checked').toString();
-        var new_save_holds = $('#save_holds').is(':checked').toString();
-        var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
-        var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
-        var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
-        var old_pickup_location = $('#new_pickup_location option[selected]').val();
-        var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
-        var old_email_notify = $('#hold_notify_email').prop("defaultValue");
-        var old_save_circs = $('#save_circs').prop("defaultValue").toString();
-        var old_save_holds = $('#save_holds').prop("defaultValue").toString();
+        if ($('#acct_password').val()) {
+            var password = $('#acct_password').val();
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem('token');
+            $('#save_settings_button').html('<span>&nbsp;Saving...</span>').removeClass('green').addClass('black').removeAttr('onclick').spin('tiny');
+            var base_url = 'https://mel-catcher.herokuapp.com/main/search_prefs?';
+            var new_username = encodeURIComponent($('#new_username').val());
+            var new_alias = encodeURIComponent($('#new_alias').val());
+            var new_email = encodeURIComponent($('#new_email').val());
+            var new_pickup_location = $('#new_pickup_location').val();
+            var new_phone_notify = $('#hold_notify_phone').is(':checked').toString();
+            var new_email_notify = $('#hold_notify_email').is(':checked').toString();
+            var new_save_circs = $('#save_circs').is(':checked').toString();
+            var new_save_holds = $('#save_holds').is(':checked').toString();
+            var old_username = encodeURIComponent($('#new_username').prop("defaultValue"));
+            var old_alias = encodeURIComponent($('#new_alias').prop("defaultValue"));
+            var old_email = encodeURIComponent($('#new_email').prop("defaultValue"));
+            var old_pickup_location = $('#new_pickup_location option[selected]').val();
+            var old_phone_notify = $('#hold_notify_phone').prop("defaultValue");
+            var old_email_notify = $('#hold_notify_email').prop("defaultValue");
+            var old_save_circs = $('#save_circs').prop("defaultValue").toString();
+            var old_save_holds = $('#save_holds').prop("defaultValue").toString();
 
-        if (new_username != old_username) {
-            var username_param = '&new_username=' + new_username;
+            if (new_username != old_username) {
+                var username_param = '&new_username=' + new_username;
+            } else {
+                var username_param = '';
+            }
+
+            if (new_alias != old_alias) {
+                var alias_param = '&new_alias=' + new_alias;
+            } else {
+                var alias_param = '';
+            }
+
+            if (new_email != old_email) {
+                var email_param = '&new_email=' + new_email;
+            } else {
+                var email_param = '';
+            }
+
+            if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ) {
+                var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds;
+            } else {
+                var search_param = '';
+            }
+
+            if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify) {
+                var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify;
+            } else {
+                var notify_param = '';
+            }
+
+            var url = username_param + alias_param + email_param + search_param + notify_param;
+            $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?token=' + token + '&u=' + username + '&pw=' + password + url, function(data) {
+                var cat = JSON.stringify(data);
+                sessionStorage.setItem('account_settings', cat);
+                //account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
+                var prefs = myaccount_template(data);
+                $('#account_settings').html(prefs);
+                if (new_username != username) {
+                    window.localStorage.setItem('username', new_username);
+                }
+            });
         } else {
-            var username_param = '';
+            // you need to enter the password to make changes
+            $('#password_label').addClass('error');
         }
-
-        if (new_alias != old_alias) {
-            var alias_param = '&new_alias=' + new_alias;
-        } else {
-            var alias_param = '';
-        }
-
-        if (new_email != old_email) {
-            var email_param = '&new_email=' + new_email;
-        } else {
-            var email_param = '';
-        }
-
-        if (new_pickup_location != old_pickup_location || new_save_circs != old_save_circs || new_save_holds != old_save_holds ) {
-            var search_param = '&new_search_prefs=' + new_pickup_location + ',' + new_save_circs + ',' + new_save_holds;
-        } else {
-            var search_param = '';
-        }
-
-        if (new_phone_notify != old_phone_notify || new_email_notify != old_email_notify) {
-            var notify_param = '&new_notify_prefs=' + new_phone_notify + ',' + new_email_notify;
-        } else {
-            var notify_param = '';
-        }
-
-        // this is going to need a form to enter current password to change things.
-
-        var url = username_param + alias_param + email_param + search_param + notify_param;
-        $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?u='+ username +'&pw=' + password + url, function(data) {
-            var cat = JSON.stringify(data);
-            sessionStorage.setItem('account_settings', cat);
-            account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
-            var prefs = myaccount_template(account_settings);
-            $('#account_settings').html(prefs);
-        });
     } else {
         // hey you're not logged in.
+        changeBanner('Log in', color_tadlblue);
+        openForm();
     }
 }
 

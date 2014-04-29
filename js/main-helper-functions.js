@@ -498,15 +498,16 @@ $.fn.spin.presets.tinyblack = {
 
 function account_settings_reset() {
 	$('#account_settings_form').get(0).reset();
-	$("#account_settings_form").hide();
-	$("#settings_save").hide();
-	$("#account_settings_display").show();
+	$('#account_settings_form').hide();
+	$('#settings_save').hide();
+	$('#account_settings_display').show();
+    $('#password_label').removeClass('error');
 }
 
 function show_edit_account_settings(){
-	$("#account_settings_display").hide();
-	$("#settings_save").show();
-	$("#account_settings_form").show();
+	$('#account_settings_display').hide();
+	$('#settings_save').show();
+	$('#account_settings_form').show();
 }
 
 function loading_animation(state) {
