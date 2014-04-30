@@ -43,6 +43,12 @@ Handlebars.registerHelper('encode', function(data, options) {
     return encode_data;
 });
 
+Handlebars.registerHelper('decode', function(data, options) {
+    var data = data;
+    var encode_data = decodeURIComponent(data);
+    return encode_data;
+});
+
 Handlebars.registerHelper('idtoname', function(id) {
     var idname;
     if (id == 23) {

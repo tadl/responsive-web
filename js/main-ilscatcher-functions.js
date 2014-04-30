@@ -498,11 +498,19 @@ function show_checkout_history() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?token=' + token, function(data) {
-            var template = Handlebars.compile($('#showcheckout-history-template').html());
-            var info = template(data);
-            var more = data.more;
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
+            if (data.more == 'false') { delete data.more; }
+            if (data.status == '200') {
+                var template = Handlebars.compile($('#showcheckout-history-template').html());
+                var info = template(data);
+                var more = data.more;
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+            } else if (data.status == '302') {
+                changeBanner('Session Expired, Please Log In', color_tadlblue);
+                openForm();
+            } else {
+                changeBanner('Something weird happened', color_red);
+            }
             loading_animation('stop');
         });
     } else {
@@ -517,13 +525,23 @@ function more_history() {
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
         if (data.more == 'false') { delete data.more; }
-        var more = data.more;
-        var template = Handlebars.compile($('#showcheckout-history-template').html());
-        var info = template(data);
-        $('#two-thirds').append(info).promise().done(function() {
+        if (data.status == '200') {
+            var template = Handlebars.compile($('#showcheckout-history-template').html());
+            var info = template(data);
+            $('#two-thirds').append(info).promise().done(function() {
+                $('.spinning').hide();
+                $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
+            });
+        } else if (data.status == '302') {
+            changeBanner('Session Expired, Please Log In', color_tadlblue);
             $('.spinning').hide();
-            $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
-        });
+            $('html, body').animate({scrollTop: 0}, 500);
+            openForm();
+        } else {
+            changeBanner('Something weird happened', color_red);
+            $('html, body').animate({scrollTop: 0}, 500);
+            $('.spinning').hide();
+        }
     });
 }
 
@@ -629,7 +647,6 @@ function showpickups() {
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
             var template = Handlebars.compile($('#showholds-template').html());
-            console.log(data);
             if (data[':holds']) {
                 var info = template(data);
             } else {
@@ -742,12 +759,35 @@ function mylist() {
         $('#region-two').parent().removeClass('grid-75').addClass('grid-50');
         $('#region-one').parent().removeClass('pull-75').addClass('pull-50');
         var list = window.localStorage.getItem('list');
-        var data = JSON.parse('{"objects": ' + decodeURIComponent(list) + ' }');
+        var data = JSON.parse('{"objects": ' + list + ' }');
         var template = Handlebars.compile($('#mylist-template').html());
         var info = template(data);
-        $('#region-three').html(info);
+        $('#region-three').html(info).promise().done(function() {
+            if (logged_in()) {
+                var token = window.localStorage.getItem('token');
+                var formblob = '<input type="text" placeholder="New list" name="new_list" id="new_list" />';
+                formblob += '<select name="existing_list" id="existing_list">';
+                formblob += '<option selected="selected" value="CREATE_NEW_LIST">Add to existing</option>';
+                $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+                    for (i=0;i<data.lists.length;i++) {
+                        var listname = htmlDecode(data.lists[i].list_name);
+                        var listid = data.lists[i].list_id;
+                        formblob += '<option value="' + listid + '">' + listname.trunc(20) + '</option>';
+                    }
+                    formblob += '</select>';
+                    formblob += '<a onclick="create_new_list()" class="button verysmall tadlblue"><span>';
+                    formblob += 'Save';
+                    formblob += '</span></a>';
+                    $('#listmaint').html(formblob);
+                });
+            }
+        });
     }
 }
+function htmlDecode(t) {
+    if (t) return $('<div />').html(t).text();
+}
+
 
 function removefromlist(record) {
     var json;
