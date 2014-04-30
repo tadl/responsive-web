@@ -629,8 +629,8 @@ function showpickups() {
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
             var template = Handlebars.compile($('#showholds-template').html());
-            data.ready = 'ready';
-            if (data.holds != null) {
+            console.log(data);
+            if (data[':holds']) {
                 var info = template(data);
             } else {
                 var info = 'You have no items ready for pickup!';
