@@ -544,6 +544,11 @@ img.icon.logo {
     background-color:#FFB6B8;
 }
 
+.success {
+    border:2px solid #91BD09;
+    background-color:#DDFF74;
+}
+
 .smaller {
     font-size:0.8em;
 }

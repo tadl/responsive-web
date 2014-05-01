@@ -732,10 +732,10 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
         var newitem = {"record": record_id, "image": image, "format_icon": format_icon, "author": author, "year": year, "online": online, "title": title };
         if (idInList(record_id,current_list) != true) {
             current_list.unshift(newitem);
-            if (Object.keys(current_list).length <= 15) {
+            if (Object.keys(current_list).length <= 9) {
                 window.localStorage.setItem('list', JSON.stringify(current_list));
             } else {
-                var content = '<div>Your bag is too heavy. Place holds, remove an item or <s>save your bag to a list</s> to add more!</div><div class="center" style="padding-top:30px;"><a onclick="$.fancybox.close();" class="button tadlblue verysmall"><span>Ok</span></a></div>';
+                var content = '<div>Your bag is too heavy. Place holds, remove an item or save your bag to a list to add more!</div><div class="center" style="padding-top:30px;"><a onclick="$.fancybox.close();" class="button tadlblue verysmall"><span>Ok</span></a></div>';
                 $.fancybox({
                     content: content,
                     autoScale: true,
@@ -775,7 +775,7 @@ function mylist() {
                         formblob += '<option value="' + listid + '">' + listname.trunc(20) + '</option>';
                     }
                     formblob += '</select>';
-                    formblob += '<a onclick="create_new_list()" class="button verysmall tadlblue"><span>';
+                    formblob += '<a onclick="add_create_list()" id="save_list" class="button verysmall tadlblue"><span>';
                     formblob += 'Save';
                     formblob += '</span></a>';
                     $('#listmaint').html(formblob);
@@ -784,14 +784,51 @@ function mylist() {
         });
     }
 }
-function htmlDecode(t) {
-    if (t) return $('<div />').html(t).text();
-}
 
+function add_create_list() {
+    var json;
+    var record_ids = [];
+    var existing_list = $('#existing_list').val();
+    var new_list = $('#new_list').val();
+    var token = window.localStorage.getItem('token');
+    if ((existing_list == 'CREATE_NEW_LIST') && (new_list == '')) {
+        // nothing to see here
+        return;
+    }
+    // build our array of item ids!
+    try { json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
+    for (i=0;i<json.length;i++) {
+        record_ids.push(json[i].record);
+    }
+    if (existing_list == 'CREATE_NEW_LIST') {
+        $('#save_list').removeClass('tadlblue').addClass('black').html('<span>Saving</span>').spin('tiny');
+        // we have to create a new list, get the id, then add the records to it
+        // http://dev.tadl.org:3000/main/create_new_list.json?token=c5d9fc943ded6979bf6680e78c2d8155&name=New%20Music&ids=46751062,46755358,46757487,46755626,46752922,46759259,46757006,46752914,46755042,46755032,46756925
+        var listname = encodeURIComponent(new_list);
+        var records = record_ids.join();
+        $.getJSON(ILSCATCHER_BASE + '/main/create_new_list.json?token=' + token + '&name=' + listname + '&ids=' + records, function(data) {
+            console.log(data.listid);
+            if (data.listid) {
+                mylist();
+                setTimeout(function() {
+                    $('#listresults').html('<div class="success">Successfully created list id ' + data.listid + ' with name ' + new_list + '.</div>');
+                }, 2000);
+                setTimeout(function() {
+                    $('#listresults').fadeOut('slow');
+                }, 5000);
+            } else {
+                $('#listresults').html('Something weird happened. Aieeee! Try again, maybe?');
+            }
+        });
+    } else {
+        // much easier; we just add records to a list. bam.
+        console.log(existing_list);
+    }
+}
 
 function removefromlist(record) {
     var json;
-    try { var json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
+    try { json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
     for (i=0;i<json.length;i++) {
         if (json[i].record == record) {
             json.splice(i,1);
@@ -803,7 +840,8 @@ function removefromlist(record) {
 
 
 function pre_multi_hold() {
-    try { var json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
+    var json;
+    try { json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
     var record_ids = [];
     for (i=0;i<json.length;i++) {
         record_ids.push(json[i].record);
