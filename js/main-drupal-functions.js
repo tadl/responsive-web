@@ -109,7 +109,8 @@ function showitemlist(list_name, list_id) {
     loading_text = 'Loading ' + list_name + '...';
     changeBanner(loading_text, color_tadlblue);
     loading_animation('start');
-    var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
+    var token = window.localStorage.getItem('token');
+    var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
         $.getJSON(drupal_json_url, function(data) {
         var template = Handlebars.compile($('#results-template_2').html());
         var info = template(data);
