@@ -31,7 +31,7 @@ function showEastBay() {
         var news_ebb = location_news_template(data.news_ebb);
         var hours_ebb = showlocations_template(data.hours_ebb);
         var alleventslink = "load('events/ebb')";
-        $('#region-one').html(infobox_ebb);
+        $('#region-one').html(logodiv + infobox_ebb);
         $('#region-two').html(hours_ebb + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ebb + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All East Bay events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ebb);
     }
@@ -57,7 +57,7 @@ function showFifeLake() {
         var news_flpl = location_news_template(data.news_flpl);
         var hours_flpl = showlocations_template(data.hours_flpl);
         var alleventslink = "load('events/flpl')";
-        $('#region-one').html(infobox_flpl);
+        $('#region-one').html(logodiv + infobox_flpl);
         $('#region-two').html(hours_flpl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_flpl + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All Fife Lake events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_flpl);
     }
@@ -83,7 +83,7 @@ function showInterlochen() {
         var news_ipl = location_news_template(data.news_ipl);
         var hours_ipl = showlocations_template(data.hours_ipl);
         var alleventslink = "load('events/ipl')";
-        $('#region-one').html(infobox_ipl);
+        $('#region-one').html(logodiv + infobox_ipl);
         $('#region-two').html(hours_ipl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_ipl + '<a class="pointer button tadlblue wide medium" onclick="' + alleventslink + '"><span>All Interlochen  events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_ipl);
     }
@@ -109,7 +109,7 @@ function showKingsley() {
         var news_kbl = location_news_template(data.news_kbl);
         var hours_kbl = showlocations_template(data.hours_kbl);
         var alleventslink = "load('events/kbl')";
-        $('#region-one').html(infobox_kbl);
+        $('#region-one').html(logodiv + infobox_kbl);
         $('#region-two').html(hours_kbl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_kbl + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Kingsley events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_kbl);
     }
@@ -135,7 +135,7 @@ function showPeninsula() {
         var news_pcl = location_news_template(data.news_pcl);
         var hours_pcl = showlocations_template(data.hours_pcl);
         var alleventslink = "load('events/pcl')";
-        $('#region-one').html(infobox_pcl);
+        $('#region-one').html(logodiv + infobox_pcl);
         $('#region-two').html(hours_pcl + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_pcl + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Peninsula events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_pcl);
     }
@@ -161,7 +161,7 @@ function showWoodmere() {
         var news_wood = location_news_template(data.news_wood);
         var hours_wood = showlocations_template(data.hours_wood);
         var alleventslink = "load('events/wood')";
-        $('#region-one').html(infobox_wood);
+        $('#region-one').html(logodiv + infobox_wood);
         $('#region-two').html(hours_wood + '<div class="card"><h4 class="title">Upcoming Events</h4></div>' + events_wood + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Woodmere events</span></a>');
         $('#region-three').html('<div class="card"><h4 class="title">Recent News</h4></div>' + news_wood);
     }
