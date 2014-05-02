@@ -800,12 +800,10 @@ function add_create_list() {
     for (i=0;i<json.length;i++) {
         record_ids.push(json[i].record);
     }
+    var records = record_ids.join();
     if (existing_list == 'CREATE_NEW_LIST') {
         $('#save_list').removeClass('tadlblue').addClass('black').html('<span>Saving</span>').spin('tiny');
-        // we have to create a new list, get the id, then add the records to it
-        // http://dev.tadl.org:3000/main/create_new_list.json?token=c5d9fc943ded6979bf6680e78c2d8155&name=New%20Music&ids=46751062,46755358,46757487,46755626,46752922,46759259,46757006,46752914,46755042,46755032,46756925
         var listname = encodeURIComponent(new_list);
-        var records = record_ids.join();
         $.getJSON(ILSCATCHER_BASE + '/main/create_new_list.json?token=' + token + '&name=' + listname + '&ids=' + records, function(data) {
             console.log(data.listid);
             if (data.listid) {
@@ -822,7 +820,17 @@ function add_create_list() {
         });
     } else {
         // much easier; we just add records to a list. bam.
+        $('#save_list').removeClass('tadlblue').addClass('black').html('<span>Adding</span>').spin('tiny');
         console.log(existing_list);
+        $.getJSON(ILSCATCHER_BASE + '/main/bulk_add_to_list.json?token=' + token + '&list_id=' + existing_list + '&record_ids=' + records, function(data) {
+            mylist();
+            setTimeout(function() {
+                $('#listresults').html('<div class="success">Successfully added items to list.</div>');
+            }, 2000);
+            setTimeout(function() {
+                $('#listresults').fadeOut('slow');
+            }, 5000);
+        });
     }
 }
 
