@@ -25,8 +25,8 @@ function showAllEventsByTerm(term) {
     } else if (term == 'adults') {
         banner = 'Adult Events';
     }
-    if ((term == null) || (term == 'events')) { 
-        selector = 'events'; 
+    if ((term == null) || (term == 'events')) {
+        selector = 'events';
         banner = 'Events';
     } else {
         selector = 'events_' + term;
@@ -105,23 +105,32 @@ function lib_firstname_to_shortname(name) {
 function showitemlist(list_name, list_id) {
     cleanhouse();
     cleandivs();
-    var list_name = htmlEncode(decodeURIComponent(list_name));
-    loading_text = 'Loading ' + list_name + '...';
-    changeBanner(loading_text, color_tadlblue);
-    loading_animation('start');
-    var token = window.localStorage.getItem('token');
-    var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
+    if (logged_in()) {
+        var list_name = htmlEncode(decodeURIComponent(list_name));
+        loading_text = 'Loading ' + list_name + '...';
+        changeBanner(loading_text, color_tadlblue);
+        loading_animation('start');
+        var token = window.localStorage.getItem('token');
+        var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
         $.getJSON(drupal_json_url, function(data) {
-        var template = Handlebars.compile($('#results-template_2').html());
-        var info = template(data);
-        $('#region-one').html(logodiv);
-        $('#region-two').html(info);
-        loading_animation('stop');
-        changeBanner(list_name, color_tadlblue);
-        mylist();
-    });       
+            var template = Handlebars.compile($('#results-template_2').html());
+            var info = template(data);
+            $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+                var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your other lists</span></div></div></div>';
+                quicklists_template = Handlebars.compile($('#quicklists-template').html());
+                var quicklists = quicklists_template(data)
+                $('#region-one').html(logodiv + titlediv + quicklists);
+                $('#region-two').html(info);
+                loading_animation('stop');
+                changeBanner(list_name, color_tadlblue);
+                mylist();
+            });
+        });
+    } else {
+        changeBanner('Log In', color_tadlblue);
+        openForm();
+    }
 }
-
 
 function showfeaturedlist(list_name, list_id) {
     cleanhouse();
@@ -154,11 +163,11 @@ function showfeaturedlist(list_name, list_id) {
             ids = ids + this.record_id + ',';
         });
         //fetch_available_by_id(ids);
-    }       
+    }
 }
 
 
-function showreviews(review_type) { 
+function showreviews(review_type) {
     cleanhouse();
     loading_animation('start');
     $.getJSON('https://www.tadl.org/export/reviews/'+ review_type +'/json', function(data) {

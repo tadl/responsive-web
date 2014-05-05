@@ -612,6 +612,21 @@
     {{/lists}}
 </script>
 
+<script id="quicklists-template" type="text/template">
+    <div class="card">
+        <div class="grid-container">
+            <div class="grid-100 tablet-grid-100 mobile-grid-100" style="padding-left:10px;">
+                {{#lists}}
+                    <span class="cardtitle"><a onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a></span><br/>
+                    {{#if list_desc}}
+                        <em class="subtitle">{{list_desc}}</em><br/><br/>
+                    {{/if}}
+                {{/lists}}
+            </div>
+        </div>
+    </div>
+</script>
+
 <script id="payments-template" type="text/template">
     <div class="card">
         <div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100 padtop">
