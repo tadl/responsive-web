@@ -392,12 +392,13 @@ function myAccount(){
 
 function my_lists(){
     loading_animation('start');
-    if (current_user == 'true') {
+    if (logged_in()) {
         cleandivs();
         cleanhouse();
         changeBanner('My Lists', color_tadlblue);
         token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+            console.log(data);
             var my_lists = mylists_template(data)
             $('#two-thirds').html(my_lists);
             myaccount_menu();
@@ -405,7 +406,7 @@ function my_lists(){
         });
     } else {
           $('#two-thirds').html('<div class="card"><h4 class="title">Log in to View Your Account</h4></div>');
-          $("#login_form").slideDown("fast");
+          openForm();
           loading_animation('stop');
     };
 
