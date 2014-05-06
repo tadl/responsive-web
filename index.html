@@ -997,23 +997,24 @@
 <script id="showlocations-template" type="text/template">
   	{{#nodes}}
         <div class="card padtop">
-            <div class="grid-50 tablet-grid-50 mobile-grid-50">
-                <img class="location_img" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg">{{node.title}}
-                <h3 class="wrapper">{{node.fullname}}</h3>
+            <div class="grid-50 tablet-grid-50 mobile-grid-100 center">
+                <div style="position:relative;">
+                    <img class="location_img wide" src="https://www.tadl.org/sites/default/files/libraryphotos/{{node.shortname}}-200x125.jpg"/>
+                    <div style="width:100%;font-size:18px;text-shadow:black 1px 1px 2px;text-align:center;position:absolute;left:0;bottom:0;background-color:rgba(0,0,0,0.5);color:#fff;">{{node.fullname}}</div>
+                </div>
                 {{node.address}}<br />
                 {{node.citystatezip}}<br />
                 <a href="tel:{{node.phone}}">{{node.phone}}</a><br />
             </div>
             <div class="grid-50 tablet-grid-50 mobile-grid-100 topten">
-                <table>
-                    <tr><td><strong>Hours:</strong></td><td></td></tr>
-                    <tr><td>Sunday</td><td>{{node.sunday}}</td></tr>
-                    <tr><td>Monday</td><td>{{node.monday}}</td></tr>
-                    <tr><td>Tuesday</td><td>{{node.tuesday}}</td></tr>
-                    <tr><td>Wednesday</td><td>{{node.wednesday}}</td></tr>
-                    <tr><td>Thursday</td><td>{{node.thursday}}</td></tr>
-                    <tr><td>Friday</td><td>{{node.friday}}</td></tr>
-                    <tr><td>Saturday</td><td>{{node.saturday}}</td></tr>
+                <table style="width:100%">
+                    <tr><td>Sunday</td><td class="right">{{node.sunday}}</td></tr>
+                    <tr><td>Monday</td><td class="right">{{node.monday}}</td></tr>
+                    <tr><td>Tuesday</td><td class="right">{{node.tuesday}}</td></tr>
+                    <tr><td>Wednesday</td><td class="right">{{node.wednesday}}</td></tr>
+                    <tr><td>Thursday</td><td class="right">{{node.thursday}}</td></tr>
+                    <tr><td>Friday</td><td class="right">{{node.friday}}</td></tr>
+                    <tr><td>Saturday</td><td class="right">{{node.saturday}}</td></tr>
                 </table>
             </div>
         </div>

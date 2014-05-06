@@ -48,42 +48,6 @@ function showAllEventsByTerm(term) {
     }
 }
 
-function list_node_to_name(list_id) {
-    var info;
-    if (list_id == '67') {
-        info = 'books_featured_fiction';
-    } else if (list_id == '68') {
-        info = 'books_featured_nonfiction';
-    } else if (list_id == '45') {
-        info = 'books_adult_display';
-    } else if (list_id == '224') {
-        info = 'books_adult_clubkits';
-    } else if (list_id == '234') {
-        info = 'books_adult_business';
-    } else if (list_id == '29') {
-        info = 'music_new';
-    } else if (list_id == '31') {
-        info = 'music_hot';
-    } else if (list_id == '32') {
-        info = 'videos_new';
-    } else if (list_id == '34') {
-        info = 'videos_hot';
-    } else if (list_id == '165') {
-        info = 'videos_tcff';
-    } else if (list_id == '286') {
-        info = 'videos_met';
-    } else if (list_id == '47') {
-        info = 'youth_display';
-    } else if (list_id == '52') {
-        info = 'youth_new_books';
-    } else if (list_id == '41') {
-        info = 'teens_manga';
-    } else if (list_id == '51') {
-        info = 'teens_new';
-    }
-    return info;
-}
-
 function lib_firstname_to_shortname(name) {
     var shortname;
     if (name == 'Fife Lake') {
