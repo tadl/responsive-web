@@ -71,11 +71,14 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
             $('#region-two').html(cat + info);
             $('#region-one').html(info_facets);
             $('#search-params').html('Results for '+ unescape(searchtype) +': <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' sorted by '+ unescape(sort_type) +' '+ availablemsg +'. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a><a class="hide-on-desktop button verysmall gray" onclick="scroll_to(facets)"><span>Filters</span></a></div><a class="hide-on-desktop button verysmall gray" onclick="scroll_to(book_bag)"><span>Book Bag</span></a></div>');
+            show_melcat_block();
         } else {
             $('#search-params').html("No Results");
+            show_melcat_block();
         }
     });
     mylist();
+
 }
 
 function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
@@ -120,9 +123,11 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
             $('#region-two').html(info);
             $('#region-one').html(info_facets);
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
-            $('#search-params').append(info_selected_facets);
+            $('#search-params').prepend(info_selected_facets);
+            show_melcat_block();
         } else {
             $('#region-two').replaceWith("No Results");
+            show_melcat_block();
         }
     });
     mylist();
@@ -155,6 +160,7 @@ function logout() {
     window.localStorage.removeItem('current_user');
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('username');
+    window.localStorage.removeItem('melcat_id');
     current_user = 'false';
     location.reload();
 }
@@ -354,6 +360,7 @@ function login_and_fetch_dash(username, password) {
             } else {
                 render_dash(data);
                 var patron_full_name = data.users[0].user.name;
+                var melcat_id = data.users[0].user.melcat_id;
                 var checkouts = data.users[0].user.checkouts;
                 var holds = data.users[0].user.holds;
                 var pickups = data.users[0].user.pickups;
@@ -368,6 +375,7 @@ function login_and_fetch_dash(username, password) {
                 window.localStorage.setItem('current_user', current_user);
                 window.localStorage.setItem('token', token);
                 window.localStorage.setItem('username', username);
+                window.localStorage.setItem('melcat_id', melcat_id);
                 reset_hold_links();
                 if (current_page == 'myaccount' && first_state != 'true' ) {
                 	myAccount();
@@ -1038,4 +1046,23 @@ function fetch_available_by_id(ids) {
         });
     });
 }
+
+function show_melcat_block(){
+    var melcat_id = window.localStorage.getItem('melcat_id');
+    if (melcat_id != undefined){
+        var melcat_id_text = 'Your MeLCat ID is: ' + melcat_id
+    } else {
+        var melcat_id_text = '' 
+    }
+    var melcat_html = '<div class="card" style="text-align: center;">Not finding what you want?<br><a onclick="search_melcat()">Check MeLCat<br><img src="img/mel.jpg"></a><br>'+ melcat_id_text +'</div>'
+    $('#region-one').prepend(melcat_html);
+}
+
+function search_melcat(){    
+    var searchquery = encodeURIComponent($('#term').val());
+    var url = 'http://elibrary.mel.org/search/a?searchtype=X&searcharg='+ searchquery +'&SORT=D'
+    window.open(url,'_blank')
+}
+
+
 
