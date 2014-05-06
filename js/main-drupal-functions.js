@@ -114,9 +114,10 @@ function showitemlist(list_name, list_id) {
         var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
         $.getJSON(drupal_json_url, function(data) {
             var template = Handlebars.compile($('#results-template_2').html());
+            data.userlist = list_id;
             var info = template(data);
             $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
-                var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your other lists</span></div></div></div>';
+                var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your Lists</span></div></div></div>';
                 quicklists_template = Handlebars.compile($('#quicklists-template').html());
                 var quicklists = quicklists_template(data)
                 $('#region-one').html(logodiv + titlediv + quicklists);

@@ -750,6 +750,18 @@ function addtolist(record_id, image, format_icon, author, year, online, title) {
     mylist();
 }
 
+function removefromlist(record) {
+    var json;
+    try { json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
+    for (i=0;i<json.length;i++) {
+        if (json[i].record == record) {
+            json.splice(i,1);
+        }
+    }
+    window.localStorage.setItem('list', JSON.stringify(json));
+    mylist();
+}
+
 function mylist() {
     if (bagIsEmpty()) {
         $('#region-three').empty();
@@ -834,18 +846,15 @@ function add_create_list() {
     }
 }
 
-function removefromlist(record) {
-    var json;
-    try { json = JSON.parse(window.localStorage.getItem('list')); } catch (e) { json = []; }
-    for (i=0;i<json.length;i++) {
-        if (json[i].record == record) {
-            json.splice(i,1);
-        }
+function userlist_remove(itemid,listid,confirmed) {
+    var el = '#rmlist_' + itemid
+    if (confirmed == 1) {
+        $(el).removeClass('red').addClass('black').spin('tiny');
+        console.log('this is where it would be removed');
+    } else {
+        $(el).attr('onclick','userlist_remove(' + itemid + ',' + listid + ',1)').removeClass('tadlblue').addClass('red').html('<span>Click to confirm</span>');
     }
-    window.localStorage.setItem('list', JSON.stringify(json));
-    mylist();
 }
-
 
 function pre_multi_hold() {
     var json;

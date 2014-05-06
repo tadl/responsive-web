@@ -466,7 +466,7 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-30">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https image}}" />
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
                 </div>
                 <div class="grid-70 tablet-grid-70 mobile-grid-70">
                     <span class="cardtitle"><img src="{{make_https format_icon}}" />&nbsp;{{title}}</span><br />
@@ -487,6 +487,9 @@
                         {{#compare availability null operator="!="}}
                             <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
                         {{/compare}}
+                        {{#if ../userlist}}
+                            <a class="button small tadlblue" id="rmlist_{{record_id}}" onclick="userlist_remove({{record_id}},{{ ../../userlist }})"><span>Remove from List</span></a>
+                        {{/if}}
                     </div>
                     <div id="hold_message_{{record_id}}" class="holdmessage"></div>
                     <div id="{{record_id}}">
@@ -619,7 +622,7 @@
                 {{#lists}}
                     <span class="cardtitle"><a onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</a></span><br/>
                     {{#if list_desc}}
-                        <em class="subtitle">{{list_desc}}</em><br/><br/>
+                        <em class="subtitle">{{list_desc}}</em><br/>
                     {{/if}}
                 {{/lists}}
             </div>
