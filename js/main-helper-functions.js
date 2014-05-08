@@ -61,17 +61,8 @@ $(document).ready(function() {
         }
     });
 
-    /*
-     * $('.back-to-top').click(function(event) {
-     *     event.preventDefault();
-     *     $('html, body').animate({scrollTop: 0}, duration);
-     *     return false;
-     * });
-     */
-
     $('a[rel="lightframe"]').fancybox();
 
-//    $('#login_form').html($('#login_form-template').html());
     $('#pleasewait').spin('tinyblack');
 
 

@@ -463,7 +463,7 @@
 
 <script id="results-template_2" type="text/template">
     {{#items}}
-        <div class="card">
+        <div class="card card_{{record_id}} card_{{list_item_id}}">
             <div class="grid-container">
                 <div class="grid-30 tablet-grid-30 mobile-grid-30">
                     <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{record_id}}" />
@@ -488,7 +488,7 @@
                             <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a> 
                         {{/compare}}
                         {{#if ../userlist}}
-                            <a class="button small tadlblue" id="rmlist_{{record_id}}" onclick="userlist_remove({{record_id}},{{ ../../userlist }})"><span>Remove from List</span></a>
+                            <a class="button small tadlblue" id="rmlist_{{list_item_id}}" onclick="userlist_remove({{list_item_id}},{{ ../../userlist }})"><span>Remove from List</span></a>
                         {{/if}}
                     </div>
                     <div id="hold_message_{{record_id}}" class="holdmessage"></div>

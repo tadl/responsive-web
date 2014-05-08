@@ -69,20 +69,25 @@ function lib_firstname_to_shortname(name) {
 function showitemlist(list_name, list_id) {
     cleanhouse();
     cleandivs();
+    var drupal_json_url;
+    var list_name = htmlEncode(decodeURIComponent(list_name));
+    var token = window.localStorage.getItem('token');
+    loading_text = 'Loading ' + list_name + '...';
+    changeBanner(loading_text, color_tadlblue);
+    loading_animation('start');
     if (logged_in()) {
-        var list_name = htmlEncode(decodeURIComponent(list_name));
-        loading_text = 'Loading ' + list_name + '...';
-        changeBanner(loading_text, color_tadlblue);
-        loading_animation('start');
-        var token = window.localStorage.getItem('token');
-        var drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
-        $.getJSON(drupal_json_url, function(data) {
-            var template = Handlebars.compile($('#results-template_2').html());
+        drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
+    } else {
+        drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
+    }
+    $.getJSON(drupal_json_url, function(data) {
+        var template = Handlebars.compile($('#results-template_2').html());
+        var info = template(data);
+        if (logged_in()) {
             data.userlist = list_id;
-            var info = template(data);
             $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+                var quicklists_template = Handlebars.compile($('#quicklists-template').html());
                 var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your Lists</span></div></div></div>';
-                quicklists_template = Handlebars.compile($('#quicklists-template').html());
                 var quicklists = quicklists_template(data)
                 $('#region-one').html(logodiv + titlediv + quicklists);
                 $('#region-two').html(info);
@@ -90,11 +95,14 @@ function showitemlist(list_name, list_id) {
                 changeBanner(list_name, color_tadlblue);
                 mylist();
             });
-        });
-    } else {
-        changeBanner('Log In', color_tadlblue);
-        openForm();
-    }
+        } else {
+            $('#region-one').html(logodiv);
+            $('#region-two').html(info);
+            loading_animation('stop');
+            changeBanner(list_name, color_tadlblue);
+            mylist();
+        }
+    });
 }
 
 function showfeaturedlist(list_name, list_id) {

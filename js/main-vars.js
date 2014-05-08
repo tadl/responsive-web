@@ -23,3 +23,24 @@ var color_blue = '#15b1eb';
 var color_purple = '#8a178a';
 
 var NODEPREFIX = 'https://www.tadl.org/export/node/json/';
+
+$.ajaxSetup({
+    timeout: 5*1000,
+    error: function(jqXHR, status, errorThrown){
+        console.log('WAAAAA: ' + errorThrown);
+        console.log('jqXHR: ' + jqXHR);
+        console.log('status: ' + status);
+        if (errorThrown == 'timeout') {
+            loading_animation('stop');
+            changeBanner('Error', color_red);
+            var content = '<div>Sorry, the server took too long to respond.<br/>Our technology staff have been notified.<br/>Please try again later.</div><div class="center" style="padding-top:30px;"><a onclick="$.fancybox.close();window.location=\'/responsive-web/\';" class="button tadlblue medium"><span>Ok</span></a></div>';
+            $.fancybox({
+                content: content,
+                autoScale: true,
+                closeBtn: false
+            });
+        } else {
+            window.location='/responsive-web/';
+        }
+    }
+});

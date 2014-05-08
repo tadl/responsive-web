@@ -242,7 +242,7 @@ function pre_hold(record_id) {
     } else {
         $(link_id).html('<span>Log in to place hold</span>');
         $(link_id).addClass('hold_login_first');
-        $('#login_form').slideDown('fast');
+        openForm();
     }
 }
 
@@ -393,13 +393,13 @@ function login_and_fetch_dash(username, password) {
 function refresh_acctinfo() {
     var token = window.localStorage.getItem('token');
     var username = window.localStorage.getItem('username');
-    var first_state = window.localStorage.getItem('current_user');
-    if (logged_in()) {
+    if (token) {
         $.getJSON(ILSCATCHER_BASE + '/main/acctinfo.json?token=' + token, function(data) {
             if (data['status'] == 'error') {
                 var source = $('#login_form-template').html();
                 $('#login_form').html(source);
                 $('#login_msg').html('<span>Error logging in.</span>');
+                window.localStorage.removeItem('token');
                 current_user = 'false';
             } else {
                 render_dash(data);
@@ -506,6 +506,7 @@ function show_checkout_history() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?token=' + token, function(data) {
+        //$.getJSON('http://wjr.dev.tadl.org/fail.php', function(data) { // This is^H^H--was for testing
             if (data.more == 'false') { delete data.more; }
             if (data.status == '200') {
                 var template = Handlebars.compile($('#showcheckout-history-template').html());
@@ -855,12 +856,21 @@ function add_create_list() {
 }
 
 function userlist_remove(itemid,listid,confirmed) {
-    var el = '#rmlist_' + itemid
-    if (confirmed == 1) {
-        $(el).removeClass('red').addClass('black').spin('tiny');
-        console.log('this is where it would be removed');
+    var el = '#rmlist_' + itemid;
+    var card = '.card_' + itemid;
+    if (logged_in()) {
+        if (confirmed == 1) {
+            var token = window.localStorage.getItem('token');
+            $(el).removeClass('red').addClass('black').spin('tiny');
+            $.getJSON(ILSCATCHER_BASE + '/main/remove_list_item.json?token=' + token + '&listid=' + listid + '&itemid=' + itemid, function(data) {
+                $(card).remove();
+            });
+        } else {
+            $(el).attr('onclick','userlist_remove(' + itemid + ',' + listid + ',1)').removeClass('tadlblue').addClass('red').html('<span>Click to confirm</span>');
+        }
     } else {
-        $(el).attr('onclick','userlist_remove(' + itemid + ',' + listid + ',1)').removeClass('tadlblue').addClass('red').html('<span>Click to confirm</span>');
+        $(el).html('<span>Log in to remove item</span>');
+        openForm();
     }
 }
 

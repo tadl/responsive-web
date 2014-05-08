@@ -25,7 +25,7 @@ function showEastBay() {
             return;
         });
     } else { 
-        changeBanner('East Bay', color_tadlblue);
+        //changeBanner('East Bay', color_tadlblue);
         var events_ebb = events_template(data.events_ebb);
         var infobox_ebb = simplenode_template(data.infobox_ebb);
         var news_ebb = location_news_template(data.news_ebb);
@@ -51,7 +51,7 @@ function showFifeLake() {
             return;
         });
     } else { 
-        changeBanner('Fife Lake', color_tadlblue);
+        //changeBanner('Fife Lake', color_tadlblue);
         var events_flpl = events_template(data.events_flpl);
         var infobox_flpl = simplenode_template(data.infobox_flpl);
         var news_flpl = location_news_template(data.news_flpl);
@@ -77,7 +77,7 @@ function showInterlochen() {
             return;
         });
     } else { 
-        changeBanner('Interlochen', color_tadlblue);
+        //changeBanner('Interlochen', color_tadlblue);
         var events_ipl = events_template(data.events_ipl);
         var infobox_ipl = simplenode_template(data.infobox_ipl);
         var news_ipl = location_news_template(data.news_ipl);
@@ -103,7 +103,7 @@ function showKingsley() {
             return;
         });
     } else { 
-        changeBanner('Kingsley', color_tadlblue);
+        //changeBanner('Kingsley', color_tadlblue);
         var events_kbl = events_template(data.events_kbl);
         var infobox_kbl = simplenode_template(data.infobox_kbl);
         var news_kbl = location_news_template(data.news_kbl);
@@ -129,7 +129,7 @@ function showPeninsula() {
             return;
         });
     } else { 
-        changeBanner('Peninsula', color_tadlblue);
+        //changeBanner('Peninsula', color_tadlblue);
         var events_pcl = events_template(data.events_pcl);
         var infobox_pcl = simplenode_template(data.infobox_pcl);
         var news_pcl = location_news_template(data.news_pcl);
@@ -155,7 +155,7 @@ function showWoodmere() {
             return;
         });
     } else { 
-        changeBanner('Woodmere', color_tadlblue);
+        //changeBanner('Woodmere', color_tadlblue);
         var events_wood = events_template(data.events_wood);
         var infobox_wood = simplenode_template(data.infobox_wood);
         var news_wood = location_news_template(data.news_wood);
