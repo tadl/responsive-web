@@ -437,10 +437,17 @@ function showcheckouts() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?token=' + token, function(data) {
-            var template = Handlebars.compile($('#showcheckedout-template').html());
-            var info = template(data);
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
+            if (data.status == '200') {
+                var template = Handlebars.compile($('#showcheckedout-template').html());
+                var info = template(data);
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+            } else if (data.status == '302') {
+                changeBanner('Session expired. Please log in again.', color_tadlblue);
+                openForm();
+            } else {
+                changeBanner('Something weird happened and the global error handler should hide this message.', color_red);
+            }
             loading_animation('stop');
         });
     } else {
@@ -485,10 +492,17 @@ function showholds() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
-            var template = Handlebars.compile($('#showholds-template').html());
-            var info = template(data);
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
+            if (data.status == '200') {
+                var template = Handlebars.compile($('#showholds-template').html());
+                var info = template(data);
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+            } else if (data.status == '302') {
+                changeBanner('Session expired. Please log in again.', color_tadlblue);
+                openForm();
+            } else {
+                changeBanner('Something weird happened and the global error handler should hide this message.', color_red);
+            }
             loading_animation('stop');
         });
     } else {
@@ -517,7 +531,7 @@ function show_checkout_history() {
                 changeBanner('Session Expired, Please Log In', color_tadlblue);
                 openForm();
             } else {
-                changeBanner('Something weird happened', color_red);
+                changeBanner('Something weird happened and the global error handler should hide this message.', color_red);
             }
             loading_animation('stop');
         });
@@ -546,7 +560,7 @@ function more_history() {
             $('html, body').animate({scrollTop: 0}, 500);
             openForm();
         } else {
-            changeBanner('Something weird happened', color_red);
+            changeBanner('Something weird happened and the global error handler should hide this message.', color_red);
             $('html, body').animate({scrollTop: 0}, 500);
             $('.spinning').hide();
         }
@@ -654,14 +668,21 @@ function showpickups() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
-            var template = Handlebars.compile($('#showholds-template').html());
-            if (data[':holds']) {
-                var info = template(data);
+            if (data.status == '200') {
+                var template = Handlebars.compile($('#showholds-template').html());
+                if (data['holds']) {
+                    var info = template(data);
+                } else {
+                    var info = 'You have no items ready for pickup!';
+                }
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+            } else if (data.status == '302') {
+                changeBanner('Session expired. Please log in.', color_tadlblue);
+                openForm();
             } else {
-                var info = 'You have no items ready for pickup!';
+                changeBanner('Something weird happened and the global error handler should hide this message.', color_red);
             }
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
             loading_animation('stop');
         });
     } else {

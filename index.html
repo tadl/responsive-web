@@ -924,24 +924,24 @@
 </script>
 
 <script id="showcheckedout-template" type="text/template">
-    {{#:checkouts}}
+    {{#checkouts}}
         <div class="card">
             <div class="grid-container">
                 <div class="grid-10 tablet-grid-20 mobile-grid-30">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :checkout.:image}}" />
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https checkout.image}}" />
                 </div>
                 <div class="grid-90 tablet-grid-80 mobile-grid-70">
-                    <span class="cardtitle"><img src="{{make_https :checkout.:format_icon}}" />&nbsp;{{:checkout.:name}}</span><br />
-                    <div id="{{:checkout.:checkout_id}}">
-                        Due: {{:checkout.:due_date}}<br />
-                        Remaining Renewals: {{:checkout.:renew_attempts}}
+                    <span class="cardtitle"><img src="{{make_https checkout.format_icon}}" />&nbsp;{{checkout.name}}</span><br />
+                    <div id="{{checkout.checkout_id}}">
+                        Due: {{checkout.due_date}}<br />
+                        Remaining Renewals: {{checkout.renew_attempts}}
                     </div>
-                    <a class="button verysmall tadlblue padtop floatright linkto_{{:checkout.:record_id}}" onclick="loadItem({{:checkout.:record_id}})"><span>link to item</span></a>
-                    <a class="button small tadlblue" id="renew_{{:checkout.:checkout_id}}" onclick="renew({{:checkout.:checkout_id}}, {{:checkout.:barcode}});"><span>Renew this item</span></a>
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{checkout.record_id}}" onclick="loadItem({{checkout.record_id}})"><span>link to item</span></a>
+                    <a class="button small tadlblue" id="renew_{{checkout.checkout_id}}" onclick="renew({{checkout.checkout_id}}, {{checkout.barcode}});"><span>Renew this item</span></a>
                 </div>
             </div>
         </div>
-    {{/:checkouts}}
+    {{/checkouts}}
 </script>
 
 <script id="someevents-template" type="text/template">
@@ -1034,27 +1034,27 @@
 </script>
 
 <script id="showholds-template" type="text/template">
-    {{#:holds}}
-        <div id="hold_{{:hold.:hold_id}}" class="card">
+    {{#holds}}
+        <div id="hold_{{hold.hold_id}}" class="card">
             <div class="grid-container">
                 <div class="grid-20 tablet-grid-10 mobile-grid-20">
-                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https :hold.:image}}" />
+                    <img class="result_img" onload="img_check(this);" onerror="img_error(this);" src="{{make_https hold.image}}" />
                 </div>
                 <div class="grid-80 tablet-grid-90 mobile-grid-80">
-                    <span class="cardtitle"><img src="{{make_https :hold.:format_icon}}" />&nbsp;{{:hold.:name}}</span><br />
-                    Pick-up Location: {{:hold.:pickup_location}}<br />
-                    Status: <span id="holdstatus_{{:hold.:hold_id}}">{{#if :hold.:active}}Active{{else}}Suspended{{/if}}</span>; {{:hold.:status}}<br />
-                    <a class="button verysmall tadlblue" id="cancel_{{:hold.:hold_id}}" onclick="pre_cancelhold({{:hold.:hold_id}});"><span>Cancel</span></a>
-                    {{#if :hold.:active}}
-                        <a class="button verysmall tadlblue {{#if ../../ready}}hidden{{/if}}" id="suspend_{{:hold.:hold_id}}" onclick="holdaction('suspend',{{:hold.:hold_id}});"><span>Suspend</span></a>
+                    <span class="cardtitle"><img src="{{make_https hold.format_icon}}" />&nbsp;{{hold.name}}</span><br />
+                    Pick-up Location: {{hold.pickup_location}}<br />
+                    Status: <span id="holdstatus_{{hold.hold_id}}">{{#if hold.active}}Active{{else}}Suspended{{/if}}</span>; {{hold.status}}<br />
+                    <a class="button verysmall tadlblue" id="cancel_{{hold.hold_id}}" onclick="pre_cancelhold({{hold.hold_id}});"><span>Cancel</span></a>
+                    {{#if hold.active}}
+                        <a class="button verysmall tadlblue {{#if ../../ready}}hidden{{/if}}" id="suspend_{{hold.hold_id}}" onclick="holdaction('suspend',{{hold.hold_id}});"><span>Suspend</span></a>
                     {{else}}
-                        <a class="button verysmall tadlblue" id="activate_{{:hold.:hold_id}}" onclick="holdaction('activate',{{:hold.:hold_id}});"><span>Activate</span></a>
+                        <a class="button verysmall tadlblue" id="activate_{{hold.hold_id}}" onclick="holdaction('activate',{{hold.hold_id}});"><span>Activate</span></a>
                     {{/if}}
-                    <a class="button verysmall tadlblue padtop floatright linkto_{{:hold.:record_id}}" onclick="loadItem({{:hold.:record_id}})"><span>link to item</span></a>
+                    <a class="button verysmall tadlblue padtop floatright linkto_{{hold.record_id}}" onclick="loadItem({{hold.record_id}})"><span>link to item</span></a>
                 </div>
             </div>
         </div>
-    {{/:holds}}
+    {{/holds}}
 </script>
 
 <script id="showcheckout-history-template" type="text/template">
