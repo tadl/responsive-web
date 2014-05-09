@@ -506,7 +506,6 @@ function show_checkout_history() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?token=' + token, function(data) {
-        //$.getJSON('http://wjr.dev.tadl.org/fail.php', function(data) { // This is^H^H--was for testing
             if (data.more == 'false') { delete data.more; }
             if (data.status == '200') {
                 var template = Handlebars.compile($('#showcheckout-history-template').html());

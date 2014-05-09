@@ -82,9 +82,9 @@ function showitemlist(list_name, list_id) {
     }
     $.getJSON(drupal_json_url, function(data) {
         var template = Handlebars.compile($('#results-template_2').html());
+        if (logged_in()) { data.userlist = list_id; }
         var info = template(data);
         if (logged_in()) {
-            data.userlist = list_id;
             $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
                 var quicklists_template = Handlebars.compile($('#quicklists-template').html());
                 var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your Lists</span></div></div></div>';
