@@ -3,7 +3,7 @@ var ILSCATCHER_HOST = 'mel-catcher.herokuapp.com/';
 var ILSCATCHER_BASE = 'https://' + ILSCATCHER_HOST;
 var PLACEHOLDER_IMG = 'img/clocktower100.png';
 var psTitle = "Traverse Area District Library";
-var eventsnav = '<a class="button small tadlblue wide" id="eventlocs" data-dropdown="#dropdown-2"><span>Filter by location</span></a><br/><br/><a class="button small tadlblue wide" id="eventaudis" data-dropdown="#dropdown-3"><span>Filter by audience</span></a>';
+var eventsnav = '<a class="button large tadlblue wide" id="eventlocs" data-dropdown="#dropdown-2"><span>Filter by location</span></a><br/><br/><a class="button large tadlblue wide" id="eventaudis" data-dropdown="#dropdown-3"><span>Filter by audience</span></a>';
 var separator = " | ";
 var pagecount = 0;
 var historycount = 0;
