@@ -8,12 +8,6 @@ var separator = " | ";
 var pagecount = 0;
 var historycount = 0;
 var state = {}
-//var linked_search = false;
-//var templist = {};
-//templist.localArray = []; 
-//var mylist2 = []
-
-// colors
 var color_tadlblue = '#0d4c78';
 var color_red = '#e03434';
 var color_orange = '#fe6b18';
@@ -23,6 +17,8 @@ var color_blue = '#15b1eb';
 var color_purple = '#8a178a';
 
 var NODEPREFIX = 'https://www.tadl.org/export/node/json/';
+
+var debuglog = 1;
 
 $.ajaxSetup({
     timeout: 5*1000,
@@ -40,7 +36,14 @@ $.ajaxSetup({
                 closeBtn: false
             });
         } else {
-            window.location='/responsive-web/';
+            loading_animation('stop');
+            changeBanner('Error', color_red);
+            var content = '<div>Sorry, something very strange happened.<br/>Our technology staff have been informed of the details.<br/>Please try again later.</div><div class="center" style="padding-top:30px;"><a onclick="window.location=\'/responsive-web/\'" class="button tadlblue medium"><span>Ok</span></a></div>';
+            $.fancybox({
+                content: content,
+                autoScale: true,
+                closeBtn: false
+            });
         }
     }
 });
