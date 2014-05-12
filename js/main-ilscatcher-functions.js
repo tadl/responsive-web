@@ -204,13 +204,14 @@ function viewItem(record_id) {
             loading_animation('stop');
         });
         $('#region-one').html(logodiv);
-        /*
-        if (bagIsEmpty()) {
-            $('#region-two').parent().removeClass('grid-50').addClass('grid-100').removeClass('push-25');
-        } else {
-            $('#region-two').parent().removeClass('grid-50').addClass('grid-75').removeClass('push-25');
-        } */
+        console.log(window.location.href);
         check_googlebooks(record_id, isbn);
+        $('#itemqr').qrcode({
+            width: 100,
+            height: 100,
+            color: '#000',
+            text: window.location.href
+        }).addClass('padtop');
     });
 }
 

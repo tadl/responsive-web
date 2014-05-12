@@ -48,6 +48,7 @@
     <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="js/jquery.printElement.min.js"></script>
     <script type="text/javascript" src="js/handlebars.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
     <script type="text/javascript" src="js/jquery-barcode.min.js"></script>
     <script type="text/javascript" src="js/jquery.dropdown.min.js"></script>
     <script type="text/javascript" src="js/jquery.spin.js"></script>
@@ -401,6 +402,7 @@
                         <br /><a class="button small green" id="place_hold_{{record_id}}" onclick="pre_hold({{record_id}})"><span>Place Hold</span></a><br /><br />
                         <a class="button small tadlblue" onclick="addtolist('{{record_id}}', '{{make_https image}}', '{{make_https format_icon}}', '{{encode author}}', '{{record_year}}', '{{online}}', '{{encode title}}' )"><span>Add to Bag</span></a><br />
                     {{/if}}
+                    <div class="hide-on-mobile" id="itemqr"></div>
                 </div>
                 <div class="grid-70 tablet-grid-80 mobile-grid-100">
                     <span class="cardtitle"><img src="https://catalog.tadl.org/images/format_icons/item_type/{{format_icon}}" />&nbsp;{{title}}</span><br />
