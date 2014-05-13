@@ -811,23 +811,6 @@
     </div>
 </script>
 
-<script id="shelf-template" type="text/template">
-    <table>
-    <th>Library:</th>
-    <th>Status:</th>
-    <th>Shelving Location:</th>
-    <th>Call Number:</th>
-    {{#:items}}
-        <tr>
-        <td>{{:item.:library}}</td>
-        <td>{{:item.:available}}</td>
-        <td>{{:item.:shelving_location}}</td>
-        <td>{{:item.:call_number}}</td>
-        </tr>
-    {{/:items}}
-    </table>
-</script>
-
 <script id="logedin-template" type="text/template">
     {{#users}}
         <div>
@@ -1083,11 +1066,11 @@
 </script>
 
 <script id="renew-template" type="text/template">
-    {{#:checkouts}}
-        Due: {{:checkout.:due_date}}<br />
-        Remaining Renewals: {{:checkout.:renew_attempts}}<br />
-    {{/:checkouts}}
-        <span>{{:response}}</span>
+    {{#checkouts}}
+        Due: {{checkout.due_date}}<br />
+        Remaining Renewals: {{checkout.renew_attempts}}<br />
+    {{/checkouts}}
+        <span>{{response}}</span>
 </script>
 
 <script id="mylist-template" type="text/template">

@@ -21,7 +21,7 @@ var NODEPREFIX = 'https://www.tadl.org/export/node/json/';
 var debuglog = 1;
 
 $.ajaxSetup({
-    timeout: 5*1000,
+    timeout: 25*1000,
     error: function(jqXHR, status, errorThrown){
         console.log('WAAAAA: ' + errorThrown);
         console.log('jqXHR: ' + jqXHR);
