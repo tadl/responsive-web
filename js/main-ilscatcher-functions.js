@@ -401,13 +401,7 @@ function refresh_acctinfo() {
     if (token) {
         $.getJSON(ILSCATCHER_BASE + '/main/acctinfo.json?token=' + token, function(data) {
             if (debuglog) console.log(data);
-            if (data['status'] == 'error') {
-                var source = $('#login_form-template').html();
-                $('#login_form').html(source);
-                $('#login_msg').html('<span>Error logging in.</span>');
-                window.localStorage.removeItem('token');
-                current_user = 'false';
-            } else {
+            if (data.status == '200') {
                 render_dash(data);
                 var patron_full_name = data.users[0].user.name;
                 var checkouts = data.users[0].user.checkouts;
@@ -423,6 +417,15 @@ function refresh_acctinfo() {
                 window.localStorage.setItem('current_user', current_user);
                 window.localStorage.setItem('username', username);
                 reset_hold_links();
+            } else if (data.status == '302') {
+                var source = $('#login_form-template').html();
+                $('#login_form').html(source);
+                $('#login_msg').html('<span>Error logging in. Your session may have expired.</span>');
+                window.localStorage.removeItem('token');
+                current_user = 'false';
+                openForm();
+            } else {
+                // noooo
             }
         });
     }
