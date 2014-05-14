@@ -51,10 +51,11 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
     }
     var loctext = document.getElementById('location').options[document.getElementById('location').selectedIndex].text;
     var mediatypedecode = decodeURIComponent(mediatype);
-    $('#search-params').html('<div class="grid-container"><div class="grid-10 tablet-grid-15 mobile-grid-20"><div class="params-content padtop">&nbsp;</div></div><div class="grid-90 tablet-grid-85 mobile-grid-80">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.</div></div>').show(); // the spinner here should be improved. soon.
+    $('#search-params').html('<div class="grid-container"><div class="grid-10 tablet-grid-15 mobile-grid-20"><div class="params-content padtop">&nbsp;</div></div><div class="grid-90 tablet-grid-85 mobile-grid-80">Searching for <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '.</div></div>').show();
     $('.params-content').spin();
     changeBanner('Searching Catalog', color_tadlblue);
     $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + unescape(searchquery) + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type, function(data) {
+        if (debuglog) console.log(data);
         if (data.more_results == "false") { delete data.more_results; }
         var results = data.message;
         linked_search = "false";
@@ -110,6 +111,7 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
     changeBanner('Searching Catalog', color_tadlblue);
     $('#search-params').html('&nbsp;Changing filter.').spin('tinyblack');
     $.getJSON(ILSCATCHER_BASE + "/main/searchjson.json?utf8=%E2%9C%93&q=" + searchquery + "&mt=" + mediatypedecode +"&avail=" + available + "&loc=" + loc + "&st=" + searchtype + "&sort=" + sort_type + "&facet=" + facet, function(data) {
+        if (debuglog) console.log(data);
         if (data.more_results == "false") { delete data.more_results; }
         var results = data.message;
         linked_search = "false";
@@ -170,6 +172,7 @@ function showmore(record_id) {
     var e = document.getElementById(record_id);
     $('#more_details_' + record_id).removeClass('tadlblue').addClass('black').html('<span>Loading...</span>').spin('tiny').removeAttr('onclick');
     $.getJSON(ILSCATCHER_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
+        if (debuglog) console.log(data);
         var results = data.message;
         var template = Handlebars.compile($('#more_details-template').html());
         var info = template(data);
@@ -195,6 +198,7 @@ function viewItem(record_id) {
     changeBanner('Loading...', color_tadlblue);
     loading_animation('start');
     $.getJSON(ILSCATCHER_BASE + "/main/itemdetails.json?utf8=%E2%9C%93&record_id=" + record_id, function(data) {
+        if (debuglog) console.log(data);
         var template = Handlebars.compile($('#viewitem-template').html());
         var info = template(data);
         var isbn = data.items[0].isbn;
@@ -217,6 +221,7 @@ function viewItem(record_id) {
 
 function viewmarc(record_id) {
     $.getJSON(ILSCATCHER_BASE + "/main/marc.json?record_id=" + record_id, function(data) {
+        if (debuglog) console.log(data);
         var content = data.marc;
         $.fancybox({
             content: content
@@ -256,11 +261,13 @@ function reset_hold_links() {
     });
 }
 
+// this and corresponding melcat-catcher functions still need to be updated to communicate status responses
 function hold(record_id) {
     var record_id = record_id;
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/hold.json?token='+ token + '&record_id=' + record_id, function(data) {
-        var message = data[':message'].replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
+        if (debuglog) console.log(data);
+        var message = data['message'].replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
         var success = false;
         var button_id = '#place_hold_' + record_id;
         var hold_message = '#hold_message_' + record_id;
@@ -282,6 +289,7 @@ function hold(record_id) {
 function hold_partB() {
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/acctinfo.json?token=' + token, function(data) {
+        if (debuglog) console.log(data);
         var template = Handlebars.compile($('#logedin-template').html());
         var info = template(data);
         $('#login_form').html(info);
@@ -300,6 +308,7 @@ function submit_password_reset() {
     if (uservalue = '') { return };
     set_login_form_keypress_event();
     $.getJSON(ILSCATCHER_BASE + 'main/passwordreset.json?user=' + uservalue, function(data) {
+        if (debuglog) console.log(data);
         var login_form = $('#login_form');
         var source = $('#password-reset-complete-template').html();
         login_form.html(source);
@@ -353,6 +362,7 @@ function login_and_fetch_dash(username, password) {
             $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
         } this doesn't seem to get used by anything */
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
+            if (debuglog) console.log(data);
             if (data['status'] == 'error') {
                 var source = $('#login_form-template').html();
                 $('#login_form').html(source);
@@ -396,6 +406,7 @@ function refresh_acctinfo() {
     var username = window.localStorage.getItem('username');
     if (token) {
         $.getJSON(ILSCATCHER_BASE + '/main/acctinfo.json?token=' + token, function(data) {
+            if (debuglog) console.log(data);
             if (data['status'] == 'error') {
                 var source = $('#login_form-template').html();
                 $('#login_form').html(source);
@@ -438,6 +449,7 @@ function showcheckouts() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showcheckouts.json?token=' + token, function(data) {
+            if (debuglog) console.log(data);
             if (data.status == '200') {
                 var template = Handlebars.compile($('#showcheckedout-template').html());
                 var info = template(data);
@@ -469,6 +481,7 @@ function holdaction(action,hold_id) {
     $('#' + todo + '_' + hold_id).html('<span>Working</span>').spin('tiny').removeAttr('onclick').removeClass('tadlblue').addClass('black');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/holdaction.json?token=' + token + '&hold_id=' + hold_id + '&todo=' + todo, function(data) {
+        if (debuglog) console.log(data);
         if (data.status == '200') {
             if (todo == 'suspend') {
                 $('#suspend_' + hold_id).html('<span>Activate</span>').attr('onclick', 'holdaction(\'activate\',' + hold_id + ');').attr('id', 'activate_' + hold_id).removeClass('black').addClass('tadlblue');
@@ -484,9 +497,10 @@ function holdaction(action,hold_id) {
                 myaccount_menu();
             }
         } else if (data.status == '302') {
-            // need to log in first
+            changeBanner('Session expired. Please log in again.', color_tadlblue);
+            openForm();
         } else {
-            // something weird happened
+            changeBanner('Something weird happened and the global error handler should hide this message.', color_red);
         }
     });
 }
@@ -499,6 +513,7 @@ function showholds() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showholds.json?token=' + token, function(data) {
+            if (debuglog) console.log(data);
             if (data.status == '200') {
                 var template = Handlebars.compile($('#showholds-template').html());
                 var info = template(data);
@@ -527,6 +542,7 @@ function show_checkout_history() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?token=' + token, function(data) {
+            if (debuglog) console.log(data);
             if (data.more == 'false') { delete data.more; }
             if (data.status == '200') {
                 var template = Handlebars.compile($('#showcheckout-history-template').html());
@@ -553,6 +569,7 @@ function more_history() {
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_checkout_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
+        if (debuglog) console.log(data);
         if (data.more == 'false') { delete data.more; }
         if (data.status == '200') {
             var template = Handlebars.compile($('#showcheckout-history-template').html());
@@ -579,13 +596,20 @@ function billing_print(id) {
     $('body').scrollTop(0);
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/receipt_print.json?pmt_id=' + id + '&token=' + token, function(data) {
-        var message = data.message;
-        message = '<div id="printThis">' + message + '</div><div class="clearfix"></div><div><a class="button verysmall tadlblue" onclick="billing_actually_print()"><span>print</span></a></div>';
-        $.fancybox({
-            content: message,
-            type: 'iframe',
-            autoScale: true
-        });
+        if (debuglog) console.log(data);
+        if (data.status == '200') {
+            var message = data.message;
+            message = '<div id="printThis">' + message + '</div><div class="clearfix"></div><div><a class="button verysmall tadlblue" onclick="billing_actually_print()"><span>print</span></a></div>';
+            $.fancybox({
+                content: message,
+                type: 'iframe',
+                autoScale: true
+            });
+        } else if (data.status == '302') {
+            // need to log in
+        } else {
+            // ABORT ABORT ABORT!!!!!!!!
+        }
         loading_animation('stop');
     });
 }
@@ -598,12 +622,17 @@ function billing_email(id) {
     $('body').scrollTop(0);
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/receipt_email.json?pmt_id=' + id + '&token=' + token, function(data) {
-        var message = data.message[0].message;
-        $.fancybox({
-            content: message,
-            type: 'iframe',
-            autoScale: true
-        });
+        if (debuglog) console.log(data);
+        if (data.status == '200') {
+            var message = data.message[0].message;
+            $.fancybox({
+                content: message,
+                type: 'iframe',
+                autoScale: true
+            });
+        } else if (data.status == '302') {
+        } else {
+        }
         loading_animation('stop');
     });
 }
@@ -618,11 +647,16 @@ function show_payment_history() {
         var username = window.localStorage.getItem('username');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?token=' + token, function(data) {
-            if (data.more == 'false') { delete data.more; }
-            var template = Handlebars.compile($('#payments-template').html());
-            var info = template(data);
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
+            if (debuglog) console.log(data);
+            if (data.status == '200') {
+                if (data.more == 'false') { delete data.more; }
+                var template = Handlebars.compile($('#payments-template').html());
+                var info = template(data);
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+            } else if (data.status == '302') {
+            } else {
+            }
             loading_animation('stop');
         });
     } else {
@@ -635,13 +669,18 @@ function more_payment_history() {
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/get_payment_history.json?user=' + username + '&token=' + token + '&page=' + historycount, function(data) {
-        if (data.more == 'false') { delete data.more; }
-        var template = Handlebars.compile($('#payments-template').html());
-        var info = template(data);
-        $('#two-thirds').append(info).promise().done(function() {
-            $('.spinning').hide();
-            $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
-        });
+        if (debuglog) console.log(data);
+        if (data.status == '200') {
+            if (data.more == 'false') { delete data.more; }
+            var template = Handlebars.compile($('#payments-template').html());
+            var info = template(data);
+            $('#two-thirds').append(info).promise().done(function() {
+                $('.spinning').hide();
+                $('.spinning').parent().html('<h4 class="title">Page ' + (historycount+1) + '</h4>');
+            });
+        } else if (data.status == '302') {
+        } else {
+        }
     });
 }
 
@@ -654,11 +693,16 @@ function show_fines() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_fines.json?token=' + token, function(data) {
-            var template = Handlebars.compile($('#fines-template').html());
-            var info = template(data);
-            var more = data.more;
-            $('#two-thirds').html(info).show();
-            myaccount_menu();
+            if (debuglog) console.log(data);
+            if (data.status == '200') {
+                var template = Handlebars.compile($('#fines-template').html());
+                var info = template(data);
+                var more = data.more;
+                $('#two-thirds').html(info).show();
+                myaccount_menu();
+            } else if (data.status == '302') {
+            } else {
+            }
             loading_animation('stop');
         });
     } else {
@@ -675,6 +719,7 @@ function showpickups() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showpickups.json?token=' + token, function(data) {
+            if (debuglog) console.log(data);
             if (data.status == '200') {
                 var template = Handlebars.compile($('#showholds-template').html());
                 if (data['holds']) {
@@ -704,10 +749,15 @@ function renew(circulation_id, barcode) {
     var token = window.localStorage.getItem('token');
     $('#renew_' + circ_id).removeClass('tadlblue').addClass('black').removeAttr('onclick').html('<span>&nbsp;Renewing...</span>').spin('tiny');
     $.getJSON(ILSCATCHER_BASE + '/main/renew.json?token=' + token + '&circ_id=' + circ_id + '&bc=' + bc, function(data) {
-        var template = Handlebars.compile($('#renew-template').html());
-        var info = template(data);
-        $('#'+ circ_id).html(info);
-        $('#renew_' + circ_id).hide();
+        if (debuglog) console.log(data);
+        if (data.status == '200') {
+            var template = Handlebars.compile($('#renew-template').html());
+            var info = template(data);
+            $('#'+ circ_id).html(info);
+            $('#renew_' + circ_id).hide();
+        } else if (data.status == '302') {
+        } else {
+        }
     });
 }
 
@@ -720,11 +770,16 @@ function showcard() {
         loading_animation('start');
         var token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/showcard.json?token=' + token, function(data) {
-            var card = data.barcode;
-            var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
-            $('#two-thirds').html(html).show();
-            $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12});
-            myaccount_menu();
+            if (debuglog) console.log(data);
+            if (data.status == '200') {
+                var card = data.barcode;
+                var html = '<div class="card"><div id="barcodepage" class="padtop"><div class="barcode padtop"><div id="bcTarget"></div></div><div class="barcodelogo"><div class="bclogoTarget"><img src="img/clean-logo-header.png" alt="" /></div></div><div class="clearfix"></div></div></div>';
+                $('#two-thirds').html(html).show();
+                $('#bcTarget').barcode(card, 'code128', {barWidth:2, barHeight:80, fontSize:12});
+                myaccount_menu();
+            } else if (data.status == '302') {
+            } else {
+            }
             loading_animation('stop');
         });
     } else {
@@ -817,16 +872,21 @@ function mylist() {
                 formblob += '<select name="existing_list" id="existing_list">';
                 formblob += '<option selected="selected" value="CREATE_NEW_LIST">Add to existing</option>';
                 $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
-                    for (i=0;i<data.lists.length;i++) {
-                        var listname = htmlDecode(data.lists[i].list_name);
-                        var listid = data.lists[i].list_id;
-                        formblob += '<option value="' + listid + '">' + listname.trunc(20) + '</option>';
+                    if (debuglog) console.log(data);
+                    if (data.status == '200') {
+                        for (i=0;i<data.lists.length;i++) {
+                            var listname = htmlDecode(data.lists[i].list_name);
+                            var listid = data.lists[i].list_id;
+                            formblob += '<option value="' + listid + '">' + listname.trunc(20) + '</option>';
+                        }
+                        formblob += '</select>';
+                        formblob += '<a onclick="add_create_list()" id="save_list" class="button verysmall tadlblue"><span>';
+                        formblob += 'Save';
+                        formblob += '</span></a>';
+                        $('#listmaint').html(formblob);
+                    } else if (data.status == '302') {
+                    } else {
                     }
-                    formblob += '</select>';
-                    formblob += '<a onclick="add_create_list()" id="save_list" class="button verysmall tadlblue"><span>';
-                    formblob += 'Save';
-                    formblob += '</span></a>';
-                    $('#listmaint').html(formblob);
                 });
             }
         });
@@ -853,7 +913,7 @@ function add_create_list() {
         $('#save_list').removeClass('tadlblue').addClass('black').html('<span>Saving</span>').spin('tiny');
         var listname = encodeURIComponent(new_list);
         $.getJSON(ILSCATCHER_BASE + '/main/create_new_list.json?token=' + token + '&name=' + listname + '&ids=' + records, function(data) {
-            console.log(data.listid);
+            if (debuglog) console.log(data);
             if (data.listid) {
                 mylist();
                 setTimeout(function() {
@@ -871,6 +931,7 @@ function add_create_list() {
         $('#save_list').removeClass('tadlblue').addClass('black').html('<span>Adding</span>').spin('tiny');
         console.log(existing_list);
         $.getJSON(ILSCATCHER_BASE + '/main/bulk_add_to_list.json?token=' + token + '&list_id=' + existing_list + '&record_ids=' + records, function(data) {
+            if (debuglog) console.log(data);
             mylist();
             setTimeout(function() {
                 $('#listresults').html('<div class="success">Successfully added items to list.</div>');
@@ -890,6 +951,7 @@ function userlist_remove(itemid,listid,confirmed) {
             var token = window.localStorage.getItem('token');
             $(el).removeClass('red').addClass('black').spin('tiny');
             $.getJSON(ILSCATCHER_BASE + '/main/remove_list_item.json?token=' + token + '&listid=' + listid + '&itemid=' + itemid, function(data) {
+                if (debuglog) console.log(data);
                 $(card).remove();
             });
         } else {
@@ -924,6 +986,7 @@ function multi_hold(record_ids) {
     var records = record_ids.join();
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/multihold.json?token=' + token + '&record_id=' + records, function(data) {
+        if (debuglog) console.log(data);
         $.each(data.items, function (index, value) {
             var message_div = '#multi_hold_message_' + this.record_id;
             var status = this.message.replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
@@ -1054,6 +1117,7 @@ function change_account_settings() {
 
             var url = username_param + alias_param + email_param + search_param + notify_param;
             $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?token=' + token + '&u=' + username + '&pw=' + password + url, function(data) {
+                if (debuglog) console.log(data);
                 var cat = JSON.stringify(data);
                 sessionStorage.setItem('account_settings', cat);
                 //account_settings = JSON.parse(sessionStorage.getItem("account_settings"));
@@ -1077,6 +1141,7 @@ function change_account_settings() {
 function fetch_available_by_id(ids) {
     var url = 'main/by_id.json?ids=' + ids
     $.getJSON(ILSCATCHER_BASE + url, function(data) {
+        if (debuglog) console.log(data);
         $.each(data.items, function(){
             var target_div = '#available_' + this.record_id;
             $(target_div).html(this.availability);

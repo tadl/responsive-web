@@ -34,6 +34,7 @@ function showAllEventsByTerm(term) {
     var alljson = JSON.parse(sessionStorage.getItem('events'));
     if (alljson == null || typeof alljson['events'] == undefined || alljson['events'] == null) {
         $.getJSON(drupal_json_url + '?content=events', function(data) {
+            if (debuglog) console.log(data);
             var jstring = JSON.stringify(data);
             sessionStorage.setItem('events', jstring);
             showAllEventsByTerm(term);
@@ -81,11 +82,13 @@ function showitemlist(list_name, list_id) {
         drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
     }
     $.getJSON(drupal_json_url, function(data) {
+        if (debuglog) console.log(data);
         var template = Handlebars.compile($('#results-template_2').html());
         if (logged_in()) { data.userlist = list_id; }
         var info = template(data);
         if (logged_in()) {
             $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
+                if (debuglog) console.log(data);
                 var quicklists_template = Handlebars.compile($('#quicklists-template').html());
                 var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your Lists</span></div></div></div>';
                 var quicklists = quicklists_template(data)
@@ -116,10 +119,11 @@ function showfeaturedlist(list_name, list_id) {
     if (data == null) {
         var drupal_json_url = 'http://mel-catcher.herokuapp.com/drupal/drupal.json?content=lists'
         $.getJSON(drupal_json_url, function(data) {
-                var cat = JSON.stringify(data);
-                sessionStorage.setItem('featured_lists', cat);
-                showfeaturedlist(list_name, list_id);
-                return;
+            if (debuglog) console.log(data);
+            var cat = JSON.stringify(data);
+            sessionStorage.setItem('featured_lists', cat);
+            showfeaturedlist(list_name, list_id);
+            return;
         });
     } else {
         var template = Handlebars.compile($('#results-template_2').html());
@@ -144,6 +148,7 @@ function showreviews(review_type) {
     cleanhouse();
     loading_animation('start');
     $.getJSON('https://www.tadl.org/export/reviews/'+ review_type +'/json', function(data) {
+        if (debuglog) console.log(data);
         var template = Handlebars.compile($('#showreviews-template').html());
         var info = template(data);
         loading_animation('stop');
@@ -163,6 +168,7 @@ function locHoursAndInfo(loc) {
         var data = JSON.parse(sessionStorage.getItem("everything"));
         if (data == null) {
             $.getJSON(drupal_json_url, function(data) {
+                if (debuglog) console.log(data);
                 var cat = JSON.stringify(data);
                 sessionStorage.setItem('everything', cat);
                 locHoursAndInfo(loc);
@@ -181,6 +187,7 @@ function hoursAndInfo(loc) {
     var data = JSON.parse(sessionStorage.getItem("everything"));
     if (data == null) {
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             hoursAndInfo(loc);
@@ -199,6 +206,7 @@ function showNode(nid) {
     cleandivs();
     loading_animation('start');
     $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
+        if (debuglog) console.log(data);
         var template = Handlebars.compile($('#node-template').html());
         var info = template(data);
         $('#region-wide').html(info).show();
@@ -223,6 +231,7 @@ function showNewsNode(nid) {
     if (everything == null || typeof everything['featured_news'] == undefined) {
         var drupal_json_url = ILSCATCHER_BASE + 'drupal/drupal.json';
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             window.sessionStorage.setItem('everything', cat);
             showNewsNode(nid);
@@ -231,6 +240,7 @@ function showNewsNode(nid) {
     } else {
         var newsfeed = location_news_template(newsy);
         $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
+            if (debuglog) console.log(data);
             var template = Handlebars.compile($('#newsnode-template').html());
             var info = template(data);
             $('#third-two').html(info).show();
@@ -245,6 +255,7 @@ function showEventNode(nid) {
     cleandivs();
     loading_animation('start');
     $.getJSON('https://www.tadl.org/export/node/json/' + nid, function(data) {
+        if (debuglog) console.log(data);
         var template = Handlebars.compile($('#eventnode-template').html());
         var firstname = data.nodes[0].node.location;
         var shortname = lib_firstname_to_shortname(firstname);
@@ -253,6 +264,7 @@ function showEventNode(nid) {
         var stuff = JSON.parse(sessionStorage.getItem("events"));
         if (stuff == null) {
             $.getJSON(drupal_json_url + '?content=events', function(data) {
+                if (debuglog) console.log(data);
                 var jstring = JSON.stringify(data);
                 sessionStorage.setItem('events', jstring);
                 showEventNode(nid);
@@ -277,6 +289,7 @@ function showAnnouncements() {
     var seenIt = window.sessionStorage.getItem('announcements');
     if (seenIt == null) {
         $.getJSON('http://mel-catcher.herokuapp.com/drupal/drupal.json?content=announcements', function(data) {
+            if (debuglog) console.log(data);
             var template = Handlebars.compile($('#announcements-template').html());
             var output = template(data);
             $('#locsel').prepend(output);

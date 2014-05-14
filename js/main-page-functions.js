@@ -18,6 +18,7 @@ function showEastBay() {
     if (data == null || typeof data['infobox_ebb'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showEastBay();
@@ -44,6 +45,7 @@ function showFifeLake() {
     if (data == null || typeof data['infobox_flpl'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showFifeLake();
@@ -70,6 +72,7 @@ function showInterlochen() {
     if (data == null || typeof data['infobox_ipl'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showInterlochen();
@@ -96,6 +99,7 @@ function showKingsley() {
     if (data == null || typeof data['infobox_kbl'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showKingsley();
@@ -122,6 +126,7 @@ function showPeninsula() {
     if (data == null  || typeof data['infobox_pcl'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showPeninsula();
@@ -148,6 +153,7 @@ function showWoodmere() {
     if (data == null || typeof data['infobox_wood'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=locations";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showWoodmere();
@@ -174,6 +180,7 @@ function showTeensPage() {
     if (data == null || typeof data['teen_reviews'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=teens";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showTeensPage();
@@ -202,6 +209,7 @@ function showOnlinePage() {
     if (data == null || typeof data['online_legal'] == undefined || data['online_legal'] == null ) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=online";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showOnlinePage();
@@ -227,6 +235,7 @@ function showYouthPage() {
     if (data == null || typeof data['youth_reviews'] == undefined || data['youth_reviews'] == null) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=youth";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showYouthPage();
@@ -258,6 +267,7 @@ function showVideoPage() {
     if (data == null || typeof data['videos_reviews'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=video";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showVideoPage();
@@ -285,6 +295,7 @@ function showMusicPage() {
     if (data == null || typeof data['music_reviews'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=music";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showMusicPage();
@@ -310,6 +321,7 @@ function showBooksPage() {
     if (data == null || typeof data['books_reviews'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=books";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showBooksPage();
@@ -338,6 +350,7 @@ function showHomePage() {
     if (data == null || typeof data['featured_news'] == undefined) {
         var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json?content=home";
         $.getJSON(drupal_json_url, function(data) {
+            if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
             sessionStorage.setItem('everything', cat);
             showHomePage();
@@ -370,6 +383,7 @@ function myAccount(){
         if (account_settings == null) {
             changeBanner('Loading...', color_tadlblue);
             $.getJSON(ILSCATCHER_BASE + '/main/search_prefs.json?token='+ token, function(data) {
+                if (debuglog) console.log(data);
                 var cat = JSON.stringify(data);
                 sessionStorage.setItem('account_settings', cat);
                 myAccount();
@@ -398,7 +412,7 @@ function my_lists(){
         changeBanner('My Lists', color_tadlblue);
         token = window.localStorage.getItem('token');
         $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
-            console.log(data);
+            if (debuglog) console.log(data);
             var my_lists = mylists_template(data)
             $('#two-thirds').html(my_lists);
             myaccount_menu();

@@ -79,6 +79,7 @@ $(document).ajaxComplete(function(){
 function load_drupal_json(content) {
 var drupal_json_url = "https://mel-catcher.herokuapp.com/drupal/drupal.json"
 $.getJSON(drupal_json_url, function(data) {
+        if (debuglog) console.log(data);
  		var payload = JSON.stringify(data)
         sessionStorage.setItem('everything', payload );
     });
@@ -394,6 +395,7 @@ function loadNodes(nodes) {
         loading_animation('start');
         if (nodes.left != null) {
             $.getJSON(NODEPREFIX + nodes.left, function(data) {
+                if (debuglog) console.log(data);
                 var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-one').append(info);
@@ -402,6 +404,7 @@ function loadNodes(nodes) {
         }
         if (nodes.middle != null) {
             $.getJSON(NODEPREFIX + nodes.middle, function(data) {
+                if (debuglog) console.log(data);
                 var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-two').append(info);
@@ -410,6 +413,7 @@ function loadNodes(nodes) {
         }
         if (nodes.right != null) {
             $.getJSON(NODEPREFIX + nodes.right, function(data) {
+                if (debuglog) console.log(data);
                 var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#region-three').append(info);
@@ -418,6 +422,7 @@ function loadNodes(nodes) {
         }
         if (nodes.third != null) {
             $.getJSON(NODEPREFIX + nodes.third, function(data) {
+                if (debuglog) console.log(data);
                 var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#one-third').append(info);
@@ -426,6 +431,7 @@ function loadNodes(nodes) {
         }
         if (nodes.twothirds != null) {
             $.getJSON(NODEPREFIX + nodes.twothirds, function(data) {
+                if (debuglog) console.log(data);
                 var template = Handlebars.compile($('#simplenode-template').html());
                 var info = template(data);
                 $('#two-thirds').append(info);
@@ -556,6 +562,7 @@ function scroll_to(div) {
 
 function loadJson(key, url) {
     $.getJSON(url, function(data) {
+        if (debuglog) console.log(data);
         sessionStorage.setItem(key, JSON.stringify(data));
     });
 }
