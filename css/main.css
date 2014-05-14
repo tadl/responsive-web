@@ -801,8 +801,9 @@ h3.footer-heading {
     bottom:0;
     left:0;
     padding:10px;
-    background:rgba(255,255,255,0.8);
-    color:#000;
+    background:rgba(0,0,0,0.5);
+    text-shadow: black 1px 1px 2px;
+    color:#fff;
 }
 
 #feedback_link { 

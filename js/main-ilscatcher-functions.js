@@ -72,11 +72,10 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
             $('#region-two').html(cat + info);
             $('#region-one').html(info_facets);
             $('#search-params').html('Results for '+ unescape(searchtype) +': <strong>'+ unescape(searchquery) +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' sorted by '+ unescape(sort_type) +' '+ availablemsg +'. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a><a class="hide-on-desktop button verysmall gray" onclick="scroll_to(facets)"><span>Filters</span></a></div><a class="hide-on-desktop button verysmall gray" onclick="scroll_to(book_bag)"><span>Book Bag</span></a></div>');
-            show_melcat_block();
         } else {
             $('#search-params').html("No Results");
-            show_melcat_block();
         }
+        show_melcat_block();
     });
     mylist();
 
@@ -126,11 +125,10 @@ function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
             $('#region-one').html(info_facets);
             $('#search-params').html('Results for <strong>'+ searchquery +'</strong> in ' + mediatypedecode + ' at ' + loctext + ' ' + availablemsg + '. <a onclick="openSearch_options()" class="button verysmall gray"><span>options...</span></a>');
             $('#search-params').prepend(info_selected_facets);
-            show_melcat_block();
         } else {
             $('#region-two').replaceWith("No Results");
-            show_melcat_block();
         }
+        show_melcat_block();
     });
     mylist();
 }
@@ -208,7 +206,6 @@ function viewItem(record_id) {
             loading_animation('stop');
         });
         $('#region-one').html(logodiv);
-        console.log(window.location.href);
         check_googlebooks(record_id, isbn);
         $('#itemqr').qrcode({
             width: 100,
@@ -358,9 +355,6 @@ function login_and_fetch_dash(username, password) {
             $('#login_form').html('<div class="tempspin">&nbsp;Loading...</div>');
             $('.tempspin').spin('tinyblack');
         }
-        /* if ($('#login').length != 0) {
-            $('#login').html('<span><img src="img/spinner.gif" width="12" height="12"/>&nbsp;Refreshing...</span>').removeClass('tadlblue').addClass('black').removeAttr('onclick');
-        } this doesn't seem to get used by anything */
         $.getJSON(ILSCATCHER_BASE + '/main/login.json?u='+ username +'&pw=' + password, function(data) {
             if (debuglog) console.log(data);
             if (data['status'] == 'error') {
@@ -395,7 +389,7 @@ function login_and_fetch_dash(username, password) {
         });
     } else {
         // Not logged in. Display the default login form.
-        var source   = $('#login_form-template').html();
+        var source = $('#login_form-template').html();
         $('#login_form').html(source);
         set_login_form_keypress_event();
     }
@@ -1151,19 +1145,20 @@ function fetch_available_by_id(ids) {
 
 function show_melcat_block(){
     var melcat_id = window.localStorage.getItem('melcat_id');
-    if (melcat_id != undefined){
-        var melcat_id_text = 'Your MeLCat ID is: ' + melcat_id
+    var melcat_id_text;
+    if (melcat_id != undefined) {
+        melcat_id_text = 'Your MeLCat ID is: ' + melcat_id;
     } else {
-        var melcat_id_text = '' 
+        melcat_id_text = '';
     }
     var melcat_html = '<div class="card" style="text-align: center;">Not finding what you want?<br><a onclick="search_melcat()">Check MeLCat<br><img src="img/mel.jpg"></a><br>'+ melcat_id_text +'</div>'
     $('#region-one').prepend(melcat_html);
 }
 
-function search_melcat(){    
+function search_melcat() {
     var searchquery = encodeURIComponent($('#term').val());
-    var url = 'http://elibrary.mel.org/search/a?searchtype=X&searcharg='+ searchquery +'&SORT=D'
-    window.open(url,'_blank')
+    var url = 'http://elibrary.mel.org/search/a?searchtype=X&searcharg='+ searchquery +'&SORT=D';
+    window.open(url,'_blank');
 }
 
 
