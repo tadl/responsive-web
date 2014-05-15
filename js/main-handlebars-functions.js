@@ -5,6 +5,21 @@ Handlebars.registerHelper('fixurls', function(text) {
     return response;
 });
 
+Handlebars.registerHelper('bodyparse', function(text) {
+    // Open PDF files in a fancybox (requires init)
+    var response = text.replace(/(href[^ ]+pdf)/gi, 'class="pdf" $1');
+    // rewrite img src http: to https:
+    response = response.replace(/(img src="http):/gi, '$1s:');
+    // rewrite img src from drupal-relative to drupal-absolute
+    response = response.replace(/(img src=")(\/sites\/default\/files[^ ]+)/gi, '$1https://www.tadl.org$2');
+    // open item links in responsive-web, not catalog.tadl.org
+    response = response.replace(/href="http[s]?:\/\/catalog.tadl.org\/eg\/opac\/record\/([\d]+)[^ ]*"/gi, 'href="/responsive-web/item/$1"');
+    // view lists in responsive-web, not catalog.tadl.org
+    response = response.replace(/href="http[s]?:[^ ]*bookbag=([\d]+)[^ ]*">([^<]+)<\/a>/gi, 'onclick="loadlist(\'$1\', \'$2\')">$2</a>');
+    return response;
+
+});
+
 Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlerbars Helper 'compare' needs 2 parameters");

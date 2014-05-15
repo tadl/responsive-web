@@ -711,7 +711,7 @@
                         {{{trunc node.body}}} <a class="pointer smaller" onclick="toggleBody({{node.record}})">more</a>
                     </div>
                     <div id="review_full_{{node.record}}" class="hidden full-review-body">
-                        {{{fixurls node.body}}}
+                        {{{bodyparse node.body}}}
                     </div>
                     <div id="showmore-{{node.record}}" class="padtop">
                         <a class="button verysmall tadlblue" id="more_details_{{node.record}}" onclick="showmore({{node.record}});"><span>Details</span></a>
@@ -739,7 +739,7 @@
         <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100">
-                    <div class="padtop">{{{fixurls node.body}}}</div>
+                    <div class="padtop">{{{bodyparse node.body}}}</div>
                 </div>
             </div>
         </div>
@@ -1175,7 +1175,7 @@
                     {{/if}}
                     {{#if node.body}}
                         <div class="padtop">
-                            {{{fixurls node.body}}}
+                            {{{bodyparse node.body}}}
                         </div>
                         {{#if node.simplestartdate}}
                             <div class="padbot">
@@ -1217,7 +1217,7 @@
                     {{/if}}
                     {{#if node.body}}
                         <div class="padtop">
-                            {{{fixurls node.body}}}
+                            {{{bodyparse node.body}}}
                         </div>
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
                         <br /><br />
@@ -1262,7 +1262,7 @@
                     {{/if}}
                     {{#if node.body}}
                         <div class="padtop">
-                            {{{fixurls node.body}}}
+                            {{{bodyparse node.body}}}
                         </div>
                         <fb:like layout="button_count" action="like" show_faces="true" share="true"></fb:like>
                         <br /><br />

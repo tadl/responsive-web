@@ -67,8 +67,8 @@ $(document).ready(function() {
 
 
     setTimeout(function(){ showAnnouncements(); },2000);
-
 });
+
 
 $(document).ajaxComplete(function(){
     try{
@@ -593,4 +593,19 @@ function feedback(action) {
     }
 
 }
+
+function pdfbox() {
+    $('.pdf').click(function() {
+        $.fancybox({
+            type: 'html',
+            autoSize: false,
+            content: '<embed src="'+this.href+'#nameddest=self&page=1&view=FitH,0&zoom=80,0,0" type="application/pdf" height="99%" width="100%" />',
+            beforeClose: function() {
+                $(".fancybox-inner").unwrap();
+            }
+        });
+        return false;
+    });
+}
+
 

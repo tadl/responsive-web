@@ -211,6 +211,7 @@ function showNode(nid) {
         var info = template(data);
         $('#region-wide').html(info).show();
         loading_animation('stop');
+        pdfbox();
     });
 }
 
@@ -282,6 +283,7 @@ function showEventNode(nid) {
         $('#third-two').html(info).show();
         $('#third-one').html('<div class="card"><h4 class="title">Coming soon at ' + firstname + '</h4></div>' + events + '<a class="pointer button tadlblue medium wide center" onclick="' + alleventslink + '"><span>All ' + firstname + ' events</span></a>').show();
         loading_animation('stop');
+        pdfbox();
     });
 }
 

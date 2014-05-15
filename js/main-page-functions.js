@@ -199,6 +199,7 @@ function showTeensPage() {
         $('#region-one').html(teens_new + teens_manga + teens_lists);
         $('#region-two').html(teens_reviews);
         $('#region-three').html(teens_homework + events_teens + '<a class="pointer button tadlblue medium wide" onclick="' + alleventslink + '"><span>All Teen events</span></a>');
+        pdfbox();
     }
 }
 
