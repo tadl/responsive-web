@@ -121,7 +121,7 @@ Handlebars.registerHelper('check_for_select', function(value1, value2) {
 });
 
 Handlebars.registerHelper('youtubeify', function(record_id){
-    var check_url = 'http://trailer-tank.herokuapp.com/main/get_trailer.json?id=' + record_id;
+    var check_url = 'https://trailer-tank.herokuapp.com/main/get_trailer.json?id=' + record_id;
     jQuery.extend({
         getValues: function(url) {
             var result = null;

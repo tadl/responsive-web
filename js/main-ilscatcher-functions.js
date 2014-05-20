@@ -1044,6 +1044,7 @@ function load_googlebooks(isbn){
     viewer.load(isbn);
 }
 
+/* This is unused.
 function shelf_finder(library, location, call_number){
     var shelf_url = 'http://wjr.dev.tadl.org/locator/index.php?location='+ library + '&shelf=' + location +'&call=' + call_number;
     var content = '<iframe style="width: 90%; height: 90%; overflow: hidden" scrolling="no" src="' + shelf_url + '"></iframe>';
@@ -1056,6 +1057,7 @@ function shelf_finder(library, location, call_number){
         scrolling : 'no'
     });
 }
+*/
 
 function change_account_settings() {
     if (logged_in()) {
