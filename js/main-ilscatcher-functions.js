@@ -1034,8 +1034,8 @@ function check_googlebooks(record_id, isbn) {
     });
 }
 
-function load_googlebooks(isbn){
-    var content = '<div id="viewerCanvas" style="width:700px;height:500px;"></div>';
+function load_googlebooks(isbn) {
+    var content = '<div id="viewerCanvas" style="width:700px;height:500px;overflow-y:hidden;"></div>';
     $.fancybox({
         content: content,
         autoScale: true
