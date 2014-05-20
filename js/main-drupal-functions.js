@@ -77,9 +77,9 @@ function showitemlist(list_name, list_id) {
     changeBanner(loading_text, color_tadlblue);
     loading_animation('start');
     if (logged_in()) {
-        drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?token=' + token + '&list_id=' + list_id;
+        drupal_json_url = ILSCATCHER_BASE + '/main/get_list.json?token=' + token + '&list_id=' + list_id;
     } else {
-        drupal_json_url = 'http://mel-catcher.herokuapp.com/main/get_list.json?list_id=' + list_id;
+        drupal_json_url = ILSCATCHER_BASE + '/main/get_list.json?list_id=' + list_id;
     }
     $.getJSON(drupal_json_url, function(data) {
         if (debuglog) console.log(data);
@@ -117,7 +117,7 @@ function showfeaturedlist(list_name, list_id) {
     loading_animation('start');
     var data = JSON.parse(sessionStorage.getItem('featured_lists'));
     if (data == null) {
-        var drupal_json_url = 'http://mel-catcher.herokuapp.com/drupal/drupal.json?content=lists'
+        var drupal_json_url = ILSCATCHER_BASE + '/drupal/drupal.json?content=lists'
         $.getJSON(drupal_json_url, function(data) {
             if (debuglog) console.log(data);
             var cat = JSON.stringify(data);
@@ -290,7 +290,7 @@ function showEventNode(nid) {
 function showAnnouncements() {
     var seenIt = window.sessionStorage.getItem('announcements');
     if (seenIt == null) {
-        $.getJSON('http://mel-catcher.herokuapp.com/drupal/drupal.json?content=announcements', function(data) {
+        $.getJSON(ILSCATCHER_BASE + '/drupal/drupal.json?content=announcements', function(data) {
             if (debuglog) console.log(data);
             var template = Handlebars.compile($('#announcements-template').html());
             var output = template(data);
