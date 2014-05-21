@@ -16,6 +16,12 @@ Handlebars.registerHelper('bodyparse', function(text) {
     response = response.replace(/href="http[s]?:\/\/catalog.tadl.org\/eg\/opac\/record\/([\d]+)[^ ]*"/gi, 'href="/responsive-web/item/$1"');
     // view lists in responsive-web, not catalog.tadl.org
     response = response.replace(/href="http[s]?:[^ ]*bookbag=([\d]+)[^ ]*">([^<]+)<\/a>/gi, 'onclick="loadlist(\'$1\', \'$2\')">$2</a>');
+    // rewrite opac searches to r-w searches
+    response = response.replace(/href="http[s]?:\/\/catalog.tadl.org\/eg\/opac\/results[^ ]*query=([^ &]*)[^ ]*"/gi, 'onclick="genSearch(\'$1\');"').replace(/\+/gi, ' ');
+    // rewrite relative hrefs to https://www.tadl.org/...
+    response = response.replace(/href="\/[^ \/]/gi, 'href="https:\/\/www.tadl.org\/');
+    // rewrite external hrefs to open in a new tab/window
+    response = response.replace(/(href="[^ ]+")/gi, '$1 target="_blank"');
     return response;
 
 });

@@ -22,6 +22,14 @@ function loadmore() {
     });
 }
 
+// function to generate search results from an onclick.
+function genSearch(query) {
+    var newsearch = 'search/'+query+'/ALL%20FORMATS/false/22/keyword/relevance';
+    var action = {action:newsearch}
+    var title = psTitle + separator + 'Search';
+    History.pushState(action, title, newsearch);
+}
+
 function getResults(query, mt, avail, location, searchtype, sort_type) {
     cleanhouse();
     cleandivs();
@@ -78,7 +86,6 @@ function getResults(query, mt, avail, location, searchtype, sort_type) {
         show_melcat_block();
     });
     mylist();
-
 }
 
 function facetsearch(query, mt, avail, location, searchtype, sort_type, facet) {
