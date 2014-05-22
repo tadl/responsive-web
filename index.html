@@ -514,6 +514,11 @@
             <a class="button tadlblue wide large more" onclick="$(this).prop('onclick',null).html('<span>Loading...</span>').removeClass('tadlblue').addClass('black').addClass('spinning').spin('tiny');loadmore();"><span>More results</span></a>
         </div>
     {{/if}}
+    {{#if more}}
+        <div class="padtop padbot moresults">
+            <a class="button tadlblue wide large more" onclick="$(this).prop('onclick',null).html('<span>Loading...</span>').removeClass('tadlblue').addClass('black').addClass('spinning').spin('tiny');nextItemListPage('{{list_name}}','{{list_id}}','{{page}}');"><span>More results</span></a>
+        </div>
+    {{/if}}
 </script>
 
 <script id="more_details-template" type="text/template">
@@ -604,13 +609,16 @@
 
 <script id="mylists-template" type="text/template">
     {{#lists}}
-        <div class="card pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">
+        <div class="card">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100" style="padding-left:10px;">
-                    <span class="cardtitle">{{list_name}}</span><br/>
+                    <span class="cardtitle pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</span><br/>
                     {{#if list_desc}}
                         <em class="subtitle">{{list_desc}}</em>
                     {{/if}}
+                    <br/>
+                    <a id="view_{{list_id}}" class="button medium tadlblue padtop" onclick="loadlist('{{list_id}}','{{encode list_name}}')"><span>View</span></a>
+                    <a id="remove_{{list_id}}" class="button medium tadlblue padtop" onclick="$(this).html('<span>Click to confirm</span>').removeClass('tadlblue').addClass('red').attr('onclick','removelist({{list_id}},1)');"><span>Delete</span></a>
                 </div>
             </div>
         </div>

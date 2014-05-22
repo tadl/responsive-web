@@ -430,7 +430,6 @@ function refresh_acctinfo() {
                 $('#login_msg').html('<span>Error logging in. Your session may have expired.</span>');
                 window.localStorage.removeItem('token');
                 current_user = 'false';
-                openForm();
             } else {
                 // noooo
             }

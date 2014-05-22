@@ -85,13 +85,24 @@ function showitemlist(list_name, list_id) {
         if (debuglog) console.log(data);
         var template = Handlebars.compile($('#results-template_2').html());
         if (logged_in()) { data.userlist = list_id; }
+        if (data.more == "false") { delete data.more; }
+        data.page = 1;
         var info = template(data);
         if (logged_in()) {
-            $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(data) {
-                if (debuglog) console.log(data);
+            $.getJSON(ILSCATCHER_BASE + '/main/get_user_lists.json?token=' + token, function(listdata) {
+                if (debuglog) console.log(listdata);
+                var listy = listdata.lists;
+                for (i=0;i<listy.length;i++) {
+                    if (listy[i]['list_id'] == list_id) {
+                        console.log(listy[i]['list_id']);
+                        listy.splice(i,1);
+                    }
+                }
+                listdata.lists = listy;
+                console.log(listdata);
                 var quicklists_template = Handlebars.compile($('#quicklists-template').html());
-                var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><span class="cardtitle">Your Lists</span></div></div></div>';
-                var quicklists = quicklists_template(data)
+                var titlediv = '<div class="card"><div class="grid-container"><div class="grid-100 tablet-grid-100 mobile-grid-100"><h4 class="title">Your Lists <a class="button tadlblue verysmall" onclick="load(\'my_lists\')"><span>view all</span></a></h4></div></div></div>';
+                var quicklists = quicklists_template(listdata)
                 $('#region-one').html(logodiv + titlediv + quicklists);
                 $('#region-two').html(info);
                 loading_animation('stop');
@@ -105,6 +116,29 @@ function showitemlist(list_name, list_id) {
             changeBanner(list_name, color_tadlblue);
             mylist();
         }
+    });
+}
+
+function nextItemListPage(list_name, list_id, pagenum) {
+    pagenum++;
+    var drupal_json_url;
+    var token = window.localStorage.getItem('token');
+    if (logged_in()) {
+        drupal_json_url = ILSCATCHER_BASE + '/main/get_list.json?token=' + token + '&list_id=' + list_id + '&page=' + pagenum;
+    } else {
+        drupal_json_url = ILSCATCHER_BASE + '/main/get_list.json?list_id=' + list_id + '&page=' + pagenum;
+    }
+    $.getJSON(drupal_json_url, function(data) { //this *may* need to consider logged_in() at some point.
+        if (debuglog) console.log(data);
+        var template = Handlebars.compile($('#results-template_2').html());
+        if (logged_in()) { data.userlist = list_id; }
+        if (data.more == "false") { delete data.more; }
+        data.page = pagenum;
+        var info = template(data);
+        $('#region-two').append(info).promise().done(function() {
+            $('.spinning').hide();
+            $('.spinning').parent().html('<h4 class="title">Page ' + pagenum + '</h4>');
+        });
     });
 }
 
