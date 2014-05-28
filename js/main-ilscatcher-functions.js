@@ -270,21 +270,28 @@ function hold(record_id) {
     var record_id = record_id;
     var token = window.localStorage.getItem('token');
     $.getJSON(ILSCATCHER_BASE + '/main/hold.json?token='+ token + '&record_id=' + record_id, function(data) {
-        if (debuglog) console.log(data);
-        var message = data['message'].replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
-        var success = false;
-        var button_id = '#place_hold_' + record_id;
-        var hold_message = '#hold_message_' + record_id;
-        if (message == 'Hold was successfully placed') {
-            success = true;
-            $(button_id).hide();
-        }
-        if (message) {
-            $(hold_message).html(message).show().addClass((success) ? 'success' : 'error');
-            $(button_id).hide();
+        if (data.status == '200') {
+            if (debuglog) console.log(data);
+            var message = data['message'].replace('Placing this hold could result in longer wait times.', 'Unavailable for pick-up at your location.');
+            var success = false;
+            var button_id = '#place_hold_' + record_id;
+            var hold_message = '#hold_message_' + record_id;
+            if (message == 'Hold was successfully placed') {
+                success = true;
+                $(button_id).hide();
+            }
+            if (message) {
+                $(hold_message).html(message).show().addClass((success) ? 'success' : 'error');
+                $(button_id).hide();
+            } else {
+                $(hold_message).html('Unable to place hold.').show().addClass('error');
+                $(button_id).hide();
+            }
+        } else if (data.status == '302') {
+            $('#place_hold_' + record_id).html('<span>Log in to place hold</span>').addClass('hold_login_first');
+            openForm();
         } else {
-            $(hold_message).html('Unable to place hold.').show().addClass('error');
-            $(button_id).hide();
+            // thud
         }
     });
     window.setTimeout(hold_partB,5000);
@@ -963,6 +970,23 @@ function userlist_remove(itemid,listid,confirmed) {
     } else {
         $(el).html('<span>Log in to remove item</span>');
         openForm();
+    }
+}
+
+function removelist(id,conf) {
+    if ((logged_in()) && (conf == 1)) {
+        var token = window.localStorage.getItem('token');
+        var card = '.card_' + id;
+        $.getJSON(ILSCATCHER_BASE + '/main/delete_list.json?token=' + token + '&listid=' + id, function(data) {
+            if (debuglog) console.log(data);
+            if (data.status == '200') {
+                $(card).remove();
+            } else if (data.status == '302') {
+                $('.spinning').hide();
+                changeBanner('Session expired. Please log in.', color_tadlblue);
+                openForm();
+            }
+        });
     }
 }
 

@@ -609,7 +609,7 @@
 
 <script id="mylists-template" type="text/template">
     {{#lists}}
-        <div class="card">
+        <div class="card card_{{list_id}}">
             <div class="grid-container">
                 <div class="grid-100 tablet-grid-100 mobile-grid-100" style="padding-left:10px;">
                     <span class="cardtitle pointer" onclick="loadlist('{{list_id}}','{{encode list_name}}')">{{list_name}}</span><br/>
@@ -618,7 +618,7 @@
                     {{/if}}
                     <br/>
                     <a id="view_{{list_id}}" class="button medium tadlblue padtop" onclick="loadlist('{{list_id}}','{{encode list_name}}')"><span>View</span></a>
-                    <a id="remove_{{list_id}}" class="button medium tadlblue padtop" onclick="$(this).html('<span>Click to confirm</span>').removeClass('tadlblue').addClass('red').attr('onclick','removelist({{list_id}},1)');"><span>Delete</span></a>
+                    <a id="remove_{{list_id}}" class="button medium tadlblue padtop" onclick="$(this).html('<span>Click to confirm</span>').removeClass('tadlblue').addClass('red').attr('onclick','$(this).html(\'<span>Working...</span>\').removeClass(\'red\').addClass(\'black\').addClass(\'spinning\').spin(\'tiny\');removelist({{list_id}},1)');"><span>Delete</span></a>
                 </div>
             </div>
         </div>
@@ -903,7 +903,7 @@
                     </label>
                 </div>
                 <div class="clear"></div>
-                <label for="acct_password" id="password_label">Enter your password to make changes</label>
+                <label for="acct_password" id="password_label">Enter your current password to make changes</label>
                 <input id="acct_password" type="password" name="acct_password" placeholder="Password" />
                 <div class="clear"></div>
             {{/settings}}
